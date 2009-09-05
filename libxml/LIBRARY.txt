@@ -1,0 +1,17 @@
+#ECF - this file contains additional configuration info.
+DEFINE = _XMLLIB_
+DEFINE = _CRT_SECURE_NO_WARNINGS
+DEFINE = _CRT_NONSTDC_NO_WARNINGS
+EXPORTSDEF = ..\..\libxml\libxml2.def
+EXCLUDE = testC14N.c
+EXCLUDE = testDocbook.c
+EXCLUDE = testHTML.c
+EXCLUDE = testSAX.c
+EXCLUDE = testThreads.c
+EXCLUDE = testThreadsWin32.c
+EXCLUDE = testURI.c
+EXCLUDE = testXPath.c
+EXCLUDE = trio.c
+EXCLUDE = trionan.c
+EXCLUDE = xmlcatalog.c
+EXCLUDE = xmllint.c

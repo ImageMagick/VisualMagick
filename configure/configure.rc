@@ -1,0 +1,309 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Danish resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DAN)
+#ifdef _WIN32
+LANGUAGE LANG_DANISH, SUBLANG_DEFAULT
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif //_WIN32\r\n"
+    "#include ""res\\Configure.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Danish resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\Configure.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_WELCOME_PAGE DIALOG  0, 0, 318, 233
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Welcome to the VisualMagick configuration tool."
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "welcome text string...",IDC_WELCOME_TEXT,7,137,304,88
+    CONTROL         132,IDC_STATIC,"Static",SS_BITMAP,91,7,132,126
+END
+
+IDD_TARGET_PAGE DIALOGEX 0, 0, 318, 233
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "Target Setup"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "Build type setup:",IDC_STATIC,7,7,304,107
+    CONTROL         "Dynamic Multi-threaded DLL runtimes",IDC_PROJECT_TYPE,
+                    "Button",BS_AUTORADIOBUTTON | WS_GROUP,15,33,133,10
+    CONTROL         "Static Single-threaded runtimes",IDC_PROJECT_TYPE1,
+                    "Button",BS_AUTORADIOBUTTON,15,64,113,10
+    CONTROL         "Static Multi-threaded runtimes",IDC_PROJECT_TYPE2,
+                    "Button",BS_AUTORADIOBUTTON,15,79,109,10
+    CONTROL         "Use X11 stubs to prevent use of X Window",
+                    IDC_USE_X11_STUBS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    153,33,152,10
+    CONTROL         "Decorate exe files with build options",
+                    IDC_DECORATE_FILES,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    15,135,139,10
+    GROUPBOX        "Build options",IDC_STATIC,7,122,304,77
+    CONTROL         "Static Multi-threaded DLL runtimes",IDC_PROJECT_TYPE3,
+                    "Button",BS_AUTORADIOBUTTON,15,95,124,10
+    LTEXT           "Static Builds",IDC_STATIC,13,50,40,8
+    LTEXT           "Dynamic (DLL) Builds",IDC_STATIC,13,19,68,8
+    CONTROL         "Include all demo, test, appl, and contrib directories",
+                    IDC_INCLUDE_OPTIONAL,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,151,204,10
+    CONTROL         "Generate all utility projects with full paths rather then relative paths.",
+                    IDC_STANDALONE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,
+                    167,236,10
+    PUSHBUTTON      "Edit ""magick-config.h""",IDC_EditConfig,109,204,92,14
+    CONTROL         "Generate Visual Studio 7 format",IDC_GENERATE_VS7,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,182,140,10
+    CONTROL         "All coders go into one big DLL",IDC_BIGCODERDLL,"Button",
+                    BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,186,134,
+                    111,10
+END
+
+IDD_SYSTEM_PAGE DIALOG  0, 0, 318, 233
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "System Setup"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Intermediate files directory setup:",IDC_STATIC,7,7,304,
+                    97
+    LTEXT           "Please specify the location in your file system were you would like to place intermediate files that are generated during the build process. This include such things as object code, etc.",
+                    IDC_STATIC,14,19,290,19
+    LTEXT           "Intermediate files Release directory:",IDC_STATIC,14,47,
+                    147,9
+    EDITTEXT        IDC_TEMP_RELEASE,13,58,259,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_TEMP_RELEASE_BROWSE,275,58,30,13
+    LTEXT           "Intermediate files Debug directory:",IDC_STATIC,13,74,
+                    147,9
+    EDITTEXT        IDC_TEMP_DEBUG,13,85,259,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_TEMP_DEBUG_BROWSE,275,85,30,13
+    GROUPBOX        "Output files directory setup:",IDC_STATIC,7,113,304,89
+    LTEXT           "Please specify were the executables, libraries, and DLL's should be placed:",
+                    IDC_STATIC,13,127,291,11
+    LTEXT           "Exe and DLL directory:",IDC_STATIC,13,144,147,9
+    EDITTEXT        IDC_OUTPUT_BIN,13,155,259,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_OUTPUT_BIN_BROWSE,275,155,30,13
+    LTEXT           "Library directory:",IDC_STATIC,13,171,147,9
+    EDITTEXT        IDC_OUTPUT_LIB,13,183,259,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_OUTPUT_LIB_BROWSE,275,183,30,13
+END
+
+IDD_FINISHED_PAGE DIALOG  0, 0, 318, 233
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "VisualMagick configuration finished."
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           "some finish text...",IDC_FINISHED_TEXT,7,7,304,192
+    PUSHBUTTON      "Build It!",IDC_BuildIt,135,212,50,14,NOT WS_VISIBLE
+END
+
+IDD_WAITDIALOG DIALOG  0, 0, 228, 82
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+FONT 8, "MS Sans Serif"
+BEGIN
+    CTEXT           "",IDC_MSGCTRL,8,5,214,32,SS_NOPREFIX
+    CONTROL         "",IDC_PROGRESSCTRL,"msctls_progress32",WS_BORDER,7,41,
+                    214,16
+    PUSHBUTTON      "Cancel",IDCANCEL,89,65,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_WELCOME_PAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 311
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 225
+    END
+
+    IDD_TARGET_PAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 311
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 226
+    END
+
+    IDD_SYSTEM_PAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 311
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 226
+    END
+
+    IDD_FINISHED_PAGE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 311
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 226
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_LOGO1               BITMAP                  "res\\magick.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,2
+ PRODUCTVERSION 1,0,0,2
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "This program is part of the ImageMagick imaging tookit."
+            VALUE "CompanyName", "ImageMagick Studio LLC"
+            VALUE "FileDescription", "ImageMagick Win32 Configure Application"
+            VALUE "FileVersion", "1, 0, 0, 2"
+            VALUE "InternalName", "Configure"
+            VALUE "LegalCopyright", "This program is LGPL"
+            VALUE "OriginalFilename", "Configure.EXE"
+            VALUE "ProductName", "Win32 Configure Application"
+            VALUE "ProductVersion", "1, 0, 0, 2"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_PROPSHT_CAPTION     "Wizard"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif //_WIN32
+#include "res\Configure.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

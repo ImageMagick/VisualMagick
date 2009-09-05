@@ -1,0 +1,5 @@
+#ECF - this file contains additional configuration info.
+DEFINE = _JBIGLIB_
+DEFINE = _CRT_SECURE_NO_WARNINGS
+EXCLUDE = tstcodec.c
+SOURCE = jbig.rc

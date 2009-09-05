@@ -1,0 +1,4 @@
+#ECF - this file contains additional configuration info.
+DEFINE = _CRT_SECURE_NO_WARNINGS
+DEFINE = _CRT_NONSTDC_NO_WARNINGS
+SOURCE = ..\..\magick\ImageMagick.rc

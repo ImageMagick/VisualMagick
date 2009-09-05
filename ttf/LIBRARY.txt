@@ -1,0 +1,124 @@
+#ECF - this file contains additional configuration info.
+DEFINE = _TTFLIB_
+DEFINE = HAVE_FREETYPE_FREETYPE_H
+DEFINE = _CRT_SECURE_NO_WARNINGS
+#DEFINE = FT_DEBUG_LEVEL_ERROR
+#DEFINE = FT_DEBUG_LEVEL_TRACE
+#DEFINE = _LIB
+DEFINE = _MBCS
+SOURCE = ttf.rc
+# autohint
+EXCLUDE = ahangles.c
+EXCLUDE = ahglobal.c
+EXCLUDE = ahglyph.c
+EXCLUDE = ahhint.c
+EXCLUDE = ahmodule.c
+# base
+EXCLUDE = ftapi.c
+EXCLUDE = ftcalc.c
+EXCLUDE = ftexcept.c
+EXCLUDE = ftgloadr.c
+EXCLUDE = fthash.c
+EXCLUDE = fttrigon.c
+EXCLUDE = ftobject.c
+EXCLUDE = ftobjs.c
+EXCLUDE = ftpfr.c
+EXCLUDE = ftstream.c
+EXCLUDE = ftlist.c
+EXCLUDE = ftoutln.c
+EXCLUDE = ftnames.c
+EXCLUDE = ftdbgmem.c
+EXCLUDE = ftextend.c
+EXCLUDE = ftmac.c
+EXCLUDE = ftmac.h
+EXCLUDE = ftsynth.c
+EXCLUDE = ftsysio.c
+EXCLUDE = ftsysmem.c
+EXCLUDE = ftutil.c
+EXCLUDE = ftwinfnt.c
+# bdf
+EXCLUDE = bdfdrivr.c
+EXCLUDE = bdflib.c
+# cache
+EXCLUDE = ftccache.c
+EXCLUDE = ftccmap.c
+EXCLUDE = ftcglyph.c
+EXCLUDE = ftcimage.c
+EXCLUDE = ftcmanag.c
+EXCLUDE = ftcsbits.c
+EXCLUDE = ftlru.c
+# cff
+EXCLUDE = cffcmap.c
+EXCLUDE = cffdrivr.c
+EXCLUDE = cffgload.c
+EXCLUDE = cffload.c
+EXCLUDE = cffobjs.c
+EXCLUDE = cffparse.c
+# cid
+EXCLUDE = cidgload.c
+EXCLUDE = cidload.c
+EXCLUDE = cidobjs.c
+EXCLUDE = cidparse.c
+EXCLUDE = cidriver.c
+# gzip
+EXCLUDE = adler32.c
+EXCLUDE = infblock.c
+EXCLUDE = infcodes.c
+EXCLUDE = inflate.c
+EXCLUDE = inftrees.c
+EXCLUDE = infutil.c
+EXLCUDE = zutil.c
+# pcf
+EXCLUDE = pcfdrivr.c
+EXCLUDE = pcfread.c
+EXCLUDE = pcfutil.c
+# pfr
+EXCLUDE = pfrcmap.c
+EXCLUDE = pfrdrivr.c
+EXCLUDE = pfrgload.c
+EXCLUDE = pfrload.c
+EXCLUDE = pfrobjs.c
+EXCLUDE = pfrsbit.c
+# psaux
+EXCLUDE = psauxmod.c
+EXCLUDE = psobjs.c
+EXCLUDE = t1cmap.c
+EXCLUDE = t1decode.c
+# psnames
+EXCLUDE = psmodule.c
+# raster
+EXCLUDE = ftraster.c
+EXCLUDE = ftrend1.c
+# sfnt
+EXCLUDE = sfdriver.c
+EXCLUDE = sfobjs.c
+EXCLUDE = ttcmap0.c
+EXCLUDE = ttcmap.c
+EXCLUDE = ttload.c
+EXCLUDE = ttpost.c
+EXCLUDE = ttsbit.c
+# smooth
+EXCLUDE = ftgrays.c
+EXCLUDE = ftsmooth.c
+# truetype
+EXCLUDE = ttdriver.c
+EXCLUDE = ttgload.c
+EXCLUDE = ttinterp.c
+EXCLUDE = ttobjs.c
+EXCLUDE = ttpload.c
+# type1
+EXCLUDE = t1afm.c
+EXCLUDE = t1driver.c
+EXCLUDE = t1gload.c
+EXCLUDE = t1load.c
+EXCLUDE = t1objs.c
+EXCLUDE = t1parse.c
+# type42
+EXCLUDE = t42drivr.c
+EXCLUDE = t42objs.c
+EXCLUDE = t42parse.c
+# pshinter
+EXCLUDE = pshrec.c
+EXCLUDE = pshglob.c
+EXCLUDE = pshalgo.c
+EXCLUDE = pshmod.c

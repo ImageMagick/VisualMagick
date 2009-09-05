@@ -1,0 +1,22 @@
+#ECF - this file contains additional configuration info.
+DEFINE = _TIFFLIB_ CHECK_JPEG_YCBCR_SUBSAMPLING DEFAULT_EXTRASAMPLE_AS_ALPHA STRIPCHOP_DEFAULT=TIFF_STRIPCHOP LOGLUV_SUPPORT NEXT_SUPPORT THUNDER_SUPPORT LZW_SUPPORT PACKBITS_SUPPORT CCITT_SUPPORT TIF_PLATFORM_CONSOLE FILLODER_LSB2MSB
+DEFINE = _CRT_SECURE_NO_WARNINGS
+DEFINE = _CRT_NONSTDC_NO_WARNINGS
+# Use libtiff provided DLL exports
+EXPORTSDEF = ..\..\tiff\libtiff\libtiff.def
+# Resource file
+SOURCE = tiff.rc
+EXCLUDE = mkg3states.c
+EXCLUDE = mkspans.c
+EXCLUDE = mkversion.c
+EXCLUDE = fax3sm.c
+EXCLUDE = fax3sm_winnt.c
+EXCLUDE = tif_acorn.c
+EXCLUDE = tif_apple.c
+EXCLUDE = tif_atari.c
+EXCLUDE = tif_msdos.c
+# Use Unix style I/O functions rather than Windows so that 4GB files can be supported.
+#EXCLUDE = tif_unix.c
+EXCLUDE = tif_win32.c
+EXCLUDE = tif_vms.c
+EXCLUDE = tif_win3.c

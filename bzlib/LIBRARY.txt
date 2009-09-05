@@ -1,0 +1,13 @@
+#ECF - this file contains additional configuration info.
+DEFINE = BZ_EXPORT
+DEFINE = _WIN32
+DEFINE = _CRT_SECURE_NO_WARNINGS
+DEFINE = _CRT_NONSTDC_NO_WARNINGS
+EXCLUDE = dlltest.c
+EXCLUDE = bzip2recover.c
+EXCLUDE = bzip2.c
+EXCLUDE = libbz2.def
+EXCLUDE = mk251.c
+EXCLUDE = spewG.c
+EXCLUDE = unzcrash.c
+SOURCE = bzlib.rc
