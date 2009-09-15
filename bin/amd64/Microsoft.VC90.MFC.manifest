@@ -1,6 +1,13 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Copyright (c) Microsoft Corporation.  All rights reserved. -->
 <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
-    <noInheritable></noInheritable>
-    <assemblyIdentity type="win32" name="Microsoft.VC90.MFC" version="9.0.30729.4148" processorArchitecture="amd64" publicKeyToken="1fc8b3b9a1e18e3b"></assemblyIdentity>
-    <file name="mfc90.dll" hashalg="SHA1" hash="7a86bbafeb8fab5ec5e6b34f226cde1ce9a1ae9b"><asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"><dsig:Transforms><dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity"></dsig:Transform></dsig:Transforms><dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></dsig:DigestMethod><dsig:DigestValue>jknaTCuYm0hCeoiYG7L8EtQPel4=</dsig:DigestValue></asmv2:hash></file> <file name="mfc90u.dll" hashalg="SHA1" hash="1817389f2b3d7b9fe5c4468c6592c536a5c2b842"><asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"><dsig:Transforms><dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity"></dsig:Transform></dsig:Transforms><dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></dsig:DigestMethod><dsig:DigestValue>vt6LPZVjCNKb/yPSUkUdFNN5QvI=</dsig:DigestValue></asmv2:hash></file> <file name="mfcm90.dll" hashalg="SHA1" hash="6d5a9eb76e51f590282fffb2ade4528674db6dcf"><asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"><dsig:Transforms><dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity"></dsig:Transform></dsig:Transforms><dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></dsig:DigestMethod><dsig:DigestValue>hNfigibU0hF4kqqtAg2etgwg44E=</dsig:DigestValue></asmv2:hash></file> <file name="mfcm90u.dll" hashalg="SHA1" hash="e8db4e4a676e898c436fdbc2fdaf20838d97c02a"><asmv2:hash xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"><dsig:Transforms><dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity"></dsig:Transform></dsig:Transforms><dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></dsig:DigestMethod><dsig:DigestValue>hjm7cRzKQhGscC1GvewQSA8bF/0=</dsig:DigestValue></asmv2:hash></file>
+    <noInheritable/>
+    <assemblyIdentity
+        type="win32"
+        name="Microsoft.VC90.MFC"
+        version="9.0.21022.8"
+        processorArchitecture="amd64"
+        publicKeyToken="1fc8b3b9a1e18e3b"
+    />
+    <file name="mfc90.dll" /> <file name="mfc90u.dll" /> <file name="mfcm90.dll" /> <file name="mfcm90u.dll" />
 </assembly>
