@@ -18,5 +18,5 @@
 
 #define public MagickPackageName "ImageMagick"
 #define public MagickPackageVersion "6.5.6"
-#define public MagickPackageVersionAddendum "-3"
+#define public MagickPackageVersionAddendum "-4"
 #define public MagickPackageReleaseDate "2009-10-01"
