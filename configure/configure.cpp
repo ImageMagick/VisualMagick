@@ -1055,6 +1055,11 @@ void CConfigureApp::process_library( const char *root,
         {
           workspace->write_project_dependency(project,"CORE_jpeg");
         }
+      if (name.compare("cals") == 0)
+        {
+          workspace->write_project_dependency(project,"CORE_tiff");
+          workspace->write_project_dependency(project,"CORE_zlib");
+        }
       if (name.compare("hdf") == 0)
         {
           workspace->write_project_dependency(project,"CORE_zlib");
@@ -1162,6 +1167,13 @@ void CConfigureApp::process_module( const char *root,
   if (name.compare("avi") == 0)
     {
       extra = "..\\jpeg";
+      add_includes(includes_list, extra, levels-2);
+    }
+  if (name.compare("cals") == 0)
+    {
+      extra = "..\\zlib";
+      add_includes(includes_list, extra, levels-2);
+      extra = "..\\tiff\\libtiff";
       add_includes(includes_list, extra, levels-2);
     }
   if (name.compare("mat") == 0)
@@ -1346,9 +1358,14 @@ void CConfigureApp::process_module( const char *root,
         workspace->write_project_dependency(project,"CORE_magick");
         if (dependency.length() > 0)
           workspace->write_project_dependency(project,dependency.c_str());
-		if (name.compare("avi") == 0)
+        if (name.compare("avi") == 0)
           {
             workspace->write_project_dependency(project,"CORE_jpeg");
+          }
+        if (name.compare("cals") == 0)
+          {
+            workspace->write_project_dependency(project,"CORE_tiff");
+            workspace->write_project_dependency(project,"CORE_zlib");
           }
         if (name.compare("label") == 0)
           {
@@ -1493,6 +1510,11 @@ void CConfigureApp::process_3rd_party_library( const char *root,
             case MULTITHREADEDDLL:
               {
                 workspace->write_begin_project(project, pname.c_str(), projectname.c_str());
+                if (name.compare("cals") == 0)
+                  {
+                    workspace->write_project_dependency(project,"CORE_tiff");
+                    workspace->write_project_dependency(project,"CORE_zlib");
+                  }
                 if (name.compare("mat") == 0)
                   {
                     workspace->write_project_dependency(project,"CORE_zlib");
