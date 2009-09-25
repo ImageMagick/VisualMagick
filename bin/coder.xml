@@ -46,6 +46,7 @@
   <coder magick="GIF87" name="GIF"/>
   <coder magick="G" name="RAW"/>
   <coder magick="GRANITE" name="MAGICK"/>
+  <coder magick="GROUP4" name="TIFF"/>
   <coder magick="H" name="MAGICK"/>
   <coder magick="HTM" name="HTML"/>
   <coder magick="HTTP" name="URL"/>
@@ -101,6 +102,7 @@
   <coder magick="PNG8" name="PNG"/>
   <coder magick="PPM" name="PNM"/>
   <coder magick="PTIF" name="TIFF"/>
+  <coder magick="R" name="RAW"/>
   <coder magick="RAF" name="DNG"/>
   <coder magick="RAS" name="SUN"/>
   <coder magick="RGBA" name="RGB"/>
