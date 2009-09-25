@@ -1026,7 +1026,6 @@ void CConfigureApp::process_library( const char *root,
           workspace->write_project_dependency(project,"CORE_zlib");
           workspace->write_project_dependency(project,"CORE_bzlib");
           workspace->write_project_dependency(project,"CORE_jpeg");
-//          workspace->write_project_dependency(project,"CORE_fpx");
           workspace->write_project_dependency(project,"CORE_jbig");
           workspace->write_project_dependency(project,"CORE_jp2");
           workspace->write_project_dependency(project,"CORE_png");
@@ -1065,17 +1064,14 @@ void CConfigureApp::process_library( const char *root,
         }
       if (name.compare("pdf") == 0)
         {
-          workspace->write_project_dependency(project,"CORE_tiff");
           workspace->write_project_dependency(project,"CORE_zlib");
         }
       if (name.compare("ps2") == 0)
         {
-          workspace->write_project_dependency(project,"CORE_tiff");
           workspace->write_project_dependency(project,"CORE_zlib");
         }
       if (name.compare("ps3") == 0)
         {
-          workspace->write_project_dependency(project,"CORE_tiff");
           workspace->write_project_dependency(project,"CORE_zlib");
         }
       if (name.compare("png") == 0)
@@ -1178,21 +1174,15 @@ void CConfigureApp::process_module( const char *root,
     {
       extra = "..\\zlib";
       add_includes(includes_list, extra, levels-2);
-      extra = "..\\tiff\\libtiff";
-      add_includes(includes_list, extra, levels-2);
     }
   if (name.compare("ps2") == 0)
     {
       extra = "..\\zlib";
       add_includes(includes_list, extra, levels-2);
-      extra = "..\\tiff\\libtiff";
-      add_includes(includes_list, extra, levels-2);
     }
   if (name.compare("ps3") == 0)
     {
       extra = "..\\zlib";
-      add_includes(includes_list, extra, levels-2);
-      extra = "..\\tiff\\libtiff";
       add_includes(includes_list, extra, levels-2);
     }
   if (name.compare("miff") == 0)
@@ -1370,17 +1360,14 @@ void CConfigureApp::process_module( const char *root,
           }
         if (name.compare("pdf") == 0)
           {
-            workspace->write_project_dependency(project,"CORE_tiff");
             workspace->write_project_dependency(project,"CORE_zlib");
           }
         if (name.compare("ps") == 0)
           {
-            workspace->write_project_dependency(project,"CORE_tiff");
             workspace->write_project_dependency(project,"CORE_zlib");
           }
         if (name.compare("ps2") == 0)
           {
-            workspace->write_project_dependency(project,"CORE_tiff");
             workspace->write_project_dependency(project,"CORE_zlib");
           }
         if (name.compare("ps3") == 0)
@@ -1504,17 +1491,14 @@ void CConfigureApp::process_3rd_party_library( const char *root,
                   }
                 if (name.compare("pdf") == 0)
                   {
-                    workspace->write_project_dependency(project,"CORE_tiff");
                     workspace->write_project_dependency(project,"CORE_zlib");
                   }
                 if (name.compare("ps2") == 0)
                   {
-                    workspace->write_project_dependency(project,"CORE_tiff");
                     workspace->write_project_dependency(project,"CORE_zlib");
                   }
                 if (name.compare("ps3") == 0)
                   {
-                    workspace->write_project_dependency(project,"CORE_tiff");
                     workspace->write_project_dependency(project,"CORE_zlib");
                   }
 #ifdef HDF_SUPPORTED
