@@ -75,7 +75,7 @@ begin
 				if i = 1 then begin
 					newpath := pathArr[i-1];
 				end else begin
-					newpath := pathArr[i-1] + ';' + newpath;
+					newpath := newpath + ';' + pathArr[i-1];
 				end;
 			end;
 
