@@ -9,12 +9,12 @@
 <!ATTLIST policy value CDATA #IMPLIED>
 ]>
 <!--
-  ImageMagick policies.
+  Configure ImageMagick policies.
 
-  Domains include delegate, coder, filter, path or resources.
+  Domains include delegate, coder, filter, path, or resource.
 
   Rights include none, read, write, and execute.  Use | to combine them,
-  for example: "read | write" to permit read or write from / to a path.
+  for example: "read | write" to permit read from, or write to, a path.
 
   Use a glob expression as a pattern.
 
@@ -47,4 +47,5 @@
   <!-- <policy domain="resource" name="disk" value="16eb"/> -->
   <!-- <policy domain="resource" name="file" value="768"/> -->
   <!-- <policy domain="resource" name="thread" value="8"/> -->
+  <!-- <policy domain="resource" name="time" value="3600"/> -->
 </policymap>
