@@ -1,3 +1,8 @@
+For convenience, the ImageMagick Windows distribution includes a few optional
+delegate programs.  If you disagree with the licenses, feel free to remove them.
+ImageMagick will work fine but may not be able to read or write certain
+image formats.
+
 This product incorporates the ffmpeg delegate program, Copyright (C)
 2000, 2001, 2002 Fabrice Bellard under this license:
 
