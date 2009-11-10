@@ -4,7 +4,8 @@ ImageMagick will work fine but may not be able to read or write certain
 image formats.
 
 This product incorporates the ffmpeg delegate program, Copyright (C)
-2000, 2001, 2002 Fabrice Bellard under this license:
+2000, 2001, 2002 Fabrice Bellard and the dcraw delegate program, Copyright (C)
+1997-2008 by Dave Coffinthe under this license:
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -18,9 +19,6 @@ This product incorporates the ffmpeg delegate program, Copyright (C)
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-This product incorporates the dcraw delegate program, Copyright (C)
-1997-2008 by Dave Coffin.
 
 This product incorporates the hp2xx delegate program, Copyright (C)
 1998 - 2000  M. Kroeker, 1992 - 1994  H. Werntges.
