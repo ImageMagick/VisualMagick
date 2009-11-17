@@ -32,7 +32,6 @@ Source: "..\bin\import.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversio
 Source: "..\bin\hp2xx.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
 Source: "..\bin\ffmpeg.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
 Source: "..\bin\dcraw.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
-Source: "..\bin\NOTICE"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion;  DestName: "Notice-1.txt"
 
 ; Path Tool
 Source: "..\..\contrib\win32\PathTool\PathTool.exe"; DestDir: "{app}\uninstall"; Flags: ignoreversion

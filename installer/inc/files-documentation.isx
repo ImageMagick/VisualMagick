@@ -20,6 +20,7 @@
 Source: "..\..\ChangeLog"; DestDir: "{app}"; Flags: ignoreversion; DestName: "ChangeLog.txt"
 Source: "..\..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion; DestName: "License.txt"
 Source: "..\..\NOTICE"; DestDir: "{app}"; Flags: ignoreversion; DestName: "Notice.txt"
+Source: "..\bin\NOTICE"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion;  DestName: "Notice-1.txt"
 Source: "..\..\QuickStart.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\README.txt"; DestDir: "{app}"; Flags: ignoreversion
 ; Web pages
@@ -39,3 +40,4 @@ Source: "..\..\www\Magick++\README.txt"; DestDir: "{app}\www\Magick++"; Flags: i
 Source: "..\..\www\api\*.html"; DestDir: "{app}\www\api"; Flags: ignoreversion
 Source: "..\..\www\api\MagickCore\*.*"; DestDir: "{app}\www\api\MagickCore"; Flags: ignoreversion
 Source: "..\..\www\api\MagickWand\*.*"; DestDir: "{app}\www\api\MagickWand"; Flags: ignoreversion
+Source: "..\bin\ffmpeg-0.5.tar.bz2"; DestDir: "{app}\source"; Flags: ignoreversion;  DestName: "ffmpeg-0.5.tar.bz2"
