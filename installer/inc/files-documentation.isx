@@ -40,4 +40,3 @@ Source: "..\..\www\Magick++\README.txt"; DestDir: "{app}\www\Magick++"; Flags: i
 Source: "..\..\www\api\*.html"; DestDir: "{app}\www\api"; Flags: ignoreversion
 Source: "..\..\www\api\MagickCore\*.*"; DestDir: "{app}\www\api\MagickCore"; Flags: ignoreversion
 Source: "..\..\www\api\MagickWand\*.*"; DestDir: "{app}\www\api\MagickWand"; Flags: ignoreversion
-Source: "..\bin\ffmpeg-0.5.tar.bz2"; DestDir: "{app}\source"; Flags: ignoreversion;  DestName: "ffmpeg-0.5.tar.bz2"
