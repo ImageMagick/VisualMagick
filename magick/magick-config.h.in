@@ -167,10 +167,20 @@
 // Use Visual C++ C inline method extension to improve performance
 #define inline __inline
 
+// Visual C++ does not define restrict by default.
+#if !defined(restrict)
+  #define restrict
+#endif
+
 // Visual C++ does not define ssize_t by default.
 #if !defined(ssize_t)
 #  define ssize_t  long
 #endif
+
+#if !defined(__FUNCTION__)
+  #define __FUNCTION__  "unknown"
+#endif
+#define __func__  __FUNCTION__
 
 /* Define to 1 if you have the <ft2build.h> header file. */
 #define MAGICKCORE_HAVE_FT2BUILD_H 1
@@ -218,13 +228,6 @@
 #define MAGICKCORE_HAVE_SETVBUF 1
 #define MAGICKCORE_HAVE_TEMPNAM 1
 #define MAGICKCORE_HAVE_RAISE 1
-#if !defined(__FUNCTION__)
-  #define __FUNCTION__  "unknown"
-#endif
-#define __func__  __FUNCTION__
-#if !defined(__restrict)
-  #define __restrict
-#endif
 
 /*
   Tiff features.
