@@ -31,6 +31,7 @@ Source: "..\..\images\*.png"; DestDir: "{app}\images"; Flags: ignoreversion
 Source: "..\..\images\patterns\*.png"; DestDir: "{app}\images\patterns"; Flags: ignoreversion
 Source: "..\..\www\source\*.*"; DestDir: "{app}\www\source"; Flags: ignoreversion
 Source: "..\..\www\*.css"; DestDir: "{app}\www"; Flags: ignoreversion
+Source: "..\..\www\*.ico"; DestDir: "{app}\www"; Flags: ignoreversion
 Source: "..\..\www\*.html"; DestDir: "{app}\www"; Flags: ignoreversion
 Source: "..\..\www\Magick++\*.html"; DestDir: "{app}\www\Magick++"; Flags: ignoreversion
 Source: "..\..\www\Magick++\*.jpg"; DestDir: "{app}\www\Magick++"; Flags: ignoreversion
