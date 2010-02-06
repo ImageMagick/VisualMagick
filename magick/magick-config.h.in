@@ -60,7 +60,7 @@
 
 // Exclude deprecated methods in MagickCore API 
 //
-//#under MAGICKCORE_EXCLUDE_DEPRECATED
+//#undef MAGICKCORE_EXCLUDE_DEPRECATED
 
 // Define to enable high dynamic range imagery (HDRI) (experimental)
 //
