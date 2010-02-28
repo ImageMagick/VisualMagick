@@ -85,6 +85,9 @@
 // Define to use the FreeType (TrueType & Postscript font support) library
 #define MAGICKCORE_FREETYPE_DELEGATE
 
+/* Define to 1 if you have the `gettimeofday' function. */
+#define MAGICKCORE_HAVE_GETTIMEOFDAY
+
 // Define to use the JBIG library
 #define MAGICKCORE_JBIG_DELEGATE
 
