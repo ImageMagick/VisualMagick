@@ -3,6 +3,10 @@
 #ifndef LIBWMF_CONFIG_H
 #define LIBWMF_CONFIG_H
 
+#define WMF_FONTDIR "."
+#define WMF_SYS_FONTMAP "."
+#define WMF_GS_FONTMAP "."
+
 
 /* Define if you have expat.  */
 /* #undef HAVE_EXPAT */
