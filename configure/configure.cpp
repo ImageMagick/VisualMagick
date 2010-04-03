@@ -1030,6 +1030,7 @@ void CConfigureApp::process_library( const char *root,
           workspace->write_project_dependency(project,"CORE_jp2");
           workspace->write_project_dependency(project,"CORE_png");
           workspace->write_project_dependency(project,"CORE_libxml");
+          workspace->write_project_dependency(project,"CORE_ttf");
           workspace->write_project_dependency(project,"CORE_tiff");
           workspace->write_project_dependency(project,"CORE_wmf");
           if (useX11Stubs)
@@ -1083,15 +1084,16 @@ void CConfigureApp::process_library( const char *root,
           workspace->write_project_dependency(project,"CORE_jpeg");
           workspace->write_project_dependency(project,"CORE_zlib");
         }
-      if (name.compare("wmf") == 0)
-        {
-          workspace->write_project_dependency(project,"CORE_wand");
-        }
       if (name.compare("wand") == 0)
         {
           workspace->write_project_dependency(project,"CORE_magick");
           if (useX11Stubs)
             workspace->write_project_dependency(project,"CORE_xlib");
+        }
+      if (name.compare("wmf") == 0)
+        {
+          workspace->write_project_dependency(project,"CORE_ttf");
+          workspace->write_project_dependency(project,"CORE_zlib");
         }
       workspace->write_end_project(project);
     }
@@ -1377,7 +1379,8 @@ void CConfigureApp::process_module( const char *root,
           }
         if (name.compare("wmf") == 0)
           {
-            workspace->write_project_dependency(project,"CORE_wand");
+            workspace->write_project_dependency(project,"CORE_ttf");
+            workspace->write_project_dependency(project,"CORE_zlib");
           }
         if (name.compare("x") == 0)
           {
@@ -1511,6 +1514,11 @@ void CConfigureApp::process_3rd_party_library( const char *root,
                 if (name.compare("tiff") == 0)
                   {
                     workspace->write_project_dependency(project,"CORE_jpeg");
+                    workspace->write_project_dependency(project,"CORE_zlib");
+                  }
+                if (name.compare("wmf") == 0)
+                  {
+                    workspace->write_project_dependency(project,"CORE_ttf");
                     workspace->write_project_dependency(project,"CORE_zlib");
                   }
                 workspace->write_end_project(project);
