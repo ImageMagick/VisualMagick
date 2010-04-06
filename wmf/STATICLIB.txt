@@ -2,8 +2,6 @@
 DEFINE = HAVE_CONFIG_H
 DEFINE = HAVE_CONFIG_H
 DEFINE = _CRT_SECURE_NO_WARNINGS
-EXCLUDE = eps.c
-EXCLUDE = eps.h
 EXCLUDE = fig.c
 EXCLUDE = fig.h
 EXCLUDE = foreign.c
@@ -18,4 +16,6 @@ EXCLUDE = x.c
 EXCLUDE = x.h
 EXCLUDE = ipa.c
 EXCLUDE = io-wmf.c
+EXCLUDE = xgd.c
+EXCLUDE = xgd.h
 EXCLUDE = xml.c
