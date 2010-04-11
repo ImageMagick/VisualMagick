@@ -65,7 +65,7 @@
   <delegate decode="cgm" command="ralcgm -d ps &quot;%i&quot; &quot;%o&quot; &quot;%u&quot;     convert -concatenate %o*.ps &quot;%o&quot;"/>
   <delegate decode="compress" restrain="True" command="|uncompress -c &quot;%i&quot;"/>
   <delegate decode="miff" encode="compress" restrain="True" command="|compress -c &gt; &quot;%o&quot;"/>
-  <delegate decode="dng:decode" stealth="True" command="dcraw.exe -4 -w -O &quot;%u.ppm&quot; &quot;%i&quot;"/>
+  <delegate decode="dng:decode" stealth="True" command="dcraw.exe -6 -w -O &quot;%u.ppm&quot; &quot;%i&quot;"/>
   <delegate decode="dot" command="dot -Tps &quot;%i&quot; -o &quot;%o&quot;"/>
   <delegate decode="dvi" command="dvips -q -o &quot;%o&quot; &quot;%i&quot;"/>
   <delegate decode="edit" restrain="True" command="notepad &quot;%o&quot;"/>
