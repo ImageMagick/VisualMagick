@@ -96,6 +96,7 @@
 
 // Define to use the "little" Color Management System (LCMS) library
 #define MAGICKCORE_LCMS_DELEGATE
+#define MAGICKCORE_HAVE_LCMS2_H
 
 // Define to use the PNG library
 #define MAGICKCORE_PNG_DELEGATE
