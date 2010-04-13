@@ -62,7 +62,7 @@
   <delegate decode="bmp" encode="launch" mode="encode" command="imdisplay.exe &quot;%i.&quot;"/>
   <delegate decode="bmp" encode="win" mode="encode" command="imdisplay.exe &quot;%i.&quot;"/>
   <delegate decode="browse" restrain="True" spawn="True" command="cmd /C start http://www.imagemagick.org/"/>
-  <delegate decode="cgm" command="ralcgm -d ps &quot;%i&quot; &quot;%o&quot; &quot;%u&quot;     convert -concatenate %o*.ps &quot;%o&quot;"/>
+  <delegate decode="cgm" thread-support="False" command="ralcgm -d ps &quot;%i.&quot; &quot;%o.&quot; &quot;%u.&quot;"/>
   <delegate decode="compress" restrain="True" command="|uncompress -c &quot;%i&quot;"/>
   <delegate decode="miff" encode="compress" restrain="True" command="|compress -c &gt; &quot;%o&quot;"/>
   <delegate decode="dng:decode" stealth="True" command="dcraw.exe -4 -w -O &quot;%u.ppm&quot; &quot;%i&quot;"/>
