@@ -175,7 +175,11 @@
 
 // Visual C++ does not define ssize_t by default.
 #if !defined(ssize_t)
+#if defined(_WIN64) 
+#  define ssize_t  __int64
+#else
 #  define ssize_t  long
+#endif
 #endif
 
 #if !defined(__FUNCTION__)
