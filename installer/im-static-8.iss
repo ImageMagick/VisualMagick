@@ -19,7 +19,6 @@
 ; #define DEBUG 1
 
 #define  public MagickStaticPackage 1
-#define  public Magick64BitArchitecture 1
 #define  public QuantumDepth "8"
 #include "inc\body.isx"
 
