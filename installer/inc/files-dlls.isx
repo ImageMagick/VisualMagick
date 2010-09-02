@@ -19,21 +19,11 @@
 ; Compiler-dependent DLLs
 #ifdef Magick64BitArchitecture
 Source: "..\bin\amd64\*.dll"; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
-Source: "..\bin\amd64\*.manifest"; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
 #else
 Source: "..\bin\x86\*.dll"; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
-Source: "..\bin\x86\*.manifest"; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
 #endif
 
 ; DLLs
-#ifdef MagickDynamicPackage
-#ifdef Magick64BitArchitecture
-Source: "..\bin\amd64\modules\*.manifest"; DestDir: {#MagickCodersDirectory}; Flags: ignoreversion
-Source: "..\bin\amd64\modules\*.manifest"; DestDir: {#MagickFiltersDirectory}; Flags: ignoreversion
-#else
-Source: "..\bin\x86\modules\*.manifest"; DestDir: {#MagickCodersDirectory}; Flags: ignoreversion
-Source: "..\bin\x86\modules\*.manifest"; DestDir: {#MagickFiltersDirectory}; Flags: ignoreversion
-#endif
 Source: "..\bin\CORE_RL*.dll"; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
 Source: "..\bin\IM_MOD_RL*.dll"; DestDir: {#MagickCodersDirectory}; Flags: ignoreversion
 Source: "..\bin\analyze.dll"; DestDir: {#MagickFiltersDirectory}; Flags: ignoreversion
