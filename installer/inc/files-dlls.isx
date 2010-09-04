@@ -29,4 +29,3 @@ Source: "..\bin\IM_MOD_RL*.dll"; DestDir: {#MagickCodersDirectory}; Flags: ignor
 Source: "..\bin\analyze.dll"; DestDir: {#MagickFiltersDirectory}; Flags: ignoreversion
 Source: "..\bin\X11.dll"; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
 Source: "..\bin\Xext.dll"; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
-#endif
