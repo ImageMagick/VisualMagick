@@ -182,6 +182,11 @@
 #endif
 #endif
 
+// Required or InitializeCriticalSectionandSpinCount is undefined.
+#if !defined(_WIN32_WINNT)
+#  define _WIN32_WINNT 0x0501
+#endif
+
 #if !defined(__FUNCTION__)
   #define __FUNCTION__  "unknown"
 #endif
