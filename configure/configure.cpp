@@ -63,6 +63,7 @@ BOOL standaloneMode = FALSE;
 BOOL onebigdllMode = FALSE;
 //BOOL generateFontmap = FALSE;
 BOOL visualStudio7 = TRUE;
+BOOL build64Bit = FALSE;
 BOOL m_bigCoderDLL = FALSE;
 #ifdef __NO_MFC__
 int projectType = MULTITHREADEDSTATIC;
@@ -2794,6 +2795,7 @@ BOOL CConfigureApp::InitInstance()
   wizard.m_Page2.m_optionalFiles = optionalFiles;
   wizard.m_Page2.m_standalone = standaloneMode;
   wizard.m_Page2.m_visualStudio7 = visualStudio7;
+  wizard.m_Page2.m_build64Bit = build64Bit;
   //wizard.m_Page2.m_bigCoderDLL = m_bigCoderDLL;
 
   wizard.m_Page3.m_tempRelease = release_loc.c_str();
@@ -2893,6 +2895,7 @@ BOOL CConfigureApp::InitInstance()
       optionalFiles = wizard.m_Page2.m_optionalFiles;
       standaloneMode = wizard.m_Page2.m_standalone;
       visualStudio7 = wizard.m_Page2.m_visualStudio7;
+      build64Bit = wizard.m_Page2.m_build64Bit;
       //m_bigCoderDLL = wizard.m_Page2.m_bigCoderDLL;
       release_loc = wizard.m_Page3.m_tempRelease;
       debug_loc = wizard.m_Page3.m_tempDebug;
@@ -4868,7 +4871,10 @@ void ConfigureVS7Project::write_link_tool_dependencies( string &root,
       strmode = "DB_";
       break;
     }
-  m_stream << "        AdditionalDependencies=\"/MACHINE:AMD64 ";
+  if (!build64Bit)
+    m_stream << "        AdditionalDependencies=\" ";
+  else
+    m_stream << "        AdditionalDependencies=\"/MACHINE:AMD64 ";
   if (onebigdllMode || (standaloneMode && (type == EXEPROJECT)))
     {
       switch (runtime)
