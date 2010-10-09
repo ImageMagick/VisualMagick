@@ -7,10 +7,10 @@
 ]>
 <configuremap>
   <configure name="NAME" value="ImageMagick"/>
-  <configure name="LIB_VERSION" value="0x664"/>
-  <configure name="LIB_VERSION_NUMBER" value="6,6,4,10"/>
-  <configure name="RELEASE_DATE" value="2010-10-01"/>
-  <configure name="VERSION" value="6.6.4"/>
+  <configure name="LIB_VERSION" value="0x665"/>
+  <configure name="LIB_VERSION_NUMBER" value="6,6,5,0"/>
+  <configure name="RELEASE_DATE" value="2010-11-01"/>
+  <configure name="VERSION" value="6.6.5"/>
   <configure name="CC" value="vs8"/>
   <configure name="HOST" value="Windows"/>
   <configure name="DELEGATES" value="bzlib freetype jpeg jp2 lcms png tiff x11 xml wmf zlib"/>
