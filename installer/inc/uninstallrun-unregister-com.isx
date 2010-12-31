@@ -17,4 +17,4 @@
 #endif
 
 ; Add /s to regsvr32 for silent operation
-Filename: "regsvr32"; Parameters: "/u /s""{#MagickLibDirectory}\ImageMagickObject.dll"""; StatusMsg: "Unregistering ImageMagickObject DLL..."; Tasks: install_Magick_DLL
+Filename: "regsvr32"; Parameters: "/u /s ""{#MagickLibDirectory}\ImageMagickObject.dll"""; StatusMsg: "Unregistering ImageMagickObject DLL..."; Tasks: install_Magick_DLL
