@@ -95,7 +95,6 @@
   <delegate decode="ps:cmyk" restrain="True" command="&quot;@PSDelegate@&quot; -q -dQUIET -dPARANOIDSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dEPSCrop -dAlignToPixels=0 -dGridFitTT=2 &quot;-sDEVICE=pamcmyk32&quot; -dTextAlphaBits=%u -dGraphicsAlphaBits=%u &quot;-r%s&quot; %s &quot;-sOutputFile=%s&quot; &quot;-f%s&quot; &quot;-f%s&quot;"/>
   <delegate decode="ps:mono" restrain="True" command="&quot;@PSDelegate@&quot; -q -dQUIET -dPARANOIDSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dEPSCrop -dAlignToPixels=0 -dGridFitTT=2 &quot;-sDEVICE=pnmraw&quot; -dTextAlphaBits=%u -dGraphicsAlphaBits=%u &quot;-r%s&quot; %s &quot;-sOutputFile=%s&quot; &quot;-f%s&quot; &quot;-f%s&quot;"/>
   <delegate decode="hpg" command="hp2xx -q -m eps -f &quot;%o&quot; &quot;%i&quot;"/>
-  <delegate decode="rad" command="ra_ppm -g 1.0 &quot;%i&quot; &quot;%o&quot;"/>
   <delegate decode="rgba" encode="rle" mode="encode" command="pnmtorle -o &quot;%o&quot; -v &quot;%i&quot;"/>
   <delegate decode="scan" command="scanimage -d &quot;%i&quot; &gt; &quot;%o&quot;"/>
   <delegate decode="shtml" command="html2ps -U -o &quot;%o&quot; &quot;%i&quot;"/>
