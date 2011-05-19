@@ -214,6 +214,9 @@ typedef long ssize_t;
 /* Define to 1 if you have the `sysconf' function. */
 #define MAGICKCORE_HAVE_SYSCONF 1
 
+/* Define to 1 if you have the `fprintf_l' function. */
+#define MAGICKCORE_HAVE_FPRINTF_L 1
+
 /* Define to 1 if you have the `vsnprintf' function. */
 #define MAGICKCORE_HAVE_VSNPRINTF 1
 
