@@ -209,7 +209,7 @@ typedef long ssize_t;
 #define MAGICKCORE_HAVE_MEMMOVE 1
 
 /* Define to 1 if you have the `strtod_l' function. */
-#if defined(_VISUALC_) && (_MSC_VER >= 1300)
+#if defined(_VISUALC_) && (_MSC_VER >= 1400)
 #define MAGICKCORE_HAVE_STRTOD_L 1
 #endif
 
@@ -217,7 +217,7 @@ typedef long ssize_t;
 #define MAGICKCORE_HAVE_SYSCONF 1
 
 /* Define to 1 if you have the `vfprintf_l' function. */
-#if defined(_VISUALC_) && (_MSC_VER >= 1300)
+#if defined(_VISUALC_) && (_MSC_VER >= 1400)
 #define MAGICKCORE_HAVE_VFPRINTF_L 1
 #endif
 
@@ -225,7 +225,7 @@ typedef long ssize_t;
 #define MAGICKCORE_HAVE_VSNPRINTF 1
 
 /* Define to 1 if you have the `vsnprintf_' function. */
-#if defined(_VISUALC_) && (_MSC_VER >= 1300)
+#if defined(_VISUALC_) && (_MSC_VER >= 1400)
 #define MAGICKCORE_HAVE_VSNPRINTF_L 1
 #endif
 
