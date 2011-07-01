@@ -1,2 +1,2 @@
 #ECF - this file contains additional configuration info.
-SOURCE = ..\..\magick\ImageMagick.rc
+SOURCE = ..\MagickCore\ImageMagick.rc
