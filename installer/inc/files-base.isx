@@ -37,4 +37,4 @@ Source: "..\bin\dcraw.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
 Source: "..\..\contrib\win32\PathTool\PathTool.exe"; DestDir: "{app}\uninstall"; Flags: ignoreversion
 
 ; Icon file
-Source: "..\..\MagfickCore\ImageMagick.ico"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
+Source: "..\..\MagickCore\ImageMagick.ico"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
