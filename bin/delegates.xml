@@ -79,7 +79,7 @@
   <delegate decode="ilbm" command="ilbmtoppm &quot;%i&quot; &gt; &quot;%o&quot;"/>
   <delegate decode="man" command="groff -man -Tps &quot;%i&quot; &gt; &quot;%o&quot;"/>
   <delegate decode="mpeg:decode" command="&quot;ffmpeg.exe&quot; -v -1 -vframes %S -i &quot;%i&quot; -vcodec pam -an -f rawvideo -y &quot;%u.pam&quot;"/>
-  <delegate encode="mpeg:encode" stealth="True" command="&quot;ffmpeg.exe&quot; -v -1 -mbd rd -trellis 2 -cmp 2 -subcmp 2 -g 300 -pass 1/2 -i &quot;%M%%d.jpg&quot; &quot;%u.%m&quot;"/>
+  <delegate encode="mpeg:encode" stealth="True" command="&quot;ffmpeg.exe&quot; -v -1 -mbd rd -trellis 2 -cmp 2 -subcmp 2 -g 300 -i &quot;%M%%d.jpg&quot; &quot;%u.%m&quot;"/>
   <delegate decode="pcl:color" restrain="True" command="&quot;pcl6.exe&quot; -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 &quot;-sDEVICE=ppmraw&quot; -dTextAlphaBits=%u -dGraphicsAlphaBits=%u &quot;-r%s&quot; %s &quot;-sOutputFile=%s&quot; &quot;%s&quot;"/>
   <delegate decode="pcl:cmyk" restrain="True" command="&quot;pcl6.exe&quot; -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 &quot;-sDEVICE=pamcmyk32&quot; -dTextAlphaBits=%u -dGraphicsAlphaBits=%u &quot;-r%s&quot; %s &quot;-sOutputFile=%s&quot; &quot;%s&quot;"/>
   <delegate decode="pcl:mono" restrain="True" command="&quot;pcl6.exe&quot; -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 &quot;-sDEVICE=pbmraw&quot; -dTextAlphaBits=%u -dGraphicsAlphaBits=%u &quot;-r%s&quot; %s &quot;-sOutputFile=%s&quot; &quot;%s&quot;"/>
