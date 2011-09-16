@@ -281,5 +281,9 @@ typedef long ssize_t;
 /* Define to 1 if you have the `TIFFSetWarningHandlerExt' function. */
 #define MAGICKCORE_HAVE_TIFFSETWARNINGHANDLEREXT 1
 
+/* Define to 1 if you have the `TIFFReadEXIFDirectory' function. */
+#define MAGICKCORE_HAVE_TIFFREADEXIFDIRECTORY 1
+
 /* Define to 1 if you have the `TIFFSwabArrayOfTriples' function. */
 #define HAVE_TIFFSWABARRAYOFTRIPLES 1
+

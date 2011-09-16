@@ -34,7 +34,7 @@ BEGIN
             VALUE "ProductVersion", THIS_PROJECT_VERSION_STRING "\0"
             VALUE "CompanyName", "Mike Welles, mike@onshore.com\0"
             VALUE "LegalCopyright", "Copyright © 1988-1997 Sam Leffler and Copyright © 1991-1996 Silicon Image, Inc.\0"
-            VALUE "Comments", "http://www.libtiff.org\0"
+            VALUE "Comments", "http://www.remotesensing.org/libtiff/\0"
         END
     END
     BLOCK "VarFileInfo"
