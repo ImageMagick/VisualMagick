@@ -29,6 +29,3 @@ EXCLUDE = jmemdosa.asm
 EXCLUDE = jmemmac.c
 EXCLUDE = jmemname.c
 EXCLUDE = jmemsys.h
-EXCLUDE = jidctred.c
-EXCLUDE = jcphuff.c
-EXCLUDE = jdphuff.c
