@@ -33,7 +33,7 @@
 #endif
   #define MagickAppDirectory "{app}"
   #define MagickLibDirectory "{app}"
-  #define MagickConfigDirectory "{app}\config"
+  #define MagickConfigDirectory "{app}"
   #define MagickCodersDirectory "{app}\modules\coders"
   #define MagickFiltersDirectory "{app}\modules\filters"
 #endif
