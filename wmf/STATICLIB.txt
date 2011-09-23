@@ -1,8 +1,7 @@
 #ECF - this file contains additional configuration info.
 DEFINE = HAVE_CONFIG_H
+DEFINE = HAVE_CONFIG_H
 DEFINE = _CRT_SECURE_NO_WARNINGS
-EXCLUDE = eps.c
-EXCLUDE = eps.h
 EXCLUDE = fig.c
 EXCLUDE = fig.h
 EXCLUDE = foreign.c
@@ -15,13 +14,8 @@ EXCLUDE = template.c
 EXCLUDE = template.h
 EXCLUDE = x.c
 EXCLUDE = x.h
-EXCLUDE = xgd.c
-EXCLUDE = xgd.h
 EXCLUDE = ipa.c
 EXCLUDE = io-wmf.c
-EXCLUDE = font.c
-EXCLUDE = font.h
-EXCLUDE = wmf.c
-EXCLUDE = stream.c
-EXCLUDE = stream.h
+EXCLUDE = xgd.c
+EXCLUDE = xgd.h
 EXCLUDE = xml.c
