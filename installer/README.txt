@@ -82,5 +82,5 @@ prompt.
 10)
    Distribution package is available as
 
-     VisualMagick\bin\ImageMagick-1.0-Q8-dll.exe
+     VisualMagick\bin\ImageMagick-7.0-0-0-Q8-dll.exe
 
