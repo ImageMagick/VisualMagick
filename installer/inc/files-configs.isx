@@ -26,6 +26,7 @@ Source: "..\..\config\mime.xml"; DestDir: {#MagickConfigDirectory}; Flags: confi
 Source: "..\bin\configure.xml"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
 Source: "..\bin\ImageMagick.rdf"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
 Source: "..\bin\delegates.xml"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
+Source: "..\bin\policy.xml"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
 Source: "..\bin\sRGB.icc"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
 Source: "..\bin\thresholds.xml"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
 Source: "..\bin\type-ghostscript.xml"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
