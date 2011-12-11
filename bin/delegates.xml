@@ -59,8 +59,8 @@
 -->
 <delegatemap>
 <delegate decode="autotrace" stealth="True" command="autotrace -output-format svg -output-file &quot;%o&quot; &quot;%i&quot;"/>
-  <delegate decode="bmp" encode="launch" mode="encode" command="imdisplay.exe &quot;%i.&quot;"/>
-  <delegate decode="bmp" encode="win" mode="encode" command="imdisplay.exe &quot;%i.&quot;"/>
+  <delegate decode="bmp" encode="launch" mode="encode" command="cmd /C &quot;%SystemRoot%/system32/rundll32.exe&quot; &quot;%SystemRoot%/system32/shimgvw.dll,ImageView_Fullscreen&quot; &quot;%i.&quot;" />
+  <delegate decode="bmp" encode="win" mode="encode" command="cmd /C &quot;%SystemRoot%/system32/rundll32.exe&quot; &quot;%SystemRoot%/system32/shimgvw.dll,ImageView_Fullscreen&quot; &quot;%i.&quot;" />
   <delegate decode="browse" restrain="True" spawn="True" command="cmd /C start http://www.imagemagick.org/"/>
   <delegate decode="cgm" thread-support="False" command="ralcgm -d ps &quot;%i.&quot; &quot;%o.&quot; &quot;%u.&quot;"/>
   <delegate decode="compress" restrain="True" command="|uncompress -c &quot;%i&quot;"/>
@@ -69,8 +69,8 @@
   <delegate decode="dot" command="dot -Tps &quot;%i&quot; -o &quot;%o&quot;"/>
   <delegate decode="dvi" command="dvips -q -o &quot;%o&quot; &quot;%i&quot;"/>
   <delegate decode="edit" restrain="True" command="notepad &quot;%o&quot;"/>
-  <delegate decode="eps" encode="pdf" mode="bi" command="&quot;@PSDelegate@&quot; -q -dBATCH -dSAFER -dMaxBitmap=500000000 -dNOPAUSE -dEPSCrop -sDEVICE=pdfwrite &quot;-sOutputFile=%o&quot; -- &quot;%i&quot;"/>
-  <delegate decode="eps" encode="ps" mode="bi" command="&quot;@PSDelegate@&quot; -q -dBATCH -dSAFER -dMaxBitmap=500000000 -dNOPAUSE -dEPSCrop -dAlignToPixels=0 -sDEVICE=pswrite &quot;-sOutputFile=%o&quot; -- &quot;%i&quot;"/>
+  <delegate decode="eps" encode="pdf" mode="bi" command="&quot;@PSDelegate@&quot; -q -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -sDEVICE=pdfwrite &quot;-sOutputFile=%o&quot; -- &quot;%i&quot;"/>
+  <delegate decode="eps" encode="ps" mode="bi" command="&quot;@PSDelegate@&quot; -q -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 -sDEVICE=pswrite &quot;-sOutputFile=%o&quot; -- &quot;%i&quot;"/>
   <delegate decode="fig" command="/usr/X11R6/bin/fig2dev -L ps &quot;%i&quot; &quot;%o&quot;"/>
   <delegate decode="gplt" command="/bin/echo &quot;set size 1.25,0.62     set terminal postscript portrait color solid; set output &quot;%o&quot;; load &quot;%i&quot;&quot; &gt; &quot;%u&quot;;gnuplot %u"/>
   <delegate decode="hpgl" command="hp2xx -q -m eps -f &quot;%o&quot; &quot;%i&quot;"/>
@@ -99,7 +99,7 @@
   <delegate decode="scan" command="scanimage -d &quot;%i&quot; &gt; &quot;%o&quot;"/>
   <delegate decode="shtml" command="html2ps -U -o &quot;%o&quot; &quot;%i&quot;"/>
   <delegate decode="sid" command="mrsidgeodecode -if sid -i &quot;%i&quot; -of tif -o &quot;%o&quot; &gt; &quot;%u&quot;"/>
-  <delegate decode="miff" encode="show" restrain="True" spawn="True" command="imdisplay.exe -immutable -window-group %g -title &quot;%l of %f&quot; &quot;ephemeral:%o&quot;"/>
+  <delegate decode="bmp" encode="show" mode="encode" command="cmd /C &quot;%SystemRoot%/system32/rundll32.exe&quot; &quot;%SystemRoot%/system32/shimgvw.dll,ImageView_Fullscreen&quot; &quot;%i.&quot;" />
   <delegate decode="txt" encode="ps" mode="bi" command="enscript -o &quot;%o&quot; &quot;%i&quot;"/>
   <delegate decode="xcf" command="xcftopnm &quot;%i&quot; &gt; &quot;%o&quot;"/>
   <delegate decode="xps:color" restrain="True" command="&quot;gxps.exe&quot; -q -dQUIET -dPARANOIDSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dEPSCrop -dAlignToPixels=0 -dGridFitTT=2 &quot;-sDEVICE=pnmraw&quot; -dTextAlphaBits=%u -dGraphicsAlphaBits=%u &quot;-r%s&quot; %s &quot;-sOutputFile=%s&quot; &quot;%s&quot;"/>
