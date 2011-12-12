@@ -58,9 +58,9 @@
 
 -->
 <delegatemap>
-<delegate decode="autotrace" stealth="True" command="autotrace -output-format svg -output-file &quot;%o&quot; &quot;%i&quot;"/>
-  <delegate decode="bmp" encode="launch" mode="encode" command="cmd /C &quot;%SystemRoot%/system32/rundll32.exe&quot; &quot;%SystemRoot%/system32/shimgvw.dll,ImageView_Fullscreen&quot; &quot;%i.&quot;" />
-  <delegate decode="bmp" encode="win" mode="encode" command="cmd /C &quot;%SystemRoot%/system32/rundll32.exe&quot; &quot;%SystemRoot%/system32/shimgvw.dll,ImageView_Fullscreen&quot; &quot;%i.&quot;" />
+  <delegate decode="autotrace" stealth="True" command="autotrace -output-format svg -output-file &quot;%o&quot; &quot;%i&quot;"/>
+  <delegate decode="bmp" encode="launch" mode="encode" command="cmd.exe /C %%SystemRoot%/System32/rundll32.exe &quot;%%ProgramFiles%/Windows Photo Viewer/PhotoViewer.dll&quot;, ImageView_Fullscreen file:///%i" />
+  <delegate decode="bmp" encode="win" mode="encode" command="cmd.exe /C %%SystemRoot%/System32/rundll32.exe &quot;%%ProgramFiles%/Windows Photo Viewer/PhotoViewer.dll&quot;, ImageView_Fullscreen file:///%i" />
   <delegate decode="browse" restrain="True" spawn="True" command="cmd /C start http://www.imagemagick.org/"/>
   <delegate decode="cgm" thread-support="False" command="ralcgm -d ps &quot;%i.&quot; &quot;%o.&quot; &quot;%u.&quot;"/>
   <delegate decode="compress" restrain="True" command="|uncompress -c &quot;%i&quot;"/>
@@ -99,7 +99,7 @@
   <delegate decode="scan" command="scanimage -d &quot;%i&quot; &gt; &quot;%o&quot;"/>
   <delegate decode="shtml" command="html2ps -U -o &quot;%o&quot; &quot;%i&quot;"/>
   <delegate decode="sid" command="mrsidgeodecode -if sid -i &quot;%i&quot; -of tif -o &quot;%o&quot; &gt; &quot;%u&quot;"/>
-  <delegate decode="bmp" encode="show" mode="encode" command="cmd /C &quot;%SystemRoot%/system32/rundll32.exe&quot; &quot;%SystemRoot%/system32/shimgvw.dll,ImageView_Fullscreen&quot; &quot;%i.&quot;" />
+  <delegate decode="bmp" encode="show" mode="encode" command="cmd.exe /C %%SystemRoot%/System32/rundll32.exe &quot;%%ProgramFiles%/Windows Photo Viewer/PhotoViewer.dll&quot;, ImageView_Fullscreen file:///%i" />
   <delegate decode="txt" encode="ps" mode="bi" command="enscript -o &quot;%o&quot; &quot;%i&quot;"/>
   <delegate decode="xcf" command="xcftopnm &quot;%i&quot; &gt; &quot;%o&quot;"/>
   <delegate decode="xps:color" restrain="True" command="&quot;gxps.exe&quot; -q -dQUIET -dPARANOIDSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dEPSCrop -dAlignToPixels=0 -dGridFitTT=2 &quot;-sDEVICE=pnmraw&quot; -dTextAlphaBits=%u -dGraphicsAlphaBits=%u &quot;-r%s&quot; %s &quot;-sOutputFile=%s&quot; &quot;%s&quot;"/>
