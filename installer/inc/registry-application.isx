@@ -25,34 +25,34 @@
 #define private KeyVersionDepth  KeyVersion + "\Q:" + QuantumDepth
 #define private KeyCurrent       KeyBase + "\Current"
 
-Root: HKLM; Subkey: {#KeyBase}; ValueType: none; Flags: uninsdeletekeyifempty
-Root: HKLM; Subkey: {#KeyVersion}; ValueType: none; Flags: uninsdeletekeyifempty
-Root: HKLM; Subkey: {#KeyVersionDepth}; ValueType: none; Flags: uninsdeletekey
-Root: HKLM; Subkey: {#KeyVersionDepth}; ValueType: string; ValueName: "BinPath"; ValueData: "{app}"
-Root: HKLM; Subkey: {#KeyVersionDepth}; ValueType: string; ValueName: "ConfigurePath"; ValueData: {#MagickConfigDirectory}
-Root: HKLM; Subkey: {#KeyVersionDepth}; ValueType: string; ValueName: "LibPath"; ValueData: "{app}"
+Root: HKCU; Subkey: {#KeyBase}; ValueType: none; Flags: uninsdeletekeyifempty
+Root: HKCU; Subkey: {#KeyVersion}; ValueType: none; Flags: uninsdeletekeyifempty
+Root: HKCU; Subkey: {#KeyVersionDepth}; ValueType: none; Flags: uninsdeletekey
+Root: HKCU; Subkey: {#KeyVersionDepth}; ValueType: string; ValueName: "BinPath"; ValueData: "{app}"
+Root: HKCU; Subkey: {#KeyVersionDepth}; ValueType: string; ValueName: "ConfigurePath"; ValueData: {#MagickConfigDirectory}
+Root: HKCU; Subkey: {#KeyVersionDepth}; ValueType: string; ValueName: "LibPath"; ValueData: "{app}"
 #ifdef MagickCodersDirectory
-Root: HKLM; Subkey: {#KeyVersionDepth}; ValueType: string; ValueName: "CoderModulesPath"; ValueData: {#MagickCodersDirectory}
+Root: HKCU; Subkey: {#KeyVersionDepth}; ValueType: string; ValueName: "CoderModulesPath"; ValueData: {#MagickCodersDirectory}
 #endif
 #ifdef MagickFiltersDirectory
-Root: HKLM; Subkey: {#KeyVersionDepth}; ValueType: string; ValueName: "FilterModulesPath"; ValueData: {#MagickFiltersDirectory}
+Root: HKCU; Subkey: {#KeyVersionDepth}; ValueType: string; ValueName: "FilterModulesPath"; ValueData: {#MagickFiltersDirectory}
 #endif
 
 
-Root: HKLM; Subkey: {#KeyCurrent}; ValueType: none; Flags: uninsdeletekey
-Root: HKLM; Subkey: {#KeyCurrent}; ValueType: string; ValueName: "Version"; ValueData: {#MagickPackageVersion}
-Root: HKLM; Subkey: {#KeyCurrent}; ValueType: dword; ValueName: "QuantumDepth"; ValueData: {#QuantumDepth}
+Root: HKCU; Subkey: {#KeyCurrent}; ValueType: none; Flags: uninsdeletekey
+Root: HKCU; Subkey: {#KeyCurrent}; ValueType: string; ValueName: "Version"; ValueData: {#MagickPackageVersion}
+Root: HKCU; Subkey: {#KeyCurrent}; ValueType: dword; ValueName: "QuantumDepth"; ValueData: {#QuantumDepth}
 
-Root: HKLM; Subkey: {#KeyCurrent}; ValueType: string; ValueName: "BinPath"; ValueData: "{app}"
-Root: HKLM; Subkey: {#KeyCurrent}; ValueType: string; ValueName: "ConfigurePath"; ValueData: {#MagickConfigDirectory}
-Root: HKLM; Subkey: {#KeyCurrent}; ValueType: string; ValueName: "LibPath"; ValueData: "{app}"
+Root: HKCU; Subkey: {#KeyCurrent}; ValueType: string; ValueName: "BinPath"; ValueData: "{app}"
+Root: HKCU; Subkey: {#KeyCurrent}; ValueType: string; ValueName: "ConfigurePath"; ValueData: {#MagickConfigDirectory}
+Root: HKCU; Subkey: {#KeyCurrent}; ValueType: string; ValueName: "LibPath"; ValueData: "{app}"
 #ifdef MagickCodersDirectory
-Root: HKLM; Subkey: {#KeyCurrent}; ValueType: string; ValueName: "CoderModulesPath"; ValueData: {#MagickCodersDirectory}
+Root: HKCU; Subkey: {#KeyCurrent}; ValueType: string; ValueName: "CoderModulesPath"; ValueData: {#MagickCodersDirectory}
 #endif
 #ifdef MagickFiltersDirectory
-Root: HKLM; Subkey: {#KeyCurrent}; ValueType: string; ValueName: "FilterModulesPath"; ValueData: {#MagickFiltersDirectory}
+Root: HKCU; Subkey: {#KeyCurrent}; ValueType: string; ValueName: "FilterModulesPath"; ValueData: {#MagickFiltersDirectory}
 #endif
 
 ; Tell windows to use our convert.exe
 ;
-Root: HKLM; Subkey: "Software\Classes\Applications"; ValueType: string; ValueName: "AutoRun"; ValueData: "{app}\convert.exe $*"
+Root: HKCU; Subkey: "Software\Classes\Applications"; ValueType: string; ValueName: "AutoRun"; ValueData: "{app}\convert.exe $*"
