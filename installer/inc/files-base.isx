@@ -29,6 +29,7 @@ Source: "..\bin\stream.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversio
 Source: "..\bin\animate.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
 Source: "..\bin\display.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
 Source: "..\bin\import.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
+Source: "..\bin\emfplus.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
 Source: "..\bin\hp2xx.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
 Source: "..\bin\ffmpeg.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
 Source: "..\bin\dcraw.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
