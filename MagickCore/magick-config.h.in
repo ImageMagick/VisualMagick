@@ -285,5 +285,7 @@ typedef long ssize_t;
 #define MAGICKCORE_HAVE_TIFFREADEXIFDIRECTORY 1
 
 /* Define to 1 if you have the `TIFFSwabArrayOfTriples' function. */
-#define HAVE_TIFFSWABARRAYOFTRIPLES 1
+#define MAGICKCORE_HAVE_TIFFSWABARRAYOFTRIPLES 1
 
+/* Define to 1 if you have the `TIFFIsBigEndian' function. */
+#define MAGICKCORE_HAVE_TIFFISBIGENDIAN  1
