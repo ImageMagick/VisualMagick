@@ -69,8 +69,7 @@
   <delegate decode="dot" command="dot -Tps &quot;%i&quot; -o &quot;%o&quot;"/>
   <delegate decode="dvi" command="dvips -q -o &quot;%o&quot; &quot;%i&quot;"/>
   <delegate decode="edit" restrain="True" command="notepad &quot;%o&quot;"/>
-  <delegate decode="emf" command="emfplus -format png &quot;%i&quot; &quot;%o&quot;"/>
-  <delegate decode="wmf" command="emfplus -format png &quot;%i&quot; &quot;%o&quot;"/>
+  <delegate decode="emfplus" command="emfplus.exe -format png &quot;%i&quot; &quot;%o&quot;"/>
   <delegate decode="eps" encode="pdf" mode="bi" command="&quot;@PSDelegate@&quot; -q -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -sDEVICE=pdfwrite &quot;-sOutputFile=%o&quot; -- &quot;%i&quot;"/>
   <delegate decode="eps" encode="ps" mode="bi" command="&quot;@PSDelegate@&quot; -q -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 -sDEVICE=pswrite &quot;-sOutputFile=%o&quot; -- &quot;%i&quot;"/>
   <delegate decode="fig" command="/usr/X11R6/bin/fig2dev -L ps &quot;%i&quot; &quot;%o&quot;"/>
