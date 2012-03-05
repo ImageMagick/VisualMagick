@@ -107,9 +107,6 @@
 // Define to use the Windows GDI32 library (for clipboard and emf modules)
 #define MAGICKCORE_WINGDI32_DELEGATE
 
-// Define to use the libwmf WMF parsing library
-#define MAGICKCORE_WMF_DELEGATE
-
 // Define to use the GNOME XML library
 #define MAGICKCORE_XML_DELEGATE
 
