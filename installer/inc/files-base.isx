@@ -18,7 +18,7 @@
 
 ; Executables
 Source: "..\bin\imdisplay.exe"; DestDir: {#MagickAppDirectory}; DestName: "imdisplay.exe"; Flags: ignoreversion
-Source: "..\bin\convert.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
+Source: "..\bin\convert.exe"; DestDir: {#MagickAppDirectory}; ; Tasks: legacy_support; Flags: ignoreversion
 Source: "..\bin\compare.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
 Source: "..\bin\composite.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
 Source: "..\bin\conjure.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion

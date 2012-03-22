@@ -55,4 +55,4 @@ Root: HKLM; Subkey: {#KeyCurrent}; ValueType: string; ValueName: "FilterModulesP
 
 ; Tell windows to use our convert.exe
 ;
-Root: HKLM; Subkey: "Software\Classes\Applications"; ValueType: string; ValueName: "AutoRun"; ValueData: "{app}\convert.exe $*"
+Root: HKLM; Subkey: "Software\Classes\Applications"; ValueType: string; ValueName: "AutoRun"; ValueData: "{app}\convert.exe $*"; Tasks: legacy_support
