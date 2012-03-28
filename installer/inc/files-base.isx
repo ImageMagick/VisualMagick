@@ -23,6 +23,7 @@ Source: "..\bin\compare.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversi
 Source: "..\bin\composite.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
 Source: "..\bin\conjure.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
 Source: "..\bin\identify.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
+Source: "..\bin\magick.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
 Source: "..\bin\mogrify.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
 Source: "..\bin\montage.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
 Source: "..\bin\stream.exe"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion
