@@ -20,7 +20,7 @@ AppName={#MagickPackageName} {#MagickPackageVersion} Q{#QuantumDepth}
 ; When updating the version string, remember to also update the version in
 ; the [Registry] section
 AppVerName={#MagickPackageName} {#MagickPackageVersion}{#MagickPackageVersionAddendum} Q{#QuantumDepth} ({#MagickPackageReleaseDate})
-AppVersion={#MagickPackageVersion}
+AppVersion={#MagickPackageVersion}{#MagickPackageVersionAddendum}
 AppCopyright=Copyright (C) 1999-2010 ImageMagick Studio LLC
 AppPublisher=ImageMagick Studio LLC
 AppPublisherURL=http://www.imagemagick.org/
