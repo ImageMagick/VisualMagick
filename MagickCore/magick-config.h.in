@@ -247,6 +247,7 @@ typedef long ssize_t;
 /* Define to 1 if you have the `_wstat' function. */
 #define MAGICKCORE_HAVE__WSTAT 1
 
+#define MAGICKCORE_HAVE__ALIGNED_MALLOC 1
 #define MAGICKCORE_HAVE_VSNPRINTF 1
 #define MAGICKCORE_HAVE_GETTIMEOFDAY
 #define MAGICKCORE_HAVE_SETVBUF 1
