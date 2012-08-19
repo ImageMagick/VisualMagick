@@ -62,9 +62,9 @@
 //
 //#undef MAGICKCORE_EXCLUDE_DEPRECATED
 
-// Define to enable high dynamic range imagery (HDRI) (experimental)
+// Enable high dynamic range imagery (HDRI)
 //
-// #undef MAGICKCORE_HDRI_SUPPORT
+#define MAGICKCORE_HDRI_SUPPORT
 
 // Permit enciphering and deciphering image pixels.
 //
