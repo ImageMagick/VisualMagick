@@ -68,4 +68,4 @@ TYPE-GHOSTSCRIPT.XML  IMAGEMAGICK DISCARDABLE "..\\bin\\type-ghostscript.xml"
 //
 /////////////////////////////////////////////////////////////////////////////
 
-IDR_MAGICKICON          ICON    DISCARDABLE     "..\\..\\MagickCore\\ImageMagick.ico"
+IDR_MAGICKICON          ICON    DISCARDABLE     "..\\..\\images\\ImageMagick.ico"
