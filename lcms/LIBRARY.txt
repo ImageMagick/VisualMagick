@@ -1,4 +1,5 @@
 #ECF - this file contains additional configuration info.
+DEFINE = CMS_NO_HALF_SUPPORT
 DEFINE = _LCMSLIB_
 DEFINE = __CONSOLE__
 DEFINE = _CRT_SECURE_NO_WARNINGS
