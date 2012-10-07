@@ -801,7 +801,7 @@ void CConfigureApp::process_utility(
           exempt=true;
           for (i=0; magick_exempt[i] != NULL; i++)
           {
-            if (LocalFindNoCase(name,magick_exempt[i],0) >= 0)
+            if (LocalFindNoCase(name,(char *) magick_exempt[i],0) >= 0)
               {
                 exempt=false;
                 break;
