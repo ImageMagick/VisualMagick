@@ -1,5 +1,8 @@
 // Configure.cpp : Defines the class behaviors for the application.
 //
+//
+#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_NONSTDC_NO_WARNINGS
 
 #ifndef __NO_MFC__
 #include "stdafx.h"
