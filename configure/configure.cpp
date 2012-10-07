@@ -832,6 +832,11 @@ void CConfigureApp::process_utility(
             {
               workspace->write_project_dependency(project,"CORE_tiff");
             }
+          if (LocalFindNoCase(name,"dcraw",0) >= 0)
+            {
+              workspace->write_project_dependency(project,"CORE_jp2");
+              workspace->write_project_dependency(project,"CORE_jpeg");
+            }
         }
       workspace->write_end_project(project);
       break;
