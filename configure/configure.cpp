@@ -796,7 +796,7 @@ void CConfigureApp::process_utility(
             (const char *) NULL
           };
 
-          ssize_t i;
+          int i;
 
           exempt=true;
           for (i=0; magick_exempt[i] != NULL; i++)
