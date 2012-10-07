@@ -729,6 +729,13 @@ void CConfigureApp::process_utility(
       extra = "..\\tiff";
       add_includes(includes_list, extra, levels-2);
     }
+  if (LocalFindNoCase(name,"dcraw",0) >= 0)
+    {
+      extra = "..\\jp2\\src\\libjasper\\include";
+      add_includes(includes_list, extra, levels-2);
+      extra = "..\\jpeg";
+      add_includes(includes_list, extra, levels-2);
+    }
 
 #ifdef _DEBUG
   debuglog  << "process_utility "
@@ -741,8 +748,7 @@ void CConfigureApp::process_utility(
             << "extn:" << extn.c_str() << endl;
 #endif
 
-  ConfigureProject *project = write_project_exe(
-                                                runtime,
+  ConfigureProject *project = write_project_exe(runtime,
                                                 project_type,
                                                 staging,
                                                 search,
@@ -760,8 +766,7 @@ void CConfigureApp::process_utility(
   string projectname;
   string pname;
   pname = prefix + name;
-  projectname = get_project_name(
-                                 EXEPROJECT,runtime,staging.substr(1),prefix,name);
+  projectname = get_project_name(EXEPROJECT,runtime,staging.substr(1),prefix,name);
   switch (runtime)
     {
     case MULTITHREADEDSTATIC:
@@ -777,10 +782,35 @@ void CConfigureApp::process_utility(
       workspace->write_begin_project(project, pname.c_str(), projectname.c_str());
       if (!standaloneMode)
         {
-          workspace->write_project_dependency(project,"CORE_MagickCore");
-          workspace->write_project_dependency(project,"CORE_MagickWand");
-          if (useX11Stubs)
-            workspace->write_project_dependency(project,"CORE_xlib");
+          bool exempt;
+
+          static const char *magick_exempt[] =
+          {
+            "dcraw",
+            "iptcutil",
+            "jasper",
+            "tiff",
+            (const char *) NULL
+          };
+
+          ssize_t i;
+
+          exempt=true;
+          for (i=0; magick_exempt[i] != NULL; i++)
+          {
+            if (LocalFindNoCase(name,magick_exempt[i],0) >= 0)
+              {
+                exempt=false;
+                break;
+              }
+          }
+          if (exempt)
+            {
+              workspace->write_project_dependency(project,"CORE_MagickCore");
+              workspace->write_project_dependency(project,"CORE_MagickWand");
+              if (useX11Stubs)
+                workspace->write_project_dependency(project,"CORE_xlib");
+            }
           if (extn.compare("cpp") == 0)
             {
               workspace->write_project_dependency(project,"CORE_Magick++");
