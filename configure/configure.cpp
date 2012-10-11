@@ -4952,6 +4952,11 @@ void ConfigureVS7Project::write_link_tool_dependencies( string &root,
               m_stream << " ";
             bFirstTime=false;
             m_stream << strDepends.c_str();
+            LocalFormat(strDepends,"CORE_%sMagickWand%s",strmode,"_.lib");
+            if (!bFirstTime)
+              m_stream << " ";
+            bFirstTime=false;
+            m_stream << strDepends.c_str();
             if (useX11Stubs)
               {
                 LocalFormat(strDepends,"CORE_%sxlib%s",strmode,"_.lib");
