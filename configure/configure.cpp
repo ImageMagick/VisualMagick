@@ -456,6 +456,7 @@ void CConfigureApp::generate_dependencies( ConfigureProject *p,
   generate_a_dependency(workspace, p, "LIBR_", true, false);
   generate_a_dependency(workspace, p, "CORE_", true, true);
   generate_a_dependency_cs(workspace, p, "CORE_%sMagickCore");
+  generate_a_dependency_cs(workspace, p, "CORE_%sMagickWand");
   if (add_cpp_depends)
     generate_a_dependency_cs(workspace, p, "CORE_%sMagick++");
   generate_a_dependency(workspace, p, (char *)MODULE_PREFIX, true, false);
