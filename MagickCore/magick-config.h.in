@@ -58,10 +58,6 @@
 //
 #define MAGICKCORE_X11_DELEGATE
 
-// Exclude deprecated methods in MagickCore API 
-//
-//#undef MAGICKCORE_EXCLUDE_DEPRECATED
-
 // Enable high dynamic range imagery (HDRI)
 //
 #define MAGICKCORE_HDRI_SUPPORT
@@ -69,6 +65,10 @@
 // Permit enciphering and deciphering image pixels.
 //
 #define MAGICKCORE_CIPHER_SUPPORT
+
+// Exclude deprecated methods in MagickCore API 
+//
+//#undef MAGICKCORE_EXCLUDE_DEPRECATED
 
 /////////////
 //
