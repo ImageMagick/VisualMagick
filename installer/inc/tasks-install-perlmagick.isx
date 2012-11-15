@@ -16,4 +16,4 @@
 ;  Copyright (C) 2003 - 2008 GraphicsMagick Group
 #endif
 
-Name: install_PerlMagick; Description: "Install PerlMagick for ActiveState Perl v5.14.2 build 1402"; Flags: unchecked
+Name: install_PerlMagick; Description: "Install PerlMagick for ActiveState Perl v5.16.1"; Flags: unchecked
