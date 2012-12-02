@@ -123,7 +123,7 @@ BEGIN
     CONTROL         "Generate all utility projects with full paths rather then relative paths.",
                     IDC_STANDALONE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,
                     167,236,10
-    PUSHBUTTON      "Edit ""magick-config.h""",IDC_EditConfig,109,204,92,14
+    PUSHBUTTON      "Edit ""magick-baseconfig.h""",IDC_EditConfig,109,204,92,14
     CONTROL         "Generate Visual Studio 7 format",IDC_GENERATE_VS7,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,182,140,10
     CONTROL         "Build 64-bit distribution",IDC_BUILD_64_BIT,"Button",
