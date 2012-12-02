@@ -21,7 +21,7 @@
    b) Click on '!' icon to run configure program
    c) Select DLL build
    d) Uncheck "Use X11 Stubs" and check "Build demo and test programs"
-   e) Click on Edit "magick-config.h" and ensure that
+   e) Click on Edit "magick-baseconfig.h" and ensure that
       UseInstalledMagick and ProvideDllMain are defined.
    f) Finish remaining configure wizard screens to complete.
    g) File -> "Close Workspace"
