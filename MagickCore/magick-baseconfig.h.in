@@ -145,10 +145,10 @@
 // #define MAGICKCORE_SHARE_PATH  "c:\\ImageMagick\\"
 
 // Optional: Specify where coder modules (DLLs) are installed
-#define MAGICKCORE_CODER_PATH  "c:\\ImageMagick\\"
+// #define MAGICKCORE_CODER_PATH  "c:\\ImageMagick\\"
 
 // Optional: Specify where filter modules (DLLs) are installed
-#define MAGICKCORE_FILTER_PATH  "c:\\ImageMagick\\"
+// #define MAGICKCORE_FILTER_PATH  "c:\\ImageMagick\\"
 
 // Magick API method prefix.  Define to add a unique prefix to all API methods.
 // #undef MAGICKCORE_NAMESPACE_PREFIX
