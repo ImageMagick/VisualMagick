@@ -161,6 +161,10 @@
 // Define the package name.
 #define MAGICKCORE_PACKAGE_NAME  "ImageMagick"
 
+// Required or InitializeCriticalSectionandSpinCount is undefined.
+#if !defined(_WIN32_WINNT)
+#  define _WIN32_WINNT  0x0501
+#endif
 
 // Use Visual C++ C inline method extension to improve performance
 #define inline __inline
@@ -171,17 +175,12 @@
 #endif
 
 // Visual C++ does not define ssize_t by default.
-#if !defined(__MINGW32__)
+#if !defined(__MINGW32__) && !defined(__MINGW64__)
 #if defined(_WIN64) 
 typedef __int64 ssize_t;
 #else
 typedef long ssize_t;
 #endif
-#endif
-
-// Required or InitializeCriticalSectionandSpinCount is undefined.
-#if !defined(_WIN32_WINNT)
-#  define _WIN32_WINNT  0x0501
 #endif
 
 #if !defined(__FUNCTION__)
