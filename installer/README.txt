@@ -1,8 +1,7 @@
 [ The files in this directory are to support the ImageMagick
   setup.exe-style installer package. The following are the instructions
   foro how to build a Q:8 DLL-based distribution installer package
-  using Visual C++
-  7.0. ]
+  using Visual C++ 10.0. ]
 
 	   Steps for building VisualMagick Distribution Package
 
@@ -51,7 +50,7 @@ Visual Studio provides a batch script in VC98\Bin called VCVARS32.BAT
 that can be used to do this manually after you open up a command
 prompt.
 
-5) Open VisualMagick\installer\im-dll-8.iss by double-clicking from
+5) Open VisualMagick\installer\im-x64-dll.iss by double-clicking from
    Windows Explorer.
 
    a) File -> Compile
@@ -82,5 +81,5 @@ prompt.
 10)
    Distribution package is available as
 
-     VisualMagick\bin\ImageMagick-7.0-0-0-Q8-dll.exe
+     VisualMagick\bin\ImageMagick-7.0-0-0-Q16-HDRI-dll.exe
 
