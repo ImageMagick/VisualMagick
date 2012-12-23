@@ -21,7 +21,7 @@ AppName={#MagickPackageName} {#MagickPackageVersion} Q{#QuantumDepth}
 ; the [Registry] section
 AppVerName={#MagickPackageName} {#MagickPackageVersion}{#MagickPackageVersionAddendum} Q{#QuantumDepth} ({#MagickPackageReleaseDate})
 AppVersion={#MagickPackageVersion}
-AppCopyright=Copyright (C) 1999-2010 ImageMagick Studio LLC
+AppCopyright=Copyright (C) 1999-2013 ImageMagick Studio LLC
 AppPublisher=ImageMagick Studio LLC
 AppPublisherURL=http://www.imagemagick.org/
 AppSupportURL=http://www.imagemagick.org/
