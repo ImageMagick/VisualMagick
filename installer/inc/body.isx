@@ -17,20 +17,12 @@
 #endif
 
 #ifdef MagickStaticPackage
-#ifdef Magick64BitArchitecture
-  #define MagickPackageType "x64-static"
-#else
   #define MagickPackageType "static"
-#endif
   #define MagickAppDirectory "{app}"
   #define MagickLibDirectory "{app}"
   #define MagickConfigDirectory "{app}"
 #else
-#ifdef Magick64BitArchitecture
-  #define MagickPackageType "x64-dll"
-#else
   #define MagickPackageType "dll"
-#endif
   #define MagickAppDirectory "{app}"
   #define MagickLibDirectory "{app}"
   #define MagickConfigDirectory "{app}"
