@@ -23,5 +23,5 @@
 #include "inc\body.isx"
 
 #ifdef Debug
-  #expr SaveToFile(AddBackslash(SourcePath) + "im-static-16.txt")
+  #expr SaveToFile(AddBackslash(SourcePath) + "im-x86-static-16.isp")
 #endif

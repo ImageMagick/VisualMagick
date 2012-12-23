@@ -16,12 +16,31 @@
 ;  Copyright (C) 2003 - 2008 GraphicsMagick Group
 #endif
 
-; Compiler-dependent DLLs
+#define  public MSVCRedist "C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\redist"
+
 #ifdef Magick64BitArchitecture
-Source: "..\bin\amd64\*.dll"; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
+  #define  public MagickArchitecture "x64"
 #else
-Source: "..\bin\x86\*.dll"; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
+  #define  public MagickArchitecture "x86"
 #endif
+
+;
+; MSVC Runtime DLLs.
+;
+; C runtime
+Source: {#MSVCRedist}\{#MagickArchitecture}\Microsoft.VC100.CRT\msvcr100.dll; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
+
+; C++ standard runtime
+Source: {#MSVCRedist}\{#MagickArchitecture}\Microsoft.VC100.CRT\msvcp100.dll; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
+
+; OpenMP runtime
+Source: {#MSVCRedist}\{#MagickArchitecture}\Microsoft.VC100.OPENMP\vcomp100.dll; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
+
+; MFC C++ runtime
+Source: {#MSVCRedist}\{#MagickArchitecture}\Microsoft.VC100.MFC\mfc100.dll;   DestDir: {#MagickLibDirectory}; Flags: ignoreversion
+
+; MFC C++ runtime
+Source: {#MSVCRedist}\{#MagickArchitecture}\Microsoft.VC100.ATL\atl100.dll;   DestDir: {#MagickLibDirectory}; Flags: ignoreversion
 
 ; DLLs
 #ifdef MagickDynamicPackage
