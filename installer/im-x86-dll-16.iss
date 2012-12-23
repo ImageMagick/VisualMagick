@@ -23,5 +23,5 @@
 #include "inc\body.isx"
 
 #ifdef Debug
-  #expr SaveToFile(AddBackslash(SourcePath) + "im-x86-dynamic-16.isp")
+  #expr SaveToFile(AddBackslash(SourcePath) + "im-x86-dll-16.isp")
 #endif
