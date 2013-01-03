@@ -60,7 +60,7 @@
 
 // Enable high dynamic range imagery (HDRI)
 //
-#define MAGICKCORE_HDRI_SUPPORT
+#define MAGICKCORE_HDRI_ENABLE 1
 
 // Permit enciphering and deciphering image pixels.
 //
