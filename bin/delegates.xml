@@ -59,10 +59,10 @@
 -->
 <delegatemap>
   <delegate decode="autotrace" stealth="True" command="autotrace -output-format svg -output-file &quot;%o&quot; &quot;%i&quot;"/>
-  <delegate decode="bmp" encode="launch" mode="encode" command="cmd.exe /C %%SystemRoot%%/System32/rundll32.exe &quot;%%ProgramFiles%%/Windows Photo Viewer/PhotoViewer.dll&quot;, ImageView_Fullscreen file:///%i" />
-  <delegate decode="bmp" encode="show" mode="encode" command="cmd.exe /C %%SystemRoot%%/System32/rundll32.exe &quot;%%ProgramFiles%%/Windows Photo Viewer/PhotoViewer.dll&quot;, ImageView_Fullscreen file:///%i" />
-  <delegate decode="bmp" encode="win" mode="encode" command="cmd.exe /C %%SystemRoot%%/System32/rundll32.exe &quot;%%ProgramFiles%%/Windows Photo Viewer/PhotoViewer.dll&quot;, ImageView_Fullscreen file:///%i" />
-  <delegate decode="browse" restrain="True" spawn="True" command="cmd /C start http://www.imagemagick.org/"/>
+  <delegate decode="png" encode="launch" spawn="True" mode="encode" command="cmd.exe /C &quot;&quot; file:///&quot;%i.&quot;" />
+  <delegate decode="png" encode="show" spawn="True" mode="encode" command="cmd.exe /C &quot;&quot; file:///&quot;%i.&quot;" />
+  <delegate decode="png" encode="win" spawn="True" mode="encode" command="cmd.exe /C &quot;&quot; file:///&quot;%i.&quot;" />
+  <delegate decode="browse" restrain="True" spawn="True" command="cmd /C start &quot;&quot; http://www.imagemagick.org/"/>
   <delegate decode="cgm" thread-support="False" command="ralcgm -d ps &quot;%i.&quot; &quot;%o.&quot; &quot;%u.&quot;"/>
   <delegate decode="compress" restrain="True" command="|uncompress -c &quot;%i&quot;"/>
   <delegate decode="dng:decode" stealth="True" command="dcraw.exe -6 -w -O &quot;%u.ppm&quot; &quot;%i&quot;"/>
