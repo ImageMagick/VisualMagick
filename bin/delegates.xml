@@ -59,9 +59,9 @@
 -->
 <delegatemap>
   <delegate decode="autotrace" stealth="True" command="autotrace -output-format svg -output-file &quot;%o&quot; &quot;%i&quot;"/>
-  <delegate decode="png" encode="launch" spawn="True" mode="encode" command="cmd.exe /C start &quot;&quot; file:///&quot;%i.&quot;" />
-  <delegate decode="png" encode="show" spawn="True" mode="encode" command="cmd.exe /C start &quot;&quot; file:///&quot;%i.&quot;" />
-  <delegate decode="png" encode="win" spawn="True" mode="encode" command="cmd.exe /C start &quot;&quot; file:///&quot;%i.&quot;" />
+  <delegate decode="png" encode="launch" spawn="True" mode="encode" command="cmd.exe /C start &quot;%f&quot; file:///&quot;%i&quot;" />
+  <delegate decode="png" encode="show" spawn="True" mode="encode" command="cmd.exe /C start &quot;%f&quot; file:///&quot;%i&quot;" />
+  <delegate decode="png" encode="win" spawn="True" mode="encode" command="cmd.exe /C start &quot;%f&quot; file:///&quot;%i&quot;" />
   <delegate decode="browse" stealth="True" spawn="True" command="cmd /C start &quot;&quot; http://www.imagemagick.org/"/>
   <delegate decode="cgm" thread-support="False" command="ralcgm -d ps &quot;%i.&quot; &quot;%o.&quot; &quot;%u.&quot;"/>
   <delegate decode="compress" stealth="True" command="|uncompress -c &quot;%i&quot;"/>
