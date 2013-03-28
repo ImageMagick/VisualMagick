@@ -79,7 +79,7 @@ extern "C" {
 #define na  PL_na
 #endif
 #define NumberOf(array)  (sizeof(array)/sizeof(*array))
-#define PackageName   "Image::Magick"
+#define PackageName   "Image::Magick::@MAGICK_ABI_NAME@"
 #if PERL_VERSION <= 6
 #define PerlIO  FILE
 #define PerlIO_importFILE(f, fl)  (f)
@@ -189,7 +189,7 @@ struct PackageInfo
 };
 
 typedef void
-  *Image__Magick;  /* data type for the Image::Magick package */
+  *Image__Magick;  /* data type for the Image::Magick::@MAGICK_ABI_NAME@ package */
 
 /*
   Static declarations.
@@ -390,7 +390,8 @@ static struct
       { "black-point-compensation", MagickBooleanOptions} } },
     { "UnsharpMask", { {"geometry", StringReference},
       {"radius", RealReference}, {"sigma", RealReference},
-      {"gain", RealReference}, {"channel", MagickChannelOptions} } },
+      {"gain", RealReference}, {"threshold", RealReference},
+      {"channel", MagickChannelOptions} } },
     { "MotionBlur", { {"geometry", StringReference},
       {"radius", RealReference}, {"sigma", RealReference},
       {"angle", RealReference}, {"channel", MagickChannelOptions} } },
@@ -7787,8 +7788,7 @@ Mogrify(ref,...)
         {
           if (attribute_flag[0] != 0)
             geometry_info.rho=argument_list[0].real_reference;
-          image=EdgeImage(image,geometry_info.rho,geometry_info.sigma,
-            exception);
+          image=EdgeImage(image,geometry_info.rho,exception);
           break;
         }
         case 11:  /* Emboss */
@@ -9488,10 +9488,12 @@ Mogrify(ref,...)
           if (attribute_flag[3] != 0)
             geometry_info.xi=argument_list[3].real_reference;
           if (attribute_flag[4] != 0)
-            channel=(ChannelType) argument_list[4].integer_reference;
+            geometry_info.psi=argument_list[4].real_reference;
+          if (attribute_flag[5] != 0)
+            channel=(ChannelType) argument_list[5].integer_reference;
           channel_mask=SetImageChannelMask(image,channel);
           image=UnsharpMaskImage(image,geometry_info.rho,geometry_info.sigma,
-            geometry_info.xi,exception);
+            geometry_info.xi,geometry_info.psi,exception);
           if (image != (Image *) NULL)
             (void) SetImageChannelMask(image,channel_mask);
           break;
