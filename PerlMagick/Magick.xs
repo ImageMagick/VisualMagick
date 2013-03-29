@@ -541,7 +541,8 @@ static struct
     { "Perceptible", { {"epsilon", RealReference},
       {"channel", MagickChannelOptions} } },
     { "Poly", { {"terms", ArrayReference},
-      {"channel", MagickChannelOptions} } }
+      {"channel", MagickChannelOptions} } },
+    { "Grayscale", { {"method", MagickNoiseOptions} } },
   };
 
 static SplayTreeInfo
@@ -7362,6 +7363,8 @@ Mogrify(ref,...)
     PerceptibleImage   = 272
     Poly               = 273
     PolyImage          = 274
+    Grayscale          = 275
+    GrayscaleImage     = 276
     MogrifyRegion      = 666
   PPCODE:
   {
@@ -10921,6 +10924,17 @@ Mogrify(ref,...)
             terms[j]=(double) SvNV(*(av_fetch(av,j,0)));
           image=PolynomialImage(image,number_terms >> 1,terms,exception);
           terms=(double *) RelinquishMagickMemory(terms);
+          break;
+        }
+        case 137:  /* Grayscale */
+        {
+          PixelIntensityMethod
+            method;
+
+          method=UndefinedPixelIntensityMethod;
+          if (attribute_flag[0] != 0)
+            method=(PixelIntensityMethod) argument_list[0].integer_reference;
+          (void) GrayscaleImage(image,method,exception);
           break;
         }
       }
