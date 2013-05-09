@@ -79,7 +79,7 @@ extern "C" {
 #define na  PL_na
 #endif
 #define NumberOf(array)  (sizeof(array)/sizeof(*array))
-#define PackageName   "Image::Magick::@MAGICK_ABI_NAME@"
+#define PackageName   "Image::Magick"
 #if PERL_VERSION <= 6
 #define PerlIO  FILE
 #define PerlIO_importFILE(f, fl)  (f)
@@ -189,7 +189,7 @@ struct PackageInfo
 };
 
 typedef void
-  *Image__Magick;  /* data type for the Image::Magick::@MAGICK_ABI_NAME@ package */
+  *Image__Magick;  /* data type for the Image::Magick package */
 
 /*
   Static declarations.
