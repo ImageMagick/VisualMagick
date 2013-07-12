@@ -26,6 +26,7 @@ CTargetPage::CTargetPage() : CPropertyPage(CTargetPage::IDD)
 	m_standalone = FALSE;
 	m_visualStudio7 = FALSE;
 	m_build64Bit = FALSE;
+	m_openMP = FALSE;
 	m_bigCoderDLL = FALSE;
 	//}}AFX_DATA_INIT
 }
@@ -45,6 +46,7 @@ void CTargetPage::DoDataExchange(CDataExchange* pDX)
 	DDX_Check(pDX, IDC_STANDALONE, m_standalone);
 	DDX_Check(pDX, IDC_GENERATE_VS7, m_visualStudio7);
 	DDX_Check(pDX, IDC_BUILD_64_BIT, m_build64Bit);
+	DDX_Check(pDX, IDC_OPEN_MP, m_openMP);
 	DDX_Check(pDX, IDC_BIGCODERDLL, m_bigCoderDLL);
 	//}}AFX_DATA_MAP
 }

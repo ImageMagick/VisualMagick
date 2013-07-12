@@ -67,6 +67,7 @@ BOOL onebigdllMode = FALSE;
 //BOOL generateFontmap = FALSE;
 BOOL visualStudio7 = TRUE;
 BOOL build64Bit = FALSE;
+BOOL openMP = TRUE;
 BOOL m_bigCoderDLL = FALSE;
 #ifdef __NO_MFC__
 int projectType = MULTITHREADEDSTATIC;
@@ -2070,13 +2071,15 @@ public:
     nCurrent = 1;
     nTotal = 10;
     nPercent = 0;
+	 canPump = TRUE;
   }
 
   void Pumpit()
   {
     nPercent = (nCurrent * 100)/nTotal;
     SetPercentComplete(nPercent);
-    Pump();
+    if (canPump)
+      canPump = Pump();
     nCurrent++;
     if (nCurrent > nTotal)
       nCurrent = 0;
@@ -2086,6 +2089,8 @@ public:
     nCurrent,
     nTotal,
     nPercent;
+  BOOL
+    canPump;
 };
 
 #define THIS_SUB_KEY FALSE
@@ -2835,6 +2840,7 @@ BOOL CConfigureApp::InitInstance()
   wizard.m_Page2.m_standalone = standaloneMode;
   wizard.m_Page2.m_visualStudio7 = visualStudio7;
   wizard.m_Page2.m_build64Bit = build64Bit;
+  wizard.m_Page2.m_openMP = openMP;
   //wizard.m_Page2.m_bigCoderDLL = m_bigCoderDLL;
 
   wizard.m_Page3.m_tempRelease = release_loc.c_str();
@@ -2935,6 +2941,7 @@ BOOL CConfigureApp::InitInstance()
       standaloneMode = wizard.m_Page2.m_standalone;
       visualStudio7 = wizard.m_Page2.m_visualStudio7;
       build64Bit = wizard.m_Page2.m_build64Bit;
+      openMP = wizard.m_Page2.m_openMP;
       //m_bigCoderDLL = wizard.m_Page2.m_bigCoderDLL;
       release_loc = wizard.m_Page3.m_tempRelease;
       debug_loc = wizard.m_Page3.m_tempDebug;
@@ -3166,7 +3173,7 @@ ConfigureProject *CConfigureApp::write_project_lib( bool dll,
 
   project->write_begin_project(libname.c_str(), dll?DLLPROJECT:LIBPROJECT);
 
-  project->write_configuration(libname.c_str(), "Win32 Release", 0);
+  project->write_configuration(libname.c_str(), (build64Bit ? "x64 Release" : "Win32 Release"), 0);
 
   project->write_properties(libname.c_str(),
                             get_full_path(root + "\\",lib_path).c_str(), // output
@@ -3216,7 +3223,7 @@ ConfigureProject *CConfigureApp::write_project_lib( bool dll,
                                  runtime, project_type, dll?DLLPROJECT:LIBPROJECT, 0, isCOMproject);
     }
 
-  project->write_configuration(libname.c_str(), "Win32 Debug", 1);
+  project->write_configuration(libname.c_str(), (build64Bit ? "x64 Debug" : "Win32 Debug"), 1);
 
   project->write_properties(libname.c_str(),
                             get_full_path(root + "\\",lib_path).c_str(), // output
@@ -3382,7 +3389,7 @@ ConfigureProject *CConfigureApp::write_project_exe(
 
   project->write_begin_project(libname.c_str(), EXEPROJECT);
 
-  project->write_configuration(libname.c_str(), "Win32 Release", 0);
+  project->write_configuration(libname.c_str(), (build64Bit ? "x64 Release" : "Win32 Release"), 0);
 
   project->write_properties(libname.c_str(),
                             get_full_path(root + "\\",bin_path).c_str(), // output
@@ -3415,7 +3422,7 @@ ConfigureProject *CConfigureApp::write_project_exe(
                            get_full_path(root + "\\",bin_path).c_str(),
                            runtime, project_type, EXEPROJECT, 0);
 
-  project->write_configuration(libname.c_str(), "Win32 Debug", 1);
+  project->write_configuration(libname.c_str(), (build64Bit ? "x64 Debug" : "Win32 Debug"), 1);
 
   project->write_properties(libname.c_str(),
                             get_full_path(root + "\\",bin_path).c_str(), // output
@@ -4437,10 +4444,10 @@ void ConfigureVS7Workspace::write_end()
        it1++)
     {
       string guid = (*it1)->m_GuidText;
-      m_stream << "\t\t{" << guid.c_str() << "}.Debug.ActiveCfg = Debug|Win32" << endl;
-      m_stream << "\t\t{" << guid.c_str() << "}.Debug.Build.0 = Debug|Win32" << endl;
-      m_stream << "\t\t{" << guid.c_str() << "}.Release.ActiveCfg = Release|Win32" << endl;
-      m_stream << "\t\t{" << guid.c_str() << "}.Release.Build.0 = Release|Win32" << endl;
+      m_stream << "\t\t{" << guid.c_str() << "}.Debug.ActiveCfg = Debug|" << (build64Bit ? "x64" : "Win32") << endl;
+      m_stream << "\t\t{" << guid.c_str() << "}.Debug.Build.0 = Debug|" << (build64Bit ? "x64" : "Win32") << endl;
+      m_stream << "\t\t{" << guid.c_str() << "}.Release.ActiveCfg = Release|" << (build64Bit ? "x64" : "Win32") << endl;
+      m_stream << "\t\t{" << guid.c_str() << "}.Release.Build.0 = Release|" << (build64Bit ? "x64" : "Win32") << endl;
     }
   m_stream << "\tEndGlobalSection" << endl;
 
@@ -4500,9 +4507,9 @@ void ConfigureVS7Project::write_begin_project(const char *name, int type)
   m_stream << "  Version=\"7.00\"" << endl;
   m_stream << "  Name=\"" << name << "\"" << endl;
   m_stream << "  ProjectGUID=\"{" << m_GuidText << "}\"" << endl;
-  m_stream << "  Keyword=\"Win32Proj\">" << endl;
+  m_stream << "  Keyword=\"" << (build64Bit ? "x64" : "Win32") << "Proj\">" << endl;
   m_stream << "  <Platforms>" << endl;
-  m_stream << "    <Platform Name=\"Win32\"/>" << endl;
+  m_stream << "    <Platform Name=\""<< (build64Bit ? "x64" : "Win32") << "\"/>" << endl;
   m_stream << "  </Platforms>" << endl;
 }
 
@@ -4543,10 +4550,10 @@ void ConfigureVS7Project::write_properties( const char *name,
   switch (mode)
     {
     case 0:
-      m_stream << "      Name=\"Release|Win32\"" << endl;
+      m_stream << "      Name=\"Release|" << (build64Bit ? "x64" : "Win32") << "\"" << endl;
       break;
     case 1:
-      m_stream << "      Name=\"Debug|Win32\"" << endl;
+      m_stream << "      Name=\"Debug|" << (build64Bit ? "x64" : "Win32") << "\"" << endl;
       break;
     }
   m_stream << "      OutputDirectory=\"" << outputpath << "\"" << endl;
@@ -4744,6 +4751,8 @@ void ConfigureVS7Project::write_cpp_compiler_tool_options( int type,
   m_stream << "        CompileAs=\"0\"" << endl; // C or C++ compile
   // expandDisable 0,expandOnlyInline 1,expandAnySuitable 2
   m_stream << "        InlineFunctionExpansion=\"2\"" << endl;
+  if (openMP)
+    m_stream << "        OpenMP=\"TRUE\"" << endl;
   switch (mode)
     {
     case 0:

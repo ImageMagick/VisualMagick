@@ -40,6 +40,7 @@
 #define IDC_GENERATE_VS7                1029
 #define IDC_BUILD_64_BIT                1030
 #define IDC_BIGCODERDLL                 1031
+#define IDC_OPEN_MP                     1032
 #define IDD_WAITDIALOG                  23040
 #define IDC_MSGCTRL                     23041
 #define IDC_PROGRESSCTRL                23042

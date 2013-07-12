@@ -29,6 +29,7 @@ public:
 	BOOL	m_standalone;
 	BOOL	m_visualStudio7;
 	BOOL	m_build64Bit;
+	BOOL	m_openMP;
 	BOOL	m_bigCoderDLL;
 	//}}AFX_DATA
 

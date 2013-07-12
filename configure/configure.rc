@@ -119,7 +119,7 @@ BEGIN
     LTEXT           "Dynamic (DLL) Builds",IDC_STATIC,13,19,68,8
     CONTROL         "Include all demo, test, appl, and contrib directories",
                     IDC_INCLUDE_OPTIONAL,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,15,151,204,10
+                    WS_TABSTOP,15,151,170,10
     CONTROL         "Generate all utility projects with full paths rather then relative paths.",
                     IDC_STANDALONE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,
                     167,236,10
@@ -127,8 +127,11 @@ BEGIN
     CONTROL         "Generate Visual Studio 7 format",IDC_GENERATE_VS7,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,182,140,10
     CONTROL         "Build 64-bit distribution",IDC_BUILD_64_BIT,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,186,134,
+                    BS_AUTOCHECKBOX | WS_TABSTOP,195,135,
                     111,10
+    CONTROL         "Enable OpenMP",IDC_OPEN_MP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,195,151,
+                    66,10
     CONTROL         "All coders go into one big DLL",IDC_BIGCODERDLL,"Button",
                     BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,186,134,
                     131,10
