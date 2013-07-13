@@ -599,6 +599,21 @@ bool CConfigureApp::process_one_entry(const char *entry, int nLinesRead, int run
           else if (_tcsicmp(sValue.c_str(), "WINDOWS") == 0)
             consoleMode = false;
         }
+      else if ((build64Bit == TRUE) && (_tcsicmp(sName.c_str(), "OBJECT64") == 0))
+        object_list.push_back(temp);
+      else if ((build64Bit == FALSE) && (_tcsicmp(sName.c_str(), "OBJECT32") == 0))
+        object_list.push_back(temp);
+      else if ((build64Bit == TRUE) && (_tcsicmp(sName.c_str(), "SOURCE64") == 0))
+        source_list.push_back(temp);
+      else if ((build64Bit == FALSE) && (_tcsicmp(sName.c_str(), "SOURCE32") == 0))
+        source_list.push_back(temp);
+      else if ((build64Bit == TRUE) && (_tcsicmp(sName.c_str(), "PREBUILD64") == 0))
+        prebuild_cmd_list.push_back(temp);
+      else if ((build64Bit == FALSE) && (_tcsicmp(sName.c_str(), "PREBUILD32") == 0))
+        prebuild_cmd_list.push_back(temp);
+      else if (_tcsicmp(sName.c_str(), "FILTER_OPENCL_SOURCE") == 0)
+        filter_opencl_list.push_back(temp);
+
       switch(runtime)
         {
         default:
@@ -661,6 +676,9 @@ void CConfigureApp::process_utility(
   source_list.clear();
   resource_list.clear();
   exclude_list.clear();
+  object_list.clear();
+  prebuild_cmd_list.clear();
+  additional_libdir_list.clear();
 
   string envpath;
   string search;
@@ -741,6 +759,10 @@ void CConfigureApp::process_utility(
       extra = "..\\jpeg";
       add_includes(includes_list, extra, levels-2);
     }
+
+  // Add OpenCL path
+  if (with_opencl)
+    includes_list.push_back(opencl_include);
 
 #ifdef _DEBUG
   debuglog  << "process_utility "
@@ -953,6 +975,9 @@ void CConfigureApp::process_library( const char *root,
   resource_list.clear();
   exclude_list.clear();
   module_definition_file.erase();
+  object_list.clear();
+  prebuild_cmd_list.clear();
+  additional_libdir_list.clear();
 
   if (runtime == MULTITHREADEDDLL)
     {
@@ -1012,6 +1037,20 @@ void CConfigureApp::process_library( const char *root,
       envpath += "\\STATICLIB.txt";
       load_environment_file(envpath.c_str(), runtime);
     }
+
+  // Add OpenCL path
+  if (with_opencl)
+  {
+    if (strcmp(filename, "magick") == 0 || strcmp(filename, "ojpeg") == 0 || 
+      strcmp(filename, "Magick++") == 0 || strcmp(filename, "wand") == 0)
+      includes_list.push_back(opencl_include);
+    if (strcmp(filename, "magick") == 0 || strcmp(filename, "ojpeg") == 0)
+    {
+      lib_release_list.push_back("OpenCL.lib");
+      lib_debug_list.push_back("OpenCL.lib");
+      additional_libdir_list.push_back(opencl_libdir);
+    }
+  }
 
 #ifdef _DEBUG
   debuglog  << "process_library "
@@ -1177,6 +1216,10 @@ void CConfigureApp::process_module( const char *root,
   source_list.clear();
   resource_list.clear();
   exclude_list.clear();
+  object_list.clear();
+  prebuild_cmd_list.clear();
+  additional_libdir_list.clear();
+  filter_opencl_list.clear();
 
   if (runtime == MULTITHREADEDDLL)
     {
@@ -1320,11 +1363,32 @@ void CConfigureApp::process_module( const char *root,
   if (project_type == ADD_ON)
     {
       envpath += "\\ADD_ON.txt";
-      search = "*";
+      search = "";
+      //search = "*";
       // we force this to always be built as a dll
       dll = true;
       load_environment_file(envpath.c_str(), runtime);
     }
+
+  // Add OpenCL path
+  if (with_opencl)
+  {
+    if (name.compare("accelerate") == 0)
+    {
+      extra = "..\\ojpeg";
+      add_includes(includes_list, extra, levels-2);
+      lib_release_list.push_back("OpenCL.lib");
+      lib_debug_list.push_back("OpenCL.lib");
+      additional_libdir_list.push_back(opencl_libdir);
+      dependency = "CORE_ojpeg";
+    }
+    if (name.compare("ojpeg") == 0)
+    {
+      extra = "..\\filters";
+      add_includes(includes_list, extra, levels-2);
+    }
+    includes_list.push_back(opencl_include);
+  }
 
 #ifdef _DEBUG
   debuglog  << "process_module "
@@ -1444,6 +1508,10 @@ void CConfigureApp::process_module( const char *root,
               workspace->write_project_dependency(project,"CORE_autotrace");
 #endif
           }
+        if (with_opencl && (name.compare("ojpeg") == 0))
+          {
+            workspace->write_project_dependency(project,"accelerate");
+          }
         workspace->write_end_project(project);
       }
     }
@@ -1472,6 +1540,9 @@ void CConfigureApp::process_3rd_party_library( const char *root,
   source_list.clear();
   resource_list.clear();
   exclude_list.clear();
+  object_list.clear();
+  prebuild_cmd_list.clear();
+  additional_libdir_list.clear();
 
   if (runtime == MULTITHREADEDDLL)
     {
@@ -1514,6 +1585,7 @@ void CConfigureApp::process_3rd_party_library( const char *root,
 #endif
       projectname = get_project_name(
                                      dll?DLLPROJECT:LIBPROJECT,runtime,staging.substr(1),prefix,name);
+
       libhandle = FindFirstFile(projectname.c_str(), &libdata);
       if (libhandle != INVALID_HANDLE_VALUE)
         {
@@ -1679,7 +1751,7 @@ void CConfigureApp::process_one_folder( const char *root,
     case MODULE:
       {
         bool bFoundSomething = false;
-        // Look for any C files first and generate a project for each file that
+        // Look for any C++ files first and generate a project for each file that
         // is found.
         subpath = "..\\";
         subpath += root;
@@ -1709,31 +1781,58 @@ void CConfigureApp::process_one_folder( const char *root,
         if ((project_type == ADD_ON) && bFoundSomething)
           break;
 
-        // Look for any C++ files next and generate a project for each file that
+        // Look for any C files next and generate a project for each file that
         // is found.
         subpath = "..\\";
         subpath += root;
         subpath += "\\*.c";
-        subhandle = FindFirstFile(subpath.c_str(), &subdata);
-        if (subhandle != INVALID_HANDLE_VALUE)
+        if (project_type == ADD_ON)
+        {
+          bool bFilterAnalyze = false;
+          bool bFilterOpenCL = false;
+          onebigdllMode = TRUE;
+          subhandle = FindFirstFile(subpath.c_str(), &subdata);
+          if (subhandle != INVALID_HANDLE_VALUE)
           {
-            bFoundSomething = true;
             do
+            {
+              // custom image filter: analyze
+              if (strcmp(subdata.cFileName, "analyze.c") == 0)
+                process_module(root, subdata.cFileName, runtimeOption, project_type);
+              // custom image filter: OpenCL acceleration
+              if (with_opencl && (strcmp(subdata.cFileName, "accelerate-filter.c") == 0))
               {
-                BOOL standaloneModeBackup = standaloneMode;
-                if (project_type == MODULE)
-                  onebigdllMode = FALSE;
-                else if (project_type == ADD_ON)
-                  onebigdllMode = TRUE;
-                process_module(root, subdata.cFileName,
-                               runtimeOption, project_type);
                 onebigdllMode = FALSE;
-                standaloneMode = standaloneModeBackup;
-                if (project_type == ADD_ON)
-                  break;
-              } while (FindNextFile(subhandle, &subdata));
+                process_module(root, "accelerate.c", runtimeOption, project_type);
+              }
+            } while (FindNextFile(subhandle, &subdata));
             FindClose(subhandle);
           }
+          onebigdllMode = FALSE;
+        }
+        else
+        {
+          subhandle = FindFirstFile(subpath.c_str(), &subdata);
+          if (subhandle != INVALID_HANDLE_VALUE)
+            {
+              bFoundSomething = true;
+              do
+                {
+                  BOOL standaloneModeBackup = standaloneMode;
+                  if (project_type == MODULE)
+                    onebigdllMode = FALSE;
+                  else if (project_type == ADD_ON)
+                    onebigdllMode = TRUE;
+                  process_module(root, subdata.cFileName,
+                                 runtimeOption, project_type);
+                  onebigdllMode = FALSE;
+                  standaloneMode = standaloneModeBackup;
+                  if (project_type == ADD_ON)
+                    break;
+                } while (FindNextFile(subhandle, &subdata));
+              FindClose(subhandle);
+            }
+        }
       }
       break;
     case THIRDPARTY:
@@ -2833,6 +2932,8 @@ BOOL CConfigureApp::InitInstance()
   bin_loc = "..\\bin\\";
   lib_loc = "..\\lib\\";
 
+  process_opencl_path();
+
 #ifndef __NO_MFC__
   wizard.m_Page2.m_useX11Stubs = useX11Stubs;
   wizard.m_Page2.m_decorateFiles = decorateFiles;
@@ -3117,6 +3218,70 @@ typedef struct _ConfigureInfo
     *group;
 } ConfigureInfo;
 
+void CConfigureApp::process_opencl_path()
+{
+  const string opencl_include_amd   = "$(AMDAPPSDKROOT)include";
+  const string opencl_include_cuda  = "$(CUDA_PATH)include";
+  const string opencl_include_intel = "$(INTELOCLSDKROOT)include";
+  const string opencl_libdir_x86_amd   = "$(AMDAPPSDKROOT)lib\\x86";
+  const string opencl_libdir_x64_amd   = "$(AMDAPPSDKROOT)lib\\x86_64";
+  const string opencl_libdir_x86_cuda  = "$(CUDA_PATH)lib\\Win32";
+  const string opencl_libdir_x64_cuda  = "$(CUDA_PATH)lib\\Win64";
+  const string opencl_libdir_x86_intel = "$(INTELOCLSDKROOT)lib\\x86";
+  const string opencl_libdir_x64_intel = "$(INTELOCLSDKROOT)lib\\x64";
+
+  with_opencl = false;
+  if (getenv("AMDAPPSDKROOT") != NULL)
+  {
+    with_opencl = true;
+    opencl_include = opencl_include_amd;
+    opencl_libdir = (build64Bit == TRUE) ? opencl_libdir_x64_amd : opencl_libdir_x86_amd;
+  }
+  else if (getenv("CUDA_PATH") != NULL)
+  {
+    with_opencl = true;
+    opencl_include = opencl_include_cuda;
+    opencl_libdir = (build64Bit == TRUE) ? opencl_libdir_x64_cuda : opencl_libdir_x86_cuda;
+  }
+  else if (getenv("INTELOCLSDKROOT") != NULL)
+  {
+    with_opencl = true;
+    opencl_include = opencl_include_intel;
+    opencl_libdir = (build64Bit == TRUE) ? opencl_libdir_x64_intel : opencl_libdir_x86_intel;
+  }
+
+  if (with_opencl)
+  {
+    string chcfg = "\r\n/* Define to use OpenCL */\r\n"
+      "#define MAGICKCORE__OPENCL 1\r\n"
+#if defined __APPLE__
+      "#define MAGICKCORE_HAVE_OPENCL_CL_H 1\r\n";
+#else
+      "#define MAGICKCORE_HAVE_CL_CL_H 1\r\n";
+#endif
+
+    // enable MAGICKCORE__OPENCL in config file
+    string str, line;
+    const char *cfg_filename             = "..\\magick\\magick-baseconfig.h.in";
+    ifstream infile(cfg_filename, ifstream::in | ifstream::binary);
+    if (infile.is_open())
+    {
+      while (getline(infile, line))
+        str += line + "\n";
+      infile.close();
+      size_t pos = str.find("MAGICKCORE__OPENCL");
+      if (pos == string::npos)
+        str += chcfg;
+      ofstream outfile(cfg_filename, ofstream::out | ofstream::binary);
+      if (outfile.is_open())
+      {
+        outfile << str;
+        outfile.close();
+      }
+    }
+  }
+}
+
 ConfigureProject *CConfigureApp::write_project_lib( bool dll,
                                                     int runtime,
                                                     int project_type,
@@ -3181,6 +3346,8 @@ ConfigureProject *CConfigureApp::write_project_lib( bool dll,
                             "", // target
                             dll?DLLPROJECT:LIBPROJECT, 0);
 
+  project->write_pre_build_event(prebuild_cmd_list);
+
   outname = prefix.c_str();
   if (project_type != ADD_ON)
     outname += "RL_";
@@ -3202,7 +3369,7 @@ ConfigureProject *CConfigureApp::write_project_lib( bool dll,
 
   // FIXME: update to handle .def files
   project->write_link_tool(root,extra_path,module_definition_file,outname,bNeedsMagickpp,
-                           bNeedsRelo,lib_shared_list,lib_release_list,
+                           bNeedsRelo,lib_shared_list,lib_release_list,additional_libdir_list,
                            get_full_path(root + "\\",lib_path).c_str(),
                            dll?get_full_path(root + "\\",bin_path).c_str():get_full_path(root + "\\",lib_path).c_str(),
                            runtime, project_type, dll?DLLPROJECT:LIBPROJECT, 0);
@@ -3231,6 +3398,8 @@ ConfigureProject *CConfigureApp::write_project_lib( bool dll,
                             "", // target
                             dll?DLLPROJECT:LIBPROJECT, 1);
 
+  project->write_pre_build_event(prebuild_cmd_list);
+
   outname = prefix.c_str();
   if (project_type != ADD_ON)
     outname += "DB_";
@@ -3250,7 +3419,7 @@ ConfigureProject *CConfigureApp::write_project_lib( bool dll,
                                    runtime, project_type, dll?DLLPROJECT:LIBPROJECT, 1);
 
   project->write_link_tool(root,extra_path,module_definition_file,outname,bNeedsMagickpp,
-                           bNeedsRelo,lib_shared_list,lib_debug_list,
+                           bNeedsRelo,lib_shared_list,lib_debug_list,additional_libdir_list,
                            get_full_path(root + "\\",lib_path).c_str(),
                            dll?get_full_path(root + "\\",bin_path).c_str():get_full_path(root + "\\",lib_path).c_str(),
                            runtime, project_type, dll?DLLPROJECT:LIBPROJECT, 1);
@@ -3288,6 +3457,7 @@ ConfigureProject *CConfigureApp::write_project_lib( bool dll,
       { ".idl", "src" },
       { ".h",   "include" },
       { ".rc",  "resource" },
+      { ".obj", "object"},
       { NULL,   NULL  }
     };
 
@@ -3316,6 +3486,28 @@ ConfigureProject *CConfigureApp::write_project_lib( bool dll,
               for (list<string>::iterator it = source_list.begin();
                    it != source_list.end(); it++)
                 project->write_file((*it).c_str());
+              if (dspname.compare("accelerate") == 0)
+              {
+                for (list<string>::iterator it = filter_opencl_list.begin();
+                     it != filter_opencl_list.end(); it++)
+                {
+                  if ((*it).find(".c") != string::npos)
+                    project->write_file((*it).c_str());
+                }
+              }
+            }
+          // add in any hard coded headers from the config file
+          if (group.compare("include") == 0)
+            {
+              if (dspname.compare("accelerate") == 0)
+              {
+                for (list<string>::iterator it = filter_opencl_list.begin();
+                     it != filter_opencl_list.end(); it++)
+                {
+                  if ((*it).find(".h") != string::npos)
+                    project->write_file((*it).c_str());
+                }
+              }
             }
           // add in any hard coded resources from the config file
           if (group.compare("resource") == 0)
@@ -3324,10 +3516,25 @@ ConfigureProject *CConfigureApp::write_project_lib( bool dll,
                    it2 != resource_list.end(); it2++)
                 project->write_file((*it2).c_str());
             }
+          // add in any hard coded objects from the config file
+          if (group.compare("object") == 0)
+            {
+              for (list<string>::iterator it = object_list.begin();
+                   it != object_list.end(); it++)
+                project->write_file((*it).c_str());
+            }
           project->write_end_group();
           if (valid_dirs[i].group != NULL)
             {
               group = valid_dirs[i].group;
+              if ((group.compare("object") == 0) && (object_list.empty()))
+              {
+                i++;
+                if (valid_dirs[i].group != NULL)
+                  group = valid_dirs[i].group;
+                else
+                  break;
+              }
               project->write_begin_group(group.c_str());
             }
         }
@@ -3417,7 +3624,7 @@ ConfigureProject *CConfigureApp::write_project_exe(
                                    runtime, project_type, EXEPROJECT, 0);
 
   project->write_link_tool(root,extra_path,module_definition_file,outname,bNeedsMagickpp,
-                           false,lib_shared_list,lib_release_list,
+                           false,lib_shared_list,lib_release_list,additional_libdir_list,
                            get_full_path(root + "\\",lib_path).c_str(),
                            get_full_path(root + "\\",bin_path).c_str(),
                            runtime, project_type, EXEPROJECT, 0);
@@ -3450,7 +3657,7 @@ ConfigureProject *CConfigureApp::write_project_exe(
                                    runtime, project_type, EXEPROJECT, 1);
 
   project->write_link_tool(root,extra_path,module_definition_file,outname,bNeedsMagickpp,
-                           false,lib_shared_list,lib_debug_list,
+                           false,lib_shared_list,lib_debug_list,additional_libdir_list,
                            get_full_path(root + "\\",lib_path).c_str(),
                            get_full_path(root + "\\",bin_path).c_str(),
                            runtime, project_type, EXEPROJECT, 1);
@@ -3854,6 +4061,13 @@ void ConfigureVS6Project::write_properties(const char *name,
     }
 }
 
+void ConfigureVS6Project::write_pre_build_event(list<string> &prebuild_cmd_list)
+{
+  if (!prebuild_cmd_list.empty())
+  {
+  }
+}
+
 void ConfigureVS6Project::write_res_compiler_tool( string &root, string &extra_path,
                                                    int runtime, int project_type,
                                                    int type, int mode)
@@ -4127,6 +4341,7 @@ void ConfigureVS6Project::write_cpp_compiler_tool( string &root, string &extra_p
 
 void ConfigureVS6Project::write_link_tool_begin( const char *input_path,
                                                  const char *output_path,
+                                                 list<string> &additional_libdir_list,
                                                  int type, int mode )
 {
   switch (type)
@@ -4136,7 +4351,11 @@ void ConfigureVS6Project::write_link_tool_begin( const char *input_path,
       m_stream << "LIB32=link.exe -lib" << endl;
       m_stream << "LINK32=link.exe" << endl;
       m_stream << "# ADD LINK32";
-      m_stream << " /libpath:\"" << input_path << "\"";
+      m_stream << " /libpath:\"";
+      for (list<string>::iterator it = additional_libdir_list.begin(); 
+           it != additional_libdir_list.end(); it++)
+        m_stream << *it << ";";
+      m_stream << input_path << "\"";
       break;
     case LIBPROJECT:
       m_stream << "LIB32=link.exe -lib" << endl;
@@ -4324,6 +4543,7 @@ void ConfigureVS6Project::write_link_tool( string &root,
                                            bool bNeedsRelo,
                                            list<string> &shared_lib_list,
                                            list<string> &lib_list,
+                                           list<string> &additional_libdir_list,
                                            const char *input_path,
                                            const char *output_path,
                                            int runtime,
@@ -4331,7 +4551,7 @@ void ConfigureVS6Project::write_link_tool( string &root,
                                            int type,
                                            int mode )
 {
-  write_link_tool_begin(input_path,output_path,type,mode);
+  write_link_tool_begin(input_path,output_path,additional_libdir_list,type,mode);
   write_link_tool_dependencies(root,bNeedsMagickpp,shared_lib_list,lib_list,runtime,type,mode);
   write_link_tool_options(bNeedsRelo,type,mode,defs_path);
   write_link_tool_output(input_path,output_path,outname,type,mode);
@@ -4573,6 +4793,28 @@ void ConfigureVS7Project::write_properties( const char *name,
   m_stream << "      UseOfMFC=\"0\"" << endl;
   m_stream << "      ATLMinimizesCRunTimeLibraryUsage=\"FALSE\"" << endl;
   m_stream << "      CharacterSet=\"2\">" << endl;
+}
+
+void ConfigureVS7Project::write_pre_build_event(list<string> &prebuild_cmd_list)
+{
+  if (!prebuild_cmd_list.empty())
+  {
+    m_stream << "      <Tool" << endl;
+    m_stream << "        Name=\"VCPreBuildEventTool\"" << endl;
+    if (build64Bit == TRUE)
+      m_stream << "        Description=\"Building x86_64 libjpeg-turbo SIMD extensions...\"" << endl;
+    else
+      m_stream << "        Description=\"Building i386 libjpeg-turbo SIMD extensions...\"" << endl;
+    m_stream << "        CommandLine=\"";
+    for (list<string>::iterator it = prebuild_cmd_list.begin(); it != prebuild_cmd_list.end(); it++)
+    {
+      if (it != prebuild_cmd_list.begin())
+        m_stream << endl << "                     ";
+      m_stream << *it;
+    }
+    m_stream << "\"" << endl;
+    m_stream << "        />" << endl;
+  }
 }
 
 void ConfigureVS7Project::write_midl_compiler_tool( string &root,
@@ -4886,6 +5128,7 @@ void ConfigureVS7Project::write_cpp_compiler_tool( string &root,
 
 void ConfigureVS7Project::write_link_tool_begin( const char *input_path,
                                                  const char *output_path,
+                                                 list<string> &additional_libdir_list,
                                                  int type, int mode )
 {
   m_stream << "      <Tool" << endl;
@@ -4894,7 +5137,11 @@ void ConfigureVS7Project::write_link_tool_begin( const char *input_path,
     case DLLPROJECT:
     case EXEPROJECT:
       m_stream << "        Name=\"VCLinkerTool\"" << endl;
-      m_stream << "        AdditionalLibraryDirectories=\"" << input_path << "\"" << endl;
+      m_stream << "        AdditionalLibraryDirectories=\"";
+      for (list<string>::iterator it = additional_libdir_list.begin(); 
+           it != additional_libdir_list.end(); it++)
+        m_stream << *it << ";";
+      m_stream << input_path << "\"" << endl;
       break;
     case LIBPROJECT:
       m_stream << "        Name=\"VCLibrarianTool\"" << endl;
@@ -5130,6 +5377,7 @@ void ConfigureVS7Project::write_link_tool( string &root,
                                            bool bNeedsRelo,
                                            list<string> &shared_lib_list,
                                            list<string> &lib_list,
+                                           list<string> &additional_libdir_list,
                                            const char *input_path,
                                            const char *output_path,
                                            int runtime,
@@ -5137,7 +5385,7 @@ void ConfigureVS7Project::write_link_tool( string &root,
                                            int type,
                                            int mode )
 {
-  write_link_tool_begin(input_path,output_path,type,mode);
+  write_link_tool_begin(input_path,output_path,additional_libdir_list,type,mode);
   write_link_tool_dependencies(root,bNeedsMagickpp,shared_lib_list,lib_list,runtime,type,mode);
   write_link_tool_options(bNeedsRelo,type,mode,defs_path); //FIXME Support .def
   write_link_tool_output(input_path,output_path,outname,type,mode);

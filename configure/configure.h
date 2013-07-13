@@ -79,6 +79,8 @@ public:
                                 const char *targetpath, int type,
                                 int mode) = 0;
 
+  virtual void write_pre_build_event(list<string> &prebuild_cmd_list) = 0;
+
   virtual void write_cpp_compiler_tool(string &root, string &extra_path,
                                        list<string> &includes_list,
                                        list<string> &standard_includes_list,
@@ -106,6 +108,7 @@ public:
                                bool bNeedsRelo,
                                list<string> &shared_lib_list,
                                list<string> &lib_list,
+                               list<string> &additional_libdir_list,
                                const char *input_path,
                                const char *output_path,
                                int runtime,
@@ -114,6 +117,7 @@ public:
                                int mode) = 0;
   virtual void write_link_tool_begin(const char *input_path,
                                      const char *output_path,
+                                     list<string> &additional_libdir_list,
                                      int type, int mode) = 0;
   virtual void write_link_tool_dependencies(string &root, bool bNeedsMagickpp,
                                             list<string> &shared_lib_list,
@@ -181,6 +185,9 @@ public:
   void write_properties(const char *name,
                         const char *outputpath, const char *intermediatepath,
                         const char *targetpath, int type, int mode);
+
+  void write_pre_build_event(list<string> &prebuild_cmd_list);
+
   void write_cpp_compiler_tool(string &root, string &extra_path,
                                list<string> &includes_list,
                                list<string> &standard_includes_list,
@@ -195,6 +202,7 @@ public:
                        bool bNeedsRelo,
                        list<string> &shared_lib_list,
                        list<string> &lib_list,
+                       list<string> &additional_libdir_list,
                        const char *input_path,
                        const char *output_path,
                        int runtime,
@@ -202,6 +210,7 @@ public:
                        int type,
                        int mode);
   void write_link_tool_begin(const char *input_path, const char *output_path,
+                             list<string> &additional_libdir_list,
                              int type, int mode);
   void write_link_tool_dependencies(string &root, bool bNeedsMagickpp,
                                     list<string> &shared_lib_list,
@@ -270,6 +279,8 @@ public:
                         const char *targetpath,
                         int type, int mode);
 
+  void write_pre_build_event(list<string> &prebuild_cmd_list);
+
   void write_cpp_compiler_tool(string &root, string &extra_path,
                                list<string> &includes_list,
                                list<string> &standard_includes_list,
@@ -296,6 +307,7 @@ public:
                        bool bNeedsRelo,
                        list<string> &shared_lib_list,
                        list<string> &lib_list,
+                       list<string> &additional_libdir_list,
                        const char *input_path,
                        const char *output_path,
                        int runtime,
@@ -303,6 +315,7 @@ public:
                        int type,
                        int mode);
   void write_link_tool_begin(const char *input_path, const char *output_path,
+                             list<string> &additional_libdir_list,
                              int type, int mode);
   void write_link_tool_dependencies(string &root, bool bNeedsMagickpp,
                                     list<string> &shared_lib_list,
@@ -377,8 +390,17 @@ public:
   list<string> standard_includes_list;
   string       module_definition_file;  // DLL .DEF file.
 
-  void process_project_type(
-                            const char *root, const int runtime,
+  list<string> object_list;             // list of pre-compiled objects
+  list<string> prebuild_cmd_list;       // pre-build command events
+  list<string> additional_libdir_list;  // additional library directories
+  list<string> filter_opencl_list;      // OpenCL filter files
+  bool         with_opencl;             // whether OpenCL is enabled
+  string       opencl_include;          // OpenCL include path
+  string       opencl_libdir;           // OpenCL library path
+
+  void process_opencl_path();
+
+  void process_project_type(const char *root, const int runtime,
                             const char *stype, const int btype);
   void process_project_replacements(const char *root, const char *top,
                                     const char *stype, const char *newstype,
