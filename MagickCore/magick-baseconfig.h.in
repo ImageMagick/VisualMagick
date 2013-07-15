@@ -107,13 +107,19 @@
 // Define to use the Windows GDI32 library (for clipboard and emf modules)
 #define MAGICKCORE_WINGDI32_DELEGATE
 
+// Define to use the WebP library (obtain sources separately)
+// #undef MAGICKCORE_WEBP_DELEGATE
+
+// Define to use the WMF library
+// #undef MAGICKCORE_WMF_DELEGATE
+
 // Define to use the GNOME XML library
 #define MAGICKCORE_XML_DELEGATE
 
 // Define to use the zlib ZIP compression library
 #define MAGICKCORE_ZLIB_DELEGATE
 
-// Define to use the autotrace library (obtain sources seperately)
+// Define to use the autotrace library (obtain sources separately)
 //
 // #undef MAGICKCORE_AUTOTRACE_DELEGATE
 
