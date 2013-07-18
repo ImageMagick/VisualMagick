@@ -752,6 +752,7 @@ void CConfigureApp::process_utility(
       extra = "..\\tiff";
       add_includes(includes_list, extra, levels-2);
     }
+  // Includes for when building dcraw program
   if (LocalFindNoCase(name,"dcraw",0) >= 0)
     {
       extra = "..\\jp2\\src\\libjasper\\include";
@@ -5289,7 +5290,7 @@ void ConfigureVS7Project::write_link_tool_options( bool bNeedsRelo,
   m_stream << "        SuppressStartupBanner=\"TRUE\"" << endl; // /nologo
   // linkIncrementalDefault 0, linkIncrementalNo 1, linkIncrementalYes 2
   m_stream << "        LinkIncremental=\"1\"" << endl;
-  m_stream << "        TargetMachine=\"1\"" << (build64Bit ? "17" : "1") << "\"" << endl;
+  m_stream << "        TargetMachine=\"" << (build64Bit ? "17" : "1") << "\"" << endl;
 
   //subSystemNotSet 0,subSystemConsole 1,subSystemWindows 2
   switch(type)
