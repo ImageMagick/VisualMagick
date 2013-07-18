@@ -467,12 +467,12 @@ void CConfigureApp::generate_dependencies( ConfigureProject *p,
     generate_a_dependency_type(workspace, p, ADD_ON);
 }
 
-static bool doesDirExist(const char *name)
+static bool doesDirExist(string &name)
 {
   // check to see if the path exists
   string libpath;
   WIN32_FIND_DATA libdata;
-  HANDLE libhandle = FindFirstFile(name, &libdata);
+  HANDLE libhandle = FindFirstFile(name.c_str(), &libdata);
   if (libhandle != INVALID_HANDLE_VALUE)
     {
       FindClose(libhandle);
@@ -527,7 +527,7 @@ static void add_includes( list<string> &includes_list,
                       ipath += libpath;
                       ipath += "\\";
                       ipath += libdata.cFileName;
-                      if (doesDirExist(ipath.c_str()))
+                      if (doesDirExist(ipath))
                         {
                           ipath = libpath;
                           ipath += "\\";
@@ -3233,21 +3233,21 @@ void CConfigureApp::process_opencl_path()
   with_opencl = false;
   if (getenv("AMDAPPSDKROOT") != NULL)
   {
-    with_opencl = true;
     opencl_include = opencl_include_amd;
     opencl_libdir = (build64Bit == TRUE) ? opencl_libdir_x64_amd : opencl_libdir_x86_amd;
+    with_opencl = doesDirExist(opencl_include);
   }
-  else if (getenv("CUDA_PATH") != NULL)
+  if (!with_opencl && getenv("CUDA_PATH") != NULL)
   {
-    with_opencl = true;
     opencl_include = opencl_include_cuda;
     opencl_libdir = (build64Bit == TRUE) ? opencl_libdir_x64_cuda : opencl_libdir_x86_cuda;
+    with_opencl = doesDirExist(opencl_include);
   }
-  else if (getenv("INTELOCLSDKROOT") != NULL)
+  if (!with_opencl && getenv("INTELOCLSDKROOT") != NULL)
   {
-    with_opencl = true;
     opencl_include = opencl_include_intel;
     opencl_libdir = (build64Bit == TRUE) ? opencl_libdir_x64_intel : opencl_libdir_x86_intel;
+    with_opencl = doesDirExist(opencl_include);
   }
 
   if (with_opencl)
@@ -5289,7 +5289,7 @@ void ConfigureVS7Project::write_link_tool_options( bool bNeedsRelo,
   m_stream << "        SuppressStartupBanner=\"TRUE\"" << endl; // /nologo
   // linkIncrementalDefault 0, linkIncrementalNo 1, linkIncrementalYes 2
   m_stream << "        LinkIncremental=\"1\"" << endl;
-  m_stream << "        TargetMachine=\"1\"" << endl;
+  m_stream << "        TargetMachine=\"1\"" << (build64Bit ? "17" : "1") << "\"" << endl;
 
   //subSystemNotSet 0,subSystemConsole 1,subSystemWindows 2
   switch(type)
