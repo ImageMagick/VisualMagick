@@ -1041,10 +1041,10 @@ void CConfigureApp::process_library( const char *root,
   // Add OpenCL path
   if (with_opencl)
   {
-    if (strcmp(filename, "magick") == 0 || strcmp(filename, "ojpeg") == 0 || 
-      strcmp(filename, "Magick++") == 0 || strcmp(filename, "wand") == 0)
+    if (strcmp(filename, "MagickCore") == 0 || strcmp(filename, "ojpeg") == 0 || 
+      strcmp(filename, "Magick++") == 0 || strcmp(filename, "MagickWand") == 0)
       includes_list.push_back(opencl_include);
-    if (strcmp(filename, "magick") == 0 || strcmp(filename, "ojpeg") == 0)
+    if (strcmp(filename, "MagickCore") == 0 || strcmp(filename, "ojpeg") == 0)
     {
       lib_release_list.push_back("OpenCL.lib");
       lib_debug_list.push_back("OpenCL.lib");
@@ -3262,7 +3262,7 @@ void CConfigureApp::process_opencl_path()
 
     // enable MAGICKCORE__OPENCL in config file
     string str, line;
-    const char *cfg_filename             = "..\\magick\\magick-baseconfig.h.in";
+    const char *cfg_filename             = "..\\MagickCore\\magick-baseconfig.h.in";
     ifstream infile(cfg_filename, ifstream::in | ifstream::binary);
     if (infile.is_open())
     {
