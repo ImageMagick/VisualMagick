@@ -3486,14 +3486,14 @@ ConfigureProject *CConfigureApp::write_project_lib( bool dll,
             {
               for (list<string>::iterator it = source_list.begin();
                    it != source_list.end(); it++)
-                project->write_file((*it).c_str());
+                project->write_file(*it);
               if (dspname.compare("accelerate") == 0)
               {
                 for (list<string>::iterator it = filter_opencl_list.begin();
                      it != filter_opencl_list.end(); it++)
                 {
                   if ((*it).find(".c") != string::npos)
-                    project->write_file((*it).c_str());
+                    project->write_file(*it);
                 }
               }
             }
@@ -3506,7 +3506,7 @@ ConfigureProject *CConfigureApp::write_project_lib( bool dll,
                      it != filter_opencl_list.end(); it++)
                 {
                   if ((*it).find(".h") != string::npos)
-                    project->write_file((*it).c_str());
+                    project->write_file(*it);
                 }
               }
             }
@@ -3515,14 +3515,14 @@ ConfigureProject *CConfigureApp::write_project_lib( bool dll,
             {
               for (list<string>::iterator it2 = resource_list.begin();
                    it2 != resource_list.end(); it2++)
-                project->write_file((*it2).c_str());
+                project->write_file(*it2);
             }
           // add in any hard coded objects from the config file
           if (group.compare("object") == 0)
             {
               for (list<string>::iterator it = object_list.begin();
                    it != object_list.end(); it++)
-                project->write_file((*it).c_str());
+                project->write_file(*it);
             }
           project->write_end_group();
           if (valid_dirs[i].group != NULL)
@@ -3689,7 +3689,7 @@ ConfigureProject *CConfigureApp::write_project_exe(
          it != source_list.end();
          it++)
       {
-        project->write_file((*it).c_str());
+        project->write_file(*it);
       }
   }
   for (int i=0; valid_dirs[i].group != NULL; i++)
@@ -3814,12 +3814,12 @@ void ConfigureProject::generate_dir(
                 relpath += "..\\";
               relpath += path;
               relpath += data.cFileName;
-              write_file(get_full_path(dir,relpath).c_str());
+              write_file(get_full_path(dir,relpath));
             }
           else
             {
               string relpath = otherpath + data.cFileName;
-              write_file(get_full_path("",relpath).c_str());
+              write_file(get_full_path("",relpath));
             }
 
         } while (FindNextFile(handle, &data));
@@ -4584,7 +4584,7 @@ void ConfigureVS6Project::write_end_group()
   m_stream << "# End Group" << endl;
 }
 
-void ConfigureVS6Project::write_file(const char *filename)
+void ConfigureVS6Project::write_file(string &filename)
 {
   m_stream << "# Begin Source File" << endl;
   m_stream << "SOURCE=" << filename << endl;
@@ -5413,9 +5413,34 @@ void ConfigureVS7Project::write_end_group()
   m_stream << "    </Filter>" << endl;
 }
 
-void ConfigureVS7Project::write_file(const char *filename)
+void ConfigureVS7Project::write_file(string &filename)
 {
-  m_stream << "      <File RelativePath=\"" << filename << "\"/>" << endl;
+  string name = filename.substr(filename.find_last_of("\\") + 1);
+  int count = 1;
+  if (name.substr(name.find_last_of(".")) == ".c")
+   {
+     if (m_fileNames.find(name) == m_fileNames.end())
+       m_fileNames.insert(make_pair(name, count));
+     else
+       count = ++m_fileNames[name];
+   }
+
+  if (count == 1)
+    {
+      m_stream << "      <File RelativePath=\"" << filename << "\"/>" << endl;
+    }
+  else
+    {
+      name = name.substr(0, name.find_last_of(".") + 1);
+      m_stream << "      <File RelativePath=\"" << filename << "\">" << endl;
+      m_stream << "        <FileConfiguration Name=\"Debug|" << (build64Bit ? "x64" : "Win32") << "\">" << endl;
+      m_stream << "          <Tool Name=\"VCCLCompilerTool\" ObjectFile=\"$(IntDir)" << name << count << ".obj\"/>" << endl;
+      m_stream << "        </FileConfiguration>" << endl;
+      m_stream << "        <FileConfiguration Name=\"Release|" << (build64Bit ? "x64 " : "Win32") << "\">" << endl;
+      m_stream << "          <Tool Name=\"VCCLCompilerTool\" ObjectFile=\"$(IntDir)" << name << count << ".obj\"/>" << endl;
+      m_stream << "        </FileConfiguration>" << endl;
+      m_stream << "      </File>" << endl;
+    }
 }
 
 BOOL BrowseForFolder(HWND hOwner, char* szTitle, char* szRetval)

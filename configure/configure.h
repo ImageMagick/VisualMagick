@@ -26,6 +26,7 @@
 
 #include <string>
 #include <list>
+#include <map>
 
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -70,7 +71,7 @@ public:
   virtual void write_end_target(void) = 0;
   virtual void write_begin_project(const char *name,int type) = 0;
   virtual void write_end_project(void) = 0;
-  virtual void write_file(const char *filename) = 0;
+  virtual void write_file(string &filename) = 0;
   virtual void write_configuration(const char *name, const char *subname,
                                    int state) = 0;
   virtual void write_properties(const char *name,
@@ -180,7 +181,7 @@ public:
   void write_end_target(void);
   void write_begin_project(const char *name,int type);
   void write_end_project(void);
-  void write_file(const char *filename);
+  void write_file(string &filename);
   void write_configuration(const char *name, const char *subname, int state);
   void write_properties(const char *name,
                         const char *outputpath, const char *intermediatepath,
@@ -264,6 +265,7 @@ class ConfigureVS7Project : public ConfigureProject
 public:
   ConfigureVS7Project() {};
   ~ConfigureVS7Project( void );
+  map<string,int> m_fileNames;
 
   void write_begin_group(const char *name);
   void write_end_group(void);
@@ -271,7 +273,7 @@ public:
   void write_end_target(void);
   void write_begin_project(const char *name,int type);
   void write_end_project(void);
-  void write_file(const char *filename);
+  void write_file(string &filename);
   void write_configuration(const char *name, const char *subname, int state);
   void write_properties(const char *name,
                         const char *outputpath,
