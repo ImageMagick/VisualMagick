@@ -21,5 +21,4 @@ INCLUDE = ..\..\jp2\src\libjasper\include\jasper
 INCLUDE = ..\..\jp2\src\libjasper\jp2
 INCLUDE = ..\..\jp2\src\libjasper\jpc
 INCLUDE = ..\..\zlib
-
-
+INCLUDE = ..\..\webp\src

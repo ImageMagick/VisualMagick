@@ -1,0 +1,6 @@
+#ECF - this file contains additional configuration info.
+DEFINE = WIN32
+DEFINE = WIN32_LEAN_AND_MEAN
+DEFINE = HAVE_WINCODEC_H
+DEFINE = WEBP_USE_THREAD
+DEFINE = _CRT_SECURE_NO_WARNINGS

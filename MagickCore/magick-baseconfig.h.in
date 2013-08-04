@@ -107,8 +107,8 @@
 // Define to use the Windows GDI32 library (for clipboard and emf modules)
 #define MAGICKCORE_WINGDI32_DELEGATE
 
-// Define to use the WebP library (obtain sources separately)
-// #undef MAGICKCORE_WEBP_DELEGATE
+// Define to use the WebP library
+#define MAGICKCORE_WEBP_DELEGATE
 
 // Define to use the WMF library
 // #undef MAGICKCORE_WMF_DELEGATE
