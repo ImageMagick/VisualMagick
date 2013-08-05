@@ -5436,7 +5436,7 @@ void ConfigureVS7Project::write_file(string &filename)
       m_stream << "        <FileConfiguration Name=\"Debug|" << (build64Bit ? "x64" : "Win32") << "\">" << endl;
       m_stream << "          <Tool Name=\"VCCLCompilerTool\" ObjectFile=\"$(IntDir)" << name << count << ".obj\"/>" << endl;
       m_stream << "        </FileConfiguration>" << endl;
-      m_stream << "        <FileConfiguration Name=\"Release|" << (build64Bit ? "x64 " : "Win32") << "\">" << endl;
+      m_stream << "        <FileConfiguration Name=\"Release|" << (build64Bit ? "x64" : "Win32") << "\">" << endl;
       m_stream << "          <Tool Name=\"VCCLCompilerTool\" ObjectFile=\"$(IntDir)" << name << count << ".obj\"/>" << endl;
       m_stream << "        </FileConfiguration>" << endl;
       m_stream << "      </File>" << endl;
