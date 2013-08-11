@@ -2936,14 +2936,17 @@ BOOL CConfigureApp::InitInstance()
   process_opencl_path();
 
 #ifndef __NO_MFC__
+  CommandLineInfo info = CommandLineInfo(build64Bit);
+  ParseCommandLine(info);
+
   wizard.m_Page2.m_useX11Stubs = useX11Stubs;
   wizard.m_Page2.m_decorateFiles = decorateFiles;
   wizard.m_Page2.m_optionalFiles = optionalFiles;
   wizard.m_Page2.m_standalone = standaloneMode;
   wizard.m_Page2.m_visualStudio7 = visualStudio7;
-  wizard.m_Page2.m_build64Bit = build64Bit;
+  wizard.m_Page2.m_build64Bit = info.build64Bit();
   wizard.m_Page2.m_openMP = openMP;
-  //wizard.m_Page2.m_bigCoderDLL = m_bigCoderDLL;
+  wizard.m_Page2.m_projectType = info.projectType();
 
   wizard.m_Page3.m_tempRelease = release_loc.c_str();
   wizard.m_Page3.m_tempDebug = debug_loc.c_str();
@@ -3025,9 +3028,19 @@ BOOL CConfigureApp::InitInstance()
 #endif
 
 #ifndef __NO_MFC__
-  int nResponse = wizard.DoModal();
-  // ref. http://redux.imagemagick.org/discussion-server/viewtopic.php?t=7892
-  MessageBox(NULL,"B","info",MB_OK);
+  int nResponse = ID_WIZFINISH;
+  if (info.noWizard())
+    {
+      wizard.Create();
+      wizard.ShowWindow(SW_HIDE);
+    }
+  else
+    {
+      nResponse = wizard.DoModal();
+      // ref. http://redux.imagemagick.org/discussion-server/viewtopic.php?t=7892
+      MessageBox(NULL,"B","info",MB_OK);
+    }
+
   if (nResponse == ID_WIZFINISH)
 #else // __NO_MFC__
   if (TRUE)
@@ -3717,6 +3730,49 @@ ConfigureProject *CConfigureApp::write_project_exe(
   project->m_stream.close();
   return project;
 }
+
+#ifndef __NO_MFC__
+CommandLineInfo::CommandLineInfo(BOOL build64Bit)
+{
+  m_build64Bit = build64Bit;
+  m_noWizard = FALSE;
+  m_projectType = ProjectType::MULTITHREADEDDLL;
+}
+
+BOOL CommandLineInfo::build64Bit()
+{
+  return m_build64Bit;
+}
+
+BOOL CommandLineInfo::noWizard()
+{
+  return m_noWizard;
+}
+
+ProjectType CommandLineInfo::projectType()
+{
+  return m_projectType;
+}
+
+void CommandLineInfo::ParseParam(const char* pszParam, BOOL bFlag, BOOL bLast)
+{
+  if (!bFlag)
+    return;
+
+  if (strcmpi(pszParam, "x64") == 0)
+    m_build64Bit = TRUE;
+  else if (strcmpi(pszParam, "mtd") == 0)
+    m_projectType = ProjectType::MULTITHREADEDDLL;
+  else if (strcmpi(pszParam, "sts") == 0)
+    m_projectType = ProjectType::SINGLETHREADEDSTATIC;
+  else if (strcmpi(pszParam, "mts") == 0)
+    m_projectType = ProjectType::MULTITHREADEDSTATIC;
+  else if (strcmpi(pszParam, "mtsd") == 0)
+    m_projectType = ProjectType::MULTITHREADEDSTATICDLL;
+  else if (strcmpi(pszParam, "noWizard") == 0)
+    m_noWizard = TRUE;
+}
+#endif
 
 // Destructor
 ConfigureProject::~ConfigureProject ( void )

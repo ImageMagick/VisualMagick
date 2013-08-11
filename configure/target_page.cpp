@@ -64,7 +64,6 @@ BOOL CTargetPage::OnInitDialog()
 {
 	CPropertyPage::OnInitDialog();
 	
-	m_projectType = 0;
 	UpdateData(FALSE);
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
