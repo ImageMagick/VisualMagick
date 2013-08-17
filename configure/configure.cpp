@@ -3234,34 +3234,41 @@ typedef struct _ConfigureInfo
 
 void CConfigureApp::process_opencl_path()
 {
-  const string opencl_include_amd   = "$(AMDAPPSDKROOT)include";
-  const string opencl_include_cuda  = "$(CUDA_PATH)include";
-  const string opencl_include_intel = "$(INTELOCLSDKROOT)include";
-  const string opencl_libdir_x86_amd   = "$(AMDAPPSDKROOT)lib\\x86";
-  const string opencl_libdir_x64_amd   = "$(AMDAPPSDKROOT)lib\\x86_64";
-  const string opencl_libdir_x86_cuda  = "$(CUDA_PATH)lib\\Win32";
-  const string opencl_libdir_x64_cuda  = "$(CUDA_PATH)lib\\Win64";
+  const string opencl_include_amd   = "$(AMDAPPSDKROOT)\\include";
+  const string opencl_include_cuda  = "$(CUDA_PATH)\\include";
+  const string opencl_include_intel = "$(INTELOCLSDKROOT)\\include";
+  const string opencl_libdir_x86_amd   = "$(AMDAPPSDKROOT)\\lib\\x86";
+  const string opencl_libdir_x64_amd   = "$(AMDAPPSDKROOT)\\lib\\x86_64";
+  const string opencl_libdir_x86_cuda  = "$(CUDA_PATH)\\lib\\Win32";
+  const string opencl_libdir_x64_cuda  = "$(CUDA_PATH)\\lib\\x64";
   const string opencl_libdir_x86_intel = "$(INTELOCLSDKROOT)lib\\x86";
   const string opencl_libdir_x64_intel = "$(INTELOCLSDKROOT)lib\\x64";
 
   with_opencl = false;
-  if (getenv("AMDAPPSDKROOT") != NULL)
+  char* opencl_sdk_path;
+  if ((opencl_sdk_path = getenv("AMDAPPSDKROOT")) != NULL)
   {
-    opencl_include = opencl_include_amd;
-    opencl_libdir = (build64Bit == TRUE) ? opencl_libdir_x64_amd : opencl_libdir_x86_amd;
-    with_opencl = doesDirExist(opencl_include);
+    with_opencl = doesDirExist(string(opencl_sdk_path) + string("\\include"));
+    if (with_opencl) {
+	opencl_include = opencl_include_amd;
+	opencl_libdir = (build64Bit == TRUE) ? opencl_libdir_x64_amd : opencl_libdir_x86_amd;
+    }
   }
-  if (!with_opencl && getenv("CUDA_PATH") != NULL)
+  if (!with_opencl && (opencl_sdk_path = getenv("CUDA_PATH")) != NULL)
   {
-    opencl_include = opencl_include_cuda;
-    opencl_libdir = (build64Bit == TRUE) ? opencl_libdir_x64_cuda : opencl_libdir_x86_cuda;
-    with_opencl = doesDirExist(opencl_include);
+    with_opencl = doesDirExist(string(opencl_sdk_path) + string("\\include"));
+    if (with_opencl) {
+	opencl_include = opencl_include_cuda;
+	opencl_libdir = (build64Bit == TRUE) ? opencl_libdir_x64_cuda : opencl_libdir_x86_cuda;
+    }
   }
-  if (!with_opencl && getenv("INTELOCLSDKROOT") != NULL)
+  if (!with_opencl && (opencl_sdk_path = getenv("INTELOCLSDKROOT")) != NULL)
   {
-    opencl_include = opencl_include_intel;
-    opencl_libdir = (build64Bit == TRUE) ? opencl_libdir_x64_intel : opencl_libdir_x86_intel;
-    with_opencl = doesDirExist(opencl_include);
+    with_opencl = doesDirExist(string(opencl_sdk_path) + string("\\include"));
+    if (with_opencl) {
+	opencl_include = opencl_include_intel;
+	opencl_libdir = (build64Bit == TRUE) ? opencl_libdir_x64_intel : opencl_libdir_x86_intel;
+    }
   }
 
   if (with_opencl)
