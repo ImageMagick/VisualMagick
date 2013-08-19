@@ -68,7 +68,7 @@
 
 // Exclude deprecated methods in MagickCore API 
 //
-//#undef MAGICKCORE_EXCLUDE_DEPRECATED
+#define MAGICKCORE_EXCLUDE_DEPRECATED
 
 /////////////
 //
