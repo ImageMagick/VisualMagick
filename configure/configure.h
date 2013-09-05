@@ -37,7 +37,7 @@ using namespace std;
 // See Configure.cpp for the implementation of this class
 /////////////////////////////////////////////////////////////////////////////
 
-enum ProjectType {MULTITHREADEDDLL, SINGLETHREADEDSTATIC, MULTITHREADEDSTATIC, MULTITHREADEDSTATICDLL};
+enum {MULTITHREADEDDLL, SINGLETHREADEDSTATIC, MULTITHREADEDSTATIC, MULTITHREADEDSTATICDLL};
 enum {DLLPROJECT, LIBPROJECT, EXEPROJECT};
 enum {DISABLED, UTILITY, LIBRARY, STATICLIB, MODULE, ADD_ON, THIRDPARTY, PROJECT};
 enum {CPPCOMPILETOOL, RESCOMPILETOOL, MIDLCOMPILETOOL, LIBRARYTOOL, LINKERTOOL};
@@ -359,12 +359,14 @@ class CommandLineInfo : public CCommandLineInfo
 {
   BOOL m_build64Bit;
   BOOL m_noWizard;
-  ProjectType m_projectType;
+  int m_projectType;
 public:
   CommandLineInfo(BOOL build64Bit);
+  CommandLineInfo(const CommandLineInfo &obj);
+  CommandLineInfo& operator=(const CommandLineInfo& obj);
   BOOL build64Bit();
   BOOL noWizard();
-  ProjectType projectType();
+  int projectType();
 
   virtual void ParseParam(const char* pszParam, BOOL bFlag, BOOL bLast);
 };

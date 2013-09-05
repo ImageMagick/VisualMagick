@@ -3743,7 +3743,17 @@ CommandLineInfo::CommandLineInfo(BOOL build64Bit)
 {
   m_build64Bit = build64Bit;
   m_noWizard = FALSE;
-  m_projectType = ProjectType::MULTITHREADEDDLL;
+  m_projectType = MULTITHREADEDDLL;
+}
+
+CommandLineInfo::CommandLineInfo(const CommandLineInfo& obj)
+{
+  *this = obj;
+}
+
+CommandLineInfo& CommandLineInfo::operator=(const CommandLineInfo& obj)
+{
+  return *this;
 }
 
 BOOL CommandLineInfo::build64Bit()
@@ -3756,7 +3766,7 @@ BOOL CommandLineInfo::noWizard()
   return m_noWizard;
 }
 
-ProjectType CommandLineInfo::projectType()
+int CommandLineInfo::projectType()
 {
   return m_projectType;
 }
@@ -3769,13 +3779,13 @@ void CommandLineInfo::ParseParam(const char* pszParam, BOOL bFlag, BOOL bLast)
   if (strcmpi(pszParam, "x64") == 0)
     m_build64Bit = TRUE;
   else if (strcmpi(pszParam, "mtd") == 0)
-    m_projectType = ProjectType::MULTITHREADEDDLL;
+    m_projectType = MULTITHREADEDDLL;
   else if (strcmpi(pszParam, "sts") == 0)
-    m_projectType = ProjectType::SINGLETHREADEDSTATIC;
+    m_projectType = SINGLETHREADEDSTATIC;
   else if (strcmpi(pszParam, "mts") == 0)
-    m_projectType = ProjectType::MULTITHREADEDSTATIC;
+    m_projectType = MULTITHREADEDSTATIC;
   else if (strcmpi(pszParam, "mtsd") == 0)
-    m_projectType = ProjectType::MULTITHREADEDSTATICDLL;
+    m_projectType = MULTITHREADEDSTATICDLL;
   else if (strcmpi(pszParam, "noWizard") == 0)
     m_noWizard = TRUE;
 }
@@ -4412,15 +4422,17 @@ void ConfigureVS6Project::write_link_tool_begin( const char *input_path,
     {
     case DLLPROJECT:
     case EXEPROJECT:
-      m_stream << "LIB32=link.exe -lib" << endl;
-      m_stream << "LINK32=link.exe" << endl;
-      m_stream << "# ADD LINK32";
-      m_stream << " /libpath:\"";
-      for (list<string>::iterator it = additional_libdir_list.begin(); 
-           it != additional_libdir_list.end(); it++)
-        m_stream << *it << ";";
-      m_stream << input_path << "\"";
-      break;
+      {
+        m_stream << "LIB32=link.exe -lib" << endl;
+        m_stream << "LINK32=link.exe" << endl;
+        m_stream << "# ADD LINK32";
+        m_stream << " /libpath:\"";
+        for (list<string>::iterator it = additional_libdir_list.begin(); 
+             it != additional_libdir_list.end(); it++)
+          m_stream << *it << ";";
+        m_stream << input_path << "\"";
+        break;
+      }
     case LIBPROJECT:
       m_stream << "LIB32=link.exe -lib" << endl;
       m_stream << "# ADD LIB32";
@@ -5200,13 +5212,15 @@ void ConfigureVS7Project::write_link_tool_begin( const char *input_path,
     {
     case DLLPROJECT:
     case EXEPROJECT:
-      m_stream << "        Name=\"VCLinkerTool\"" << endl;
-      m_stream << "        AdditionalLibraryDirectories=\"";
-      for (list<string>::iterator it = additional_libdir_list.begin(); 
-           it != additional_libdir_list.end(); it++)
-        m_stream << *it << ";";
-      m_stream << input_path << "\"" << endl;
-      break;
+      {
+        m_stream << "        Name=\"VCLinkerTool\"" << endl;
+        m_stream << "        AdditionalLibraryDirectories=\"";
+        for (list<string>::iterator it = additional_libdir_list.begin(); 
+             it != additional_libdir_list.end(); it++)
+          m_stream << *it << ";";
+        m_stream << input_path << "\"" << endl;
+        break;
+      }
     case LIBPROJECT:
       m_stream << "        Name=\"VCLibrarianTool\"" << endl;
       break;
