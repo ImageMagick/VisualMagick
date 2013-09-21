@@ -3128,10 +3128,9 @@ BOOL CConfigureApp::InitInstance()
       lib_shared_list.push_back("ole32.lib");
       lib_shared_list.push_back("oleaut32.lib");
       lib_shared_list.push_back("winmm.lib");
-      // lib_shared_list.push_back("dxguid.lib");
       lib_shared_list.push_back("wsock32.lib");
       lib_shared_list.push_back("advapi32.lib");
-      //lib_shared_list.push_back("scrnsave.lib");
+      lib_shared_list.push_back("urlmon.lib");
 
       ConfigureProject *dummy_project;
       if (visualStudio7)
