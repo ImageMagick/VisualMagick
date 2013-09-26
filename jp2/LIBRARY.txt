@@ -11,3 +11,4 @@ DEFINE = _CRT_NONSTDC_NO_WARNINGS
 EXPORTSDEF = ..\..\jp2\jasper.def
 EXCLUDE = dummy.c
 EXCLUDE = jiv.c
+RESOURCE = jp2.rc

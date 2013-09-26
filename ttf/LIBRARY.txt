@@ -6,7 +6,7 @@ DEFINE = _CRT_SECURE_NO_WARNINGS
 #DEFINE = FT_DEBUG_LEVEL_TRACE
 #DEFINE = _LIB
 DEFINE = _MBCS
-SOURCE = ttf.rc
+RESOURCE = ttf.rc
 # autohint
 EXCLUDE = ahangles.c
 EXCLUDE = ahglobal.c

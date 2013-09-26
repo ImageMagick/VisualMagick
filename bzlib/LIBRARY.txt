@@ -10,4 +10,4 @@ EXCLUDE = libbz2.def
 EXCLUDE = mk251.c
 EXCLUDE = spewG.c
 EXCLUDE = unzcrash.c
-SOURCE = bzlib.rc
+RESOURCE = bzlib.rc

@@ -3,4 +3,4 @@ DEFINE = _CRT_SECURE_NO_WARNINGS
 EXCLUDE = maketree.c
 EXCLUDE = minigzip.c
 EXCLUDE = example.c
-SOURCE = zlib.rc
+RESOURCE = zlib.rc

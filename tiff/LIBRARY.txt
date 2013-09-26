@@ -16,7 +16,7 @@ DEFINE = _CRT_NONSTDC_NO_WARNINGS
 # Use libtiff provided DLL exports
 EXPORTSDEF = ..\..\tiff\libtiff\libtiff.def
 # Resource file
-SOURCE = tiff.rc
+RESOURCE = tiff.rc
 EXCLUDE = mkg3states.c
 EXCLUDE = mkspans.c
 EXCLUDE = mkversion.c
