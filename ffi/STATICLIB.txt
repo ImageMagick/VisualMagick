@@ -1,0 +1,6 @@
+#ECF - this file contains additional configuration info.
+DEFINE = _CRT_SECURE_NO_WARNINGS
+EXCLUDE = dlmalloc.c
+EXCLUDE = java_raw_api.c
+EXCLUDE32 = win64.asm
+EXCLUDE64 = win32.asm

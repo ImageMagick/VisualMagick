@@ -579,6 +579,10 @@ bool CConfigureApp::process_one_entry(const char *entry, int nLinesRead, int run
         resource_list.push_back(temp);
       else if (_tcsicmp(sName.c_str(), "EXCLUDE") == 0)
         exclude_list.push_back(temp);
+      else if ((build64Bit == TRUE) && (_tcsicmp(sName.c_str(), "EXCLUDE64") == 0))
+        exclude_list.push_back(temp);
+      else if ((build64Bit == FALSE) && (_tcsicmp(sName.c_str(), "EXCLUDE32") == 0))
+        exclude_list.push_back(temp);
       else if (_tcsicmp(sName.c_str(), "LIBRARY") == 0)
         {
           lib_release_list.push_back(temp);
@@ -1093,7 +1097,6 @@ void CConfigureApp::process_library( const char *root,
         {
           if (useX11Stubs)
             workspace->write_project_dependency(project,"CORE_xlib");
-          //workspace->write_project_dependency(project,"CORE_tiff");
           workspace->write_project_dependency(project,"CORE_jpeg");
           workspace->write_project_dependency(project,"CORE_zlib");
           workspace->write_project_dependency(project,"CORE_bzlib");
@@ -1101,6 +1104,8 @@ void CConfigureApp::process_library( const char *root,
           workspace->write_project_dependency(project,"CORE_tiff");
           workspace->write_project_dependency(project,"CORE_ttf");
           workspace->write_project_dependency(project,"CORE_libxml");
+          workspace->write_project_dependency(project,"CORE_glib");
+          workspace->write_project_dependency(project,"CORE_lqr");
         }
       if (name.compare("coders") == 0)
         {
@@ -1136,9 +1141,17 @@ void CConfigureApp::process_library( const char *root,
         {
           workspace->write_project_dependency(project,"CORE_jpeg");
         }
+      if (name.compare("glib") == 0)
+        {
+          workspace->write_project_dependency(project,"CORE_ffi");
+        }
       if (name.compare("hdf") == 0)
         {
           workspace->write_project_dependency(project,"CORE_zlib");
+        }
+      if (name.compare("lqr") == 0)
+        {
+          workspace->write_project_dependency(project,"CORE_glib");
         }
       if (name.compare("mat") == 0)
         {
@@ -3475,6 +3488,7 @@ ConfigureProject *CConfigureApp::write_project_lib( bool dll,
       { ".cpp", "src" },
       { ".def", "src" },
       { ".idl", "src" },
+      { ".asm", "src" },
       { ".h",   "include" },
       { ".rc",  "resource" },
       { ".obj", "object"},
@@ -5500,6 +5514,21 @@ void ConfigureVS7Project::write_file(string &filename)
      else
        count = ++m_fileNames[name];
    }
+  else if (name.substr(name.find_last_of(".")) == ".asm")
+    {
+      m_stream << "      <File RelativePath=\"" << filename << "\">" << endl;
+      m_stream << "        <FileConfiguration Name=\"Debug|" << (build64Bit ? "x64" : "Win32") << "\">" << endl;
+      m_stream << "          <Tool Name=\"VCCustomBuildTool\" CommandLine=\"ml" << (build64Bit ? "64" : "");
+      m_stream << " /nologo /c /safeseh /Cx /coff /Fo&quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" ";
+      m_stream << "Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
+      m_stream << "        </FileConfiguration>" << endl;
+      m_stream << "        <FileConfiguration Name=\"Release|" << (build64Bit ? "x64" : "Win32") << "\">" << endl;
+      m_stream << "          <Tool Name=\"VCCustomBuildTool\" CommandLine=\"ml" << (build64Bit ? "64" : "");
+      m_stream << " /nologo /c /safeseh /Cx /coff /Fo&quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" ";
+      m_stream << "Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
+      m_stream << "        </FileConfiguration>" << endl;
+      m_stream << "      </File>" << endl;
+    }
 
   if (count == 1)
     {
