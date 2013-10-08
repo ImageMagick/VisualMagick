@@ -3484,11 +3484,12 @@ ConfigureProject *CConfigureApp::write_project_lib( bool dll,
 
   const ConfigureInfo
     valid_dirs[] = {
+      { ".asm", "src" },
       { ".c",   "src" },
       { ".cpp", "src" },
       { ".def", "src" },
       { ".idl", "src" },
-      { ".asm", "src" },
+      { ".nasm", "src" },
       { ".h",   "include" },
       { ".rc",  "resource" },
       { ".obj", "object"},
@@ -5505,7 +5506,8 @@ void ConfigureVS7Project::write_end_group()
 
 void ConfigureVS7Project::write_file(string &filename)
 {
-  string name = filename.substr(filename.find_last_of("\\") + 1);
+  int index = filename.find_last_of("\\");
+  string name = filename.substr(index + 1);
   int count = 1;
   if (name.substr(name.find_last_of(".")) == ".c")
    {
@@ -5526,6 +5528,22 @@ void ConfigureVS7Project::write_file(string &filename)
       m_stream << "          <Tool Name=\"VCCustomBuildTool\" CommandLine=\"ml" << (build64Bit ? "64" : "");
       m_stream << " /nologo /c /safeseh /Cx /coff /Fo&quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" ";
       m_stream << "Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
+      m_stream << "        </FileConfiguration>" << endl;
+      m_stream << "      </File>" << endl;
+    }
+  else if (name.substr(name.find_last_of(".")) == ".nasm")
+    {
+      string folder = filename.substr(0, index + 1);
+      m_stream << "      <File RelativePath=\"" << filename << "\">" << endl;
+      m_stream << "        <FileConfiguration Name=\"Debug|" << (build64Bit ? "x64" : "Win32") << "\">" << endl;
+      m_stream << "          <Tool Name=\"VCCustomBuildTool\" CommandLine=\"..\\build\\nasm -fwin" << (build64Bit ? "64" : "32");
+      m_stream << " -DWIN" << (build64Bit ? "64 -D__x86_64__" : "32") << " -I" << folder;
+      m_stream << " -o &quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
+      m_stream << "        </FileConfiguration>" << endl;
+      m_stream << "        <FileConfiguration Name=\"Release|" << (build64Bit ? "x64" : "Win32") << "\">" << endl;
+      m_stream << "          <Tool Name=\"VCCustomBuildTool\" CommandLine=\"..\\build\\nasm -fwin" << (build64Bit ? "64" : "32");
+      m_stream << " -DWIN" << (build64Bit ? "64 -D__x86_64__" : "32") << " -I" << folder;
+      m_stream << " -o &quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
       m_stream << "        </FileConfiguration>" << endl;
       m_stream << "      </File>" << endl;
     }
