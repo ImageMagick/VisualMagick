@@ -22,6 +22,7 @@ EXCLUDE = glib-genmarshal.c
 EXCLUDE = glib-unix.c
 EXCLUDE = gobject-query.c
 EXCLUDE = gspawn.c
+EXCLUDE = gspawn-win32-helper.c
 EXCLUDE = gtester.c
 EXCLUDE = gspawn.c
 EXCLUDE = gtester.c
