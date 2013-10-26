@@ -1,7 +1,7 @@
 #include "winver.h"
 
-#define THIS_PROJECT_VERSION_NUM		3,7,4,0
-#define THIS_PROJECT_VERSION_STRING		"3.7.4 (12 September 2005)"
+#define THIS_PROJECT_VERSION_NUM		4,0,3,0
+#define THIS_PROJECT_VERSION_STRING		"4.0.3 (22 September 2012)"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -34,7 +34,7 @@ BEGIN
             VALUE "ProductVersion", THIS_PROJECT_VERSION_STRING "\0"
             VALUE "CompanyName", "Mike Welles, mike@onshore.com\0"
             VALUE "LegalCopyright", "Copyright © 1988-1997 Sam Leffler and Copyright © 1991-1996 Silicon Image, Inc.\0"
-            VALUE "Comments", "http://www.remotesensing.org/libtiff/\0"
+            VALUE "Comments", "http://www.remotesensing.org/libtiff\0"
         END
     END
     BLOCK "VarFileInfo"
