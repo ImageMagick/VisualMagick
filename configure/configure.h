@@ -361,13 +361,15 @@ class CommandLineInfo : public CCommandLineInfo
 {
   BOOL m_build64Bit;
   BOOL m_noWizard;
+  BOOL m_openCL;
   int m_projectType;
 public:
-  CommandLineInfo(BOOL build64Bit);
+  CommandLineInfo(BOOL build64Bit, BOOL openCL);
   CommandLineInfo(const CommandLineInfo &obj);
   CommandLineInfo& operator=(const CommandLineInfo& obj);
   BOOL build64Bit();
   BOOL noWizard();
+  BOOL openCL();
   int projectType();
 
   virtual void ParseParam(const char* pszParam, BOOL bFlag, BOOL bLast);

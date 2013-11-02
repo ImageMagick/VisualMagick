@@ -109,29 +109,31 @@ BEGIN
     CONTROL         "Use X11 stubs to prevent use of X Window",
                     IDC_USE_X11_STUBS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
                     153,33,152,10
-    CONTROL         "Decorate exe files with build options",
-                    IDC_DECORATE_FILES,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    15,135,139,10
     GROUPBOX        "Build options",IDC_STATIC,7,122,304,77
     CONTROL         "Static Multi-threaded DLL runtimes",IDC_PROJECT_TYPE3,
                     "Button",BS_AUTORADIOBUTTON,15,95,124,10
     LTEXT           "Static Builds",IDC_STATIC,13,50,40,8
     LTEXT           "Dynamic (DLL) Builds",IDC_STATIC,13,19,68,8
-    CONTROL         "Include all demo, test, appl, and contrib directories",
-                    IDC_INCLUDE_OPTIONAL,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,15,151,170,10
-    CONTROL         "Generate all utility projects with full paths rather then relative paths.",
-                    IDC_STANDALONE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,
-                    167,236,10
-    PUSHBUTTON      "Edit ""magick-baseconfig.h""",IDC_EditConfig,109,204,92,14
-    CONTROL         "Generate Visual Studio 7 format",IDC_GENERATE_VS7,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,182,140,10
+    CONTROL         "Decorate exe files with build options",
+                    IDC_DECORATE_FILES,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    15,135,139,10
     CONTROL         "Build 64-bit distribution",IDC_BUILD_64_BIT,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,195,135,
                     111,10
+    CONTROL         "Include all demo, test, appl, and contrib directories",
+                    IDC_INCLUDE_OPTIONAL,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,15,151,170,10
     CONTROL         "Enable OpenMP",IDC_OPEN_MP,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,195,151,
                     66,10
+    CONTROL         "Generate Visual Studio 7 format",IDC_GENERATE_VS7,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,167,140,10
+    CONTROL         "Enable OpenCL",IDC_OPEN_CL,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,195,167,66,10
+    CONTROL         "Generate all utility projects with full paths rather then relative paths.",
+                    IDC_STANDALONE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,
+                    182,236,10
+    PUSHBUTTON      "Edit ""magick-baseconfig.h""",IDC_EditConfig,109,204,92,14
     CONTROL         "All coders go into one big DLL",IDC_BIGCODERDLL,"Button",
                     BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,186,134,
                     131,10

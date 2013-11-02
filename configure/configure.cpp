@@ -68,6 +68,7 @@ BOOL onebigdllMode = FALSE;
 BOOL visualStudio7 = TRUE;
 BOOL build64Bit = FALSE;
 BOOL openMP = TRUE;
+BOOL openCL = FALSE;
 BOOL m_bigCoderDLL = FALSE;
 #ifdef __NO_MFC__
 int projectType = MULTITHREADEDSTATIC;
@@ -766,7 +767,7 @@ void CConfigureApp::process_utility(
     }
 
   // Add OpenCL path
-  if (with_opencl)
+  if (with_opencl && openCL)
     includes_list.push_back(opencl_include);
 
 #ifdef _DEBUG
@@ -1044,7 +1045,7 @@ void CConfigureApp::process_library( const char *root,
     }
 
   // Add OpenCL path
-  if (with_opencl)
+  if (with_opencl && openCL)
   {
     if (strcmp(filename, "MagickCore") == 0 || strcmp(filename, "ojpeg") == 0 || 
       strcmp(filename, "Magick++") == 0 || strcmp(filename, "MagickWand") == 0)
@@ -1403,7 +1404,7 @@ void CConfigureApp::process_module( const char *root,
     }
 
   // Add OpenCL path
-  if (with_opencl)
+  if (with_opencl && openCL)
   {
     if (name.compare("accelerate") == 0)
     {
@@ -2971,7 +2972,7 @@ BOOL CConfigureApp::InitInstance()
   process_opencl_path();
 
 #ifndef __NO_MFC__
-  CommandLineInfo info = CommandLineInfo(build64Bit);
+  CommandLineInfo info = CommandLineInfo(build64Bit, openCL);
   ParseCommandLine(info);
 
   wizard.m_Page2.m_useX11Stubs = useX11Stubs;
@@ -2981,6 +2982,7 @@ BOOL CConfigureApp::InitInstance()
   wizard.m_Page2.m_visualStudio7 = visualStudio7;
   wizard.m_Page2.m_build64Bit = info.build64Bit();
   wizard.m_Page2.m_openMP = openMP;
+  wizard.m_Page2.m_openCL = info.openCL();
   wizard.m_Page2.m_projectType = info.projectType();
 
   wizard.m_Page3.m_tempRelease = release_loc.c_str();
@@ -3092,6 +3094,7 @@ BOOL CConfigureApp::InitInstance()
       visualStudio7 = wizard.m_Page2.m_visualStudio7;
       build64Bit = wizard.m_Page2.m_build64Bit;
       openMP = wizard.m_Page2.m_openMP;
+      openCL = wizard.m_Page2.m_openCL;
       //m_bigCoderDLL = wizard.m_Page2.m_bigCoderDLL;
       release_loc = wizard.m_Page3.m_tempRelease;
       debug_loc = wizard.m_Page3.m_tempDebug;
@@ -3308,7 +3311,7 @@ void CConfigureApp::process_opencl_path()
   if (with_opencl)
   {
     string chcfg = "\r\n/* Define to use OpenCL */\r\n"
-      "#define MAGICKCORE__OPENCL 1\r\n"
+      /*"#define MAGICKCORE__OPENCL 1\r\n"*/
 #if defined __APPLE__
       "#define MAGICKCORE_HAVE_OPENCL_CL_H 1\r\n";
 #else
@@ -3324,7 +3327,7 @@ void CConfigureApp::process_opencl_path()
       while (getline(infile, line))
         str += line + "\n";
       infile.close();
-      size_t pos = str.find("MAGICKCORE__OPENCL");
+      size_t pos = str.find("MAGICKCORE_HAVE_CL_CL_H");
       if (pos == string::npos)
         str += chcfg;
       ofstream outfile(cfg_filename, ofstream::out | ofstream::binary);
@@ -3775,10 +3778,11 @@ ConfigureProject *CConfigureApp::write_project_exe(
 }
 
 #ifndef __NO_MFC__
-CommandLineInfo::CommandLineInfo(BOOL build64Bit)
+CommandLineInfo::CommandLineInfo(BOOL build64Bit, BOOL openCL)
 {
   m_build64Bit = build64Bit;
   m_noWizard = FALSE;
+  m_openCL = openCL;
   m_projectType = MULTITHREADEDDLL;
 }
 
@@ -3800,6 +3804,11 @@ BOOL CommandLineInfo::build64Bit()
 BOOL CommandLineInfo::noWizard()
 {
   return m_noWizard;
+}
+
+BOOL CommandLineInfo::openCL()
+{
+  return m_openCL;
 }
 
 int CommandLineInfo::projectType()
@@ -3824,6 +3833,8 @@ void CommandLineInfo::ParseParam(const char* pszParam, BOOL bFlag, BOOL bLast)
     m_projectType = MULTITHREADEDSTATICDLL;
   else if (strcmpi(pszParam, "noWizard") == 0)
     m_noWizard = TRUE;
+  else if (strcmpi(pszParam, "openCL") == 0)
+    m_openCL = TRUE;
 }
 #endif
 
@@ -4444,6 +4455,8 @@ void ConfigureVS6Project::write_cpp_compiler_tool_defines( list<string> &defines
   }
   if (bDynamicMFC&& (type == EXEPROJECT))
     m_stream << "/D \"_AFXDLL\"";
+  if (openCL)
+    m_stream << ";MAGICKCORE__OPENCL";
 }
 
 void ConfigureVS6Project::write_cpp_compiler_tool_end( int type, int mode )
@@ -5230,6 +5243,8 @@ void ConfigureVS7Project::write_cpp_compiler_tool_defines( list<string> &defines
   }
   if (bDynamicMFC&& (type == EXEPROJECT))
     m_stream << ";_AFXDLL";
+  if (openCL)
+    m_stream << ";MAGICKCORE__OPENCL";
   m_stream << "\"" << endl;
 }
 
