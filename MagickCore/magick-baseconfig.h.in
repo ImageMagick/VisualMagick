@@ -101,6 +101,9 @@
 // Define to use the Liquid Rescale library
 #define MAGICKCORE_LQR_DELEGATE
 
+// Define to use the Pango/Cairo library
+#define MAGICKCORE_PANGOCAIRO_DELEGATE
+
 // Define to use the PNG library
 #define MAGICKCORE_PNG_DELEGATE
 
