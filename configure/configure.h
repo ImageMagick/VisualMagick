@@ -61,6 +61,8 @@ public:
   // Destructor
   virtual ~ConfigureProject( void );
 
+  int get_warning_level(string &outname);
+
   void generate_dir(const char *dir,
                     const char *specS, int nestinglevel, int project_type,
                     std::list<std::string> &exclude_list);
@@ -82,7 +84,7 @@ public:
 
   virtual void write_pre_build_event(list<string> &prebuild_cmd_list) = 0;
 
-  virtual void write_cpp_compiler_tool(string &root, string &extra_path,
+  virtual void write_cpp_compiler_tool(string &root, string &extra_path, string &outname,
                                        list<string> &includes_list,
                                        list<string> &standard_includes_list,
                                        list<string> &defines_list,
@@ -90,7 +92,7 @@ public:
                                        int mode) = 0;
   virtual void write_cpp_compiler_tool_begin(int type, int mode) = 0;
   virtual void write_cpp_compiler_tool_runtime(int runtime, int type, int mode) = 0;
-  virtual void write_cpp_compiler_tool_options(int type, int mode) = 0;
+  virtual void write_cpp_compiler_tool_options(int type, int mode, string &outname) = 0;
   virtual void write_cpp_compiler_tool_includes(string &root, string &extra_path,
                                                 list<string> &includes_list,
                                                 list<string> &standard_includes_list,
@@ -189,7 +191,7 @@ public:
 
   void write_pre_build_event(list<string> &prebuild_cmd_list);
 
-  void write_cpp_compiler_tool(string &root, string &extra_path,
+  void write_cpp_compiler_tool(string &root, string &extra_path, string &outname,
                                list<string> &includes_list,
                                list<string> &standard_includes_list,
                                list<string> &defines_list,
@@ -230,7 +232,7 @@ public:
                                 bool isCOMproject);
   void write_cpp_compiler_tool_begin(int type, int mode);
   void write_cpp_compiler_tool_runtime(int runtime, int type, int mode);
-  void write_cpp_compiler_tool_options(int type, int mode);
+  void write_cpp_compiler_tool_options(int type, int mode, string &outname);
   void write_cpp_compiler_tool_includes(string &root, string &extra_path,
                                         list<string> &includes_list,
                                         list<string> &standard_includes_list,
@@ -283,7 +285,7 @@ public:
 
   void write_pre_build_event(list<string> &prebuild_cmd_list);
 
-  void write_cpp_compiler_tool(string &root, string &extra_path,
+  void write_cpp_compiler_tool(string &root, string &extra_path, string &outname,
                                list<string> &includes_list,
                                list<string> &standard_includes_list,
                                list<string> &defines_list,
@@ -291,7 +293,7 @@ public:
                                int mode);
   void write_cpp_compiler_tool_begin(int type, int mode);
   void write_cpp_compiler_tool_runtime(int runtime, int type, int mode);
-  void write_cpp_compiler_tool_options(int type, int mode);
+  void write_cpp_compiler_tool_options(int type, int mode, string &outname);
   void write_cpp_compiler_tool_includes(string &root, string &extra_path,
                                         list<string> &includes_list,
                                         list<string> &standard_includes_list,
