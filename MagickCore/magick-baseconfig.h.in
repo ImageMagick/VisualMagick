@@ -202,7 +202,6 @@ typedef long ssize_t;
   #define __FUNCTION__  "unknown"
 #endif
 #define __func__  __FUNCTION__
-#define nearbyint(x)  ((ssize_t) ((x)+0.5))
 
 /* Define to 1 if you have the <ft2build.h> header file. */
 #define MAGICKCORE_HAVE_FT2BUILD_H 1
