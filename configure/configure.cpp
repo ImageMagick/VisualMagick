@@ -5317,7 +5317,7 @@ void ConfigureVS7Project::write_link_tool_dependencies( string &root,
       break;
     }
   if (!build64Bit)
-    m_stream << "        AdditionalDependencies=\" ";
+    m_stream << "        AdditionalDependencies=\"/MACHINE:X86 ";
   else
     m_stream << "        AdditionalDependencies=\"/MACHINE:AMD64 ";
   if (onebigdllMode || (standaloneMode && (type == EXEPROJECT)))
