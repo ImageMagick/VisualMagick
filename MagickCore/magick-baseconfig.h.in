@@ -50,14 +50,6 @@
 //
 #define ProvideDllMain
 
-// Define if MIT X11 is available (or stubbed).  It is not actually
-// necessary to use X11 or the X11 stubs library. The VisualMagick configure
-// program assumes that X11 stubs is being used if X11 is not supported.
-// To achieve a slimmer ImageMagick, undefine MAGICKCORE_X11_DELEGATE and
-// remove the 'xlib' project from the ImageMagick workspace.
-//
-#undef MAGICKCORE_X11_DELEGATE
-
 // Enable high dynamic range imagery (HDRI)
 //
 #define MAGICKCORE_HDRI_ENABLE 1
@@ -69,6 +61,14 @@
 // Exclude deprecated methods in MagickCore API 
 //
 #define MAGICKCORE_EXCLUDE_DEPRECATED
+
+// Define if MIT X11 is available (or stubbed).  It is not actually
+// necessary to use X11 or the X11 stubs library. The VisualMagick configure
+// program assumes that X11 stubs is being used if X11 is not supported.
+// To achieve a slimmer ImageMagick, undefine MAGICKCORE_X11_DELEGATE and
+// remove the 'xlib' project from the ImageMagick workspace.
+//
+#undef MAGICKCORE_X11_DELEGATE
 
 /////////////
 //
