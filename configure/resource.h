@@ -31,17 +31,19 @@
 #define IDC_PROJECT_TYPE1               1020
 #define IDC_PROJECT_TYPE2               1021
 #define IDC_PROJECT_TYPE3               1022
-#define IDC_USE_X11_STUBS               1023
-#define IDC_BuildIt                     1024
-#define IDC_DECORATE_FILES              1025
-#define IDC_INCLUDE_OPTIONAL            1026
-#define IDC_STANDALONE                  1027
-#define IDC_EditConfig                  1028
-#define IDC_GENERATE_VS7                1029
-#define IDC_BUILD_64_BIT                1030
-#define IDC_BIGCODERDLL                 1031
-#define IDC_OPEN_MP                     1032
-#define IDC_OPEN_CL                     1033
+#define IDC_BuildIt                     1023
+#define IDC_DECORATE_FILES              1024
+#define IDC_INCLUDE_OPTIONAL            1025
+#define IDC_STANDALONE                  1026
+#define IDC_EditConfig                  1027
+#define IDC_GENERATE_VS7                1028
+#define IDC_BUILD_64_BIT                1029
+#define IDC_BIGCODERDLL                 1030
+#define IDC_OPEN_MP                     1031
+#define IDC_OPEN_CL                     1032
+#define IDC_QUANTUM_DEPTH               1033
+#define IDC_HDRI                        1034
+#define IDC_X11                         1035
 #define IDD_WAITDIALOG                  23040
 #define IDC_MSGCTRL                     23041
 #define IDC_PROGRESSCTRL                23042
@@ -52,7 +54,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NEXT_RESOURCE_VALUE        133
 #define _APS_NEXT_COMMAND_VALUE         32771
-#define _APS_NEXT_CONTROL_VALUE         1034
+#define _APS_NEXT_CONTROL_VALUE         1036
 #define _APS_NEXT_SYMED_VALUE           105
 #endif
 #endif

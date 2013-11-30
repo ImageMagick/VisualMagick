@@ -12,44 +12,50 @@
 
 class CTargetPage : public CPropertyPage
 {
-	DECLARE_DYNCREATE(CTargetPage)
+  DECLARE_DYNCREATE(CTargetPage)
 
 // Construction
 public:
-	CTargetPage();
-	~CTargetPage();
+  CTargetPage();
+  ~CTargetPage();
 
 // Dialog Data
-	//{{AFX_DATA(CTargetPage)
-	enum { IDD = IDD_TARGET_PAGE };
-	int		m_projectType;
-	BOOL	m_useX11Stubs;
-	BOOL	m_decorateFiles;
-	BOOL	m_optionalFiles;
-	BOOL	m_standalone;
-	BOOL	m_visualStudio7;
-	BOOL	m_build64Bit;
-	BOOL	m_openMP;
-	BOOL	m_openCL;
-	BOOL	m_bigCoderDLL;
-	//}}AFX_DATA
+  //{{AFX_DATA(CTargetPage)
+  enum { IDD = IDD_TARGET_PAGE };
+  int  m_projectType;
+  int  m_X11Mode;
+  int  m_quantumDepth;
+  BOOL m_decorateFiles;
+  BOOL m_optionalFiles;
+  BOOL m_standalone;
+  BOOL m_visualStudio7;
+  BOOL m_build64Bit;
+  BOOL m_hdri;
+  BOOL m_openMP;
+  BOOL m_openCL;
+  BOOL m_bigCoderDLL;
+  BOOL m_disableOpenCL;
+  //}}AFX_DATA
 
 
 // Overrides
-	// ClassWizard generate virtual function overrides
-	//{{AFX_VIRTUAL(CTargetPage)
-	protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
-	//}}AFX_VIRTUAL
+  // ClassWizard generate virtual function overrides
+  //{{AFX_VIRTUAL(CTargetPage)
+  protected:
+  virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
+  //}}AFX_VIRTUAL
 
 // Implementation
 protected:
-	// Generated message map functions
-	//{{AFX_MSG(CTargetPage)
-	virtual BOOL OnInitDialog();
-	afx_msg void OnEditConfig();
-	//}}AFX_MSG
-	DECLARE_MESSAGE_MAP()
+  // Generated message map functions
+  //{{AFX_MSG(CTargetPage)
+  virtual BOOL OnInitDialog();
+  afx_msg void OnEditConfig();
+  //}}AFX_MSG
+  DECLARE_MESSAGE_MAP()
+
+private:
+  void DisableOpenCL(void);
 };
 
 //{{AFX_INSERT_LOCATION}}

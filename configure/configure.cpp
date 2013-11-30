@@ -58,15 +58,16 @@ CConfigureApp theApp;
 /////////////////////////////////////////////////////////////////////////////
 // CConfigureApp initialization
 
-BOOL useX11Stubs = TRUE;
+int  quantumDepth = Q16;
+int  X11Mode = X11_DISABLED;
 BOOL decorateFiles = FALSE;
 BOOL optionalFiles = FALSE;
 bool consoleMode = true;
 BOOL standaloneMode = FALSE;
 BOOL onebigdllMode = FALSE;
-//BOOL generateFontmap = FALSE;
 BOOL visualStudio7 = TRUE;
 BOOL build64Bit = FALSE;
+BOOL hdri = TRUE;
 BOOL openMP = TRUE;
 BOOL openCL = FALSE;
 BOOL m_bigCoderDLL = FALSE;
@@ -662,6 +663,66 @@ int CConfigureApp::load_environment_file(const char *inputfile, int runtime)
   return true;
 }
 
+void CConfigureApp::replace_keywords(std::string fileName)
+{
+  string
+    line,
+    str;
+
+  ifstream infile(fileName, ifstream::in | ifstream::binary);
+  if (infile.is_open())
+    {
+      while (getline(infile,line))
+      {
+        if (!line.empty() && *line.rbegin() == '\r')
+          line.erase(line.length()-1,1);
+
+        if (line == "$$DEPTH")
+          {
+            if (quantumDepth == Q8)
+              line="#define MAGICKCORE_QUANTUM_DEPTH 8";
+            else if (quantumDepth == Q16)
+              line="#define MAGICKCORE_QUANTUM_DEPTH 16";
+            else if (quantumDepth == Q32)
+              line="#define MAGICKCORE_QUANTUM_DEPTH 32";
+            else if (quantumDepth == Q64)
+              line="#define MAGICKCORE_QUANTUM_DEPTH 64";
+          }
+        else if (line == "$$HDRI")
+          {
+            if (hdri)
+              line="#define MAGICKCORE_HDRI_ENABLE 1";
+            else
+              line="#define MAGICKCORE_HDRI_ENABLE 0";
+          }
+        else if (line == "$$OPENCL")
+          {
+            if (with_opencl && openCL)
+              line="#define MAGICKCORE__OPENCL\n#define MAGICKCORE_HAVE_CL_CL_H";
+            else
+              line="#undef MAGICKCORE__OPENCL\n#undef MAGICKCORE_HAVE_CL_CL_H";
+          }
+        else if (line == "$$X11")
+          {
+            if (X11Mode == X11_DISABLED)
+              line="#undef MAGICKCORE_X11_DELEGATE";
+            else
+              line="#define MAGICKCORE_X11_DELEGATE";
+          }
+        str += line + "\n";
+      }
+
+      infile.close();
+
+      ofstream outfile(fileName, ofstream::out | ofstream::binary);
+      if (outfile.is_open())
+      {
+        outfile << str;
+        outfile.close();
+      }
+    }
+}
+
 void CConfigureApp::process_utility(
   const char *root, const char *filename, int runtime, int project_type)
 {
@@ -841,7 +902,7 @@ void CConfigureApp::process_utility(
             {
               workspace->write_project_dependency(project,"CORE_MagickCore");
               workspace->write_project_dependency(project,"CORE_MagickWand");
-              if (useX11Stubs)
+              if (X11Mode == X11_STUBS)
                 workspace->write_project_dependency(project,"CORE_xlib");
             }
           if (extn.compare("cpp") == 0)
@@ -1096,7 +1157,7 @@ void CConfigureApp::process_library( const char *root,
       workspace->write_begin_project(project, pname.c_str(), projectname.c_str());
       if (name.compare("MagickCore") == 0)
         {
-          if (useX11Stubs)
+         if (X11Mode == X11_STUBS)
             workspace->write_project_dependency(project,"CORE_xlib");
           workspace->write_project_dependency(project,"CORE_jpeg");
           workspace->write_project_dependency(project,"CORE_zlib");
@@ -1120,7 +1181,7 @@ void CConfigureApp::process_library( const char *root,
           workspace->write_project_dependency(project,"CORE_ttf");
           workspace->write_project_dependency(project,"CORE_tiff");
           workspace->write_project_dependency(project,"CORE_wmf");
-          if (useX11Stubs)
+          if (X11Mode == X11_STUBS)
             workspace->write_project_dependency(project,"CORE_xlib");
           workspace->write_project_dependency(project,"CORE_MagickWand");
           workspace->write_project_dependency(project,"CORE_MagickCore");
@@ -1193,7 +1254,7 @@ void CConfigureApp::process_library( const char *root,
       if (name.compare("MagickWand") == 0)
         {
           workspace->write_project_dependency(project,"CORE_MagickCore");
-          if (useX11Stubs)
+          if (X11Mode == X11_STUBS)
             workspace->write_project_dependency(project,"CORE_xlib");
         }
       if (name.compare("wmf") == 0)
@@ -1482,7 +1543,7 @@ void CConfigureApp::process_module( const char *root,
           }
         if (name.compare("label") == 0)
           {
-            if (useX11Stubs)
+            if (X11Mode == X11_STUBS)
               workspace->write_project_dependency(project,"CORE_xlib");
           }
         if (name.compare("miff") == 0)
@@ -1526,12 +1587,12 @@ void CConfigureApp::process_module( const char *root,
           }
         if (name.compare("x") == 0)
           {
-            if (useX11Stubs)
+            if (X11Mode == X11_STUBS)
               workspace->write_project_dependency(project,"CORE_xlib");
           }
         if (name.compare("xwd") == 0)
           {
-            if (useX11Stubs)
+            if (X11Mode == X11_STUBS)
               workspace->write_project_dependency(project,"CORE_xlib");
           }
         if ((name.compare("svg") == 0)
@@ -1725,6 +1786,14 @@ void CConfigureApp::process_one_folder( const char *root,
           {
             do
               {
+               if (X11Mode == X11_DISABLED)
+                 if (strcmp(subdata.cFileName,"animate.c") == 0)
+                   continue;
+                 else if (strcmp(subdata.cFileName,"display.c") == 0)
+                   continue;
+                 else if (strcmp(subdata.cFileName,"import.c") == 0)
+                   continue;
+
                 process_utility(root, subdata.cFileName, runtimeOption, project_type);
               } while (FindNextFile(subhandle, &subdata));
             FindClose(subhandle);
@@ -1776,6 +1845,9 @@ void CConfigureApp::process_one_folder( const char *root,
     case LIBRARY:
     case STATICLIB:
       {
+        if (strcmp(data.cFileName, "xlib") == 0 && X11Mode != X11_STUBS)
+          return;
+
         BOOL standaloneModeBackup = standaloneMode;
         onebigdllMode = FALSE;
         standaloneMode = FALSE;
@@ -1855,6 +1927,12 @@ void CConfigureApp::process_one_folder( const char *root,
               bFoundSomething = true;
               do
                 {
+                  if (X11Mode == X11_DISABLED)
+                    if (strcmp(subdata.cFileName,"x.c") == 0)
+                      continue;
+                    else if (strcmp(subdata.cFileName,"xwd.c") == 0)
+                      continue;
+
                   BOOL standaloneModeBackup = standaloneMode;
                   if (project_type == MODULE)
                     onebigdllMode = FALSE;
@@ -2077,6 +2155,7 @@ void CConfigureApp::process_project_replacements( const char *root,
                           {
                             SetFileTimeEx(s3);
                           }
+                        replace_keywords(s3);
                       }
                     else if (operation == OP_RENAMEFILES)
                       {
@@ -2973,23 +3052,29 @@ BOOL CConfigureApp::InitInstance()
   process_opencl_path();
 
 #ifndef __NO_MFC__
-  CommandLineInfo info = CommandLineInfo(build64Bit, openCL);
+  CommandLineInfo info = CommandLineInfo(quantumDepth,build64Bit,openCL);
   ParseCommandLine(info);
 
-  wizard.m_Page2.m_useX11Stubs = useX11Stubs;
-  wizard.m_Page2.m_decorateFiles = decorateFiles;
-  wizard.m_Page2.m_optionalFiles = optionalFiles;
-  wizard.m_Page2.m_standalone = standaloneMode;
-  wizard.m_Page2.m_visualStudio7 = visualStudio7;
-  wizard.m_Page2.m_build64Bit = info.build64Bit();
-  wizard.m_Page2.m_openMP = openMP;
-  wizard.m_Page2.m_openCL = info.openCL();
-  wizard.m_Page2.m_projectType = info.projectType();
+  wizard.m_Page2.m_X11Mode=X11Mode;
+  wizard.m_Page2.m_decorateFiles=decorateFiles;
+  wizard.m_Page2.m_optionalFiles=optionalFiles;
+  wizard.m_Page2.m_standalone=standaloneMode;
+  wizard.m_Page2.m_visualStudio7=visualStudio7;
+  wizard.m_Page2.m_build64Bit=info.build64Bit();
+  wizard.m_Page2.m_hdri=hdri;
+  if (with_opencl)
+    {
+      wizard.m_Page2.m_disableOpenCL=FALSE;
+      wizard.m_Page2.m_openCL=info.openCL();
+    }
+  wizard.m_Page2.m_openMP=openMP;
+  wizard.m_Page2.m_projectType=info.projectType();
+  wizard.m_Page2.m_quantumDepth=info.quantumDepth();
 
-  wizard.m_Page3.m_tempRelease = release_loc.c_str();
-  wizard.m_Page3.m_tempDebug = debug_loc.c_str();
-  wizard.m_Page3.m_outputBin = bin_loc.c_str();
-  wizard.m_Page3.m_outputLib = lib_loc.c_str();
+  wizard.m_Page3.m_tempRelease=release_loc.c_str();
+  wizard.m_Page3.m_tempDebug=debug_loc.c_str();
+  wizard.m_Page3.m_outputBin=bin_loc.c_str();
+  wizard.m_Page3.m_outputLib=lib_loc.c_str();
 #endif // __NO_MFC__
 
 #ifdef GEN_FONTMAP_OPTION
@@ -3088,14 +3173,16 @@ BOOL CConfigureApp::InitInstance()
         bContinue = TRUE;
 
 #ifndef __NO_MFC__
-      useX11Stubs = wizard.m_Page2.m_useX11Stubs;
+      X11Mode = wizard.m_Page2.m_X11Mode;
       decorateFiles = wizard.m_Page2.m_decorateFiles;
       optionalFiles = wizard.m_Page2.m_optionalFiles;
       standaloneMode = wizard.m_Page2.m_standalone;
       visualStudio7 = wizard.m_Page2.m_visualStudio7;
       build64Bit = wizard.m_Page2.m_build64Bit;
+      hdri = wizard.m_Page2.m_hdri;
       openMP = wizard.m_Page2.m_openMP;
       openCL = wizard.m_Page2.m_openCL;
+      quantumDepth = wizard.m_Page2.m_quantumDepth;
       //m_bigCoderDLL = wizard.m_Page2.m_bigCoderDLL;
       release_loc = wizard.m_Page3.m_tempRelease;
       debug_loc = wizard.m_Page3.m_tempDebug;
@@ -3154,7 +3241,7 @@ BOOL CConfigureApp::InitInstance()
         {
           // FIXME: Only CORE_MagickCore, UTIL_animate, UTIL_display, &
           // UTIL_import should link with X11
-          if (!useX11Stubs)
+          if (X11Mode == X11_ENABLED)
             {
               lib_shared_list.push_back("X11.lib");
             }
@@ -3306,37 +3393,6 @@ void CConfigureApp::process_opencl_path()
     if (with_opencl) {
 	opencl_include = opencl_include_intel;
 	opencl_libdir = (build64Bit == TRUE) ? opencl_libdir_x64_intel : opencl_libdir_x86_intel;
-    }
-  }
-
-  if (with_opencl)
-  {
-    string chcfg = "\r\n/* Define to use OpenCL */\r\n"
-      /*"#define MAGICKCORE__OPENCL 1\r\n"*/
-#if defined __APPLE__
-      "#define MAGICKCORE_HAVE_OPENCL_CL_H 1\r\n";
-#else
-      "#define MAGICKCORE_HAVE_CL_CL_H 1\r\n";
-#endif
-
-    // enable MAGICKCORE__OPENCL in config file
-    string str, line;
-    const char *cfg_filename             = "..\\MagickCore\\magick-baseconfig.h.in";
-    ifstream infile(cfg_filename, ifstream::in | ifstream::binary);
-    if (infile.is_open())
-    {
-      while (getline(infile, line))
-        str += line + "\n";
-      infile.close();
-      size_t pos = str.find("MAGICKCORE_HAVE_CL_CL_H");
-      if (pos == string::npos)
-        str += chcfg;
-      ofstream outfile(cfg_filename, ofstream::out | ofstream::binary);
-      if (outfile.is_open())
-      {
-        outfile << str;
-        outfile.close();
-      }
     }
   }
 }
@@ -3779,11 +3835,12 @@ ConfigureProject *CConfigureApp::write_project_exe(
 }
 
 #ifndef __NO_MFC__
-CommandLineInfo::CommandLineInfo(BOOL build64Bit, BOOL openCL)
+CommandLineInfo::CommandLineInfo(int quantumDepth,BOOL build64Bit,BOOL openCL)
 {
+  m_quantumDepth = quantumDepth;
   m_build64Bit = build64Bit;
-  m_noWizard = FALSE;
   m_openCL = openCL;
+  m_noWizard = FALSE;
   m_projectType = MULTITHREADEDDLL;
 }
 
@@ -3817,25 +3874,38 @@ int CommandLineInfo::projectType()
   return m_projectType;
 }
 
+int CommandLineInfo::quantumDepth()
+{
+  return m_quantumDepth;
+}
+
 void CommandLineInfo::ParseParam(const char* pszParam, BOOL bFlag, BOOL bLast)
 {
   if (!bFlag)
     return;
 
-  if (strcmpi(pszParam, "x64") == 0)
-    m_build64Bit = TRUE;
-  else if (strcmpi(pszParam, "mtd") == 0)
-    m_projectType = MULTITHREADEDDLL;
+  if (strcmpi(pszParam, "mtd") == 0)
+    m_projectType=MULTITHREADEDDLL;
+  else if (strcmpi(pszParam, "mts") == 0)
+    m_projectType=MULTITHREADEDSTATIC;
+  else if (strcmpi(pszParam, "mtsd") == 0)
+    m_projectType=MULTITHREADEDSTATICDLL;
+  else if (strcmpi(pszParam, "noWizard") == 0)
+    m_noWizard=TRUE;
+  else if (strcmpi(pszParam, "openCL") == 0)
+    m_openCL=TRUE;
+  else if (strcmpi(pszParam, "Q8") == 0)
+    m_quantumDepth=Q8;
+  else if (strcmpi(pszParam, "Q16") == 0)
+    m_quantumDepth=Q16;
+  else if (strcmpi(pszParam, "Q32") == 0)
+    m_quantumDepth=Q32;
+  else if (strcmpi(pszParam, "Q64") == 0)
+    m_quantumDepth=Q64;
   else if (strcmpi(pszParam, "sts") == 0)
     m_projectType = SINGLETHREADEDSTATIC;
-  else if (strcmpi(pszParam, "mts") == 0)
-    m_projectType = MULTITHREADEDSTATIC;
-  else if (strcmpi(pszParam, "mtsd") == 0)
-    m_projectType = MULTITHREADEDSTATICDLL;
-  else if (strcmpi(pszParam, "noWizard") == 0)
-    m_noWizard = TRUE;
-  else if (strcmpi(pszParam, "openCL") == 0)
-    m_openCL = TRUE;
+  else if (strcmpi(pszParam, "x64") == 0)
+    m_build64Bit = TRUE;
 }
 #endif
 
@@ -3854,6 +3924,17 @@ ConfigureProject& ConfigureProject::operator=(const ConfigureProject& obj)
 ConfigureProject::ConfigureProject(const ConfigureProject& obj)
 {
   *this = obj;
+}
+
+bool ConfigureProject::can_write_file(string &filename)
+{
+  if (X11Mode != X11_DISABLED)
+    return true;
+
+  return (filename != "..\\..\\MagickCore\\widget.c" &&
+          filename != "..\\..\\MagickWand\\animate.c" &&
+          filename != "..\\..\\MagickWand\\display.c" &&
+          filename != "..\\..\\MagickWand\\import.c");
 }
 
 int ConfigureProject::get_warning_level(string &outname)
@@ -4456,8 +4537,6 @@ void ConfigureVS6Project::write_cpp_compiler_tool_defines( list<string> &defines
   }
   if (bDynamicMFC&& (type == EXEPROJECT))
     m_stream << "/D \"_AFXDLL\"";
-  if (openCL)
-    m_stream << ";MAGICKCORE__OPENCL";
 }
 
 void ConfigureVS6Project::write_cpp_compiler_tool_end( int type, int mode )
@@ -4558,7 +4637,7 @@ void ConfigureVS6Project::write_link_tool_dependencies( string &root, bool bNeed
             string strDepends;
             LocalFormat(strDepends,"CORE_%sMagickCore%s",strmode,"_.lib");
             m_stream << " " << strDepends.c_str() << "";
-            if (useX11Stubs)
+            if (X11Mode == X11_STUBS)
               {
                 LocalFormat(strDepends,"CORE_%sxlib%s",strmode,"_.lib");
                 m_stream << " " << strDepends.c_str() << "";
@@ -4731,6 +4810,9 @@ void ConfigureVS6Project::write_end_group()
 
 void ConfigureVS6Project::write_file(string &filename)
 {
+  if (!can_write_file(filename))
+    return;
+
   m_stream << "# Begin Source File" << endl;
   m_stream << "SOURCE=" << filename << endl;
   m_stream << "# End Source File" << endl;
@@ -5244,8 +5326,6 @@ void ConfigureVS7Project::write_cpp_compiler_tool_defines( list<string> &defines
   }
   if (bDynamicMFC&& (type == EXEPROJECT))
     m_stream << ";_AFXDLL";
-  if (openCL)
-    m_stream << ";MAGICKCORE__OPENCL";
   m_stream << "\"" << endl;
 }
 
@@ -5364,7 +5444,7 @@ void ConfigureVS7Project::write_link_tool_dependencies( string &root,
               m_stream << " ";
             bFirstTime=false;
             m_stream << strDepends.c_str();
-            if (useX11Stubs)
+            if (X11Mode == X11_STUBS)
               {
                 LocalFormat(strDepends,"CORE_%sxlib%s",strmode,"_.lib");
                 if (!bFirstTime)
@@ -5564,6 +5644,9 @@ void ConfigureVS7Project::write_end_group()
 
 void ConfigureVS7Project::write_file(string &filename)
 {
+  if (!can_write_file(filename))
+    return;
+
   int index = filename.find_last_of("\\");
   string name = filename.substr(index + 1);
   int count = 1;

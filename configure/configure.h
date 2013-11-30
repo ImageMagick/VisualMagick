@@ -42,6 +42,8 @@ enum {DLLPROJECT, LIBPROJECT, EXEPROJECT};
 enum {DISABLED, UTILITY, LIBRARY, STATICLIB, MODULE, ADD_ON, THIRDPARTY, PROJECT};
 enum {CPPCOMPILETOOL, RESCOMPILETOOL, MIDLCOMPILETOOL, LIBRARYTOOL, LINKERTOOL};
 enum {OP_REPLACEFILES, OP_RENAMEFILES};
+enum {X11_DISABLED, X11_STUBS, X11_ENABLED};
+enum {Q8, Q16, Q32, Q64};
 
 class ConfigureProject
 {
@@ -60,6 +62,8 @@ public:
   ConfigureProject(const ConfigureProject& obj);
   // Destructor
   virtual ~ConfigureProject( void );
+
+  bool can_write_file(string &filename);
 
   int get_warning_level(string &outname);
 
@@ -362,15 +366,17 @@ class CommandLineInfo : public CCommandLineInfo
   BOOL m_build64Bit;
   BOOL m_noWizard;
   BOOL m_openCL;
-  int m_projectType;
+  int  m_projectType;
+  int  m_quantumDepth;
 public:
-  CommandLineInfo(BOOL build64Bit, BOOL openCL);
+  CommandLineInfo(int quantumDepth,BOOL build64Bit, BOOL openCL);
   CommandLineInfo(const CommandLineInfo &obj);
   CommandLineInfo& operator=(const CommandLineInfo& obj);
   BOOL build64Bit();
   BOOL noWizard();
   BOOL openCL();
   int projectType();
+  int quantumDepth();
 
   virtual void ParseParam(const char* pszParam, BOOL bFlag, BOOL bLast);
 };
@@ -460,9 +466,9 @@ public:
                                 char *s);
   void generate_a_dependency_type(ConfigureWorkspace *w,ConfigureProject *p,
                                   int t);
-  bool CConfigureApp::process_one_entry(const char *entry, int nLinesRead,
-                                        int runtime);
-  int CConfigureApp::load_environment_file( const char *inputfile, int runtime);
+  bool process_one_entry(const char *entry, int nLinesRead,int runtime);
+  int load_environment_file( const char *inputfile, int runtime);
+  void replace_keywords(std::string fileName);
 };
 
 bool is_project_type(const char *root, const int project_type);

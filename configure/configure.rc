@@ -99,40 +99,45 @@ STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Target Setup"
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
-    GROUPBOX        "Build type setup:",IDC_STATIC,7,7,304,107
+    GROUPBOX        "Build type setup",IDC_STATIC,7,7,304,73
+    LTEXT           "Dynamic (DLL) Builds",IDC_STATIC,13,19,68,8
+    LTEXT           "Static Builds",IDC_STATIC,153,19,40,8
     CONTROL         "Dynamic Multi-threaded DLL runtimes",IDC_PROJECT_TYPE,
                     "Button",BS_AUTORADIOBUTTON | WS_GROUP,15,33,133,10
-    CONTROL         "Static Single-threaded runtimes",IDC_PROJECT_TYPE1,
-                    "Button",BS_AUTORADIOBUTTON,15,64,113,10
-    CONTROL         "Static Multi-threaded runtimes",IDC_PROJECT_TYPE2,
-                    "Button",BS_AUTORADIOBUTTON,15,79,109,10
-    CONTROL         "Use X11 stubs to prevent use of X Window",
-                    IDC_USE_X11_STUBS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    153,33,152,10
-    GROUPBOX        "Build options",IDC_STATIC,7,122,304,77
     CONTROL         "Static Multi-threaded DLL runtimes",IDC_PROJECT_TYPE3,
-                    "Button",BS_AUTORADIOBUTTON,15,95,124,10
-    LTEXT           "Static Builds",IDC_STATIC,13,50,40,8
-    LTEXT           "Dynamic (DLL) Builds",IDC_STATIC,13,19,68,8
+                    "Button",BS_AUTORADIOBUTTON,153,33,124,10
+    CONTROL         "Static Multi-threaded runtimes",IDC_PROJECT_TYPE2,
+                    "Button",BS_AUTORADIOBUTTON,153,48,109,10
+    CONTROL         "Static Single-threaded runtimes",IDC_PROJECT_TYPE1,
+                    "Button",BS_AUTORADIOBUTTON,153,63,113,10
+    GROUPBOX        "Build options",IDC_STATIC,7,90,304,92
+    CONTROL         "Build 64-bit distribution",IDC_BUILD_64_BIT,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,102,
+                    100,10
+    LTEXT           "Quantum depth",IDC_STATIC,205,102,55,8
+    COMBOBOX        IDC_QUANTUM_DEPTH,260,100,47,50,CBS_DROPDOWNLIST |
+                    WS_VSCROLL | WS_TABSTOP
     CONTROL         "Decorate exe files with build options",
                     IDC_DECORATE_FILES,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    15,135,139,10
-    CONTROL         "Build 64-bit distribution",IDC_BUILD_64_BIT,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,195,135,
-                    111,10
+                    15,117,139,10
+    LTEXT           "X11 Support",IDC_STATIC,205,117,55,8
+    COMBOBOX        IDC_X11,260,115,47,40,CBS_DROPDOWNLIST | WS_VSCROLL |
+                    WS_TABSTOP
     CONTROL         "Include all demo, test, appl, and contrib directories",
-                    IDC_INCLUDE_OPTIONAL,"Button",BS_AUTOCHECKBOX | 
-                    WS_TABSTOP,15,151,170,10
+                    IDC_INCLUDE_OPTIONAL,"Button",BS_AUTOCHECKBOX |
+                    WS_TABSTOP,15,132,170,10
     CONTROL         "Enable OpenMP",IDC_OPEN_MP,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,195,151,
+                    BS_AUTOCHECKBOX | WS_TABSTOP,205,132,
                     66,10
     CONTROL         "Generate Visual Studio 7 format",IDC_GENERATE_VS7,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,167,140,10
-    CONTROL         "Enable OpenCL",IDC_OPEN_CL,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,195,167,66,10
-    CONTROL         "Generate all utility projects with full paths rather then relative paths.",
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,147,140,10
+    CONTROL         "Enable OpenCL",IDC_OPEN_CL,"Button",BS_AUTOCHECKBOX |
+                    WS_TABSTOP,205,147,66,10
+    CONTROL         "Generate utility projects with full paths instead of relative",
                     IDC_STANDALONE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,
-                    182,236,10
+                    162,190,10
+    CONTROL         "Enable HDRI",IDC_HDRI,"Button",BS_AUTOCHECKBOX |
+                    WS_TABSTOP,205,162,66,10
     PUSHBUTTON      "Edit ""magick-baseconfig.h""",IDC_EditConfig,109,204,92,14
     CONTROL         "All coders go into one big DLL",IDC_BIGCODERDLL,"Button",
                     BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,186,134,
@@ -277,6 +282,29 @@ BEGIN
     END
 END
 
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_TARGET_PAGE DLGINIT
+BEGIN
+    IDC_QUANTUM_DEPTH, 0x403, 3, 0,
+0x3851, "\000"
+    IDC_QUANTUM_DEPTH, 0x403, 4, 0,
+0x3151, 0x0036,
+    IDC_QUANTUM_DEPTH, 0x403, 4, 0,
+0x3351, 0x0032,
+    IDC_QUANTUM_DEPTH, 0x403, 4, 0,
+0x3651, 0x0034,
+    IDC_X11, 0x403, 9, 0,
+0x6944, 0x6173, 0x6c62, 0x6465, "\000"
+    IDC_X11, 0x403, 10, 0,
+0x7355, 0x2065, 0x7473, 0x6275, 0x0073
+    IDC_X11, 0x403, 8, 0,
+0x6e45, 0x6261, 0x656c, 0x0064
+    0
+END
 
 /////////////////////////////////////////////////////////////////////////////
 //
