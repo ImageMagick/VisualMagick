@@ -81,7 +81,7 @@ BOOL CTargetPage::OnInitDialog()
 
 void CTargetPage::OnEditConfig()
 {
-  CString strConfigFile = "..\\magick\\magick-baseconfig.h.in";
+  CString strConfigFile = "..\\MagickCore\\magick-baseconfig.h.in";
 
   CString strCommandLine;
   strCommandLine.Format("notepad.exe \"%s\"",strConfigFile);
