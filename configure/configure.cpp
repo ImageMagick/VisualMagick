@@ -1115,7 +1115,7 @@ void CConfigureApp::process_library( const char *root,
     {
       lib_release_list.push_back("OpenCL.lib");
       lib_debug_list.push_back("OpenCL.lib");
-      additional_libdir_list.push_back(opencl_libdir);
+      additional_libdir_list.push_back(build64Bit?opencl_libdir_x64:opencl_libdir);
     }
   }
 
@@ -3372,28 +3372,34 @@ void CConfigureApp::process_opencl_path()
   with_opencl = false;
   char* opencl_sdk_path;
   if ((opencl_sdk_path = getenv("AMDAPPSDKROOT")) != NULL)
-  {
-    with_opencl = doesDirExist(string(opencl_sdk_path) + string("\\include"));
-    if (with_opencl) {
-	opencl_include = opencl_include_amd;
-	opencl_libdir = (build64Bit == TRUE) ? opencl_libdir_x64_amd : opencl_libdir_x86_amd;
+    {
+      with_opencl = doesDirExist(string(opencl_sdk_path) + string("\\include"));
+      if (with_opencl)
+        {
+          opencl_include = opencl_include_amd;
+          opencl_libdir = opencl_libdir_x86_amd;
+          opencl_libdir_x64 = opencl_libdir_x64_amd;
+        }
     }
-  }
   if (!with_opencl && (opencl_sdk_path = getenv("CUDA_PATH")) != NULL)
-  {
-    with_opencl = doesDirExist(string(opencl_sdk_path) + string("\\include"));
-    if (with_opencl) {
-	opencl_include = opencl_include_cuda;
-	opencl_libdir = (build64Bit == TRUE) ? opencl_libdir_x64_cuda : opencl_libdir_x86_cuda;
+    {
+      with_opencl = doesDirExist(string(opencl_sdk_path) + string("\\include"));
+      if (with_opencl)
+        {
+          opencl_include = opencl_include_cuda;
+          opencl_libdir = opencl_libdir_x86_cuda;
+          opencl_libdir_x64  = opencl_libdir_x64_cuda;
+        }
     }
-  }
   if (!with_opencl && (opencl_sdk_path = getenv("INTELOCLSDKROOT")) != NULL)
   {
     with_opencl = doesDirExist(string(opencl_sdk_path) + string("\\include"));
-    if (with_opencl) {
-	opencl_include = opencl_include_intel;
-	opencl_libdir = (build64Bit == TRUE) ? opencl_libdir_x64_intel : opencl_libdir_x86_intel;
-    }
+    if (with_opencl)
+      {
+        opencl_include = opencl_include_intel;
+        opencl_libdir = opencl_libdir_x86_intel;
+        opencl_libdir_x64  = opencl_libdir_x64_intel;
+      }
   }
 }
 

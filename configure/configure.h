@@ -425,6 +425,7 @@ public:
   bool         with_opencl;             // whether OpenCL is enabled
   string       opencl_include;          // OpenCL include path
   string       opencl_libdir;           // OpenCL library path
+  string       opencl_libdir_x64;       // OpenCL 64-bit library path
 
   void process_opencl_path();
 
