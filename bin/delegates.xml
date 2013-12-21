@@ -105,7 +105,7 @@
   <delegate decode="shtml" command="html2ps -U -o &quot;%o&quot; &quot;%i&quot;"/>
   <delegate decode="sid" command="mrsidgeodecode -if sid -i &quot;%i&quot; -of tif -o &quot;%o&quot; &gt; &quot;%u&quot;"/>
   <delegate decode="svg" command="&quot;rsvg-convert&quot; -o &quot;%o&quot; &quot;%i&quot;"/>
-  <delegate decode="svg:decode" stealth="True" command="&quot;inkscape&quot; &quot;%s&quot; --export-png=&quot;%s&quot; --export-dpi=&quot;%s&quot; --export-background=&quot;%s&quot; --export-background-opacity=&quot;%s&quot; &gt; &quot;%s&quot; 2&gt;&amp;1"/>
+  <!--<delegate decode="svg:decode" stealth="True" command="&quot;inkscape&quot; &quot;%s&quot; --export-png=&quot;%s&quot; --export-dpi=&quot;%s&quot; --export-background=&quot;%s&quot; --export-background-opacity=&quot;%s&quot; &gt; &quot;%s&quot; 2&gt;&amp;1"/>-->
   <delegate decode="txt" encode="ps" mode="bi" command="enscript -o &quot;%o&quot; &quot;%i&quot;"/>
   <delegate decode="wdp" command="rename &quot;%i&quot; &quot;%i.jxr&quot;; &quot;@JXRDecodeDelegate@&quot; -i &quot;%i.jxr&quot; -o &quot;%o.pnm&quot;; rename &quot;%i.jxr&quot; &quot;%i&quot;; rename &quot;%o.pnm&quot; &quot;%o&quot;"/>
   <delegate decode="wmf" command="emfplus.exe -format png -dpi %x\x%y &quot;%i&quot; &quot;%o&quot;"/>

@@ -50,7 +50,7 @@ $$DEPTH
 //
 #define ProvideDllMain
 
-// Enable high dynamic range imagery (HDRI)
+// Define to enable high dynamic range imagery (HDRI)
 //
 $$HDRI
 
@@ -58,13 +58,13 @@ $$HDRI
 //
 $$OPENCL
 
+// Exclude deprecated methods in MagickCore API
+//
+#define MAGICKCORE_EXCLUDE_DEPRECATED
+
 // Permit enciphering and deciphering image pixels.
 //
 #define MAGICKCORE_CIPHER_SUPPORT
-
-// Exclude deprecated methods in MagickCore API 
-//
-#define MAGICKCORE_EXCLUDE_DEPRECATED
 
 // Define if MIT X11 is available (or stubbed). It is not actually
 // necessary to use X11 or the X11 stubs library. To achieve a slimmer
@@ -110,14 +110,18 @@ $$X11
 // Define to use the PNG library
 #define MAGICKCORE_PNG_DELEGATE
 
+// Define to use the RSVG library
+#define MAGICKCORE_RSVG_DELEGATE
+#define MAGICKCORE_CAIRO_DELEGATE
+
 // Define to use the TIFF library
 #define MAGICKCORE_TIFF_DELEGATE
 
-// Define to use the Windows GDI32 library (for clipboard and emf modules)
-#define MAGICKCORE_WINGDI32_DELEGATE
-
 // Define to use the WebP library
 #define MAGICKCORE_WEBP_DELEGATE
+
+// Define to use the Windows GDI32 library (for clipboard and emf modules)
+#define MAGICKCORE_WINGDI32_DELEGATE
 
 // Define to use the WMF library
 // #undef MAGICKCORE_WMF_DELEGATE

@@ -1171,16 +1171,19 @@ void CConfigureApp::process_library( const char *root,
         }
       if (name.compare("coders") == 0)
         {
-          workspace->write_project_dependency(project,"CORE_zlib");
           workspace->write_project_dependency(project,"CORE_bzlib");
+          workspace->write_project_dependency(project,"CORE_glib");
           workspace->write_project_dependency(project,"CORE_jpeg");
           workspace->write_project_dependency(project,"CORE_jbig");
           workspace->write_project_dependency(project,"CORE_jp2");
           workspace->write_project_dependency(project,"CORE_png");
+          workspace->write_project_dependency(project,"CORE_pango");
           workspace->write_project_dependency(project,"CORE_libxml");
+          workspace->write_project_dependency(project,"CORE_librsvg");
           workspace->write_project_dependency(project,"CORE_ttf");
           workspace->write_project_dependency(project,"CORE_tiff");
           workspace->write_project_dependency(project,"CORE_wmf");
+          workspace->write_project_dependency(project,"CORE_zlib");
           if (X11Mode == X11_STUBS)
             workspace->write_project_dependency(project,"CORE_xlib");
           workspace->write_project_dependency(project,"CORE_MagickWand");
@@ -1211,10 +1214,22 @@ void CConfigureApp::process_library( const char *root,
       if (name.compare("glib") == 0)
         {
           workspace->write_project_dependency(project,"CORE_ffi");
+          workspace->write_project_dependency(project,"CORE_zlib");
         }
       if (name.compare("hdf") == 0)
         {
           workspace->write_project_dependency(project,"CORE_zlib");
+        }
+      if (name.compare("librsvg") == 0)
+        {
+          workspace->write_project_dependency(project,"CORE_croco");
+          workspace->write_project_dependency(project,"CORE_glib");
+          workspace->write_project_dependency(project,"CORE_jpeg");
+          workspace->write_project_dependency(project,"CORE_jp2");
+          workspace->write_project_dependency(project,"CORE_pango");
+          workspace->write_project_dependency(project,"CORE_png");
+          workspace->write_project_dependency(project,"CORE_tiff");
+          workspace->write_project_dependency(project,"CORE_libxml");
         }
       if (name.compare("lqr") == 0)
         {
@@ -1372,17 +1387,23 @@ void CConfigureApp::process_module( const char *root,
       extra = "..\\bzlib";
       add_includes(includes_list, extra, levels-2);
     }
-  if ((name.compare("svg") == 0)
-      || (name.compare("url") == 0)
+  if (name.compare("svg") == 0)
+    {
+      extra = "..\\glib";
+      add_includes(includes_list, extra, levels-2);
+      extra = "..\\cairo";
+      add_includes(includes_list, extra, levels-2);
+      extra = "..\\librsvg";
+      add_includes(includes_list, extra, levels-2);
+      extra = "..\\libxml";
+      add_includes(includes_list, extra, levels-2);
+    }
+  if ((name.compare("url") == 0)
       || (name.compare("msl") == 0)
       )
     {
       extra = "..\\libxml";
       add_includes(includes_list, extra, levels-2);
-#ifdef USETHIS
-      extra = "..\\autotrace";
-      add_includes(includes_list, extra, levels-2);
-#endif
     }
   if (name.compare("hdf") == 0)
     {
@@ -1580,6 +1601,19 @@ void CConfigureApp::process_module( const char *root,
             workspace->write_project_dependency(project,"CORE_tiff");
             workspace->write_project_dependency(project,"CORE_zlib");
           }
+        if (name.compare("svg") == 0)
+          {
+            workspace->write_project_dependency(project,"CORE_glib");
+            workspace->write_project_dependency(project,"CORE_librsvg");
+            workspace->write_project_dependency(project,"CORE_libxml");
+            workspace->write_project_dependency(project,"CORE_pango");
+          }
+        if ((name.compare("url") == 0)
+            || (name.compare("msl") == 0)
+            )
+          {
+            workspace->write_project_dependency(project,"CORE_libxml");
+          }
         if (name.compare("wmf") == 0)
           {
             workspace->write_project_dependency(project,"CORE_ttf");
@@ -1594,17 +1628,6 @@ void CConfigureApp::process_module( const char *root,
           {
             if (X11Mode == X11_STUBS)
               workspace->write_project_dependency(project,"CORE_xlib");
-          }
-        if ((name.compare("svg") == 0)
-            || (name.compare("url") == 0)
-            || (name.compare("msl") == 0)
-            )
-          {
-            workspace->write_project_dependency(project,"CORE_libxml");
-#ifdef USETHIS
-            if (doesDirExist("..\\..\\autotrace"))
-              workspace->write_project_dependency(project,"CORE_autotrace");
-#endif
           }
         if (with_opencl && (name.compare("ojpeg") == 0))
           {
