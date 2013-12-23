@@ -1,7 +1,7 @@
 #include "winver.h"
 
-#define THIS_PROJECT_VERSION_NUM		1,2,0,0
-#define THIS_PROJECT_VERSION_STRING		"1.2.0 (September 1 2001)"
+#define THIS_PROJECT_VERSION_NUM		1,6,8,0
+#define THIS_PROJECT_VERSION_STRING		"1.6.8 (December 19, 2013)"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -32,9 +32,9 @@ BEGIN
             VALUE "InternalName", "ImageMagick Studio\0"
             VALUE "FileVersion", THIS_PROJECT_VERSION_STRING "\0"
             VALUE "ProductVersion", THIS_PROJECT_VERSION_STRING "\0"
-            VALUE "CompanyName", "Glenn Randers-Pehrson - randeg@alum.rpi.edu\0"
-            VALUE "LegalCopyright", "Copyright © 1998-2001 Glenn Randers-Pehrson\0"
-            VALUE "Comments", "http://www.cdrom.com/pub/png\0"
+            VALUE "CompanyName", "Glenn Randers-Pehrson - glennrp@users.sf.net\0"
+            VALUE "LegalCopyright", "Copyright (c) 2000-2002 Glenn Randers-Pehrson\0"
+            VALUE "Comments", "http://www.libpng.org/pub/png/libpng.html\0"
         END
     END
     BLOCK "VarFileInfo"
