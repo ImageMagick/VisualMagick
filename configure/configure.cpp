@@ -1249,6 +1249,10 @@ void CConfigureApp::process_library( const char *root,
         {
           workspace->write_project_dependency(project,"CORE_zlib");
         }
+      if (name.compare("png") == 0)
+        {
+          workspace->write_project_dependency(project,"CORE_zlib");
+        }
       if (name.compare("ps2") == 0)
         {
           workspace->write_project_dependency(project,"CORE_zlib");
@@ -1257,7 +1261,7 @@ void CConfigureApp::process_library( const char *root,
         {
           workspace->write_project_dependency(project,"CORE_zlib");
         }
-      if (name.compare("png") == 0)
+      if (name.compare("psd") == 0)
         {
           workspace->write_project_dependency(project,"CORE_zlib");
         }
@@ -1376,6 +1380,11 @@ void CConfigureApp::process_module( const char *root,
       add_includes(includes_list, extra, levels-2);
     }
   if (name.compare("ps3") == 0)
+    {
+      extra = "..\\zlib";
+      add_includes(includes_list, extra, levels-2);
+    }
+  if (name.compare("psd") == 0)
     {
       extra = "..\\zlib";
       add_includes(includes_list, extra, levels-2);
@@ -1580,11 +1589,11 @@ void CConfigureApp::process_module( const char *root,
           {
             workspace->write_project_dependency(project,"CORE_glib");
           }
-        if (name.compare("png") == 0)
+        if (name.compare("pdf") == 0)
           {
             workspace->write_project_dependency(project,"CORE_zlib");
           }
-        if (name.compare("pdf") == 0)
+        if (name.compare("png") == 0)
           {
             workspace->write_project_dependency(project,"CORE_zlib");
           }
@@ -1599,6 +1608,10 @@ void CConfigureApp::process_module( const char *root,
         if (name.compare("ps3") == 0)
           {
             workspace->write_project_dependency(project,"CORE_tiff");
+            workspace->write_project_dependency(project,"CORE_zlib");
+          }
+        if (name.compare("psd") == 0)
+          {
             workspace->write_project_dependency(project,"CORE_zlib");
           }
         if (name.compare("svg") == 0)
@@ -1735,6 +1748,10 @@ void CConfigureApp::process_3rd_party_library( const char *root,
                     workspace->write_project_dependency(project,"CORE_zlib");
                   }
                 if (name.compare("ps3") == 0)
+                  {
+                    workspace->write_project_dependency(project,"CORE_zlib");
+                  }
+                if (name.compare("psd") == 0)
                   {
                     workspace->write_project_dependency(project,"CORE_zlib");
                   }
