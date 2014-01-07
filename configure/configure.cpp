@@ -1175,11 +1175,11 @@ void CConfigureApp::process_library( const char *root,
           workspace->write_project_dependency(project,"CORE_glib");
           workspace->write_project_dependency(project,"CORE_jpeg");
           workspace->write_project_dependency(project,"CORE_jbig");
-          workspace->write_project_dependency(project,"CORE_jp2");
           workspace->write_project_dependency(project,"CORE_png");
           workspace->write_project_dependency(project,"CORE_pango");
           workspace->write_project_dependency(project,"CORE_libxml");
           workspace->write_project_dependency(project,"CORE_librsvg");
+          workspace->write_project_dependency(project,"CORE_openjpeg");
           workspace->write_project_dependency(project,"CORE_ttf");
           workspace->write_project_dependency(project,"CORE_tiff");
           workspace->write_project_dependency(project,"CORE_wmf");
@@ -1350,6 +1350,11 @@ void CConfigureApp::process_module( const char *root,
   if (name.compare("avi") == 0)
     {
       extra = "..\\jpeg";
+      add_includes(includes_list, extra, levels-2);
+    }
+  if (name.compare("jp2") == 0)
+    {
+      extra = "..\\openjpeg";
       add_includes(includes_list, extra, levels-2);
     }
   if (name.compare("mat") == 0)
@@ -1570,6 +1575,10 @@ void CConfigureApp::process_module( const char *root,
         if (name.compare("avi") == 0)
           {
             workspace->write_project_dependency(project,"CORE_jpeg");
+          }
+        if (name.compare("jp2") == 0)
+          {
+            workspace->write_project_dependency(project,"CORE_openjpeg");
           }
         if (name.compare("label") == 0)
           {
