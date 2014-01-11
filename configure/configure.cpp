@@ -669,7 +669,7 @@ void CConfigureApp::replace_keywords(std::string fileName)
     line,
     str;
 
-  ifstream infile(fileName, ifstream::in | ifstream::binary);
+  ifstream infile(fileName.c_str(), ifstream::in | ifstream::binary);
   if (infile.is_open())
     {
       while (getline(infile,line))
@@ -714,7 +714,7 @@ void CConfigureApp::replace_keywords(std::string fileName)
 
       infile.close();
 
-      ofstream outfile(fileName, ofstream::out | ofstream::binary);
+      ofstream outfile(fileName.c_str(), ofstream::out | ofstream::binary);
       if (outfile.is_open())
       {
         outfile << str;
