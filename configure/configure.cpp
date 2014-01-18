@@ -1108,9 +1108,7 @@ void CConfigureApp::process_library( const char *root,
   // Add OpenCL path
   if (with_opencl && openCL)
   {
-    if (strcmp(filename, "MagickCore") == 0 || strcmp(filename, "ojpeg") == 0 || 
-      strcmp(filename, "Magick++") == 0 || strcmp(filename, "MagickWand") == 0)
-      includes_list.push_back(opencl_include);
+    includes_list.push_back(opencl_include);
     if (strcmp(filename, "MagickCore") == 0 || strcmp(filename, "ojpeg") == 0)
     {
       lib_release_list.push_back("OpenCL.lib");
@@ -3408,50 +3406,43 @@ typedef struct _ConfigureInfo
 
 void CConfigureApp::process_opencl_path()
 {
-  const string opencl_include_amd   = "$(AMDAPPSDKROOT)\\include";
-  const string opencl_include_cuda  = "$(CUDA_PATH)\\include";
-  const string opencl_include_intel = "$(INTELOCLSDKROOT)\\include";
-  const string opencl_libdir_x86_amd   = "$(AMDAPPSDKROOT)\\lib\\x86";
-  const string opencl_libdir_x64_amd   = "$(AMDAPPSDKROOT)\\lib\\x86_64";
-  const string opencl_libdir_x86_cuda  = "$(CUDA_PATH)\\lib\\Win32";
-  const string opencl_libdir_x64_cuda  = "$(CUDA_PATH)\\lib\\x64";
-  const string opencl_libdir_x86_intel = "$(INTELOCLSDKROOT)lib\\x86";
-  const string opencl_libdir_x64_intel = "$(INTELOCLSDKROOT)lib\\x64";
+  string
+    opencl_sdk_path;
 
   with_opencl = false;
-  char* opencl_sdk_path;
-  if ((opencl_sdk_path = getenv("AMDAPPSDKROOT")) != NULL)
+  if (!(opencl_sdk_path = string(getenv("AMDAPPSDKROOT"))).empty())
     {
-      with_opencl = doesDirExist(string(opencl_sdk_path) + string("\\include"));
+      opencl_include = opencl_sdk_path + "\\include";
+      with_opencl = doesDirExist(opencl_include);
       if (with_opencl)
         {
-          opencl_include = opencl_include_amd;
-          opencl_libdir = opencl_libdir_x86_amd;
-          opencl_libdir_x64 = opencl_libdir_x64_amd;
+          opencl_libdir = opencl_sdk_path + "\\lib\\x86";
+          opencl_libdir_x64 = opencl_sdk_path + "\\lib\\x86_64";
+          return;
         }
     }
-  if (!with_opencl && (opencl_sdk_path = getenv("CUDA_PATH")) != NULL)
+  if (!(opencl_sdk_path = string(getenv("CUDA_PATH"))).empty())
     {
-      with_opencl = doesDirExist(string(opencl_sdk_path) + string("\\include"));
+      opencl_include = opencl_sdk_path + "\\include";
+      with_opencl = doesDirExist(opencl_include);
       if (with_opencl)
         {
-          opencl_include = opencl_include_cuda;
-          opencl_libdir = opencl_libdir_x86_cuda;
-          opencl_libdir_x64  = opencl_libdir_x64_cuda;
+          opencl_libdir = opencl_sdk_path + "\\lib\\Win32";
+          opencl_libdir_x64 = opencl_sdk_path + "\\lib\\x64";
+          return;
         }
     }
-  if (!with_opencl && (opencl_sdk_path = getenv("INTELOCLSDKROOT")) != NULL)
-  {
-    with_opencl = doesDirExist(string(opencl_sdk_path) + string("\\include"));
-    if (with_opencl)
-      {
-        opencl_include = opencl_include_intel;
-        opencl_libdir = opencl_libdir_x86_intel;
-        opencl_libdir_x64  = opencl_libdir_x64_intel;
-      }
-  }
+  if (!(opencl_sdk_path = string(getenv("INTELOCLSDKROOT"))).empty())
+    {
+      opencl_include = opencl_sdk_path + "\\include";
+      with_opencl = doesDirExist(opencl_include);
+      if (with_opencl)
+        {
+          opencl_libdir = opencl_sdk_path + "\\lib\\x86";
+          opencl_libdir_x64 = opencl_sdk_path + "\\lib\\x64";
+        }
+    }
 }
-
 ConfigureProject *CConfigureApp::write_project_lib( bool dll,
                                                     int runtime,
                                                     int project_type,
@@ -5421,17 +5412,23 @@ void ConfigureVS7Project::write_link_tool_begin( const char *input_path,
     case EXEPROJECT:
       {
         m_stream << "        Name=\"VCLinkerTool\"" << endl;
-        m_stream << "        AdditionalLibraryDirectories=\"";
-        for (list<string>::iterator it = additional_libdir_list.begin(); 
-             it != additional_libdir_list.end(); it++)
-          m_stream << *it << ";";
-        m_stream << input_path << "\"" << endl;
         break;
       }
     case LIBPROJECT:
-      m_stream << "        Name=\"VCLibrarianTool\"" << endl;
-      break;
+      {
+        m_stream << "        Name=\"VCLibrarianTool\"" << endl;
+        break;
+      }
     }
+
+  if (additional_libdir_list.empty())
+    return;
+
+  m_stream << "        AdditionalLibraryDirectories=\"";
+  for (list<string>::iterator it = additional_libdir_list.begin(); 
+       it != additional_libdir_list.end(); it++)
+    m_stream << *it << ";";
+  m_stream << input_path << "\"" << endl;
 }
 
 void ConfigureVS7Project::write_link_tool_dependencies( string &root,
