@@ -3406,43 +3406,44 @@ typedef struct _ConfigureInfo
 
 void CConfigureApp::process_opencl_path()
 {
-  string
-    opencl_sdk_path;
+  char
+    *opencl_sdk_path;
 
   with_opencl = false;
-  if (!(opencl_sdk_path = string(getenv("AMDAPPSDKROOT"))).empty())
+  if ((opencl_sdk_path = getenv("AMDAPPSDKROOT")) != NULL)
     {
-      opencl_include = opencl_sdk_path + "\\include";
+      opencl_include = string(opencl_sdk_path) + "\\include";
       with_opencl = doesDirExist(opencl_include);
       if (with_opencl)
         {
-          opencl_libdir = opencl_sdk_path + "\\lib\\x86";
-          opencl_libdir_x64 = opencl_sdk_path + "\\lib\\x86_64";
+          opencl_libdir = string(opencl_sdk_path) + "\\lib\\x86";
+          opencl_libdir_x64 = string(opencl_sdk_path) + "\\lib\\x86_64";
           return;
         }
     }
-  if (!(opencl_sdk_path = string(getenv("CUDA_PATH"))).empty())
+  if ((opencl_sdk_path = getenv("CUDA_PATH")) != NULL)
     {
-      opencl_include = opencl_sdk_path + "\\include";
+      opencl_include = string(opencl_sdk_path) + "\\include";
       with_opencl = doesDirExist(opencl_include);
       if (with_opencl)
         {
-          opencl_libdir = opencl_sdk_path + "\\lib\\Win32";
-          opencl_libdir_x64 = opencl_sdk_path + "\\lib\\x64";
+          opencl_libdir = string(opencl_sdk_path) + "\\lib\\Win32";
+          opencl_libdir_x64 = string(opencl_sdk_path) + "\\lib\\x64";
           return;
         }
     }
-  if (!(opencl_sdk_path = string(getenv("INTELOCLSDKROOT"))).empty())
+  if ((opencl_sdk_path = getenv("INTELOCLSDKROOT")) != NULL)
     {
-      opencl_include = opencl_sdk_path + "\\include";
+      opencl_include = string(opencl_sdk_path) + "\\include";
       with_opencl = doesDirExist(opencl_include);
       if (with_opencl)
         {
-          opencl_libdir = opencl_sdk_path + "\\lib\\x86";
-          opencl_libdir_x64 = opencl_sdk_path + "\\lib\\x64";
+          opencl_libdir = string(opencl_sdk_path) + "\\lib\\x86";
+          opencl_libdir_x64 = string(opencl_sdk_path) + "\\lib\\x64";
         }
     }
 }
+
 ConfigureProject *CConfigureApp::write_project_lib( bool dll,
                                                     int runtime,
                                                     int project_type,
