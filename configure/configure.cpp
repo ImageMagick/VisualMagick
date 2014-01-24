@@ -5422,9 +5422,6 @@ void ConfigureVS7Project::write_link_tool_begin( const char *input_path,
       }
     }
 
-  if (additional_libdir_list.empty())
-    return;
-
   m_stream << "        AdditionalLibraryDirectories=\"";
   for (list<string>::iterator it = additional_libdir_list.begin(); 
        it != additional_libdir_list.end(); it++)
