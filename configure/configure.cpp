@@ -3503,7 +3503,7 @@ ConfigureProject *CConfigureApp::write_project_lib( bool dll,
   project->write_configuration(libname.c_str(), (build64Bit ? "x64 Release" : "Win32 Release"), 0);
 
   project->write_properties(libname.c_str(),
-                            get_full_path(root + "\\",lib_path).c_str(), // output
+                            get_full_path(root + "\\",dll?bin_path:lib_path).c_str(), // output
                             get_full_path(root + "\\",release_path).c_str(), // intermediate
                             "", // target
                             dll?DLLPROJECT:LIBPROJECT, 0);
