@@ -28,8 +28,6 @@
 #include <list>
 #include <map>
 
-#define _CRT_SECURE_NO_WARNINGS
-
 using namespace std;
 
 /////////////////////////////////////////////////////////////////////////////
@@ -271,7 +269,7 @@ class ConfigureVS7Project : public ConfigureProject
 public:
   ConfigureVS7Project() {};
   ~ConfigureVS7Project( void );
-  map<string,int> m_fileNames;
+  map<string, int> m_fileNames;
 
   void write_begin_group(const char *name);
   void write_end_group(void);
@@ -364,16 +362,18 @@ public:
 class CommandLineInfo : public CCommandLineInfo
 {
   BOOL m_build64Bit;
-  BOOL m_noWizard;
+  BOOL m_hdri;
   BOOL m_openCL;
+  BOOL m_noWizard;
   int  m_projectType;
   int  m_quantumDepth;
 public:
-  CommandLineInfo(int quantumDepth,BOOL build64Bit, BOOL openCL);
-  CommandLineInfo(const CommandLineInfo &obj);
-  CommandLineInfo& operator=(const CommandLineInfo& obj);
+  CommandLineInfo(int quantumDepth,BOOL build64Bit,BOOL hdri,BOOL openCL);
+  CommandLineInfo(const CommandLineInfo& obj);
+  CommandLineInfo& operator =(const CommandLineInfo& obj);
   BOOL build64Bit();
   BOOL noWizard();
+  BOOL hdri();
   BOOL openCL();
   int projectType();
   int quantumDepth();
@@ -424,8 +424,6 @@ public:
   list<string> filter_opencl_list;      // OpenCL filter files
   bool         with_opencl;             // whether OpenCL is enabled
   string       opencl_include;          // OpenCL include path
-  string       opencl_libdir;           // OpenCL library path
-  string       opencl_libdir_x64;       // OpenCL 64-bit library path
 
   void process_opencl_path();
 
