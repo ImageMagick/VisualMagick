@@ -368,7 +368,7 @@ class CommandLineInfo : public CCommandLineInfo
   int  m_projectType;
   int  m_quantumDepth;
 public:
-  CommandLineInfo(int quantumDepth,BOOL build64Bit,BOOL hdri,BOOL openCL);
+  CommandLineInfo(int quantumDepth,BOOL build64Bit,BOOL openCL);
   CommandLineInfo(const CommandLineInfo& obj);
   CommandLineInfo& operator =(const CommandLineInfo& obj);
   BOOL build64Bit();
