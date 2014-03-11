@@ -67,6 +67,7 @@ EXCLUDE = afblue.c
 EXCLUDE = afblue.h
 EXCLUDE = afcjk.c
 EXCLUDE = afcjk.h
+EXCLUDE = afcover.h
 EXCLUDE = afdummy.c
 EXCLUDE = afdummy.h
 EXCLUDE = aferrors.h
@@ -86,11 +87,16 @@ EXCLUDE = afmodule.c
 EXCLUDE = afmodule.h
 EXCLUDE = afpic.c
 EXCLUDE = afpic.h
+EXCLUDE = afranges.c
+EXCLUDE = afranges.h
 EXCLUDE = afscript.h
+EXCLUDE = afstyles.h
 EXCLUDE = aftypes.h
 EXCLUDE = afwarp.c
 EXCLUDE = afwarp.h
 EXCLUDE = afwrtsys.h
+EXCLUDE = hbshim.c
+EXCLUDE = hbshim.h
 
 # src/base
 EXCLUDE = basepic.c
