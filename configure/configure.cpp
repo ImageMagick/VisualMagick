@@ -3098,7 +3098,7 @@ BOOL CConfigureApp::InitInstance()
   process_opencl_path();
 
 #ifndef __NO_MFC__
-  CommandLineInfo info = CommandLineInfo(quantumDepth,build64Bit,openCL);
+  CommandLineInfo info = CommandLineInfo(quantumDepth,build64Bit,hdri,openCL);
   ParseCommandLine(info);
 
   wizard.m_Page2.m_X11Mode=X11Mode;
@@ -3107,7 +3107,7 @@ BOOL CConfigureApp::InitInstance()
   wizard.m_Page2.m_standalone=standaloneMode;
   wizard.m_Page2.m_visualStudio7=visualStudio7;
   wizard.m_Page2.m_build64Bit=info.build64Bit();
-  wizard.m_Page2.m_hdri=hdri;
+  wizard.m_Page2.m_hdri=info.hdri();
   if (with_opencl)
     {
       wizard.m_Page2.m_disableOpenCL=FALSE;
@@ -3868,10 +3868,11 @@ ConfigureProject *CConfigureApp::write_project_exe(
 }
 
 #ifndef __NO_MFC__
-CommandLineInfo::CommandLineInfo(int quantumDepth,BOOL build64Bit,BOOL openCL)
+CommandLineInfo::CommandLineInfo(int quantumDepth,BOOL build64Bit,BOOL hdri,BOOL openCL)
 {
   m_quantumDepth = quantumDepth;
   m_build64Bit = build64Bit;
+  m_hdri = hdri;
   m_openCL = openCL;
   m_noWizard = FALSE;
   m_projectType = MULTITHREADEDDLL;
@@ -3890,6 +3891,11 @@ CommandLineInfo& CommandLineInfo::operator=(const CommandLineInfo& obj)
 BOOL CommandLineInfo::build64Bit()
 {
   return m_build64Bit;
+}
+
+BOOL CommandLineInfo::hdri()
+{
+  return m_hdri;
 }
 
 BOOL CommandLineInfo::noWizard()
@@ -3923,6 +3929,8 @@ void CommandLineInfo::ParseParam(const char* pszParam, BOOL bFlag, BOOL bLast)
     m_projectType=MULTITHREADEDSTATIC;
   else if (strcmpi(pszParam, "mtsd") == 0)
     m_projectType=MULTITHREADEDSTATICDLL;
+  else if (strcmpi(pszParam, "noHdri") == 0)
+    m_hdri=FALSE;
   else if (strcmpi(pszParam, "noWizard") == 0)
     m_noWizard=TRUE;
   else if (strcmpi(pszParam, "openCL") == 0)
