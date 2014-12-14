@@ -1,5 +1,6 @@
 #ECF - this file contains additional configuration info.
 INCLUDE = ..\..\cairo\src
+INCLUDE = ..\..\exr\openexr\IlmImf
 INCLUDE = ..\..\fpx
 INCLUDE = ..\..\fpx\basics
 INCLUDE = ..\..\fpx\fpx
