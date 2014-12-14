@@ -6,6 +6,11 @@ FOR /F "tokens=3" %%A IN ('REG QUERY "HKLM\SOFTWARE\Microsoft\PowerShell\1" /v I
 
 IF NOT "%PowerShellInstalled%"=="0x1" GOTO NOT_INSTALLED
 
+RMDIR /s /q Backup
+DEL UpgradeLog.htm
+
+:NO_BACKUP
+
 powershell -ExecutionPolicy Unrestricted .\build\FixVS2010.ps1
 
 GOTO DONE
