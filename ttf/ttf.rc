@@ -1,7 +1,7 @@
 #include "winver.h"
 
-#define THIS_PROJECT_VERSION_NUM		2,0,6,0
-#define THIS_PROJECT_VERSION_STRING		"2.0.6 (1 Jan 2002)"
+#define THIS_PROJECT_VERSION_NUM		2,5,4,0
+#define THIS_PROJECT_VERSION_STRING		"2.5.4 (6 Dec 2014)"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -33,7 +33,7 @@ BEGIN
             VALUE "FileVersion", THIS_PROJECT_VERSION_STRING "\0"
             VALUE "ProductVersion", THIS_PROJECT_VERSION_STRING "\0"
             VALUE "CompanyName", "David Turner, Robert Wilhelm, & Werner Lemberg\0"
-            VALUE "LegalCopyright", "Copyright © 1996-2002 David Turner, Robert Wilhelm, & Werner Lemberg\0"
+            VALUE "LegalCopyright", "Copyright © 2006-2014 David Turner, Robert Wilhelm, & Werner Lemberg\0"
             VALUE "Comments", "http://www.freetype.org\0"
         END
     END
