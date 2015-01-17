@@ -50,7 +50,6 @@ BEGIN
     "LANGUAGE 9, 1\r\n"
     "#pragma code_page(1252)\r\n"
     "#endif //_WIN32\r\n"
-    "#include ""res\\Configure.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
     "#include ""afxres.rc""         // Standard components\r\n"
     "#endif\r\n"
     "\0"
@@ -78,7 +77,7 @@ LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
 
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
-IDR_MAINFRAME           ICON                    "res\\Configure.ico"
+IDR_MAINFRAME           ICON                    "Resources\\Configure.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -102,46 +101,33 @@ BEGIN
     GROUPBOX        "Build type setup",IDC_STATIC,7,7,304,73
     LTEXT           "Dynamic (DLL) Builds",IDC_STATIC,13,19,68,8
     LTEXT           "Static Builds",IDC_STATIC,153,19,40,8
-    CONTROL         "Dynamic Multi-threaded DLL runtimes",IDC_PROJECT_TYPE,
+    CONTROL         "Dynamic Multi-threaded DLL runtimes",IDC_PROJECT_DYNAMIC_MT,
                     "Button",BS_AUTORADIOBUTTON | WS_GROUP,15,33,133,10
-    CONTROL         "Static Multi-threaded DLL runtimes",IDC_PROJECT_TYPE3,
+    CONTROL         "Static Multi-threaded DLL runtimes",IDC_PROJECT_STATIC_MT_DLL,
                     "Button",BS_AUTORADIOBUTTON,153,33,124,10
-    CONTROL         "Static Multi-threaded runtimes",IDC_PROJECT_TYPE2,
+    CONTROL         "Static Multi-threaded runtimes",IDC_PROJECT_STATIC_MT,
                     "Button",BS_AUTORADIOBUTTON,153,48,109,10
-    CONTROL         "Static Single-threaded runtimes",IDC_PROJECT_TYPE1,
-                    "Button",BS_AUTORADIOBUTTON,153,63,113,10
-    GROUPBOX        "Build options",IDC_STATIC,7,90,304,92
+    GROUPBOX        "Build options",IDC_STATIC,7,90,304,100
     CONTROL         "Build 64-bit distribution",IDC_BUILD_64_BIT,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,15,102,
-                    100,10
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,102,100,10
     LTEXT           "Quantum depth",IDC_STATIC,205,102,55,8
     COMBOBOX        IDC_QUANTUM_DEPTH,260,100,47,50,CBS_DROPDOWNLIST |
                     WS_VSCROLL | WS_TABSTOP
-    CONTROL         "Decorate exe files with build options",
-                    IDC_DECORATE_FILES,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    15,117,139,10
-    LTEXT           "X11 Support",IDC_STATIC,205,117,55,8
-    COMBOBOX        IDC_X11,260,115,47,40,CBS_DROPDOWNLIST | WS_VSCROLL |
+    CONTROL         "Enable HDRI",IDC_HDRI,"Button",BS_AUTOCHECKBOX |
+                    WS_TABSTOP,15,115,66,10
+    LTEXT           "Visual Studio Version",IDC_STATIC,188,117,70,8
+    COMBOBOX        IDC_VISUALSTUDIO,260,115,47,40,CBS_DROPDOWNLIST | WS_VSCROLL |
                     WS_TABSTOP
+    CONTROL         "Enable OpenMP",IDC_OPEN_MP,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,130,66,10
+    CONTROL         "Enable OpenCL",IDC_OPEN_CL,"Button",BS_AUTOCHECKBOX |
+                    WS_TABSTOP,15,145,66,10
     CONTROL         "Include all demo, test, appl, and contrib directories",
                     IDC_INCLUDE_OPTIONAL,"Button",BS_AUTOCHECKBOX |
-                    WS_TABSTOP,15,132,170,10
-    CONTROL         "Enable OpenMP",IDC_OPEN_MP,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,205,132,
-                    66,10
-    CONTROL         "Generate Visual Studio 7 format",IDC_GENERATE_VS7,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,147,140,10
-    CONTROL         "Enable OpenCL",IDC_OPEN_CL,"Button",BS_AUTOCHECKBOX |
-                    WS_TABSTOP,205,147,66,10
-    CONTROL         "Generate utility projects with full paths instead of relative",
-                    IDC_STANDALONE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,15,
-                    162,190,10
-    CONTROL         "Enable HDRI",IDC_HDRI,"Button",BS_AUTOCHECKBOX |
-                    WS_TABSTOP,205,162,66,10
-    PUSHBUTTON      "Edit ""magick-baseconfig.h""",IDC_EditConfig,109,204,92,14
-    CONTROL         "All coders go into one big DLL",IDC_BIGCODERDLL,"Button",
-                    BS_AUTOCHECKBOX | NOT WS_VISIBLE | WS_TABSTOP,186,134,
-                    131,10
+                    WS_TABSTOP,15,160,170,10
+    CONTROL         "Build projects that are not compatible with the Apache 2.0 license",
+                    IDC_INCLUDE_INCOMPATIBLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    15,175,217,10
 END
 
 IDD_SYSTEM_PAGE DIALOG  0, 0, 318, 233
@@ -153,23 +139,21 @@ BEGIN
                     97
     LTEXT           "Please specify the location in your file system were you would like to place intermediate files that are generated during the build process. This include such things as object code, etc.",
                     IDC_STATIC,14,19,290,19
-    LTEXT           "Intermediate files Release directory:",IDC_STATIC,14,47,
-                    147,9
-    EDITTEXT        IDC_TEMP_RELEASE,13,58,259,12,ES_AUTOHSCROLL
-    PUSHBUTTON      "Browse",IDC_TEMP_RELEASE_BROWSE,275,58,30,13
-    LTEXT           "Intermediate files Debug directory:",IDC_STATIC,13,74,
-                    147,9
-    EDITTEXT        IDC_TEMP_DEBUG,13,85,259,12,ES_AUTOHSCROLL
-    PUSHBUTTON      "Browse",IDC_TEMP_DEBUG_BROWSE,275,85,30,13
+    LTEXT           "Intermediate files Release directory:",IDC_STATIC,14,47, 147,9
+    EDITTEXT        IDC_INTERMEDIATE_RELEASE,13,58,259,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_INTERMEDIATE_RELEASE_BROWSE,275,58,30,13
+    LTEXT           "Intermediate files Debug directory:",IDC_STATIC,13,74, 147,9
+    EDITTEXT        IDC_INTERMEDIATE_DEBUG,13,85,259,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_INTERMEDIATE_DEBUG_BROWSE,275,85,30,13
     GROUPBOX        "Output files directory setup:",IDC_STATIC,7,113,304,89
     LTEXT           "Please specify were the executables, libraries, and DLL's should be placed:",
                     IDC_STATIC,13,127,291,11
     LTEXT           "Exe and DLL directory:",IDC_STATIC,13,144,147,9
-    EDITTEXT        IDC_OUTPUT_BIN,13,155,259,12,ES_AUTOHSCROLL
-    PUSHBUTTON      "Browse",IDC_OUTPUT_BIN_BROWSE,275,155,30,13
+    EDITTEXT        IDC_BIN_DIR,13,155,259,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_BIN_DIR_BROWSE,275,155,30,13
     LTEXT           "Library directory:",IDC_STATIC,13,171,147,9
-    EDITTEXT        IDC_OUTPUT_LIB,13,183,259,12,ES_AUTOHSCROLL
-    PUSHBUTTON      "Browse",IDC_OUTPUT_LIB_BROWSE,275,183,30,13
+    EDITTEXT        IDC_LIB_DIR,13,183,259,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_LIB_DIR_BROWSE,275,183,30,13
 END
 
 IDD_FINISHED_PAGE DIALOG  0, 0, 318, 233
@@ -178,7 +162,6 @@ CAPTION "VisualMagick configuration finished."
 FONT 8, "MS Sans Serif"
 BEGIN
     LTEXT           "some finish text...",IDC_FINISHED_TEXT,7,7,304,192
-    PUSHBUTTON      "Build It!",IDC_BuildIt,135,212,50,14,NOT WS_VISIBLE
 END
 
 IDD_WAITDIALOG DIALOG  0, 0, 228, 82
@@ -189,7 +172,6 @@ BEGIN
     CTEXT           "",IDC_MSGCTRL,8,5,214,32,SS_NOPREFIX
     CONTROL         "",IDC_PROGRESSCTRL,"msctls_progress32",WS_BORDER,7,41,
                     214,16
-    PUSHBUTTON      "Cancel",IDCANCEL,89,65,50,14
 END
 
 
@@ -241,7 +223,7 @@ END
 // Bitmap
 //
 
-IDB_LOGO1               BITMAP                  "res\\magick.bmp"
+IDB_LOGO1         BITMAP                  "Resources\\Magick.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -265,15 +247,15 @@ BEGIN
     BEGIN
         BLOCK "040904b0"
         BEGIN
-            VALUE "Comments", "This program is part of the ImageMagick imaging tookit."
-            VALUE "CompanyName", "ImageMagick Studio LLC"
-            VALUE "FileDescription", "ImageMagick Win32 Configure Application"
-            VALUE "FileVersion", "1, 0, 0, 2"
-            VALUE "InternalName", "Configure"
-            VALUE "LegalCopyright", "This program is LGPL"
-            VALUE "OriginalFilename", "Configure.EXE"
-            VALUE "ProductName", "Win32 Configure Application"
-            VALUE "ProductVersion", "1, 0, 0, 2"
+            VALUE "ProductName", "ImageMagick\0"
+            VALUE "FileDescription", "ImageMagick Studio library and utility programs\0"
+            VALUE "OriginalFilename", "ImageMagick\0"
+            VALUE "InternalName", "ImageMagick\0"
+            VALUE "FileVersion", "7, 0, 0, 0\0"
+            VALUE "ProductVersion", "7, 0, 0, 0\0"
+            VALUE "CompanyName", "ImageMagick Studio\0"
+            VALUE "LegalCopyright", "Copyright 2014-2015 ImageMagick Studio LLC\0"
+            VALUE "Comments", "Win32 Configure Application\0"
         END
     END
     BLOCK "VarFileInfo"
@@ -289,20 +271,20 @@ END
 
 IDD_TARGET_PAGE DLGINIT
 BEGIN
-    IDC_QUANTUM_DEPTH, 0x403, 3, 0,
-0x3851, "\000"
+    IDC_QUANTUM_DEPTH, 0x403, 4, 0,
+0x3851, 0x00,
     IDC_QUANTUM_DEPTH, 0x403, 4, 0,
 0x3151, 0x0036,
     IDC_QUANTUM_DEPTH, 0x403, 4, 0,
 0x3351, 0x0032,
     IDC_QUANTUM_DEPTH, 0x403, 4, 0,
 0x3651, 0x0034,
-    IDC_X11, 0x403, 9, 0,
-0x6944, 0x6173, 0x6c62, 0x6465, "\000"
-    IDC_X11, 0x403, 10, 0,
-0x7355, 0x2065, 0x7473, 0x6275, 0x0073
-    IDC_X11, 0x403, 8, 0,
-0x6e45, 0x6261, 0x656c, 0x0064
+    IDC_VISUALSTUDIO, 0x403, 6, 0,
+0x3032, 0x3230, 0x00,
+    IDC_VISUALSTUDIO, 0x403, 6, 0,
+0x3032, 0x3031, 0x00,
+    IDC_VISUALSTUDIO, 0x403, 6, 0,
+0x3032, 0x3231, 0x00,
     0
 END
 
@@ -336,7 +318,6 @@ END
 LANGUAGE 9, 1
 #pragma code_page(1252)
 #endif //_WIN32
-#include "res\Configure.rc2"  // non-Microsoft Visual C++ edited resources
 #include "afxres.rc"         // Standard components
 #endif
 

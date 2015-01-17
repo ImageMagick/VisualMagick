@@ -2,51 +2,40 @@
 // Microsoft Visual C++ generated include file.
 // Used by configure.rc
 //
-#define IDD_CONFIGURE_DIALOG            102
-#define IDS_PROPSHT_CAPTION             103
+#define IDS_PROPSHT_CAPTION             101
+#define IDR_MAINFRAME                   102
+
 #define IDD_WELCOME_PAGE                104
-#define IDR_MAINFRAME                   128
-#define IDD_TARGET_PAGE                 129
-#define IDD_SYSTEM_PAGE                 130
-#define IDD_FINISHED_PAGE               131
+#define IDD_TARGET_PAGE                 105
+#define IDD_SYSTEM_PAGE                 106
+#define IDD_FINISHED_PAGE               107
+
 #define IDB_LOGO1                       132
+
 #define IDC_WELCOME_TEXT                1000
-#define IDC_USE_OPENGL                  1003
-#define IDC_USE_NETWORK                 1004
-#define IDC_DISPTARGET                  1005
-#define IDC_DISPTARGET1                 1006
-#define IDC_USE_SOUND                   1007
-#define IDC_TEMP_RELEASE                1008
-#define IDC_TEMP_RELEASE_BROWSE         1009
-#define IDC_TEMP_DEBUG                  1010
-#define IDC_TEMP_DEBUG_BROWSE           1011
-#define IDC_SETUP_SEARCH_PATH           1012
-#define IDC_FINISHED_TEXT               1013
-#define IDC_OUTPUT_BIN                  1014
-#define IDC_OUTPUT_BIN_BROWSE           1015
-#define IDC_OUTPUT_LIB                  1016
-#define IDC_OUTPUT_LIB_BROWSE           1017
-#define IDC_EDIT_TEST_BOX               1018
-#define IDC_PROJECT_TYPE                1019
-#define IDC_PROJECT_TYPE1               1020
-#define IDC_PROJECT_TYPE2               1021
-#define IDC_PROJECT_TYPE3               1022
-#define IDC_BuildIt                     1023
-#define IDC_DECORATE_FILES              1024
-#define IDC_INCLUDE_OPTIONAL            1025
-#define IDC_STANDALONE                  1026
-#define IDC_EditConfig                  1027
-#define IDC_GENERATE_VS7                1028
-#define IDC_BUILD_64_BIT                1029
-#define IDC_BIGCODERDLL                 1030
-#define IDC_OPEN_MP                     1031
-#define IDC_OPEN_CL                     1032
-#define IDC_QUANTUM_DEPTH               1033
-#define IDC_HDRI                        1034
-#define IDC_X11                         1035
-#define IDD_WAITDIALOG                  23040
-#define IDC_MSGCTRL                     23041
-#define IDC_PROGRESSCTRL                23042
+#define IDC_PROJECT_DYNAMIC_MT          1001
+#define IDC_PROJECT_STATIC_MT_DLL       1002
+#define IDC_PROJECT_STATIC_MT           1003
+#define IDC_BUILD_64_BIT                1005
+#define IDC_QUANTUM_DEPTH               1006
+#define IDC_HDRI                        1007
+#define IDC_VISUALSTUDIO                1008
+#define IDC_OPEN_MP                     1009
+#define IDC_OPEN_CL                     1010
+#define IDC_INCLUDE_OPTIONAL            1011
+#define IDC_INCLUDE_INCOMPATIBLE        1012
+#define IDC_INTERMEDIATE_DEBUG          1013
+#define IDC_INTERMEDIATE_DEBUG_BROWSE   1014
+#define IDC_INTERMEDIATE_RELEASE        1015
+#define IDC_INTERMEDIATE_RELEASE_BROWSE 1016
+#define IDC_BIN_DIR                     1017
+#define IDC_BIN_DIR_BROWSE              1018
+#define IDC_LIB_DIR                     1019
+#define IDC_LIB_DIR_BROWSE              1020
+#define IDC_FINISHED_TEXT               1021
+#define IDD_WAITDIALOG                  1022
+#define IDC_MSGCTRL                     1023
+#define IDC_PROGRESSCTRL                1024
 
 // Next default values for new objects
 // 

@@ -3,25 +3,28 @@
 //      are changed infrequently
 //
 
-#if !defined(AFX_STDAFX_H__38147988_A99A_11D3_8F4C_002018383984__INCLUDED_)
-#define AFX_STDAFX_H__38147988_A99A_11D3_8F4C_002018383984__INCLUDED_
+#ifndef __STDAFX__
+#define __STDAFX__
 
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
 
-#define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers
+#define VC_EXTRALEAN // Exclude rarely-used stuff from Windows headers
 
-#include <afxwin.h>         // MFC core and standard components
-#include <afxext.h>         // MFC extensions
-#include <afxdtctl.h>		// MFC support for Internet Explorer 4 Common Controls
+#include <afxwin.h>   // MFC core and standard components
+#include <afxext.h>   // MFC extensions
+#include <afxdtctl.h> // MFC support for Internet Explorer 4 Common Controls
 #ifndef _AFX_NO_AFXCMN_SUPPORT
-#include <afxcmn.h>			// MFC support for Windows Common Controls
+#include <afxcmn.h>   // MFC support for Windows Common Controls
 #endif // _AFX_NO_AFXCMN_SUPPORT
 
-#pragma warning(disable : 4786)
+#include "resource.h" // main symbols
 
-//{{AFX_INSERT_LOCATION}}
-// Microsoft Visual C++ will insert additional declarations immediately before the previous line.
+#include <string>
+#include <vector>
+#include <fstream>
+using namespace std;
 
-#endif // !defined(AFX_STDAFX_H__38147988_A99A_11D3_8F4C_002018383984__INCLUDED_)
+//#pragma warning(disable : 4786)
+#endif // __STDAFX__
