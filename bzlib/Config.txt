@@ -1,0 +1,23 @@
+[DLL]
+
+[DEFINES]
+_WIN32
+BZ_EXPORT
+
+[DIRECTORIES]
+..\..\bzlib
+
+[EXCLUDES]
+dlltest.c
+bzip2recover.c
+bzip2.c
+libbz2.def
+mk251.c
+spewG.c
+unzcrash.c
+
+[CONFIG_DEFINE]
+/*
+  Define to use the bzip2 compression library
+*/
+#define MAGICKCORE_BZLIB_DELEGATE

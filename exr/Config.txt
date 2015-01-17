@@ -1,0 +1,34 @@
+[DLL]
+
+[DEFINES]
+ILMIMF_EXPORTS
+
+[DIRECTORIES]
+..\..\exr\ilmbase
+..\..\exr\ilmbase\config.windows
+..\..\exr\ilmbase\half
+..\..\exr\ilmbase\Iex
+..\..\exr\ilmbase\IlmThread
+..\..\exr\ilmbase\IMath
+..\..\exr\openexr
+..\..\exr\openexr\config.windows
+..\..\exr\openexr\IlmImf
+
+[INCLUDES]
+..\..\zlib
+
+[EXCLUDES]
+b44ExpLogTable.cpp
+eLut.cpp
+ImathBox.cpp
+ImathShear.cpp
+toFloat.cpp
+
+[DEPENDENCIES]
+zlib
+
+[CONFIG_DEFINE]
+/*
+  Define to use the OpenEXR library
+*/
+#define MAGICKCORE_OPENEXR_DELEGATE

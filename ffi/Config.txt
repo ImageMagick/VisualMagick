@@ -1,0 +1,17 @@
+[STATIC]
+
+[DIRECTORIES]
+..\..\ffi\include
+..\..\ffi\src
+..\..\ffi\src\x86
+
+[EXCLUDES]
+dlmalloc.c
+java_raw_api.c
+
+[EXCLUDES_X64]
+win32.asm
+
+[EXCLUDES_X86]
+ffi64.c
+win64.asm

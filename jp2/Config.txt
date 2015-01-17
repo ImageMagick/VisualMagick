@@ -1,0 +1,30 @@
+[DLL]
+
+[DEFINES]
+JAS_WIN_MSVC_BUILD
+EXCLUDE_MIF_SUPPORT
+EXCLUDE_PNM_SUPPORT
+EXCLUDE_BMP_SUPPORT
+EXCLUDE_RAS_SUPPORT
+EXCLUDE_JPG_SUPPORT
+EXCLUDE_PGX_SUPPORT
+
+[DIRECTORIES]
+..\..\jp2\src\libjasper
+..\..\jp2\src\libjasper\base
+..\..\jp2\src\libjasper\include
+..\..\jp2\src\libjasper\include\jasper
+..\..\jp2\src\libjasper\jp2
+..\..\jp2\src\libjasper\jpc
+
+[MODULE_DEFINITION_FILE]
+..\..\jp2\jasper.def
+
+[EXCLUDES]
+dummy.c
+
+[CONFIG_DEFINE]
+/*
+  Define to use the Jasper JPEG v2 library
+*/
+#define MAGICKCORE_JP2_DELEGATE

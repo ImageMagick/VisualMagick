@@ -1,0 +1,20 @@
+[DLL]
+
+[DEFINES]
+_WEBPLIB_
+
+[DIRECTORIES]
+..\..\webp\src
+..\..\webp\src\dec
+..\..\webp\src\demux
+..\..\webp\src\dsp
+..\..\webp\src\enc
+..\..\webp\src\mux
+..\..\webp\src\utils
+..\..\webp\src\webp
+
+[CONFIG_DEFINE]
+/*
+  Define to use the WebP library
+*/
+#define MAGICKCORE_WEBP_DELEGATE

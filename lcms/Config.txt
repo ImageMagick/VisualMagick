@@ -1,0 +1,20 @@
+[DLL]
+
+[DEFINES]
+CMS_NO_HALF_SUPPORT
+__CONSOLE__
+_LCMSLIB_
+
+[DIRECTORIES]
+..\..\lcms\include
+..\..\lcms\src
+
+[EXCLUDES]
+acconfig.h
+
+[CONFIG_DEFINE]
+/*
+  Define to use the "little" Color Management System (LCMS) library
+*/
+#define MAGICKCORE_LCMS_DELEGATE
+#define MAGICKCORE_HAVE_LCMS2_H

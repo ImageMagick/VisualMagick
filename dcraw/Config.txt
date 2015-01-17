@@ -1,0 +1,15 @@
+[EXE]
+
+[DEFINES]
+NO_LCMS
+
+[DIRECTORIES]
+..\..\dcraw
+
+[INCLUDES]
+..\..\jp2\src\libjasper\include
+..\..\jpeg
+
+[DEPENDENCIES]
+jp2
+jpeg

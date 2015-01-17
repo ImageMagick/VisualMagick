@@ -1,6 +1,0 @@
-#ECF - this file contains additional configuration info.
-DEFINE = _CRT_SECURE_NO_WARNINGS
-DEFINE = PACKAGE
-EXCLUDE = pixman-vmx.c
-EXCLUDE = pixman-region.c
-EXCLUDE = pixman-mips-dspr2.c

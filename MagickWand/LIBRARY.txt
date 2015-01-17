@@ -1,7 +1,0 @@
-#ECF - this file contains additional configuration info.
-DEFINE = _MAGICKLIB_
-DEFINE = _CRT_SECURE_NO_WARNINGS
-DEFINE = _CRT_NONSTDC_NO_WARNINGS
-SOURCE = wand.rc
-EXCLUDE = drawtest.c
-EXCLUDE = wandtest.c

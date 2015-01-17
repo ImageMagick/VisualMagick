@@ -1,0 +1,15 @@
+[DLL]
+
+[DIRECTORIES]
+..\..\zlib
+
+[EXCLUDES]
+maketree.c
+minigzip.c
+example.c
+
+[CONFIG_DEFINE]
+/*
+  Define to use the zlib ZIP compression library
+*/
+#define MAGICKCORE_ZLIB_DELEGATE

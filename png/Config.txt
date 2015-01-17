@@ -1,0 +1,28 @@
+[DLL]
+
+[DEFINES]
+_PNGLIB_
+__WIN32DLL__
+__WIN32__
+__FLAT__
+PNG_NO_MODULEDEF
+PNG_BUILD_DLL
+
+[DIRECTORIES]
+..\..\png
+
+[INCLUDES]
+..\..\zlib
+
+[EXCLUDE]
+example.c
+pngtest.c
+
+[DEPENDENCIES]
+zlib
+
+[CONFIG_DEFINE]
+/*
+  Define to use the PNG library
+*/
+#define MAGICKCORE_PNG_DELEGATE

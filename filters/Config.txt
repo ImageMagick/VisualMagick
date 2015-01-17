@@ -1,0 +1,16 @@
+[DLLMODULE]
+
+[DIRECTORIES]
+..\..\filters
+
+[INCLUDES]
+..\..
+
+[MODULE_PREFIX]
+FILTER
+
+[DEPENDENCIES]
+MagickCore
+
+[WARNING_LEVEL]
+4

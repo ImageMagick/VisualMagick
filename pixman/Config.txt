@@ -1,0 +1,15 @@
+[STATIC]
+
+[DEFINES]
+PACKAGE
+
+[DIRECTORIES]
+..\..\pixman\pixman
+
+[EXCLUDES]
+pixman-arm-neon.c
+pixman-arm-simd.c
+pixman-mips-dspr2.c
+pixman-mmx.c
+pixman-region.c
+pixman-vmx.c

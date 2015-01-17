@@ -1,6 +1,0 @@
-#ECF - this file contains additional configuration info.
-DEFINE = _CRT_SECURE_NO_WARNINGS
-DEFINE = LQR_EXPORTS
-INCLUDE = ..\..\glib
-INCLUDE = ..\..\glib\glib
-RESOURCE = lqr.rc

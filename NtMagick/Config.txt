@@ -1,0 +1,16 @@
+[APP]
+
+[OPTIONAL]
+
+[DIRECTORIES]
+..\..\contrib\win32\MFC\NtMagick
+
+[INCLUDES]
+..\..
+..\..\Magick++\lib
+
+[DEPENDENCIES]
+coders
+filters
+Magick++
+MagickCore

@@ -1,4 +1,0 @@
-#ECF - this file contains additional configuration info.
-DEFINE = _CRT_SECURE_NO_WARNINGS
-INCLUDE = ..\..\glib
-INCLUDE = ..\..\glib\glib

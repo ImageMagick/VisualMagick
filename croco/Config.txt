@@ -1,0 +1,9 @@
+[STATIC]
+
+[DIRECTORIES]
+..\..\croco\src
+
+[INCLUDES]
+..\..\glib
+..\..\glib\glib
+..\..\libxml\include

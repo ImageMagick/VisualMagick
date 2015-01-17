@@ -1,9 +1,0 @@
-#ECF - this file contains additional configuration info.
-DEFINE = _CRT_SECURE_NO_WARNINGS
-DEFINE = _CRT_NONSTDC_NO_WARNINGS
-EXCLUDE = jiv.c
-EXCLUDE = dummy.c
-EXCLUDE = dummy2.c
-EXCLUDE = imgcmp.c
-EXCLUDE = imginfo.c
-EXCLUDE = tmrdemo.c

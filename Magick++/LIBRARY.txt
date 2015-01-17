@@ -1,6 +1,0 @@
-#ECF - this file contains additional configuration info.
-#DEFINE =
-#EXCLUDE =
-#SOURCE =
-DEFINE = _CRT_SECURE_NO_WARNINGS
-DEFINE = _CRT_NONSTDC_NO_WARNINGS

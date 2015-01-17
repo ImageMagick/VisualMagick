@@ -1,3 +1,0 @@
-#ECF - this file contains additional configuration info.
-SOURCE = ..\..\..\..\SDL\Sdl\src\main\win32\SDL_main.c
-EXCLUDE = testtypes.c
