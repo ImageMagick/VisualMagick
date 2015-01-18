@@ -47,13 +47,15 @@ public:
 
   bool isConsole() const;
 
-  int isDll() const;
+  bool isCom() const;
 
-  int isExe() const;
+  bool isDll() const;
 
-  int isLib() const;
+  bool isExe() const;
 
-  int isModule() const;
+  bool isLib() const;
+
+  bool isModule() const;
 
   vector<string> &libraries();
 

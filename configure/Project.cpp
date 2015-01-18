@@ -73,22 +73,27 @@ bool Project::isConsole() const
   return(_type != APPTYPE);
 }
 
-int Project::isDll() const
+bool Project::isCom() const
 {
-  return((_type == DLLTYPE) || (_type == DLLMODULETYPE));
+  return(_type == COMTYPE);
 }
 
-int Project::isExe() const
+bool Project::isDll() const
+{
+  return((_type == DLLTYPE) || (_type == DLLMODULETYPE) || (_type == COMTYPE));
+}
+
+bool Project::isExe() const
 {
   return((_type == EXETYPE) || (_type == EXEMODULETYPE) || (_type == APPTYPE));
 }
 
-int Project::isLib() const
+bool Project::isLib() const
 {
   return((_type == STATICTYPE));
 }
 
-int Project::isModule() const
+bool Project::isModule() const
 {
   return((_type == DLLMODULETYPE) || (_type == EXEMODULETYPE));
 }
@@ -152,6 +157,12 @@ bool Project::loadFiles(const ConfigureWizard &wizard)
 
   switch(_type)
   {
+    case COMTYPE:
+    {
+      projectFile=new ProjectFile(&wizard,this,"COM",_name);
+      _files.push_back(projectFile);
+      break;
+    }
     case DLLMODULETYPE:
     {
       if (wizard.solutionType() == DYNAMIC_MT)
@@ -243,6 +254,8 @@ void Project::loadConfig(ifstream &config)
     line=readLine(config);
     if (line == "[APP]")
       _type=APPTYPE;
+    else if (line == "[COM]")
+      _type=COMTYPE;
     else if (line == "[CONFIG_DEFINE]")
       addLines(config,_configDefine);
     else if (line ==  "[DEFINES]")

@@ -125,6 +125,9 @@ void ProjectFile::write(const vector<Project*> &allprojects)
 
 bool ProjectFile::isLib() const
 {
+  if (_project->isCom())
+    return(false);
+
   return(_project->isLib() || (_wizard->solutionType() != DYNAMIC_MT && _project->isDll()));
 }
 
@@ -158,6 +161,9 @@ string ProjectFile::getTargetName(const bool debug)
 {
   string
     targetName;
+
+  if (_project->isCom())
+    return _name;
 
   targetName=_prefix+"_";
   if (_prefix.compare("FILTER") != 0)
@@ -310,7 +316,7 @@ void ProjectFile::writePreprocessorDefinitions(ofstream &file,const bool debug)
   {
     file << ";" << *def;
   }
-  if (isLib() || (_wizard->solutionType() != DYNAMIC_MT && _project->isExe()))
+  if (isLib() || (_wizard->solutionType() != DYNAMIC_MT && (_project->isExe() || _project->isCom())))
     file << ";_LIB";
   else if (_project->isDll())
     file << ";_DLL;_MAGICKMOD_";
