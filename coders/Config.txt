@@ -6,6 +6,10 @@
 [INCLUDES]
 ..\..
 
+[EXCLUDES]
+x.c
+xwd.c
+
 [MODULE_PREFIX]
 IM_MOD
 
