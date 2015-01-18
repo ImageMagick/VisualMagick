@@ -31,6 +31,8 @@ public:
 
   vector<string> &defines();
 
+  vector<string> &definesDll();
+
   vector<string> &dependencies();
 
   vector<string> &directories();
@@ -84,6 +86,7 @@ private:
 
   string               _configDefine;
   vector<string>       _defines;
+  vector<string>       _definesDll;
   vector<string>       _dependencies;
   vector<string>       _directories;
   vector<string>       _excludes;

@@ -319,7 +319,13 @@ void ProjectFile::writePreprocessorDefinitions(ofstream &file,const bool debug)
   if (isLib() || (_wizard->solutionType() != DYNAMIC_MT && (_project->isExe() || _project->isCom())))
     file << ";_LIB";
   else if (_project->isDll())
+  {
+    foreach (string,def,_project->definesDll())
+    {
+      file << ";" << *def;
+    }
     file << ";_DLL;_MAGICKMOD_";
+  }
   if (_project->isExe() && _wizard->solutionType() != STATIC_MT)
     file << ";_AFXDLL";
 }

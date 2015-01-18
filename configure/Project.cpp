@@ -31,6 +31,11 @@ vector<string> &Project::defines()
   return(_defines);
 }
 
+vector<string> &Project::definesDll()
+{
+  return(_definesDll);
+}
+
 vector<string> &Project::dependencies()
 {
   return(_dependencies);
@@ -258,7 +263,9 @@ void Project::loadConfig(ifstream &config)
       _type=COMTYPE;
     else if (line == "[CONFIG_DEFINE]")
       addLines(config,_configDefine);
-    else if (line ==  "[DEFINES]")
+    else if (line == "[DEFINES_DLL]")
+      addLines(config,_definesDll);
+    else if (line == "[DEFINES]")
       addLines(config,_defines);
     else if (line == "[DEPENDENCIES]")
       addLines(config,_dependencies);
