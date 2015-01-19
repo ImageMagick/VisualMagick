@@ -43,7 +43,7 @@
 /*
   When building ImageMagick using DLLs, include a DllMain()
   function which automatically invokes MagickCoreGenesis(NULL), and
-  MagickCoreTerminus() so that the user doesn't need to. This is enabled
+  MagickCoreTerminus() so that the user doesn't need to. This is disabled
   by default.
 */
 //#define ProvideDllMain
