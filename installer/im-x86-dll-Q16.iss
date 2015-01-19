@@ -20,7 +20,6 @@
 
 #define  public MagickDynamicPackage 1
 #define  public QuantumDepth "16"
-; #define  public X11DynamicPackage 1
 #include "inc\body.isx"
 
 #ifdef Debug

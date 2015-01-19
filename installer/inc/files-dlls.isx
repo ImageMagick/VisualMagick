@@ -46,9 +46,5 @@ Source: {#MSVCRedist}\{#MagickArchitecture}\Microsoft.VC100.ATL\atl100.dll;   De
 #ifdef MagickDynamicPackage
 Source: "..\bin\CORE_RL*.dll"; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
 Source: "..\bin\IM_MOD_RL*.dll"; DestDir: {#MagickCodersDirectory}; Flags: ignoreversion
-Source: "..\bin\analyze.dll"; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
-#ifdef X11DynamicPackage
-Source: "..\bin\X11.dll"; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
-Source: "..\bin\Xext.dll"; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
-#endif
+Source: "..\bin\FILTER_*.dll"; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
 #endif
