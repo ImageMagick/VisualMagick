@@ -72,7 +72,7 @@ string ConfigureWizard::intermediateDirectoryRelease() const
 
 string ConfigureWizard::libDirectory() const
 {
-  return(_systemPage.libDirectory() + solutionName() + "-" + platform() + "\\");
+  return(_systemPage.libDirectory());
 }
 
 string ConfigureWizard::openCLIncludePath() const
