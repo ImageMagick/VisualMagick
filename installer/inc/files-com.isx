@@ -19,7 +19,6 @@
 ; ImageMagickObject DLL (usable from Visual Basic and WSH)
 Source: "..\bin\ImageMagickObject.dll"; DestDir: "{#MagickLibDirectory}"; Tasks: install_Magick_DLL; Flags: ignoreversion
 Source: "..\..\contrib\win32\ATL7\ImageMagickObject\README.txt"; DestDir: "{app}\ImageMagickObject"; Tasks: install_Magick_DLL; Flags: ignoreversion
-Source: "..\..\contrib\win32\ATL7\ImageMagickObject\MagickCMD.exe"; DestDir: "{#MagickAppDirectory}"; Tasks: install_Magick_DLL; Flags: ignoreversion
 Source: "..\..\contrib\win32\ATL7\ImageMagickObject\Tests\*.vbs"; DestDir: "{app}\ImageMagickObject\Tests"; Tasks: install_Magick_DLL; Flags: ignoreversion
 Source: "..\..\contrib\win32\ATL7\ImageMagickObject\Tests\*.jpg"; DestDir: "{app}\ImageMagickObject\Tests"; Tasks: install_Magick_DLL; Flags: ignoreversion
 Source: "..\..\contrib\win32\ATL7\ImageMagickObject\Tests\*.txt"; DestDir: "{app}\ImageMagickObject\Tests"; Tasks: install_Magick_DLL; Flags: ignoreversion
