@@ -42,7 +42,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /machine:IX86
-# ADD LINK32 CORE_RL_magick_.lib CORE_RL_Magick++_.lib X11.lib kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib /nologo /subsystem:console /debug /machine:I386 /libpath:"..\lib\\" /libpath:"..\lib"
+# ADD LINK32 CORE_RL_magick_.lib CORE_RL_Magick++_.lib kernel32.lib user32.lib gdi32.lib odbc32.lib odbccp32.lib ole32.lib oleaut32.lib winmm.lib wsock32.lib advapi32.lib /nologo /subsystem:console /debug /machine:I386 /libpath:"..\lib\\" /libpath:"..\lib"
 # SUBTRACT LINK32 /pdb:none
 # Begin Target
 
