@@ -1,4 +1,4 @@
-This directory contains PerlMagick built for Strawberry ActivePerl.
+This directory contains PerlMagick built for Strawberry Perl.
 
 Installing PerlMagick
 =====================
@@ -22,7 +22,7 @@ If you see the above, it means it's worked. If you get:
   operable program or batch file.
   ...\PerlMagick>
 
-it means your installation of ActivePerl isn't installed, or isn't
+it means your installation of Stawberry Perl isn't installed, or isn't
 configured properly - you need to make sure that the folder containing
 ppm.bat (usually c:\perl\bin) is in your system path.
 
