@@ -1,4 +1,4 @@
-This directory contains PerlMagick built for ActiveState ActivePerl.
+This directory contains PerlMagick built for Strawberry ActivePerl.
 
 Installing PerlMagick
 =====================

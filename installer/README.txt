@@ -10,8 +10,7 @@
   a) Download and install the Inno Setup Compiler from
       "http://www.jrsoftware.org/isinfo.php".
 
-  b) Download and install ActiveState ActivePerl from
-     "http://www.activestate.com/Products/ActivePerl/Download.html".
+  b) Download and install Strawberry Perl from http://www.strawberryperl.com.
 
 1) Open workspace VisualMagick\configure\configure.sln by double-clicking
    from Windows Explorer.
