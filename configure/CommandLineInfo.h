@@ -43,6 +43,8 @@ public:
 
   bool useOpenCL() const;
 
+  bool useOpenMP() const;
+
   int visualStudioVersion() const;
 
   virtual void ParseParam(const char* pszParam, BOOL bFlag, BOOL bLast);
@@ -54,6 +56,7 @@ private:
   int  _solutionType;
   bool _useHDRI;
   bool _useOpenCL;
+  bool _useOpenMP;
   int  _visualStudioVersion;
 };
 

@@ -29,6 +29,7 @@ CommandLineInfo::CommandLineInfo(const ConfigureWizard &wizard)
   _solutionType=wizard.solutionType();
   _useHDRI=wizard.useHDRI();
   _useOpenCL=wizard.useOpenCL();
+  _useOpenMP=wizard.useOpenMP();
   _visualStudioVersion=wizard.visualStudioVersion();
 }
 
@@ -72,6 +73,11 @@ bool CommandLineInfo::useOpenCL() const
   return(_useOpenCL);
 }
 
+bool CommandLineInfo::useOpenMP() const
+{
+  return(_useOpenMP);
+}
+
 int CommandLineInfo::visualStudioVersion() const
 {
   return(_visualStudioVersion);
@@ -90,6 +96,8 @@ void CommandLineInfo::ParseParam(const char* pszParam, BOOL bFlag, BOOL bLast)
     _solutionType=STATIC_MTD;
   else if (_strcmpi(pszParam, "noHdri") == 0)
     _useHDRI=false;
+  else if (_strcmpi(pszParam, "noOpenMP") == 0)
+    _useOpenMP=false;
   else if (_strcmpi(pszParam, "noWizard") == 0)
     _noWizard=true;
   else if (_strcmpi(pszParam, "openCL") == 0)

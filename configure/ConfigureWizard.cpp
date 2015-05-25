@@ -134,6 +134,7 @@ void ConfigureWizard::parseCommandLineInfo(const CommandLineInfo &info)
   _targetPage.solutionType(info.solutionType());
   _targetPage.useHDRI(info.useHDRI());
   _targetPage.useOpenCL(info.useOpenCL());
+  _targetPage.useOpenMP(info.useOpenMP());
   _targetPage.visualStudioVersion(info.visualStudioVersion());
 }
 
