@@ -740,17 +740,36 @@ void ProjectFile::writeVS2010_2012Files(ofstream &file,const vector<string> &col
 
 void ProjectFile::writeVS2010_2012ProjectReferences(ofstream &file,const vector<Project*> &allProjects)
 {
+  size_t
+    index;
+
+  string
+    projectName,
+    projectFileName;
+
   file << "  <ItemGroup>" << endl;
 
   foreach (string,dep,_dependencies)
   {
+    projectName=*dep;
+    projectFileName="";
+    index=(*dep).find(">");
+    if (index != -1)
+    {
+      projectName=(*dep).substr(0,index);
+      projectFileName=(*dep).substr(index+1);
+    }
+
     foreach_const (Project*,depp,allProjects)
     {
-      if ((*depp)->name() != *dep)
+      if ((*depp)->name() != projectName)
         continue;
 
       foreach (ProjectFile*,deppf,(*depp)->files())
       {
+        if (projectFileName != "" && (*deppf)->_name != projectFileName)
+          continue;
+
         file << "    <ProjectReference Include=\"..\\" << (*deppf)-> _project->name() << "\\" << (*deppf)->_fileName << "\">" << endl;
         file << "      <Project>{" << (*deppf)->guid() << "}</Project>" << endl;
         file << "      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>" << endl;
