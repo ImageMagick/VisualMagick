@@ -3,3 +3,4 @@
 
 [DEPENDENCIES]
 tiff
+coders>psd
