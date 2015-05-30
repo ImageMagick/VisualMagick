@@ -122,13 +122,15 @@ $$CONFIG$$
 /*
   Use Visual C++ C inline method extension to improve performance
 */
-#define inline __inline
+#define _magickcore_inline __inline
 
 /*
   Visual C++ does not define restrict by default.
 */
-#if !defined(restrict)
-  #define restrict
+#if (_MSC_VER >= 1400)
+#  define _magickcore_restrict __restrict
+#else
+#  define _magickcore_restrict
 #endif
 
 /*
