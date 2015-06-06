@@ -1,10 +1,10 @@
 [DLLMODULE]
 
 [DIRECTORIES]
-..\..\coders
+..\..\ImageMagick\coders
 
 [INCLUDES]
-..\..
+..\..\ImageMagick
 
 [EXCLUDES]
 x.c

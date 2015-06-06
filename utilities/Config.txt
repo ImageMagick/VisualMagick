@@ -1,10 +1,10 @@
 [EXEMODULE]
 
 [DIRECTORIES]
-..\..\utilities
+..\..\ImageMagick\utilities
 
 [INCLUDES]
-..\..
+..\..\ImageMagick
 
 [MODULE_PREFIX]
 UTIL

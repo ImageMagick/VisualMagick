@@ -1,7 +1,7 @@
 #include "winver.h"
 #define __WINDOWS__
-#include "..\\..\\MagickCore\\magick-baseconfig.h"
-#include "..\\..\\MagickCore\\version.h"
+#include "..\\..\\ImageMagick\\MagickCore\\magick-baseconfig.h"
+#include "..\\..\\ImageMagick\\MagickCore\\version.h"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -49,4 +49,4 @@ END
 //
 /////////////////////////////////////////////////////////////////////////////
 
-IDR_MAGICKICON          ICON    DISCARDABLE     "..\\..\\images\\ImageMagick.ico"
+IDR_MAGICKICON          ICON    DISCARDABLE     "..\\..\\ImageMagick\\images\\ImageMagick.ico"

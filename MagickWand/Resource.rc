@@ -1,7 +1,7 @@
 #include "winver.h"
 #define WIN32
-#include "../../MagickCore/magick-baseconfig.h"
-#include "../../MagickCore/version.h"
+#include "..\\..\\ImageMagick\\MagickCore\\magick-baseconfig.h"
+#include "..\\..\\ImageMagick\\MagickCore\\version.h"
 
 /////////////////////////////////////////////////////////////////////////////
 //

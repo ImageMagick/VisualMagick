@@ -4,7 +4,7 @@
 ..\..\contrib\win32\ATL7\ImageMagickObject
 
 [INCLUDES]
-..\..
+..\..\ImageMagick
 
 [EXCLUDES]
 ImageMagickObject.rc

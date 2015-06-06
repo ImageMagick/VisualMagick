@@ -6,8 +6,8 @@
 ..\..\contrib\win32\MFC\NtMagick
 
 [INCLUDES]
-..\..
-..\..\Magick++\lib
+..\..\ImageMagick
+..\..\ImageMagick\Magick++\lib
 
 [DEPENDENCIES]
 coders

@@ -1,10 +1,10 @@
 [DLLMODULE]
 
 [DIRECTORIES]
-..\..\filters
+..\..\ImageMagick\filters
 
 [INCLUDES]
-..\..
+..\..\ImageMagick
 
 [MODULE_PREFIX]
 FILTER

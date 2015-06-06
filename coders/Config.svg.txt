@@ -1,4 +1,5 @@
 [INCLUDES]
+..\..
 ..\..\cairo\src
 ..\..\glib
 ..\..\glib\glib
