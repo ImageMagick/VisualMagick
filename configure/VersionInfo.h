@@ -26,13 +26,13 @@ public:
 
   VersionInfo();
 
+  string libAddendum() const;
+
   string libVersion() const;
 
   bool load();
 
   string majorVersion() const;
-
-  string release() const;
 
   string releaseDate() const;
 

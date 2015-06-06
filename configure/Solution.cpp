@@ -246,7 +246,7 @@ void Solution::writeVersion()
     line=replace(line,"@PACKAGE_LIB_VERSION@",versionInfo.libVersion());
     line=replace(line,"@MAGICK_LIB_VERSION_TEXT@",versionInfo.version());
     line=replace(line,"@MAGICK_LIB_VERSION_NUMBER@",versionInfo.versionNumber());
-    line=replace(line,"@PACKAGE_VERSION_ADDENDUM@",versionInfo.release());
+    line=replace(line,"@PACKAGE_VERSION_ADDENDUM@",versionInfo.libAddendum());
     line=replace(line,"@MAGICK_LIBRARY_CURRENT@",versionInfo.majorVersion());
     line=replace(line,"@MAGICK_LIBRARY_CURRENT_MIN@",versionInfo.majorVersion());
     line=replace(line,"@PACKAGE_RELEASE_DATE@",versionInfo.releaseDate());

@@ -25,6 +25,11 @@ VersionInfo::VersionInfo()
 {
 }
 
+string VersionInfo::libAddendum() const
+{
+  return("-"+_release);
+}
+
 string VersionInfo::libVersion() const
 {
   return("0x"+replace(_version,".",""));
@@ -66,11 +71,6 @@ string VersionInfo::majorVersion() const
 
   index=_version.find(".");
   return(_version.substr(0,index));
-}
-
-string VersionInfo::release() const
-{
-  return(_release);
 }
 
 string VersionInfo::releaseDate() const
