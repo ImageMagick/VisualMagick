@@ -33,6 +33,10 @@ public:
 
   bool build64bit() const;
 
+  bool includeIncompatibleLicense() const;
+
+  bool includeOptional() const;
+
   bool noWizard() const;
 
   int quantumDepth() const;
@@ -51,6 +55,8 @@ public:
 
 private:
   bool _build64bit;
+  bool _includeIncompatibleLicense;
+  bool _includeOptional;
   bool _noWizard;
   int  _quantumDepth;
   int  _solutionType;

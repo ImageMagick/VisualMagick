@@ -34,8 +34,10 @@ public:
   void build64bit(bool value);
 
   bool includeIncompatibleLicense() const;
+  void includeIncompatibleLicense(bool value);
 
   bool includeOptional() const;
+  void includeOptional(bool value);
 
   string openCLIncludePath() const;
 

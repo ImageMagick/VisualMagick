@@ -46,9 +46,19 @@ bool TargetPage::includeIncompatibleLicense() const
   return(_includeIncompatibleLicense == 1);
 }
 
+void TargetPage::includeIncompatibleLicense(bool value)
+{
+  _includeIncompatibleLicense=value;
+}
+
 bool TargetPage::includeOptional() const
 {
   return(_includeOptional == 1);
+}
+
+void TargetPage::includeOptional(bool value)
+{
+  _includeOptional=value;
 }
 
 bool TargetPage::build64bit() const

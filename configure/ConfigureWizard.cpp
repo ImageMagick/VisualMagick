@@ -130,6 +130,8 @@ int ConfigureWizard::visualStudioVersion() const
 void ConfigureWizard::parseCommandLineInfo(const CommandLineInfo &info)
 {
   _targetPage.build64bit(info.build64bit());
+  _targetPage.includeIncompatibleLicense(info.includeIncompatibleLicense());
+  _targetPage.includeOptional(info.includeOptional());
   _targetPage.quantumDepth(info.quantumDepth());
   _targetPage.solutionType(info.solutionType());
   _targetPage.useHDRI(info.useHDRI());
