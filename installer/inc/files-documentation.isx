@@ -17,29 +17,29 @@
 #endif
 
 ; Release documentation files
-Source: "..\..\ChangeLog"; DestDir: "{app}"; Flags: ignoreversion; DestName: "ChangeLog.txt"
-Source: "..\..\LICENSE"; DestDir: "{app}"; Flags: ignoreversion; DestName: "License.txt"
-Source: "..\..\NOTICE"; DestDir: "{app}"; Flags: ignoreversion; DestName: "Notice.txt"
+Source: "..\..\ImageMagick\ChangeLog"; DestDir: "{app}"; Flags: ignoreversion; DestName: "ChangeLog.txt"
+Source: "..\..\ImageMagick\LICENSE"; DestDir: "{app}"; Flags: ignoreversion; DestName: "License.txt"
+Source: "..\..\ImageMagick\NOTICE"; DestDir: "{app}"; Flags: ignoreversion; DestName: "Notice.txt"
 Source: "..\bin\NOTICE"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion;  DestName: "Notice-1.txt"
-Source: "..\..\QuickStart.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\..\README.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\ImageMagick\QuickStart.txt"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\ImageMagick\README.txt"; DestDir: "{app}"; Flags: ignoreversion
 ; Web pages
-Source: "..\..\index.html"; DestDir: "{app}"; Flags: ignoreversion isreadme
-Source: "..\..\images\*.gif"; DestDir: "{app}\images"; Flags: ignoreversion
-Source: "..\..\images\*.jpg"; DestDir: "{app}\images"; Flags: ignoreversion
-Source: "..\..\images\*.png"; DestDir: "{app}\images"; Flags: ignoreversion
-Source: "..\..\images\patterns\*.png"; DestDir: "{app}\images\patterns"; Flags: ignoreversion
-Source: "..\..\www\source\*.*"; DestDir: "{app}\www\source"; Flags: ignoreversion
-Source: "..\..\www\css\*.*"; DestDir: "{app}\www\css"; Flags: ignoreversion
-Source: "..\..\www\js\*.*"; DestDir: "{app}\www\js"; Flags: ignoreversion
-Source: "..\..\www\*.css"; DestDir: "{app}\www"; Flags: ignoreversion
-Source: "..\..\www\*.ico"; DestDir: "{app}\www"; Flags: ignoreversion
-Source: "..\..\www\*.html"; DestDir: "{app}\www"; Flags: ignoreversion
-Source: "..\..\www\Magick++\*.html"; DestDir: "{app}\www\Magick++"; Flags: ignoreversion
-Source: "..\..\www\Magick++\*.jpg"; DestDir: "{app}\www\Magick++"; Flags: ignoreversion
-Source: "..\..\www\Magick++\*.png"; DestDir: "{app}\www\Magick++"; Flags: ignoreversion
-Source: "..\..\www\Magick++\COPYING"; DestDir: "{app}\www\Magick++"; Flags: ignoreversion; DestName: "Copyright.txt"
-Source: "..\..\www\Magick++\README.txt"; DestDir: "{app}\www\Magick++"; Flags: ignoreversion
-Source: "..\..\www\api\*.html"; DestDir: "{app}\www\api"; Flags: ignoreversion
-Source: "..\..\www\api\MagickCore\*.*"; DestDir: "{app}\www\api\MagickCore"; Flags: ignoreversion
-Source: "..\..\www\api\MagickWand\*.*"; DestDir: "{app}\www\api\MagickWand"; Flags: ignoreversion
+Source: "..\..\ImageMagick\index.html"; DestDir: "{app}"; Flags: ignoreversion isreadme
+Source: "..\..\ImageMagick\images\*.gif"; DestDir: "{app}\images"; Flags: ignoreversion
+Source: "..\..\ImageMagick\images\*.jpg"; DestDir: "{app}\images"; Flags: ignoreversion
+Source: "..\..\ImageMagick\images\*.png"; DestDir: "{app}\images"; Flags: ignoreversion
+Source: "..\..\ImageMagick\images\patterns\*.png"; DestDir: "{app}\images\patterns"; Flags: ignoreversion
+Source: "..\..\ImageMagick\www\source\*.*"; DestDir: "{app}\www\source"; Flags: ignoreversion
+Source: "..\..\ImageMagick\www\css\*.*"; DestDir: "{app}\www\css"; Flags: ignoreversion
+Source: "..\..\ImageMagick\www\js\*.*"; DestDir: "{app}\www\js"; Flags: ignoreversion
+Source: "..\..\ImageMagick\www\*.css"; DestDir: "{app}\www"; Flags: ignoreversion
+Source: "..\..\ImageMagick\www\*.ico"; DestDir: "{app}\www"; Flags: ignoreversion
+Source: "..\..\ImageMagick\www\*.html"; DestDir: "{app}\www"; Flags: ignoreversion
+Source: "..\..\ImageMagick\www\Magick++\*.html"; DestDir: "{app}\www\Magick++"; Flags: ignoreversion
+Source: "..\..\ImageMagick\www\Magick++\*.jpg"; DestDir: "{app}\www\Magick++"; Flags: ignoreversion
+Source: "..\..\ImageMagick\www\Magick++\*.png"; DestDir: "{app}\www\Magick++"; Flags: ignoreversion
+Source: "..\..\ImageMagick\www\Magick++\COPYING"; DestDir: "{app}\www\Magick++"; Flags: ignoreversion; DestName: "Copyright.txt"
+Source: "..\..\ImageMagick\www\Magick++\README.txt"; DestDir: "{app}\www\Magick++"; Flags: ignoreversion
+Source: "..\..\ImageMagick\www\api\*.html"; DestDir: "{app}\www\api"; Flags: ignoreversion
+Source: "..\..\ImageMagick\www\api\MagickCore\*.*"; DestDir: "{app}\www\api\MagickCore"; Flags: ignoreversion
+Source: "..\..\ImageMagick\www\api\MagickWand\*.*"; DestDir: "{app}\www\api\MagickWand"; Flags: ignoreversion

@@ -21,16 +21,16 @@ Source: "..\lib\CORE_RL_Magick++_.lib"; DestDir: "{app}\lib"; Tasks: install_Dev
 Source: "..\lib\CORE_RL_MagickCore_.lib"; DestDir: "{app}\lib"; Tasks: install_Devel; Flags: ignoreversion
 Source: "..\lib\CORE_RL_MagickWand_.lib"; DestDir: "{app}\lib"; Tasks: install_Devel; Flags: ignoreversion
 ;  Development headers
-Source: "..\..\MagickCore\*.h"; DestDir: "{app}\include\MagickCore"; Tasks: install_Devel; Flags: ignoreversion
+Source: "..\..\ImageMagick\MagickCore\*.h"; DestDir: "{app}\include\MagickCore"; Tasks: install_Devel; Flags: ignoreversion
 ; MagickWand headers
-Source: "..\..\MagickWand\*.h"; DestDir: "{app}\include\MagickWand"; Tasks: install_Devel; Flags: ignoreversion
+Source: "..\..\ImageMagick\MagickWand\*.h"; DestDir: "{app}\include\MagickWand"; Tasks: install_Devel; Flags: ignoreversion
 ; Magick++ headers
-Source: "..\..\Magick++\lib\Magick++.h"; DestDir: "{app}\include"; Tasks: install_Devel; Flags: ignoreversion
-Source: "..\..\Magick++\lib\Magick++\*.h"; DestDir: "{app}\include\Magick++"; Tasks: install_Devel; Flags: ignoreversion
+Source: "..\..\ImageMagick\Magick++\lib\Magick++.h"; DestDir: "{app}\include"; Tasks: install_Devel; Flags: ignoreversion
+Source: "..\..\ImageMagick\Magick++\lib\Magick++\*.h"; DestDir: "{app}\include\Magick++"; Tasks: install_Devel; Flags: ignoreversion
 ; Magick++ demos
 Source: "Magick++_Demo\*.dsw"; DestDir: "{app}\Magick++_Demo"; Tasks: install_Devel; Flags: ignoreversion
 Source: "Magick++_Demo\*.dsp"; DestDir: "{app}\Magick++_Demo"; Tasks: install_Devel; Flags: ignoreversion
 Source: "Magick++_Demo\*.bat"; DestDir: "{app}\Magick++_Demo"; Tasks: install_Devel; Flags: ignoreversion
 Source: "Magick++_Demo\README.txt"; DestDir: "{app}\Magick++_Demo"; Tasks: install_Devel; Flags: ignoreversion
-Source: "..\..\Magick++\demo\*.cpp"; DestDir: "{app}\Magick++_Demo"; Tasks: install_Devel; Flags: ignoreversion
-Source: "..\..\Magick++\demo\*.miff"; DestDir: "{app}\Magick++_Demo"; Tasks: install_Devel; Flags: ignoreversion
+Source: "..\..\ImageMagick\Magick++\demo\*.cpp"; DestDir: "{app}\Magick++_Demo"; Tasks: install_Devel; Flags: ignoreversion
+Source: "..\..\ImageMagick\Magick++\demo\*.miff"; DestDir: "{app}\Magick++_Demo"; Tasks: install_Devel; Flags: ignoreversion
