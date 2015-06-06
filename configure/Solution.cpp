@@ -20,6 +20,7 @@
 #include "stdafx.h"
 #include "Solution.h"
 #include "Shared.h"
+#include "VersionInfo.h"
 
 Solution::Solution()
 {
@@ -86,7 +87,7 @@ void Solution::write(const ConfigureWizard &wizard,WaitDialog &waitDialog)
     file;
 
   steps=loadProjectFiles(wizard);
-  waitDialog.setSteps(steps+2); /* write solution and config */
+  waitDialog.setSteps(steps+3); /* write solution, configuration and version */
 
   file.open(getFileName(wizard));
   if (!file)
@@ -108,8 +109,10 @@ void Solution::write(const ConfigureWizard &wizard,WaitDialog &waitDialog)
   }
 
   waitDialog.nextStep("Writing configuration");
+  writeMagickBaseConfig(wizard);
 
-  writeBaseConfig(wizard);
+  waitDialog.nextStep("Writing version");
+  writeVersion();
 }
 
 string Solution::getFileName(const ConfigureWizard &wizard)
@@ -120,6 +123,135 @@ string Solution::getFileName(const ConfigureWizard &wizard)
   fileName="..\\Visual" + wizard.solutionName();
 
   return(fileName+".sln");
+}
+
+string Solution::getFolder()
+{
+  string
+    folder;
+
+  folder="MagickCore";
+  if (!PathFileExists(("..\\..\\ImageMagick\\" + folder).c_str()))
+    folder="Magick";
+  return(folder);
+}
+
+void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
+{
+  string
+    folder,
+    line;
+
+  ifstream
+    configIn;
+
+  ofstream
+    config;
+
+  folder=getFolder();
+
+  configIn.open("..\\" + folder + "\\magick-baseconfig.h.in");
+  if (!configIn)
+    return;
+
+  config.open("..\\..\\ImageMagick\\" + folder + "\\magick-baseconfig.h");
+  if (!config)
+    return;
+
+  while (getline(configIn,line))
+  {
+    if (trim(line).compare("$$CONFIG$$") != 0)
+    {
+      config << line << endl;
+      continue;
+    }
+
+    config << "/*" << endl;
+    config << "  Specify size of PixelPacket color Quantums (8, 16, or 32)." << endl;
+    config << "  A value of 8 uses half the memory than 16 and typically runs 30% faster," << endl;
+    config << "  but provides 256 times less color resolution than a value of 16." << endl;
+    config << "*/" << endl;
+    if (wizard.quantumDepth() == Q8)
+      config << "#define MAGICKCORE_QUANTUM_DEPTH 8" << endl;
+    else if (wizard.quantumDepth() == Q16)
+      config << "#define MAGICKCORE_QUANTUM_DEPTH 16" << endl;
+    else if (wizard.quantumDepth() == Q32)
+      config << "#define MAGICKCORE_QUANTUM_DEPTH 32" << endl;
+    else if (wizard.quantumDepth() == Q64)
+      config << "#define MAGICKCORE_QUANTUM_DEPTH 64" << endl;
+    config << endl;
+
+    config << "/*" << endl;
+    config << "  Define to enable high dynamic range imagery (HDRI)" << endl;
+    config << "*/" << endl;
+    if (wizard.useHDRI())
+      config << "#define MAGICKCORE_HDRI_ENABLE 1" << endl;
+    else
+      config << "#define MAGICKCORE_HDRI_ENABLE 0" << endl;
+    config << endl;
+
+    config << "/*" << endl;
+    config << "  Define to enable OpenCL" << endl;
+    config << "*/" << endl;
+    if (wizard.useOpenCL())
+      config << "#define MAGICKCORE__OPENCL\n#define MAGICKCORE_HAVE_CL_CL_H" << endl;
+    else
+      config << "#undef MAGICKCORE__OPENCL\n#undef MAGICKCORE_HAVE_CL_CL_H" << endl;
+
+    foreach (Project*,p,_projects)
+    {
+      if ((*p)->files().size() == 0)
+        continue;
+
+      if ((*p)->configDefine().empty())
+        continue;
+
+      config << endl;
+      config << (*p)->configDefine();
+    }
+  }
+}
+
+void Solution::writeVersion()
+{
+  ifstream
+    versionIn;
+
+  ofstream
+    version;
+
+  string
+    folder,
+    line;
+
+  VersionInfo
+    versionInfo;
+
+  folder=getFolder();
+
+  versionIn.open("..\\" + folder + "\\version.h.in");
+  if (!versionIn)
+    return;
+
+  version.open("..\\..\\ImageMagick\\" + folder + "\\version.h");
+  if (!version)
+    return;
+
+  if (!versionInfo.load())
+    return;
+
+  while (getline(versionIn,line))
+  {
+    line=replace(line,"@PACKAGE_NAME@","ImageMagick");
+    line=replace(line,"@PACKAGE_LIB_VERSION@",versionInfo.libVersion());
+    line=replace(line,"@MAGICK_LIB_VERSION_TEXT@",versionInfo.version());
+    line=replace(line,"@MAGICK_LIB_VERSION_NUMBER@",versionInfo.versionNumber());
+    line=replace(line,"@PACKAGE_VERSION_ADDENDUM@",versionInfo.release());
+    line=replace(line,"@MAGICK_LIBRARY_CURRENT@",versionInfo.majorVersion());
+    line=replace(line,"@MAGICK_LIBRARY_CURRENT_MIN@",versionInfo.majorVersion());
+    line=replace(line,"@PACKAGE_RELEASE_DATE@",versionInfo.releaseDate());
+    version << line << endl;
+  }
 }
 
 void Solution::write(const ConfigureWizard &wizard,ofstream &file)
@@ -218,82 +350,4 @@ void Solution::write(const ConfigureWizard &wizard,ofstream &file)
   }
   file << "\tEndGlobalSection" << endl;
   file << "EndGlobal" << endl;
-}
-
-void Solution::writeBaseConfig(const ConfigureWizard &wizard)
-{
-  string
-    folder,
-    line;
-
-  ifstream
-    configIn;
-
-  ofstream
-    config;
-
-  folder="MagickCore";
-  if (!PathFileExists(("..\\" + folder).c_str()))
-    folder="Magick";
-
-  configIn.open("..\\" + folder + "\\magick-baseconfig.h.in");
-  if (!configIn)
-    return;
-
-  config.open("..\\..\\" + folder + "\\magick-baseconfig.h");
-  if (!config)
-    return;
-
-  while (getline(configIn,line))
-  {
-    if (trim(line).compare("$$CONFIG$$") != 0)
-    {
-      config << line << endl;
-      continue;
-    }
-
-    config << "/*" << endl;
-    config << "  Specify size of PixelPacket color Quantums (8, 16, or 32)." << endl;
-    config << "  A value of 8 uses half the memory than 16 and typically runs 30% faster," << endl;
-    config << "  but provides 256 times less color resolution than a value of 16." << endl;
-    config << "*/" << endl;
-    if (wizard.quantumDepth() == Q8)
-      config << "#define MAGICKCORE_QUANTUM_DEPTH 8" << endl;
-    else if (wizard.quantumDepth() == Q16)
-      config << "#define MAGICKCORE_QUANTUM_DEPTH 16" << endl;
-    else if (wizard.quantumDepth() == Q32)
-      config << "#define MAGICKCORE_QUANTUM_DEPTH 32" << endl;
-    else if (wizard.quantumDepth() == Q64)
-      config << "#define MAGICKCORE_QUANTUM_DEPTH 64" << endl;
-    config << endl;
-
-    config << "/*" << endl;
-    config << "  Define to enable high dynamic range imagery (HDRI)" << endl;
-    config << "*/" << endl;
-    if (wizard.useHDRI())
-      config << "#define MAGICKCORE_HDRI_ENABLE 1" << endl;
-    else
-      config << "#define MAGICKCORE_HDRI_ENABLE 0" << endl;
-    config << endl;
-
-    config << "/*" << endl;
-    config << "  Define to enable OpenCL" << endl;
-    config << "*/" << endl;
-    if (wizard.useOpenCL())
-      config << "#define MAGICKCORE__OPENCL\n#define MAGICKCORE_HAVE_CL_CL_H" << endl;
-    else
-      config << "#undef MAGICKCORE__OPENCL\n#undef MAGICKCORE_HAVE_CL_CL_H" << endl;
-
-    foreach (Project*,p,_projects)
-    {
-      if ((*p)->files().size() == 0)
-        continue;
-
-      if ((*p)->configDefine().empty())
-        continue;
-
-      config << endl;
-      config << (*p)->configDefine();
-    }
-  }
 }

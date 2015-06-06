@@ -39,7 +39,11 @@ private:
 
   string getFileName(const ConfigureWizard &wizard);
 
-  void writeBaseConfig(const ConfigureWizard &wizard);
+  string getFolder();
+
+  void writeMagickBaseConfig(const ConfigureWizard &wizard);
+
+  void writeVersion();
 
   void write(const ConfigureWizard &wizard,ofstream &file);
 

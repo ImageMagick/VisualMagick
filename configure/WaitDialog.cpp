@@ -34,6 +34,11 @@ WaitDialog::~WaitDialog()
   DestroyWindow();
 }
 
+int WaitDialog::getSteps() const
+{
+  return(_steps);
+}
+
 void WaitDialog::setSteps(const int steps)
 {
   _steps=steps;

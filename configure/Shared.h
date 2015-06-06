@@ -88,8 +88,11 @@ static inline string replace(const std::string &str, const std::string &from, co
 
   result=str;
   index=result.find(from);
-  if (index == string::npos)
+  while (index != string::npos)
+  {
     result.replace(index,from.length(),to);
+    index=result.find(from);
+  }
   return(result);
 }
 

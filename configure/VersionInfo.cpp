@@ -17,35 +17,86 @@
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 */
-#ifndef __WaitDialog__
-#define __WaitDialog__
+#include "stdafx.h"
+#include "VersionInfo.h"
+#include "Shared.h"
 
-#include "resource.h"
-
-class WaitDialog : public CDialog
+VersionInfo::VersionInfo()
 {
-public:
+}
 
-  WaitDialog();
+string VersionInfo::libVersion() const
+{
+  return("0x"+replace(_version,".",""));
+}
 
-  ~WaitDialog();
+bool VersionInfo::load()
+{
+  ifstream
+    version;
 
-  int getSteps() const;
+  size_t
+    index;
 
-  void setSteps(const int steps);
+  string
+    line;
 
-  void nextStep(const string &description);
+  version.open("..\\..\\ImageMagick\\version.sh");
+  if (!version)
+    return(false);
 
-private:
+  while (getline(version,line))
+  {
+    index=line.find("PACKAGE_VERSION=");
+    if (index != string::npos)
+      _version=line.substr(17,line.length()-18);
 
-  void pump();
+    index=line.find("PACKAGE_RELEASE=");
+    if (index != string::npos)
+      _release=line.substr(17,line.length()-18);
+  }
 
-  void setMessageText(const string &text);
+  return(true);
+}
 
-  void setPercentComplete(int percent);
+string VersionInfo::majorVersion() const
+{
+  size_t
+    index;
 
-  int _steps;
-  int _current;
-};
+  index=_version.find(".");
+  return(_version.substr(0,index));
+}
 
-#endif // __WaitDialog__
+string VersionInfo::release() const
+{
+  return(_release);
+}
+
+string VersionInfo::releaseDate() const
+{
+  char
+    buffer[11];
+
+  struct tm
+    tm;
+
+  time_t
+    t;
+
+  time(&t);
+  (void) localtime_s(&tm,&t);
+  (void) strftime(buffer, sizeof(buffer), "%Y-%m-%d", &tm);
+
+  return(string(buffer));
+}
+
+string VersionInfo::version() const
+{
+  return(_version);
+}
+
+string VersionInfo::versionNumber() const
+{
+  return(replace(_version,".",",")+","+_release);
+}

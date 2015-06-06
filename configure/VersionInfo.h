@@ -17,35 +17,33 @@
 %                                                                             %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 */
-#ifndef __WaitDialog__
-#define __WaitDialog__
+#ifndef __VersionInfo__
+#define __VersionInfo__
 
-#include "resource.h"
-
-class WaitDialog : public CDialog
+class VersionInfo
 {
 public:
 
-  WaitDialog();
+  VersionInfo();
 
-  ~WaitDialog();
+  string libVersion() const;
 
-  int getSteps() const;
+  bool load();
 
-  void setSteps(const int steps);
+  string majorVersion() const;
 
-  void nextStep(const string &description);
+  string release() const;
+
+  string releaseDate() const;
+
+  string version() const;
+
+  string versionNumber() const;
 
 private:
 
-  void pump();
-
-  void setMessageText(const string &text);
-
-  void setPercentComplete(int percent);
-
-  int _steps;
-  int _current;
+  string _version;
+  string _release;
 };
 
-#endif // __WaitDialog__
+#endif // __VersionInfo__

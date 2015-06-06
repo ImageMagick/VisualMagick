@@ -143,6 +143,7 @@
     <ClCompile Include="Solution.cpp">
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
+    <ClCompile Include="VersionInfo.cpp" />
     <ClCompile Include="WaitDialog.cpp">
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -173,6 +174,7 @@
     <ClInclude Include="ProjectFile.h" />
     <ClInclude Include="Shared.h" />
     <ClInclude Include="Solution.h" />
+    <ClInclude Include="VersionInfo.h" />
     <ClInclude Include="WaitDialog.h" />
     <ClInclude Include="ConfigureApp.h" />
     <ClInclude Include="ConfigureWizard.h" />
