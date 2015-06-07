@@ -565,7 +565,10 @@ void ProjectFile::writeVS2010_2012(wofstream &file,const vector<Project*> &allPr
   else if (_wizard->visualStudioVersion() == VS2013)
     file << "    <PlatformToolset>v120</PlatformToolset>" << endl;
   file << "    <UseOfMfc>false</UseOfMfc>" << endl;
-  file << "    <CharacterSet>MultiByte</CharacterSet>" << endl;
+  if (_project->useUnicode())
+    file << "    <CharacterSet>Unicode</CharacterSet>" << endl;
+  else
+    file << "    <CharacterSet>MultiByte</CharacterSet>" << endl;
   file << "  </PropertyGroup>" << endl;
 
   file << "  <Import Project=\"$(VCTargetsPath)\\Microsoft.Cpp.props\" />" << endl;

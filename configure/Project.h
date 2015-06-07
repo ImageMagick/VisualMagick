@@ -67,6 +67,8 @@ public:
 
   vector<wstring> &references();
 
+  bool useUnicode() const;
+
   int warningLevel() const;
 
   static Project* create(wstring name);
@@ -103,6 +105,7 @@ private:
   wstring              _name;
   vector<wstring>      _references;
   int                  _type;
+  bool                 _useUnicode;
   int                  _warningLevel;
 };
 

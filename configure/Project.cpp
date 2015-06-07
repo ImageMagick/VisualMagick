@@ -123,6 +123,11 @@ vector<wstring> &Project::references()
   return(_references);
 }
 
+bool Project::useUnicode() const
+{
+  return(_useUnicode);
+}
+
 int Project::warningLevel() const
 {
   return(_warningLevel);
@@ -216,6 +221,7 @@ Project::Project(wstring name)
   _isEnabled=true;
   _isOptional=false;
   _type=UNDEFINEDTYPE;
+  _useUnicode=false;
   _warningLevel=0;
 }
 
@@ -303,6 +309,8 @@ void Project::loadConfig(wifstream &config)
       _isOptional=true;
     else if (line == L"[REFERENCES]")
       addLines(config,_references);
+    else if (line == L"[UNICODE]")
+      _useUnicode=true;
     else if (line == L"[WARNING_LEVEL]")
       _warningLevel=stoi(readLine(config));
   }
