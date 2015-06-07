@@ -95,45 +95,45 @@ int CommandLineInfo::visualStudioVersion() const
   return(_visualStudioVersion);
 }
 
-void CommandLineInfo::ParseParam(const char* pszParam, BOOL bFlag, BOOL bLast)
+void CommandLineInfo::ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast)
 {
   if (!bFlag)
     return;
 
-  if (_strcmpi(pszParam, "dmt") == 0)
+  if (_wcsicmp(pszParam, L"dmt") == 0)
     _solutionType=DYNAMIC_MT;
-  else if (_strcmpi(pszParam, "smt") == 0)
+  else if (_wcsicmp(pszParam, L"smt") == 0)
     _solutionType=STATIC_MT;
-  else if (_strcmpi(pszParam, "smtd") == 0)
+  else if (_wcsicmp(pszParam, L"smtd") == 0)
     _solutionType=STATIC_MTD;
-  else if (_strcmpi(pszParam, "incompatibleLicense") == 0)
+  else if (_wcsicmp(pszParam, L"incompatibleLicense") == 0)
     _includeIncompatibleLicense=true;
-  else if (_strcmpi(pszParam, "noHdri") == 0)
+  else if (_wcsicmp(pszParam, L"noHdri") == 0)
     _useHDRI=false;
-  else if (_strcmpi(pszParam, "noOpenMP") == 0)
+  else if (_wcsicmp(pszParam, L"noOpenMP") == 0)
     _useOpenMP=false;
-  else if (_strcmpi(pszParam, "noWizard") == 0)
+  else if (_wcsicmp(pszParam, L"noWizard") == 0)
     _noWizard=true;
-  else if (_strcmpi(pszParam, "openCL") == 0)
+  else if (_wcsicmp(pszParam, L"openCL") == 0)
     _useOpenCL=true;
-  else if (_strcmpi(pszParam, "optional") == 0)
+  else if (_wcsicmp(pszParam, L"optional") == 0)
     _includeOptional=true;
-  else if (_strcmpi(pszParam, "Q8") == 0)
+  else if (_wcsicmp(pszParam, L"Q8") == 0)
     _quantumDepth=Q8;
-  else if (_strcmpi(pszParam, "Q16") == 0)
+  else if (_wcsicmp(pszParam, L"Q16") == 0)
     _quantumDepth=Q16;
-  else if (_strcmpi(pszParam, "Q32") == 0)
+  else if (_wcsicmp(pszParam, L"Q32") == 0)
     _quantumDepth=Q32;
-  else if (_strcmpi(pszParam, "Q64") == 0)
+  else if (_wcsicmp(pszParam, L"Q64") == 0)
     _quantumDepth=Q64;
-  else if (_strcmpi(pszParam, "x64") == 0)
+  else if (_wcsicmp(pszParam, L"x64") == 0)
     _build64bit=true;
-  else if (_strcmpi(pszParam, "VS2002") == 0)
+  else if (_wcsicmp(pszParam, L"VS2002") == 0)
     _visualStudioVersion=VS2002;
-  else if (_strcmpi(pszParam, "VS2010") == 0)
+  else if (_wcsicmp(pszParam, L"VS2010") == 0)
     _visualStudioVersion=VS2010;
-  else if (_strcmpi(pszParam, "VS2012") == 0)
+  else if (_wcsicmp(pszParam, L"VS2012") == 0)
     _visualStudioVersion=VS2012;
-  else if (_strcmpi(pszParam, "VS2013") == 0)
+  else if (_wcsicmp(pszParam, L"VS2013") == 0)
     _visualStudioVersion=VS2013;
 }

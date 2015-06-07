@@ -51,7 +51,7 @@ public:
 
   int visualStudioVersion() const;
 
-  virtual void ParseParam(const char* pszParam, BOOL bFlag, BOOL bLast);
+  virtual void ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast);
 
 private:
   bool _build64bit;
