@@ -9,6 +9,8 @@
 ..\..\ImageMagick
 ..\..\ImageMagick\Magick++\lib
 
+[UNICODE]
+
 [DEPENDENCIES]
 coders
 filters
