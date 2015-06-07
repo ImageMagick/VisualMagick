@@ -271,6 +271,11 @@ void Solution::write(const ConfigureWizard &wizard,ofstream &file)
     file << "Microsoft Visual Studio Solution File, Format Version 12.00" << endl;
     file << "# Visual Studio 2012" << endl;
   }
+  else if (wizard.visualStudioVersion() == VS2013)
+  {
+    file << "Microsoft Visual Studio Solution File, Format Version 12.00" << endl;
+    file << "# Visual Studio 2013" << endl;
+  }
 
   foreach (Project*,p,_projects)
   {

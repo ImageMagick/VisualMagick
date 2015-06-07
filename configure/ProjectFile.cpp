@@ -561,6 +561,8 @@ void ProjectFile::writeVS2010_2012(ofstream &file,const vector<Project*> &allPro
     file << "    <PlatformToolset>v100</PlatformToolset>" << endl;
   else if (_wizard->visualStudioVersion() == VS2012)
     file << "    <PlatformToolset>v110</PlatformToolset>" << endl;
+  else if (_wizard->visualStudioVersion() == VS2013)
+    file << "    <PlatformToolset>v120</PlatformToolset>" << endl;
   file << "    <UseOfMfc>false</UseOfMfc>" << endl;
   file << "    <CharacterSet>MultiByte</CharacterSet>" << endl;
   file << "  </PropertyGroup>" << endl;
@@ -570,8 +572,6 @@ void ProjectFile::writeVS2010_2012(ofstream &file,const vector<Project*> &allPro
   file << "  <PropertyGroup>" << endl;
   if (_wizard->visualStudioVersion() == VS2010)
     file << "    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>" << endl;
-  else if (_wizard->visualStudioVersion() == VS2012)
-    file << "    <_ProjectFileVersion>11.0.61030.0</_ProjectFileVersion>" << endl;
   file << "    <LinkIncremental>false</LinkIncremental>" << endl;
   file << "    <OutDir>" << (isLib() ? _wizard->libDirectory() : _wizard->binDirectory()) << "</OutDir>" << endl;
   if (_project->isExe())

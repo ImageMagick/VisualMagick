@@ -134,4 +134,6 @@ void CommandLineInfo::ParseParam(const char* pszParam, BOOL bFlag, BOOL bLast)
     _visualStudioVersion=VS2010;
   else if (_strcmpi(pszParam, "VS2012") == 0)
     _visualStudioVersion=VS2012;
+  else if (_strcmpi(pszParam, "VS2013") == 0)
+    _visualStudioVersion=VS2013;
 }
