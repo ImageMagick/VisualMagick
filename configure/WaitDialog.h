@@ -34,13 +34,13 @@ public:
 
   void setSteps(const int steps);
 
-  void nextStep(const string &description);
+  void nextStep(const wstring &description);
 
 private:
 
   void pump();
 
-  void setMessageText(const string &text);
+  void setMessageText(const wstring &text);
 
   void setPercentComplete(int percent);
 

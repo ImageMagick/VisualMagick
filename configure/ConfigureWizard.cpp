@@ -40,7 +40,7 @@ ConfigureWizard::~ConfigureWizard()
 {
 }
 
-string ConfigureWizard::binDirectory() const
+wstring ConfigureWizard::binDirectory() const
 {
   return(_systemPage.binDirectory());
 }
@@ -60,29 +60,29 @@ bool ConfigureWizard::includeOptional() const
   return(_targetPage.includeOptional());
 }
 
-string ConfigureWizard::intermediateDirectoryDebug() const
+wstring ConfigureWizard::intermediateDirectoryDebug() const
 {
   return(_systemPage.intermediateDirectoryDebug());
 }
 
-string ConfigureWizard::intermediateDirectoryRelease() const
+wstring ConfigureWizard::intermediateDirectoryRelease() const
 {
   return(_systemPage.intermediateDirectoryRelease());
 }
 
-string ConfigureWizard::libDirectory() const
+wstring ConfigureWizard::libDirectory() const
 {
   return(_systemPage.libDirectory());
 }
 
-string ConfigureWizard::openCLIncludePath() const
+wstring ConfigureWizard::openCLIncludePath() const
 {
   return(_targetPage.openCLIncludePath());
 }
 
-string ConfigureWizard::platform() const
+wstring ConfigureWizard::platform() const
 {
-  return(_targetPage.build64bit() ? "x64" : "Win32");
+  return(_targetPage.build64bit() ? L"x64" : L"Win32");
 }
 
 int ConfigureWizard::quantumDepth() const
@@ -90,16 +90,16 @@ int ConfigureWizard::quantumDepth() const
   return(_targetPage.quantumDepth());
 }
 
-string ConfigureWizard::solutionName() const
+wstring ConfigureWizard::solutionName() const
 {
   if (solutionType() == DYNAMIC_MT)
-    return("DynamicMT");
+    return(L"DynamicMT");
   else if (solutionType() == STATIC_MTD)
-    return("StaticMTD");
+    return(L"StaticMTD");
   else if (solutionType() == STATIC_MT)
-    return("StaticMT");
+    return(L"StaticMT");
   else
-    return("ThisShouldNeverHappen");
+    return(L"ThisShouldNeverHappen");
 }
 
 int ConfigureWizard::solutionType() const

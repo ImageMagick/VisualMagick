@@ -55,7 +55,7 @@ void Solution::loadProjects()
   WIN32_FIND_DATA
     data;
 
-  fileHandle=FindFirstFile("..\\*.*",&data);
+  fileHandle=FindFirstFile(L"..\\*.*",&data);
   do
   {
     if (fileHandle == INVALID_HANDLE_VALUE)
@@ -64,10 +64,10 @@ void Solution::loadProjects()
     if ((data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) != FILE_ATTRIBUTE_DIRECTORY)
       continue;
 
-    if (_stricmp(data.cFileName,".") == 0)
+    if (_wcsicmp(data.cFileName,L".") == 0)
       continue;
 
-    if (_stricmp(data.cFileName,"..") == 0)
+    if (_wcsicmp(data.cFileName,L"..") == 0)
       continue;
 
      Project* project = Project::create(data.cFileName);
@@ -83,7 +83,7 @@ void Solution::write(const ConfigureWizard &wizard,WaitDialog &waitDialog)
   int
     steps;
 
-  ofstream
+  wofstream
     file;
 
   steps=loadProjectFiles(wizard);
@@ -93,7 +93,7 @@ void Solution::write(const ConfigureWizard &wizard,WaitDialog &waitDialog)
   if (!file)
     return;
 
-  waitDialog.nextStep("Writing solution");
+  waitDialog.nextStep(L"Writing solution");
 
   write(wizard,file);
 
@@ -103,64 +103,64 @@ void Solution::write(const ConfigureWizard &wizard,WaitDialog &waitDialog)
   {
     foreach (ProjectFile*,pf,(*p)->files())
     {
-      waitDialog.nextStep("Writing: " + (*pf)->fileName());
+      waitDialog.nextStep(L"Writing: " + (*pf)->fileName());
       (*pf)->write(_projects);
     }
   }
 
-  waitDialog.nextStep("Writing configuration");
+  waitDialog.nextStep(L"Writing configuration");
   writeMagickBaseConfig(wizard);
 
-  waitDialog.nextStep("Writing version");
+  waitDialog.nextStep(L"Writing version");
   writeVersion();
 }
 
-string Solution::getFileName(const ConfigureWizard &wizard)
+wstring Solution::getFileName(const ConfigureWizard &wizard)
 {
-  string
+  wstring
     fileName;
 
-  fileName="..\\Visual" + wizard.solutionName();
+  fileName=L"..\\Visual" + wizard.solutionName();
 
-  return(fileName+".sln");
+  return(fileName+L".sln");
 }
 
-string Solution::getFolder()
+wstring Solution::getFolder()
 {
-  string
+  wstring
     folder;
 
-  folder="MagickCore";
-  if (!PathFileExists(("..\\..\\ImageMagick\\" + folder).c_str()))
-    folder="Magick";
+  folder=L"MagickCore";
+  if (!PathFileExists((L"..\\..\\ImageMagick\\" + folder).c_str()))
+    folder=L"Magick";
   return(folder);
 }
 
 void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
 {
-  string
+  wstring
     folder,
     line;
 
-  ifstream
+  wifstream
     configIn;
 
-  ofstream
+  wofstream
     config;
 
   folder=getFolder();
 
-  configIn.open("..\\" + folder + "\\magick-baseconfig.h.in");
+  configIn.open(L"..\\" + folder + L"\\magick-baseconfig.h.in");
   if (!configIn)
     return;
 
-  config.open("..\\..\\ImageMagick\\" + folder + "\\magick-baseconfig.h");
+  config.open(L"..\\..\\ImageMagick\\" + folder + L"\\magick-baseconfig.h");
   if (!config)
     return;
 
   while (getline(configIn,line))
   {
-    if (trim(line).compare("$$CONFIG$$") != 0)
+    if (trim(line).compare(L"$$CONFIG$$") != 0)
     {
       config << line << endl;
       continue;
@@ -214,13 +214,13 @@ void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
 
 void Solution::writeVersion()
 {
-  ifstream
+  wifstream
     versionIn;
 
-  ofstream
+  wofstream
     version;
 
-  string
+  wstring
     folder,
     line;
 
@@ -229,11 +229,11 @@ void Solution::writeVersion()
 
   folder=getFolder();
 
-  versionIn.open("..\\" + folder + "\\version.h.in");
+  versionIn.open(L"..\\" + folder + L"\\version.h.in");
   if (!versionIn)
     return;
 
-  version.open("..\\..\\ImageMagick\\" + folder + "\\version.h");
+  version.open(L"..\\..\\ImageMagick\\" + folder + L"\\version.h");
   if (!version)
     return;
 
@@ -242,19 +242,19 @@ void Solution::writeVersion()
 
   while (getline(versionIn,line))
   {
-    line=replace(line,"@PACKAGE_NAME@","ImageMagick");
-    line=replace(line,"@PACKAGE_LIB_VERSION@",versionInfo.libVersion());
-    line=replace(line,"@MAGICK_LIB_VERSION_TEXT@",versionInfo.version());
-    line=replace(line,"@MAGICK_LIB_VERSION_NUMBER@",versionInfo.versionNumber());
-    line=replace(line,"@PACKAGE_VERSION_ADDENDUM@",versionInfo.libAddendum());
-    line=replace(line,"@MAGICK_LIBRARY_CURRENT@",versionInfo.majorVersion());
-    line=replace(line,"@MAGICK_LIBRARY_CURRENT_MIN@",versionInfo.majorVersion());
-    line=replace(line,"@PACKAGE_RELEASE_DATE@",versionInfo.releaseDate());
+    line=replace(line,L"@PACKAGE_NAME@",L"ImageMagick");
+    line=replace(line,L"@PACKAGE_LIB_VERSION@",versionInfo.libVersion());
+    line=replace(line,L"@MAGICK_LIB_VERSION_TEXT@",versionInfo.version());
+    line=replace(line,L"@MAGICK_LIB_VERSION_NUMBER@",versionInfo.versionNumber());
+    line=replace(line,L"@PACKAGE_VERSION_ADDENDUM@",versionInfo.libAddendum());
+    line=replace(line,L"@MAGICK_LIBRARY_CURRENT@",versionInfo.majorVersion());
+    line=replace(line,L"@MAGICK_LIBRARY_CURRENT_MIN@",versionInfo.majorVersion());
+    line=replace(line,L"@PACKAGE_RELEASE_DATE@",versionInfo.releaseDate());
     version << line << endl;
   }
 }
 
-void Solution::write(const ConfigureWizard &wizard,ofstream &file)
+void Solution::write(const ConfigureWizard &wizard,wofstream &file)
 {
   size_t
     i;
@@ -311,7 +311,7 @@ void Solution::write(const ConfigureWizard &wizard,ofstream &file)
       foreach (ProjectFile*,pf,(*p)->files())
       {
         i=0;
-        foreach (string,dep,(*pf)->dependencies())
+        foreach (wstring,dep,(*pf)->dependencies())
         {
           foreach (Project*,depp,_projects)
           {

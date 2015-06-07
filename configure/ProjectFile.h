@@ -27,15 +27,15 @@ class Project;
 class ProjectFile
 {
 public:
-  ProjectFile(const ConfigureWizard *wizard,Project *project,const string &prefix,const string &name);
+  ProjectFile(const ConfigureWizard *wizard,Project *project,const wstring &prefix,const wstring &name);
 
-  vector<string> &dependencies();
+  vector<wstring> &dependencies();
 
-  string fileName() const;
+  wstring fileName() const;
 
-  string guid() const;
+  wstring guid() const;
 
-  string name() const;
+  wstring name() const;
 
   void loadConfig();
 
@@ -45,55 +45,55 @@ private:
 
   bool isLib() const;
 
-  void addLines(ifstream &config,vector<string> &container);
+  void addLines(wifstream &config,vector<wstring> &container);
 
-  string getIntermediateDirectoryName(const bool debug);
+  wstring getIntermediateDirectoryName(const bool debug);
 
-  string getTargetName(const bool debug);
+  wstring getTargetName(const bool debug);
 
-  void loadConfig(const string &fileName);
+  void loadConfig(const wstring &fileName);
 
-  void loadModule(const string &directory);
+  void loadModule(const wstring &directory);
 
   void loadSource();
 
-  void loadSource(const string &directory);
+  void loadSource(const wstring &directory);
 
   void setFileName();
 
   void setGuid();
 
-  void writeAdditionalDependencies(ofstream &file,const string &separator);
+  void writeAdditionalDependencies(wofstream &file,const wstring &separator);
 
-  void writeAdditionalIncludeDirectories(ofstream &file,const string &separator);
+  void writeAdditionalIncludeDirectories(wofstream &file,const wstring &separator);
 
-  void writePreprocessorDefinitions(ofstream &file,const bool debug);
+  void writePreprocessorDefinitions(wofstream &file,const bool debug);
 
-  void writeVS2002(ofstream &file);
+  void writeVS2002(wofstream &file);
 
-  void writeVS2002Configuration(ofstream &file,const bool debug);
+  void writeVS2002Configuration(wofstream &file,const bool debug);
 
-  void writeVS2002Files(ofstream &file,string name,const vector<string> &collection);
+  void writeVS2002Files(wofstream &file,wstring name,const vector<wstring> &collection);
 
-  void writeVS2010_2012(ofstream &file,const vector<Project*> &allProjects);
+  void writeVS2010_2012(wofstream &file,const vector<Project*> &allProjects);
 
-  void writeVS2010_2012ItemDefinitionGroup(ofstream &file,const bool debug);
+  void writeVS2010_2012ItemDefinitionGroup(wofstream &file,const bool debug);
 
-  void writeVS2010_2012Files(ofstream &file,const vector<string> &collection);
+  void writeVS2010_2012Files(wofstream &file,const vector<wstring> &collection);
 
-  void writeVS2010_2012ProjectReferences(ofstream &file,const vector<Project*> &allProjects);
+  void writeVS2010_2012ProjectReferences(wofstream &file,const vector<Project*> &allProjects);
 
-  string                 _fileName;
-  string                 _guid;
-  vector<string>         _cppFiles;
-  vector<string>         _dependencies;
-  vector<string>         _includeFiles;
-  vector<string>         _includes;
-  string                 _name;
-  string                 _prefix;
+  wstring                _fileName;
+  wstring                _guid;
+  vector<wstring>        _cppFiles;
+  vector<wstring>        _dependencies;
+  vector<wstring>        _includeFiles;
+  vector<wstring>        _includes;
+  wstring                _name;
+  wstring                _prefix;
   Project               *_project;
-  vector<string>         _resourceFiles;
-  vector<string>         _srcFiles;
+  vector<wstring>        _resourceFiles;
+  vector<wstring>        _srcFiles;
   const ConfigureWizard *_wizard;
 };
 

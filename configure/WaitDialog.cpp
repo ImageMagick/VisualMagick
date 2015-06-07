@@ -45,7 +45,7 @@ void WaitDialog::setSteps(const int steps)
   _current=0;
 }
 
-void WaitDialog::nextStep(const string &description)
+void WaitDialog::nextStep(const wstring &description)
 {
   setPercentComplete((++_current * 100)/_steps);
   setMessageText(description);
@@ -70,7 +70,7 @@ void WaitDialog::pump()
   while(AfxGetApp()->OnIdle(idle++));
 }
 
-void WaitDialog::setMessageText(const string &text)
+void WaitDialog::setMessageText(const wstring &text)
 {
   CStatic
     *control;

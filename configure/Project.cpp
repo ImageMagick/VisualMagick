@@ -21,42 +21,42 @@
 #include "Project.h"
 #include "Shared.h"
 
-string Project::configDefine() const
+wstring Project::configDefine() const
 {
   return(_configDefine);
 }
 
-vector<string> &Project::defines()
+vector<wstring> &Project::defines()
 {
   return(_defines);
 }
 
-vector<string> &Project::definesDll()
+vector<wstring> &Project::definesDll()
 {
   return(_definesDll);
 }
 
-vector<string> &Project::dependencies()
+vector<wstring> &Project::dependencies()
 {
   return(_dependencies);
 }
 
-vector<string> &Project::directories()
+vector<wstring> &Project::directories()
 {
   return(_directories);
 }
 
-vector<string> &Project::excludes()
+vector<wstring> &Project::excludes()
 {
   return(_excludes);
 }
 
-vector<string> &Project::excludesX64()
+vector<wstring> &Project::excludesX64()
 {
   return(_excludesX64);
 }
 
-vector<string> &Project::excludesX86()
+vector<wstring> &Project::excludesX86()
 {
   return(_excludesX86);
 }
@@ -66,7 +66,7 @@ vector<ProjectFile*> &Project::files()
   return(_files);
 }
 
-vector<string> &Project::includes()
+vector<wstring> &Project::includes()
 {
   return(_includes);
 }
@@ -103,22 +103,22 @@ bool Project::isModule() const
   return((_type == DLLMODULETYPE) || (_type == EXEMODULETYPE));
 }
 
-vector<string> &Project::libraries()
+vector<wstring> &Project::libraries()
 {
   return(_libraries);
 }
 
-string Project::moduleDefinitionFile() const
+wstring Project::moduleDefinitionFile() const
 {
   return(_moduleDefinitionFile);
 }
 
-string Project::name() const
+wstring Project::name() const
 {
   return(_name);
 }
 
-vector<string> &Project::references()
+vector<wstring> &Project::references()
 {
   return(_references);
 }
@@ -128,12 +128,12 @@ int Project::warningLevel() const
   return(_warningLevel);
 }
 
-Project* Project::create(string name)
+Project* Project::create(wstring name)
 {
-  ifstream
+  wifstream
     config;
 
-  config.open("..\\" + name + "\\Config.txt");
+  config.open(L"..\\" + name + L"\\Config.txt");
   if (!config)
     return((Project *) NULL);
 
@@ -164,7 +164,7 @@ bool Project::loadFiles(const ConfigureWizard &wizard)
   {
     case COMTYPE:
     {
-      projectFile=new ProjectFile(&wizard,this,"COM",_name);
+      projectFile=new ProjectFile(&wizard,this,L"COM",_name);
       _files.push_back(projectFile);
       break;
     }
@@ -174,21 +174,21 @@ bool Project::loadFiles(const ConfigureWizard &wizard)
         loadModules(wizard);
       else
       {
-        projectFile=new ProjectFile(&wizard,this,"CORE",_name);
+        projectFile=new ProjectFile(&wizard,this,L"CORE",_name);
         _files.push_back(projectFile);
       }
       break;
     }
     case DLLTYPE:
     {
-      projectFile=new ProjectFile(&wizard,this,"CORE",_name);
+      projectFile=new ProjectFile(&wizard,this,L"CORE",_name);
       _files.push_back(projectFile);
       break;
     }
     case APPTYPE:
     case EXETYPE:
     {
-      projectFile=new ProjectFile(&wizard,this,"UTIL",_name);
+      projectFile=new ProjectFile(&wizard,this,L"UTIL",_name);
       _files.push_back(projectFile);
       break;
     }
@@ -199,7 +199,7 @@ bool Project::loadFiles(const ConfigureWizard &wizard)
     }
     case STATICTYPE:
     {
-      projectFile=new ProjectFile(&wizard,this,"CORE",_name);
+      projectFile=new ProjectFile(&wizard,this,L"CORE",_name);
       _files.push_back(projectFile);
       break;
     }
@@ -208,7 +208,7 @@ bool Project::loadFiles(const ConfigureWizard &wizard)
   return(true);
 }
 
-Project::Project(string name)
+Project::Project(wstring name)
 {
   _name=name;
 
@@ -219,9 +219,9 @@ Project::Project(string name)
   _warningLevel=0;
 }
 
-void Project::addLines(ifstream &config,string &value)
+void Project::addLines(wifstream &config,wstring &value)
 {
-  string
+  wstring
     line;
 
   while (!config.eof())
@@ -230,13 +230,13 @@ void Project::addLines(ifstream &config,string &value)
     if (trim(line).empty())
       return;
 
-    value+=line+"\n";
+    value+=line+L"\n";
   }
 }
 
-void Project::addLines(ifstream &config,vector<string> &container)
+void Project::addLines(wifstream &config,vector<wstring> &container)
 {
-  string
+  wstring
     line;
 
   while (!config.eof())
@@ -249,61 +249,61 @@ void Project::addLines(ifstream &config,vector<string> &container)
   }
 }
 
-void Project::loadConfig(ifstream &config)
+void Project::loadConfig(wifstream &config)
 {
-  string
+  wstring
     line;
 
   while (!config.eof())
   {
     line=readLine(config);
-    if (line == "[APP]")
+    if (line == L"[APP]")
       _type=APPTYPE;
-    else if (line == "[COM]")
+    else if (line == L"[COM]")
       _type=COMTYPE;
-    else if (line == "[CONFIG_DEFINE]")
+    else if (line == L"[CONFIG_DEFINE]")
       addLines(config,_configDefine);
-    else if (line == "[DEFINES_DLL]")
+    else if (line == L"[DEFINES_DLL]")
       addLines(config,_definesDll);
-    else if (line == "[DEFINES]")
+    else if (line == L"[DEFINES]")
       addLines(config,_defines);
-    else if (line == "[DEPENDENCIES]")
+    else if (line == L"[DEPENDENCIES]")
       addLines(config,_dependencies);
-    else if (line == "[DIRECTORIES]")
+    else if (line == L"[DIRECTORIES]")
       addLines(config,_directories);
-    else if (line == "[DISABLED]")
+    else if (line == L"[DISABLED]")
       _isEnabled=false;
-    else if (line == "[DLL]")
+    else if (line == L"[DLL]")
       _type=DLLTYPE;
-    else if (line == "[DLLMODULE]")
+    else if (line == L"[DLLMODULE]")
       _type=DLLMODULETYPE;
-    else if (line == "[EXE]")
+    else if (line == L"[EXE]")
       _type=EXETYPE;
-    else if (line == "[EXEMODULE]")
+    else if (line == L"[EXEMODULE]")
       _type=EXEMODULETYPE;
-    else if (line == "[EXCLUDES]")
+    else if (line == L"[EXCLUDES]")
       addLines(config,_excludes);
-    else if (line == "[EXCLUDES_X86]")
+    else if (line == L"[EXCLUDES_X86]")
       addLines(config,_excludesX86);
-    else if (line == "[EXCLUDES_X64]")
+    else if (line == L"[EXCLUDES_X64]")
       addLines(config,_excludesX64);
-    else if (line == "[INCLUDES]")
+    else if (line == L"[INCLUDES]")
       addLines(config,_includes);
-    else if (line == "[INCOMPATIBLE_LICENSE]")
+    else if (line == L"[INCOMPATIBLE_LICENSE]")
       _hasIncompatibleLicense=true;
-    else if (line == "[STATIC]")
+    else if (line == L"[STATIC]")
       _type=STATICTYPE;
-    else if (line == "[LIBRARIES]")
+    else if (line == L"[LIBRARIES]")
       addLines(config,_libraries);
-    else if (line == "[MODULE_DEFINITION_FILE]")
+    else if (line == L"[MODULE_DEFINITION_FILE]")
       _moduleDefinitionFile=readLine(config);
-    else if (line == "[MODULE_PREFIX]")
+    else if (line == L"[MODULE_PREFIX]")
       _modulePrefix=readLine(config);
-    else if (line == "[OPTIONAL]")
+    else if (line == L"[OPTIONAL]")
       _isOptional=true;
-    else if (line == "[REFERENCES]")
+    else if (line == L"[REFERENCES]")
       addLines(config,_references);
-    else if (line == "[WARNING_LEVEL]")
+    else if (line == L"[WARNING_LEVEL]")
       _warningLevel=stoi(readLine(config));
   }
 }
@@ -316,15 +316,15 @@ void Project::loadModules(const ConfigureWizard &wizard)
   ProjectFile
     *projectFile;
 
-  string
+  wstring
     name;
 
   WIN32_FIND_DATA
     data;
 
-  foreach (string,dir,_directories)
+  foreach (wstring,dir,_directories)
   {
-    fileHandle=FindFirstFile((*dir + "\\*.*").c_str(),&data);
+    fileHandle=FindFirstFile((*dir + L"\\*.*").c_str(),&data);
     do
     {
       if (fileHandle == INVALID_HANDLE_VALUE)
@@ -338,10 +338,10 @@ void Project::loadModules(const ConfigureWizard &wizard)
 
       name=data.cFileName;
 
-      if (!endsWith(name,".c") && !endsWith(name,".cpp"))
+      if (!endsWith(name,L".c") && !endsWith(name,L".cpp"))
         continue;
 
-      name=name.substr(0, name.find_last_of("."));
+      name=name.substr(0, name.find_last_of(L"."));
       projectFile=new ProjectFile(&wizard,this,_modulePrefix,name);
       _files.push_back(projectFile);
 

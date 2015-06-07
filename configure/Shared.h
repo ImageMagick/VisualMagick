@@ -36,9 +36,9 @@ enum {Q8, Q16, Q32, Q64};
 #define foreach(type,var,collection) for(std::vector<type>::iterator var = collection.begin(); var != collection.end(); var++)
 #define foreach_const(type,var,collection) for(std::vector<type>::const_iterator var = collection.begin(); var != collection.end(); var++)
 
-static inline bool contains(vector<string> &container, const string s)
+static inline bool contains(vector<wstring> &container, const wstring s)
 {
-  foreach(string,c,container)
+  foreach(wstring,c,container)
   {
     if (*c == s)
       return(true);
@@ -46,21 +46,21 @@ static inline bool contains(vector<string> &container, const string s)
   return(false);
 }
 
-static inline bool endsWith(const std::string &s,const std::string &end)
+static inline bool endsWith(const wstring &s,const wstring &end)
 {
   size_t
     index;
 
   index=s.rfind(end);
-  if (index == string::npos)
+  if (index == wstring::npos)
     return false;
 
   return(s.substr(index) == end);
 }
 
-static inline string trim(const string &s)
+static inline wstring trim(const wstring &s)
 {
-  string
+  wstring
     result;
 
   result=s;
@@ -69,21 +69,21 @@ static inline string trim(const string &s)
   return(result);
 }
 
-static inline string readLine(ifstream &stream)
+static inline wstring readLine(wifstream &stream)
 {
-  string
+  wstring
     line;
 
   getline(stream,line);
   return(trim(line));
 }
 
-static inline string replace(const std::string &str, const std::string &from, const std::string &to)
+static inline wstring replace(const wstring &str, const wstring &from, const wstring &to)
 {
   size_t
     index;
 
-  string
+  wstring
     result;
 
   result=str;

@@ -27,25 +27,25 @@ class Project
 {
 public:
 
-  string configDefine() const;
+  wstring configDefine() const;
 
-  vector<string> &defines();
+  vector<wstring> &defines();
 
-  vector<string> &definesDll();
+  vector<wstring> &definesDll();
 
-  vector<string> &dependencies();
+  vector<wstring> &dependencies();
 
-  vector<string> &directories();
+  vector<wstring> &directories();
 
-  vector<string> &excludes();
+  vector<wstring> &excludes();
 
-  vector<string> &excludesX64();
+  vector<wstring> &excludesX64();
 
-  vector<string> &excludesX86();
+  vector<wstring> &excludesX86();
 
   vector<ProjectFile*> &files();
 
-  vector<string> &includes();
+  vector<wstring> &includes();
 
   bool isConsole() const;
 
@@ -59,49 +59,49 @@ public:
 
   bool isModule() const;
 
-  vector<string> &libraries();
+  vector<wstring> &libraries();
 
-  string moduleDefinitionFile() const;
+  wstring moduleDefinitionFile() const;
 
-  string name() const;
+  wstring name() const;
 
-  vector<string> &references();
+  vector<wstring> &references();
 
   int warningLevel() const;
 
-  static Project* create(string name);
+  static Project* create(wstring name);
 
   bool loadFiles(const ConfigureWizard &wizard);
 
 private:
-  Project(string name);
+  Project(wstring name);
 
-  void addLines(ifstream &config,string &value);
+  void addLines(wifstream &config,wstring &value);
 
-  void addLines(ifstream &config,vector<string> &container);
+  void addLines(wifstream &config,vector<wstring> &container);
 
-  void loadConfig(ifstream &config);
+  void loadConfig(wifstream &config);
 
   void loadModules(const ConfigureWizard &wizard);
 
-  string               _configDefine;
-  vector<string>       _defines;
-  vector<string>       _definesDll;
-  vector<string>       _dependencies;
-  vector<string>       _directories;
-  vector<string>       _excludes;
-  vector<string>       _excludesX64;
-  vector<string>       _excludesX86;
+  wstring              _configDefine;
+  vector<wstring>      _defines;
+  vector<wstring>      _definesDll;
+  vector<wstring>      _dependencies;
+  vector<wstring>      _directories;
+  vector<wstring>      _excludes;
+  vector<wstring>      _excludesX64;
+  vector<wstring>      _excludesX86;
   vector<ProjectFile*> _files;
   bool                 _hasIncompatibleLicense;
-  vector<string>       _includes;
+  vector<wstring>      _includes;
   bool                 _isEnabled;
   bool                 _isOptional;
-  vector<string>       _libraries;
-  string               _moduleDefinitionFile;
-  string               _modulePrefix;
-  string               _name;
-  vector<string>       _references;
+  vector<wstring>      _libraries;
+  wstring              _moduleDefinitionFile;
+  wstring              _modulePrefix;
+  wstring              _name;
+  vector<wstring>      _references;
   int                  _type;
   int                  _warningLevel;
 };

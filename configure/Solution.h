@@ -37,15 +37,15 @@ public:
 
 private:
 
-  string getFileName(const ConfigureWizard &wizard);
+  wstring getFileName(const ConfigureWizard &wizard);
 
-  string getFolder();
+  wstring getFolder();
 
   void writeMagickBaseConfig(const ConfigureWizard &wizard);
 
   void writeVersion();
 
-  void write(const ConfigureWizard &wizard,ofstream &file);
+  void write(const ConfigureWizard &wizard,wofstream &file);
 
   vector<Project*> _projects;
 };

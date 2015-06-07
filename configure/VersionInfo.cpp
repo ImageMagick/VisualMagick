@@ -25,25 +25,25 @@ VersionInfo::VersionInfo()
 {
 }
 
-string VersionInfo::libAddendum() const
+wstring VersionInfo::libAddendum() const
 {
-  return("-"+_release);
+  return(L"-"+_release);
 }
 
-string VersionInfo::libVersion() const
+wstring VersionInfo::libVersion() const
 {
-  return("0x"+replace(_version,".",""));
+  return(L"0x"+replace(_version,L".",L""));
 }
 
 bool VersionInfo::load()
 {
-  ifstream
+  wifstream
     version;
 
   size_t
     index;
 
-  string
+  wstring
     line;
 
   version.open("..\\..\\ImageMagick\\version.sh");
@@ -52,11 +52,11 @@ bool VersionInfo::load()
 
   while (getline(version,line))
   {
-    index=line.find("PACKAGE_VERSION=");
+    index=line.find(L"PACKAGE_VERSION=");
     if (index != string::npos)
       _version=line.substr(17,line.length()-18);
 
-    index=line.find("PACKAGE_RELEASE=");
+    index=line.find(L"PACKAGE_RELEASE=");
     if (index != string::npos)
       _release=line.substr(17,line.length()-18);
   }
@@ -64,18 +64,18 @@ bool VersionInfo::load()
   return(true);
 }
 
-string VersionInfo::majorVersion() const
+wstring VersionInfo::majorVersion() const
 {
   size_t
     index;
 
-  index=_version.find(".");
+  index=_version.find(L".");
   return(_version.substr(0,index));
 }
 
-string VersionInfo::releaseDate() const
+wstring VersionInfo::releaseDate() const
 {
-  char
+  wchar_t
     buffer[11];
 
   struct tm
@@ -86,17 +86,17 @@ string VersionInfo::releaseDate() const
 
   time(&t);
   (void) localtime_s(&tm,&t);
-  (void) strftime(buffer, sizeof(buffer), "%Y-%m-%d", &tm);
+  (void) wcsftime(buffer, sizeof(buffer), L"%Y-%m-%d", &tm);
 
-  return(string(buffer));
+  return(wstring(buffer));
 }
 
-string VersionInfo::version() const
+wstring VersionInfo::version() const
 {
   return(_version);
 }
 
-string VersionInfo::versionNumber() const
+wstring VersionInfo::versionNumber() const
 {
-  return(replace(_version,".",",")+","+_release);
+  return(replace(_version,L".",L",")+L","+_release);
 }

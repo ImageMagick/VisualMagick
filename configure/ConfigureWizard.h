@@ -36,7 +36,7 @@ public:
 
   virtual ~ConfigureWizard();
 
-  string binDirectory() const;
+  wstring binDirectory() const;
 
   bool build64bit() const;
 
@@ -44,19 +44,19 @@ public:
 
   bool includeOptional() const;
 
-  string intermediateDirectoryDebug() const;
+  wstring intermediateDirectoryDebug() const;
 
-  string intermediateDirectoryRelease() const;
+  wstring intermediateDirectoryRelease() const;
 
-  string libDirectory() const;
+  wstring libDirectory() const;
 
-  string openCLIncludePath() const;
+  wstring openCLIncludePath() const;
 
-  string platform() const;
+  wstring platform() const;
 
   int quantumDepth() const;
 
-  string solutionName() const;
+  wstring solutionName() const;
 
   int solutionType() const;
 

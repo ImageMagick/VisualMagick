@@ -36,22 +36,22 @@ SystemPage::~SystemPage()
 {
 }
 
-string SystemPage::binDirectory() const
+wstring SystemPage::binDirectory() const
 {
   return(addBackslash(_binDirectory));
 }
 
-string SystemPage::intermediateDirectoryDebug() const
+wstring SystemPage::intermediateDirectoryDebug() const
 {
   return(addBackslash(_intermediateDirectoryDebug));
 }
 
-string SystemPage::intermediateDirectoryRelease() const
+wstring SystemPage::intermediateDirectoryRelease() const
 {
   return(addBackslash(_intermediateDirectoryRelease));
 }
 
-string SystemPage::libDirectory() const
+wstring SystemPage::libDirectory() const
 {
   return(addBackslash(_libDirectory));
 }
@@ -78,7 +78,7 @@ void SystemPage::DoDataExchange(CDataExchange* pDX)
 
 void SystemPage::OnBinDirBrowse()
 {
-  setDirectory("Select Bin directory",_binDirectory);
+  setDirectory(L"Select Bin directory",_binDirectory);
 }
 
 BOOL SystemPage::OnInitDialog() 
@@ -92,17 +92,17 @@ BOOL SystemPage::OnInitDialog()
 
 void SystemPage::OnIntermediateDirectoryDebugBrowse()
 {
-  setDirectory("Select Debug directory",_intermediateDirectoryDebug);
+  setDirectory(L"Select Debug directory",_intermediateDirectoryDebug);
 }
 
 void SystemPage::OnIntermediateDirectoryReleaseBrowse()
 {
-  setDirectory("Select Release directory",_intermediateDirectoryRelease);
+  setDirectory(L"Select Release directory",_intermediateDirectoryRelease);
 }
 
 void SystemPage::OnLibDirBrowse()
 {
-  setDirectory("Select Lib directory",_libDirectory);
+  setDirectory(L"Select Lib directory",_libDirectory);
 }
 
 BEGIN_MESSAGE_MAP(SystemPage, CPropertyPage)
@@ -112,17 +112,17 @@ BEGIN_MESSAGE_MAP(SystemPage, CPropertyPage)
   ON_BN_CLICKED(IDC_BIN_DIR_BROWSE, OnLibDirBrowse)
 END_MESSAGE_MAP()
 
-string SystemPage::addBackslash(const CString &directory) const
+wstring SystemPage::addBackslash(const CString &directory) const
 {
   if (directory.GetAt(directory.GetLength()-1) != '\\')
-    return(string(directory) + "\\");
+    return(wstring(directory) + L"\\");
   else
-    return(string(directory));
+    return(wstring(directory));
 }
 
-bool SystemPage::browseForFolder(const char *title, char *retval)
+bool SystemPage::browseForFolder(const wchar_t *title, wchar_t *retval)
 {
-  char
+  wchar_t
     directory[_MAX_PATH];
 
   BROWSEINFO
@@ -159,9 +159,9 @@ bool SystemPage::browseForFolder(const char *title, char *retval)
   return(true);
 }
 
-void SystemPage::setDirectory(const string &title,CString &directory)
+void SystemPage::setDirectory(const wstring &title,CString &directory)
 {
-  char
+  wchar_t
     path[_MAX_PATH];
 
   UpdateData(TRUE);

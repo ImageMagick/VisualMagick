@@ -30,13 +30,13 @@ public:
 
   ~SystemPage();
 
-  string binDirectory() const;
+  wstring binDirectory() const;
 
-  string intermediateDirectoryDebug() const;
+  wstring intermediateDirectoryDebug() const;
 
-  string intermediateDirectoryRelease() const;
+  wstring intermediateDirectoryRelease() const;
 
-  string libDirectory() const;
+  wstring libDirectory() const;
 
   virtual BOOL OnSetActive();
 
@@ -58,11 +58,11 @@ protected:
 
 private:
 
-  string addBackslash(const CString &directory) const;
+  wstring addBackslash(const CString &directory) const;
 
-  bool browseForFolder(const char *title, char *retval);
+  bool browseForFolder(const wchar_t *title, wchar_t *retval);
 
-  void setDirectory(const string &title,CString &directory);
+  void setDirectory(const wstring &title,CString &directory);
 
   CString _binDirectory;
   CString _intermediateDirectoryDebug;

@@ -32,7 +32,7 @@ TargetPage::TargetPage() : CPropertyPage(IDD_TARGET_PAGE)
   _includeIncompatibleLicense=FALSE;
   _quantumDepth=Q16;
   _solutionType=DYNAMIC_MT;
-  _useHDRI=PathFileExists("..\\MagickCore") ? TRUE : FALSE;
+  _useHDRI=PathFileExists(L"..\\MagickCore") ? TRUE : FALSE;
   _useOpenCL=!_openCLIncludePath.empty();
   _useOpenMP=TRUE;
 }
@@ -71,7 +71,7 @@ void TargetPage::build64bit(bool value)
   _build64bit=value;
 }
 
-string TargetPage::openCLIncludePath() const
+wstring TargetPage::openCLIncludePath() const
 {
   return(_openCLIncludePath);
 }
@@ -173,22 +173,22 @@ BOOL TargetPage::OnInitDialog()
 BEGIN_MESSAGE_MAP(TargetPage, CPropertyPage)
 END_MESSAGE_MAP()
 
-string TargetPage::getEnvironmentVariable(const char *name)
+wstring TargetPage::getEnvironmentVariable(const wchar_t *name)
 {
-  char
+  wchar_t
     *buffer;
 
   size_t
     length;
 
-  string
+  wstring
     value;
 
-  if (_dupenv_s(&buffer,&length,name) == 0)
+  if (_wdupenv_s(&buffer,&length,name) == 0)
   {
     if (length > 0)
     {
-      value=string(buffer);
+      value=wstring(buffer);
       free(buffer);
       return(value);
     }
@@ -197,31 +197,31 @@ string TargetPage::getEnvironmentVariable(const char *name)
   return(value);
 }
 
-bool TargetPage::openCLIncludePathExists(const char *name)
+bool TargetPage::openCLIncludePathExists(const wchar_t *name)
 {
-  _openCLIncludePath=getEnvironmentVariable(name) + "\\include";
+  _openCLIncludePath=getEnvironmentVariable(name) + L"\\include";
   return(PathFileExists(_openCLIncludePath.c_str()) ? true : false);
 }
 
 void TargetPage::setOpenCLIncludePath()
 {
-  if (openCLIncludePathExists("AMDAPPSDKROOT"))
+  if (openCLIncludePathExists(L"AMDAPPSDKROOT"))
     return;
 
-  if (openCLIncludePathExists("CUDA_PATH"))
+  if (openCLIncludePathExists(L"CUDA_PATH"))
     return;
 
-  if (openCLIncludePathExists("INTELOCLSDKROOT"))
+  if (openCLIncludePathExists(L"INTELOCLSDKROOT"))
     return;
 
-  _openCLIncludePath="";
+  _openCLIncludePath=L"";
 }
 
 void TargetPage::setVisualStudioVersion()
 {
-  if (!getEnvironmentVariable("VS110COMNTOOLS").empty())
+  if (!getEnvironmentVariable(L"VS110COMNTOOLS").empty())
     _visualStudioVersion=VS2012;
-  else if (!getEnvironmentVariable("VS100COMNTOOLS").empty())
+  else if (!getEnvironmentVariable(L"VS100COMNTOOLS").empty())
     _visualStudioVersion=VS2010;
   else
     _visualStudioVersion=VS2002;

@@ -24,7 +24,7 @@
 #include <algorithm>
 #include <map>
 
-ProjectFile::ProjectFile(const ConfigureWizard *wizard,Project* project,const string &prefix,const string &name)
+ProjectFile::ProjectFile(const ConfigureWizard *wizard,Project* project,const wstring &prefix,const wstring &name)
 {
   _wizard=wizard;
   _project=project;
@@ -34,35 +34,35 @@ ProjectFile::ProjectFile(const ConfigureWizard *wizard,Project* project,const st
   setFileName();
   setGuid();
 
-  foreach(string,dep,project->dependencies())
+  foreach(wstring,dep,project->dependencies())
   {
     _dependencies.push_back(*dep);
   }
 
-  foreach(string,inc,project->includes())
+  foreach(wstring,inc,project->includes())
   {
     _includes.push_back(*inc);
   }
 }
 
-vector<string> &ProjectFile::dependencies()
+vector<wstring> &ProjectFile::dependencies()
 {
   return(_dependencies);
 }
 
-string ProjectFile::fileName() const
+wstring ProjectFile::fileName() const
 {
   return(_fileName);
 }
 
-string ProjectFile::guid() const
+wstring ProjectFile::guid() const
 {
   return(_guid);
 }
 
-string ProjectFile::name() const
+wstring ProjectFile::name() const
 {
-  return(_prefix+"_"+_name);
+  return(_prefix+L"_"+_name);
 }
 
 void ProjectFile::loadConfig()
@@ -70,7 +70,7 @@ void ProjectFile::loadConfig()
   HANDLE
     fileHandle;
 
-  string
+  wstring
     fileName;
 
   WIN32_FIND_DATA
@@ -81,12 +81,12 @@ void ProjectFile::loadConfig()
 
   if (_wizard->solutionType() == DYNAMIC_MT)
   {
-    fileName="..\\" + _project->name() + "\\Config." + _name + ".txt";
+    fileName=L"..\\" + _project->name() + L"\\Config." + _name + L".txt";
     loadConfig(fileName);
   }
   else
   {
-    fileHandle=FindFirstFile(("..\\" + _project->name() + "\\*.txt").c_str(),&data);
+    fileHandle=FindFirstFile((L"..\\" + _project->name() + L"\\*.txt").c_str(),&data);
     do
     {
       if (fileHandle == INVALID_HANDLE_VALUE)
@@ -95,10 +95,10 @@ void ProjectFile::loadConfig()
       if ((data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == FILE_ATTRIBUTE_DIRECTORY)
         continue;
 
-      if (strcmp(data.cFileName,"Config.txt") == 0)
+      if (wcscmp(data.cFileName,L"Config.txt") == 0)
         continue;
 
-      loadConfig("..\\" + _project->name() + "\\" + data.cFileName);
+      loadConfig(L"..\\" + _project->name() + L"\\" + data.cFileName);
 
     } while (FindNextFile(fileHandle,&data));
   }
@@ -106,10 +106,10 @@ void ProjectFile::loadConfig()
 
 void ProjectFile::write(const vector<Project*> &allprojects)
 {
-  ofstream
+  wofstream
     file;
 
-  file.open("..\\" + _project->name() + "\\" + _fileName);
+  file.open(L"..\\" + _project->name() + L"\\" + _fileName);
   if (!file)
     return;
 
@@ -131,9 +131,9 @@ bool ProjectFile::isLib() const
   return(_project->isLib() || (_wizard->solutionType() != DYNAMIC_MT && _project->isDll()));
 }
 
-void ProjectFile::addLines(ifstream &config,vector<string> &container)
+void ProjectFile::addLines(wifstream &config,vector<wstring> &container)
 {
-  string
+  wstring
     line;
 
   while (!config.eof())
@@ -146,38 +146,39 @@ void ProjectFile::addLines(ifstream &config,vector<string> &container)
       container.push_back(line);
   }
 }
-string ProjectFile::getIntermediateDirectoryName(const bool debug)
+
+wstring ProjectFile::getIntermediateDirectoryName(const bool debug)
 {
-  string
+  wstring
     directoryName;
 
   directoryName = (debug ? _wizard->intermediateDirectoryDebug() : _wizard->intermediateDirectoryRelease());
-  directoryName += _wizard->solutionName() + "-" + _wizard->platform();
-  directoryName += "\\" + _prefix + "_" + _name + "\\";
+  directoryName += _wizard->solutionName() + L"-" + _wizard->platform();
+  directoryName += L"\\" + _prefix + L"_" + _name + L"\\";
   return(directoryName);
 }
 
-string ProjectFile::getTargetName(const bool debug)
+wstring ProjectFile::getTargetName(const bool debug)
 {
-  string
+  wstring
     targetName;
 
   if (_project->isCom())
     return _name;
 
-  targetName=_prefix+"_";
-  if (_prefix.compare("FILTER") != 0)
-    targetName+=string(debug ? "DB" : "RL")+"_";
-  targetName+=_name+"_";
+  targetName=_prefix+L"_";
+  if (_prefix.compare(L"FILTER") != 0)
+    targetName+=wstring(debug ? L"DB" : L"RL")+L"_";
+  targetName+=_name+L"_";
   return(targetName);
 }
 
-void ProjectFile::loadConfig(const string &fileName)
+void ProjectFile::loadConfig(const wstring &fileName)
 {
-  ifstream
+  wifstream
     config;
 
-  string
+  wstring
     line;
 
   config.open(fileName);
@@ -187,34 +188,34 @@ void ProjectFile::loadConfig(const string &fileName)
   while (!config.eof())
   {
     line=readLine(config);
-    if (line == "[DEPENDENCIES]")
+    if (line == L"[DEPENDENCIES]")
       addLines(config,_dependencies);
-    else if (line == "[INCLUDES]")
+    else if (line == L"[INCLUDES]")
       addLines(config,_includes);
-    else if (line == "[CPP]")
+    else if (line == L"[CPP]")
       addLines(config,_cppFiles);
   }
 
   config.close();
 }
 
-void ProjectFile::loadModule(const string &directory)
+void ProjectFile::loadModule(const wstring &directory)
 {
-  string
+  wstring
     file;
 
-  file=directory + "\\" + _name + ".c";
+  file=directory + L"\\" + _name + L".c";
   if (!PathFileExists(file.c_str()))
-    file=directory + "\\" + _name + ".cpp";
+    file=directory + L"\\" + _name + L".cpp";
   _srcFiles.push_back(file);
 }
 
 void ProjectFile::loadSource()
 {
-  string
+  wstring
     resourceFile;
 
-  foreach (string,d,_project->directories())
+  foreach (wstring,d,_project->directories())
   {
     if ((_project->isModule()) && (_project->isExe() || (_project->isDll() && _wizard->solutionType() == DYNAMIC_MT)))
       loadModule(*d);
@@ -222,12 +223,12 @@ void ProjectFile::loadSource()
       loadSource(*d);
   }
 
-  resourceFile="..\\" + _project->name() + "\\Resource.rc";
+  resourceFile=L"..\\" + _project->name() + L"\\Resource.rc";
   if (PathFileExists(resourceFile.c_str()))
     _resourceFiles.push_back(resourceFile);
 }
 
-void ProjectFile::loadSource(const string &directory)
+void ProjectFile::loadSource(const wstring &directory)
 {
   HANDLE
     fileHandle;
@@ -235,7 +236,7 @@ void ProjectFile::loadSource(const string &directory)
   WIN32_FIND_DATA
     data;
 
-  fileHandle=FindFirstFile((directory + "\\*.*").c_str(),&data);
+  fileHandle=FindFirstFile((directory + L"\\*.*").c_str(),&data);
   do
   {
     if (fileHandle == INVALID_HANDLE_VALUE)
@@ -250,12 +251,12 @@ void ProjectFile::loadSource(const string &directory)
     if (contains((_wizard->build64bit() ? _project->excludesX64() : _project->excludesX86()),data.cFileName))
       continue;
 
-    if (endsWith(data.cFileName,".asm") || endsWith(data.cFileName,".c") || endsWith(data.cFileName,".cpp") || endsWith(data.cFileName,".nasm"))
-      _srcFiles.push_back(directory + "\\" + data.cFileName);
-    else if (endsWith(data.cFileName,".h"))
-      _includeFiles.push_back(directory + "\\" + data.cFileName);
-    else if (endsWith(data.cFileName,".rc"))
-      _resourceFiles.push_back(directory + "\\" + data.cFileName);
+    if (endsWith(data.cFileName,L".asm") || endsWith(data.cFileName,L".c") || endsWith(data.cFileName,L".cpp") || endsWith(data.cFileName,L".nasm"))
+      _srcFiles.push_back(directory + L"\\" + data.cFileName);
+    else if (endsWith(data.cFileName,L".h"))
+      _includeFiles.push_back(directory + L"\\" + data.cFileName);
+    else if (endsWith(data.cFileName,L".rc"))
+      _resourceFiles.push_back(directory + L"\\" + data.cFileName);
 
   } while (FindNextFile(fileHandle,&data));
 
@@ -264,12 +265,12 @@ void ProjectFile::loadSource(const string &directory)
 
 void ProjectFile::setFileName()
 {
-  _fileName=_prefix+"_"+_name+"_"+_wizard->solutionName();
+  _fileName=_prefix+L"_"+_name+L"_"+_wizard->solutionName();
 
   if (_wizard->visualStudioVersion() == VS2002)
-    _fileName+=".vcproj";
+    _fileName+=L".vcproj";
   else
-   _fileName+=".vcxproj";
+   _fileName+=L".vcxproj";
 }
 
 void ProjectFile::setGuid()
@@ -277,31 +278,31 @@ void ProjectFile::setGuid()
   GUID
     guid;
 
-  RPC_CSTR
+  RPC_WSTR
     guidStr;
 
   CoCreateGuid(&guid);
   UuidToString(&guid,&guidStr);
-  _guid=string((char *) guidStr);
+  _guid=wstring((wchar_t *) guidStr);
   transform(_guid.begin(),_guid.end(),_guid.begin(),::toupper);
   RpcStringFree(&guidStr);
 }
 
-void ProjectFile::writeAdditionalDependencies(ofstream &file,const string &separator)
+void ProjectFile::writeAdditionalDependencies(wofstream &file,const wstring &separator)
 {
-  foreach (string,lib,_project->libraries())
+  foreach (wstring,lib,_project->libraries())
   {
     file << separator << *lib;
   }
 }
 
-void ProjectFile::writeAdditionalIncludeDirectories(ofstream &file,const string &separator)
+void ProjectFile::writeAdditionalIncludeDirectories(wofstream &file,const wstring &separator)
 {
-  foreach (string,dir,_project->directories())
+  foreach (wstring,dir,_project->directories())
   {
     file << separator << *dir;
   }
-  foreach (string,dir,_includes)
+  foreach (wstring,dir,_includes)
   {
     file << separator << *dir;
   }
@@ -309,10 +310,10 @@ void ProjectFile::writeAdditionalIncludeDirectories(ofstream &file,const string 
     file << separator << _wizard->openCLIncludePath();
 }
 
-void ProjectFile::writePreprocessorDefinitions(ofstream &file,const bool debug)
+void ProjectFile::writePreprocessorDefinitions(wofstream &file,const bool debug)
 {
   file << (debug ? "_DEBUG" : "NDEBUG") << ";_WINDOWS;WIN32;_VISUALC_;NeedFunctionPrototypes";
-  foreach (string,def,_project->defines())
+  foreach (wstring,def,_project->defines())
   {
     file << ";" << *def;
   }
@@ -320,7 +321,7 @@ void ProjectFile::writePreprocessorDefinitions(ofstream &file,const bool debug)
     file << ";_LIB";
   else if (_project->isDll())
   {
-    foreach (string,def,_project->definesDll())
+    foreach (wstring,def,_project->definesDll())
     {
       file << ";" << *def;
     }
@@ -330,7 +331,7 @@ void ProjectFile::writePreprocessorDefinitions(ofstream &file,const bool debug)
     file << ";_AFXDLL";
 }
 
-void ProjectFile::writeVS2002(ofstream &file)
+void ProjectFile::writeVS2002(wofstream &file)
 {
   file << "<?xml version=\"1.0\" encoding = \"Windows-1252\"?>" << endl;
   file << "<VisualStudioProject" << endl;
@@ -350,17 +351,17 @@ void ProjectFile::writeVS2002(ofstream &file)
   file << "  </Configurations>" << endl;
   file << "  <Files>" << endl;
 
-  writeVS2002Files(file,"src",_srcFiles);
-  writeVS2002Files(file,"include",_includeFiles);
-  writeVS2002Files(file,"resource",_resourceFiles);
+  writeVS2002Files(file,L"src",_srcFiles);
+  writeVS2002Files(file,L"include",_includeFiles);
+  writeVS2002Files(file,L"resource",_resourceFiles);
 
   file << "  </Files>" << endl;
   file << "</VisualStudioProject>" << endl;
 }
 
-void ProjectFile::writeVS2002Configuration(ofstream &file,const bool debug)
+void ProjectFile::writeVS2002Configuration(wofstream &file,const bool debug)
 {
-  string
+  wstring
     name;
 
   file << "    <Configuration" << endl;
@@ -396,7 +397,7 @@ void ProjectFile::writeVS2002Configuration(ofstream &file,const bool debug)
   file << "        OmitFramePointers=\"" << (debug ? "FALSE" : "TRUE") << "\"" << endl;
   file << "        Optimization=\"" << (debug ? "0" : "3") << "\"" << endl;
   file << "        AdditionalIncludeDirectories=\".";
-  writeAdditionalIncludeDirectories(file, ",");
+  writeAdditionalIncludeDirectories(file,L",");
   file << "\"" << endl;
   file << "        PreprocessorDefinitions=\"";
   writePreprocessorDefinitions(file,debug);
@@ -411,7 +412,7 @@ void ProjectFile::writeVS2002Configuration(ofstream &file,const bool debug)
   file << "        Name=\"" << (isLib() ? "VCLibrarianTool" : "VCLinkerTool") << "\"" << endl;
   file << "        AdditionalLibraryDirectories=\"" << _wizard->libDirectory() << "\"" << endl;
   file << "        AdditionalDependencies=\"/MACHINE:" << (_wizard->build64bit() ? "AMD64" : "X86") << "";
-  writeAdditionalDependencies(file," ");
+  writeAdditionalDependencies(file,L" ");
   file << "\"" << endl;
   file << "        SuppressStartupBanner=\"TRUE\"" << endl;
   file << "        LinkIncremental=\"1\"" << endl;
@@ -442,23 +443,23 @@ void ProjectFile::writeVS2002Configuration(ofstream &file,const bool debug)
   file << "    </Configuration>" << endl;
 }
 
-void ProjectFile::writeVS2002Files(ofstream &file,string name,const vector<string> &collection)
+void ProjectFile::writeVS2002Files(wofstream &file,wstring name,const vector<wstring> &collection)
 {
   int
     count;
 
-  map<string, int>
+  map<wstring, int>
     fileCount;
 
-  string
+  wstring
     fileName,
     folder,
     objFile;
 
   file << "    <Filter Name=\"" << name << "\" Filter=\"\">" << endl;
-  foreach_const (string,f,collection)
+  foreach_const (wstring,f,collection)
   {
-    if (endsWith((*f),".asm"))
+    if (endsWith((*f),L".asm"))
     {
       file << "      <File RelativePath=\"" << *f << "\">" << endl;
       file << "        <FileConfiguration Name=\"Debug|" << _wizard->platform() << "\">" << endl;
@@ -469,9 +470,9 @@ void ProjectFile::writeVS2002Files(ofstream &file,string name,const vector<strin
       file << "        </FileConfiguration>" << endl;
       file << "      </File>" << endl;
     }
-    else if (endsWith((*f),".nasm"))
+    else if (endsWith((*f),L".nasm"))
     {
-      folder=(*f).substr(0,(*f).find_last_of("\\") + 1);
+      folder=(*f).substr(0,(*f).find_last_of(L"\\") + 1);
       file << "      <File RelativePath=\"" << *f << "\">" << endl;
       file << "        <FileConfiguration Name=\"Debug|" << _wizard->platform() << "\">" << endl;
       file << "          <Tool Name=\"VCCustomBuildTool\" CommandLine=\"..\\build\\nasm -fwin" << (_wizard->build64bit() ? "64" : "32") << " -DWIN" << (_wizard->build64bit() ? "64 -D__x86_64__" : "32") << " -I" << folder << " -o &quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
@@ -481,7 +482,7 @@ void ProjectFile::writeVS2002Files(ofstream &file,string name,const vector<strin
       file << "        </FileConfiguration>" << endl;
       file << "      </File>" << endl;
     }
-    else if (endsWith((*f),".c"))
+    else if (endsWith((*f),L".c"))
     {
       if (contains(_cppFiles,(*f)))
       {
@@ -496,7 +497,7 @@ void ProjectFile::writeVS2002Files(ofstream &file,string name,const vector<strin
       }
       else
       {
-        fileName=(*f).substr((*f).find_last_of("\\") + 1);
+        fileName=(*f).substr((*f).find_last_of(L"\\") + 1);
 
         count=1;
         if (fileCount.find(fileName) == fileCount.end())
@@ -510,8 +511,8 @@ void ProjectFile::writeVS2002Files(ofstream &file,string name,const vector<strin
           }
         else
         {
-          objFile=(*f).substr(0,(*f).find_last_of(".") + 1);
-          objFile=objFile.substr(objFile.find_last_of("\\") + 1);
+          objFile=(*f).substr(0,(*f).find_last_of(L".") + 1);
+          objFile=objFile.substr(objFile.find_last_of(L"\\") + 1);
           file << "      <File RelativePath=\"" << *f << "\">" << endl;
           file << "        <FileConfiguration Name=\"Debug|" << _wizard->platform() << "\">" << endl;
           file << "          <Tool Name=\"VCCLCompilerTool\" ObjectFile=\"$(IntDir)\\" << objFile << count << ".obj\"/>" << endl;
@@ -529,7 +530,7 @@ void ProjectFile::writeVS2002Files(ofstream &file,string name,const vector<strin
   file << "    </Filter>" << endl;
 }
 
-void ProjectFile::writeVS2010_2012(ofstream &file,const vector<Project*> &allProjects)
+void ProjectFile::writeVS2010_2012(wofstream &file,const vector<Project*> &allProjects)
 {
   file << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << endl;
   file << "<Project DefaultTargets=\"Build\" ToolsVersion=\"4.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">" << endl;
@@ -600,9 +601,9 @@ void ProjectFile::writeVS2010_2012(ofstream &file,const vector<Project*> &allPro
   file << "</Project>" << endl;
 }
 
-void ProjectFile::writeVS2010_2012ItemDefinitionGroup(ofstream &file,const bool debug)
+void ProjectFile::writeVS2010_2012ItemDefinitionGroup(wofstream &file,const bool debug)
 {
-  string
+  wstring
     name;
 
   file << "  <ItemDefinitionGroup Condition=\"'$(Configuration)|$(Platform)'=='" << (debug ? "Debug" : "Release") << "|" << _wizard->platform() << "'\">" << endl;
@@ -623,7 +624,7 @@ void ProjectFile::writeVS2010_2012ItemDefinitionGroup(ofstream &file,const bool 
   file << "      <OmitFramePointers>" << (debug ? "false" : "true") <<"</OmitFramePointers>" << endl;
   file << "      <Optimization>" << (debug ? "Disabled" : "Full") <<"</Optimization>" << endl;
   file << "      <AdditionalIncludeDirectories>";
-  writeAdditionalIncludeDirectories(file,";");
+  writeAdditionalIncludeDirectories(file,L";");
   file << ";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>" << endl;
   file << "      <PreprocessorDefinitions>";
   writePreprocessorDefinitions(file,debug);
@@ -642,7 +643,7 @@ void ProjectFile::writeVS2010_2012ItemDefinitionGroup(ofstream &file,const bool 
     file << "    <Lib>" << endl;
     file << "      <AdditionalLibraryDirectories>" << _wizard->libDirectory() << ";%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>" << endl;
     file << "      <AdditionalDependencies>/MACHINE:" << (_wizard->build64bit() ? "AMD64" : "X86");
-    writeAdditionalDependencies(file,";");
+    writeAdditionalDependencies(file,L";");
     file << ";%(AdditionalDependencies)</AdditionalDependencies>" << endl;
     file << "      <SuppressStartupBanner>true</SuppressStartupBanner>" << endl;
     file << "    </Lib>" << endl;
@@ -652,7 +653,7 @@ void ProjectFile::writeVS2010_2012ItemDefinitionGroup(ofstream &file,const bool 
     file << "    <Link>" << endl;
     file << "      <AdditionalLibraryDirectories>" << _wizard->libDirectory() << ";%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>" << endl;
     file << "      <AdditionalDependencies>/MACHINE:" << (_wizard->build64bit() ? "AMD64" : "X86");
-    writeAdditionalDependencies(file,";");
+    writeAdditionalDependencies(file,L";");
     file << ";%(AdditionalDependencies)</AdditionalDependencies>" << endl;
     file << "      <SuppressStartupBanner>true</SuppressStartupBanner>" << endl;
     file << "      <TargetMachine>Machine" << (_wizard->build64bit() ? "X64" : "X86") << "</TargetMachine>" << endl;
@@ -674,15 +675,15 @@ void ProjectFile::writeVS2010_2012ItemDefinitionGroup(ofstream &file,const bool 
   file << "  </ItemDefinitionGroup>" << endl;
 }
 
-void ProjectFile::writeVS2010_2012Files(ofstream &file,const vector<string> &collection)
+void ProjectFile::writeVS2010_2012Files(wofstream &file,const vector<wstring> &collection)
 {
   int
     count;
 
-  map<string, int>
+  map<wstring, int>
     fileCount;
 
-  string
+  wstring
     fileName,
     folder,
     objFile;
@@ -691,22 +692,22 @@ void ProjectFile::writeVS2010_2012Files(ofstream &file,const vector<string> &col
     return;
 
   file << "  <ItemGroup>" << endl;
-  foreach_const (string,f,collection)
+  foreach_const (wstring,f,collection)
   {
-    if (endsWith((*f),".rc"))
+    if (endsWith((*f),L".rc"))
       file << "    <ResourceCompile Include=\"" << *f << "\" />" << endl;
-    else if (endsWith((*f),".h"))
+    else if (endsWith((*f),L".h"))
       file << "    <ClInclude Include=\"" << *f << "\" />" << endl;
-    else if (endsWith((*f),".asm"))
+    else if (endsWith((*f),L".asm"))
     {
       file << "    <CustomBuild Include=\"" << *f << "\">" << endl;
       file << "      <Command>ml" << (_wizard->build64bit() ? "64" : "") << " /nologo /c /Cx " << (_wizard->build64bit() ? "" : "/safeseh /coff") << " /Fo\"$(IntDir)%(Filename).obj\" \"%(FullPath)\"</Command>" << endl;
       file << "      <Outputs>$(IntDir)%(Filename).obj;%(Outputs)</Outputs>" << endl;
       file << "    </CustomBuild>" << endl;
     }
-    else if (endsWith((*f),".nasm"))
+    else if (endsWith((*f),L".nasm"))
     {
-      folder=(*f).substr(0,(*f).find_last_of("\\") + 1);
+      folder=(*f).substr(0,(*f).find_last_of(L"\\") + 1);
       file << "    <CustomBuild Include=\"" << *f << "\">" << endl;
       file << "      <Command>..\\build\\nasm -fwin" << (_wizard->build64bit() ? "64" : "32") << " -DWIN" << (_wizard->build64bit() ? "64 -D__x86_64__" : "32") << " -I" << folder << " -o \"$(IntDir)%(Filename).obj\" \"%(FullPath)\"</Command>" << endl;
       file << "      <Outputs>$(IntDir)%(Filename).obj;%(Outputs)</Outputs>" << endl;
@@ -714,7 +715,7 @@ void ProjectFile::writeVS2010_2012Files(ofstream &file,const vector<string> &col
     }
     else
     {
-      fileName=(*f).substr((*f).find_last_of("\\") + 1);
+      fileName=(*f).substr((*f).find_last_of(L"\\") + 1);
 
       count=1;
       if (fileCount.find(fileName) == fileCount.end())
@@ -727,8 +728,8 @@ void ProjectFile::writeVS2010_2012Files(ofstream &file,const vector<string> &col
         file << "      <CompileAs>CompileAsCpp</CompileAs>" << endl;
       else if (count > 1)
       {
-        objFile=(*f).substr(0,(*f).find_last_of(".") + 1);
-        objFile=objFile.substr(objFile.find_last_of("\\") + 1);
+        objFile=(*f).substr(0,(*f).find_last_of(L".") + 1);
+        objFile=objFile.substr(objFile.find_last_of(L"\\") + 1);
         file << "      <ObjectFileName>$(IntDir)" << objFile << "</ObjectFileName>" << endl;
       }
       file << "      <MultiProcessorCompilation>true</MultiProcessorCompilation>" << endl;
@@ -738,22 +739,22 @@ void ProjectFile::writeVS2010_2012Files(ofstream &file,const vector<string> &col
   file << "  </ItemGroup>" << endl;
 }
 
-void ProjectFile::writeVS2010_2012ProjectReferences(ofstream &file,const vector<Project*> &allProjects)
+void ProjectFile::writeVS2010_2012ProjectReferences(wofstream &file,const vector<Project*> &allProjects)
 {
   size_t
     index;
 
-  string
+  wstring
     projectName,
     projectFileName;
 
   file << "  <ItemGroup>" << endl;
 
-  foreach (string,dep,_dependencies)
+  foreach (wstring,dep,_dependencies)
   {
     projectName=*dep;
-    projectFileName="";
-    index=(*dep).find(">");
+    projectFileName=L"";
+    index=(*dep).find(L">");
     if (index != -1)
     {
       projectName=(*dep).substr(0,index);
@@ -767,7 +768,7 @@ void ProjectFile::writeVS2010_2012ProjectReferences(ofstream &file,const vector<
 
       foreach (ProjectFile*,deppf,(*depp)->files())
       {
-        if (projectFileName != "" && (*deppf)->_name != projectFileName)
+        if (projectFileName != L"" && (*deppf)->_name != projectFileName)
           continue;
 
         file << "    <ProjectReference Include=\"..\\" << (*deppf)-> _project->name() << "\\" << (*deppf)->_fileName << "\">" << endl;

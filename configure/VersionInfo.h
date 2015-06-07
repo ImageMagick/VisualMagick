@@ -26,24 +26,24 @@ public:
 
   VersionInfo();
 
-  string libAddendum() const;
+  wstring libAddendum() const;
 
-  string libVersion() const;
+  wstring libVersion() const;
 
   bool load();
 
-  string majorVersion() const;
+  wstring majorVersion() const;
 
-  string releaseDate() const;
+  wstring releaseDate() const;
 
-  string version() const;
+  wstring version() const;
 
-  string versionNumber() const;
+  wstring versionNumber() const;
 
 private:
 
-  string _version;
-  string _release;
+  wstring _version;
+  wstring _release;
 };
 
 #endif // __VersionInfo__

@@ -39,7 +39,7 @@ public:
   bool includeOptional() const;
   void includeOptional(bool value);
 
-  string openCLIncludePath() const;
+  wstring openCLIncludePath() const;
 
   int quantumDepth() const;
   void quantumDepth(int value);
@@ -69,24 +69,24 @@ protected:
 
 private:
 
-  string getEnvironmentVariable(const char *name);
+  wstring getEnvironmentVariable(const wchar_t *name);
 
-  bool openCLIncludePathExists(const char *name);
+  bool openCLIncludePathExists(const wchar_t *name);
 
   void setOpenCLIncludePath();
 
   void setVisualStudioVersion();
 
-  BOOL   _build64bit;
-  BOOL   _includeIncompatibleLicense;
-  BOOL   _includeOptional;
-  string _openCLIncludePath;
-  int    _quantumDepth;
-  int    _solutionType;
-  BOOL   _useHDRI;
-  BOOL   _useOpenCL;
-  BOOL   _useOpenMP;
-  int    _visualStudioVersion;
+  BOOL    _build64bit;
+  BOOL    _includeIncompatibleLicense;
+  BOOL    _includeOptional;
+  wstring _openCLIncludePath;
+  int     _quantumDepth;
+  int     _solutionType;
+  BOOL    _useHDRI;
+  BOOL    _useOpenCL;
+  BOOL    _useOpenMP;
+  int     _visualStudioVersion;
 };
 
 #endif // __TargetPage__
