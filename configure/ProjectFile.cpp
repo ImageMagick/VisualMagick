@@ -667,9 +667,9 @@ void ProjectFile::writeVS2010_2012ItemDefinitionGroup(wofstream &file,const bool
     {
       if (_project->isDll())
         file << "      <LinkDLL>true</LinkDLL>" << endl;
-      file << "      <SubSystem>Windows</SubSystem>" << endl;
-      if (_project->useUnicode())
+      else if (_project->useUnicode())
         file << "    <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>" << endl;
+      file << "      <SubSystem>Windows</SubSystem>" << endl;
       if ((_project->isDll()) && (!_project->moduleDefinitionFile().empty()))
         file << "      <ModuleDefinitionFile>" << _project->moduleDefinitionFile() << "</ModuleDefinitionFile>" << endl;
     }
