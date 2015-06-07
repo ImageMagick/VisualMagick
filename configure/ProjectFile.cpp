@@ -728,9 +728,9 @@ void ProjectFile::writeVS2010_2012Files(wofstream &file,const vector<wstring> &c
         file << "      <CompileAs>CompileAsCpp</CompileAs>" << endl;
       else if (count > 1)
       {
-        objFile=(*f).substr(0,(*f).find_last_of(L".") + 1);
+        objFile=(*f).substr(0,(*f).find_last_of(L"."));
         objFile=objFile.substr(objFile.find_last_of(L"\\") + 1);
-        file << "      <ObjectFileName>$(IntDir)" << objFile << "</ObjectFileName>" << endl;
+        file << "      <ObjectFileName>$(IntDir)" << objFile << "_" << count << ".obj</ObjectFileName>" << endl;
       }
       file << "      <MultiProcessorCompilation>true</MultiProcessorCompilation>" << endl;
       file << "    </ClCompile>" << endl;
