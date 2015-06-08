@@ -219,7 +219,9 @@ void TargetPage::setOpenCLIncludePath()
 
 void TargetPage::setVisualStudioVersion()
 {
-  if (!getEnvironmentVariable(L"VS110COMNTOOLS").empty())
+  if (!getEnvironmentVariable(L"VS120COMNTOOLS").empty())
+    _visualStudioVersion = VS2013;
+  else if (!getEnvironmentVariable(L"VS110COMNTOOLS").empty())
     _visualStudioVersion=VS2012;
   else if (!getEnvironmentVariable(L"VS100COMNTOOLS").empty())
     _visualStudioVersion=VS2010;
