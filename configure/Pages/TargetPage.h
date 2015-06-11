@@ -39,6 +39,9 @@ public:
   bool includeOptional() const;
   void includeOptional(bool value);
 
+  bool installedSupport() const;
+  void installedSupport(bool value);
+
   wstring openCLIncludePath() const;
 
   int quantumDepth() const;
@@ -80,6 +83,7 @@ private:
   BOOL    _build64bit;
   BOOL    _includeIncompatibleLicense;
   BOOL    _includeOptional;
+  BOOL    _installedSupport;
   wstring _openCLIncludePath;
   int     _quantumDepth;
   int     _solutionType;

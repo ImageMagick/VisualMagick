@@ -37,6 +37,8 @@ public:
 
   bool includeOptional() const;
 
+  bool installedSupport() const;
+
   bool noWizard() const;
 
   int quantumDepth() const;
@@ -57,6 +59,7 @@ private:
   bool _build64bit;
   bool _includeIncompatibleLicense;
   bool _includeOptional;
+  bool _installedSupport;
   bool _noWizard;
   int  _quantumDepth;
   int  _solutionType;

@@ -166,6 +166,21 @@ void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
       continue;
     }
 
+
+    config << "/*" << endl;
+    config << "  Define to build a ImageMagick which uses registry settings or" << endl;
+    config << "  hard-coded paths to locate installed components.  This supports" << endl;
+    config << "  using the \"setup.exe\" style installer, or using hard-coded path" << endl;
+    config << "  definitions (see below).  If you want to be able to simply copy" << endl;
+    config << "  the built ImageMagick to any directory on any directory on any machine," << endl;
+    config << "  then do not use this setting." << endl;
+    config << "*/" << endl;
+    if (wizard.installedSupport())
+      config << "#define MAGICKCORE_INSTALLED_SUPPORT" << endl;
+    else
+      config << "//#define MAGICKCORE_INSTALLED_SUPPORT" << endl;
+    config << endl;
+
     config << "/*" << endl;
     config << "  Specify size of PixelPacket color Quantums (8, 16, or 32)." << endl;
     config << "  A value of 8 uses half the memory than 16 and typically runs 30% faster," << endl;

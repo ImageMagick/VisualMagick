@@ -44,6 +44,8 @@ public:
 
   bool includeOptional() const;
 
+  bool installedSupport() const;
+
   wstring intermediateDirectoryDebug() const;
 
   wstring intermediateDirectoryRelease() const;

@@ -30,6 +30,7 @@ TargetPage::TargetPage() : CPropertyPage(IDD_TARGET_PAGE)
 
   _build64bit=FALSE;
   _includeIncompatibleLicense=FALSE;
+  _installedSupport=FALSE;
   _quantumDepth=Q16;
   _solutionType=DYNAMIC_MT;
   _useHDRI=PathFileExists(L"..\\MagickCore") ? TRUE : FALSE;
@@ -59,6 +60,16 @@ bool TargetPage::includeOptional() const
 void TargetPage::includeOptional(bool value)
 {
   _includeOptional=value;
+}
+
+bool TargetPage::installedSupport() const
+{
+	return(_installedSupport == 1);
+}
+
+void TargetPage::installedSupport(bool value)
+{
+	_installedSupport = value;
 }
 
 bool TargetPage::build64bit() const

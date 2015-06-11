@@ -26,6 +26,7 @@ CommandLineInfo::CommandLineInfo(const ConfigureWizard &wizard)
   _build64bit=wizard.build64bit();
   _includeIncompatibleLicense=wizard.includeIncompatibleLicense();
   _includeOptional=wizard.includeOptional();
+  _installedSupport=wizard.installedSupport();
   _noWizard=false;
   _quantumDepth=wizard.quantumDepth();
   _solutionType=wizard.solutionType();
@@ -58,6 +59,11 @@ bool CommandLineInfo::includeIncompatibleLicense() const
 bool CommandLineInfo::includeOptional() const
 {
   return(_includeOptional);
+}
+
+bool CommandLineInfo::installedSupport() const
+{
+  return(_installedSupport);
 }
 
 bool CommandLineInfo::noWizard() const
@@ -107,7 +113,11 @@ void CommandLineInfo::ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast
   else if (_wcsicmp(pszParam, L"smtd") == 0)
     _solutionType=STATIC_MTD;
   else if (_wcsicmp(pszParam, L"incompatibleLicense") == 0)
-    _includeIncompatibleLicense=true;
+     _includeIncompatibleLicense=true;
+  else if (_wcsicmp(pszParam, L"includeOptional") == 0)
+    _includeOptional=true;
+  else if (_wcsicmp(pszParam, L"installedSupport") == 0)
+    _installedSupport=true;
   else if (_wcsicmp(pszParam, L"noHdri") == 0)
     _useHDRI=false;
   else if (_wcsicmp(pszParam, L"noOpenMP") == 0)
@@ -116,8 +126,6 @@ void CommandLineInfo::ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast
     _noWizard=true;
   else if (_wcsicmp(pszParam, L"openCL") == 0)
     _useOpenCL=true;
-  else if (_wcsicmp(pszParam, L"optional") == 0)
-    _includeOptional=true;
   else if (_wcsicmp(pszParam, L"Q8") == 0)
     _quantumDepth=Q8;
   else if (_wcsicmp(pszParam, L"Q16") == 0)

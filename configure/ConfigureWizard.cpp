@@ -60,6 +60,11 @@ bool ConfigureWizard::includeOptional() const
   return(_targetPage.includeOptional());
 }
 
+bool ConfigureWizard::installedSupport() const
+{
+	return(_targetPage.installedSupport());
+}
+
 wstring ConfigureWizard::intermediateDirectoryDebug() const
 {
   return(_systemPage.intermediateDirectoryDebug());
@@ -132,6 +137,7 @@ void ConfigureWizard::parseCommandLineInfo(const CommandLineInfo &info)
   _targetPage.build64bit(info.build64bit());
   _targetPage.includeIncompatibleLicense(info.includeIncompatibleLicense());
   _targetPage.includeOptional(info.includeOptional());
+  _targetPage.installedSupport(info.installedSupport());
   _targetPage.quantumDepth(info.quantumDepth());
   _targetPage.solutionType(info.solutionType());
   _targetPage.useHDRI(info.useHDRI());
