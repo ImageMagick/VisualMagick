@@ -112,6 +112,8 @@ void CommandLineInfo::ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast
     _solutionType=STATIC_MT;
   else if (_wcsicmp(pszParam, L"smtd") == 0)
     _solutionType=STATIC_MTD;
+  else if (_wcsicmp(pszParam, L"hdri") == 0)
+    _useHDRI=true;
   else if (_wcsicmp(pszParam, L"incompatibleLicense") == 0)
      _includeIncompatibleLicense=true;
   else if (_wcsicmp(pszParam, L"includeOptional") == 0)
