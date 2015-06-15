@@ -16,8 +16,14 @@
 ;  Copyright (C) 2003 - 2008 GraphicsMagick Group
 #endif
 
+#ifdef Magick64BitArchitecture
+  #define  public MagickArchitecture "x64"
+#else
+  #define  public MagickArchitecture "x86"
+#endif
+
 ; PerlMagick Perl module
 Source: "..\..\ImageMagick\PerlMagick\Image-Magick.ppd"; DestDir: "{app}\PerlMagick"; Tasks: install_PerlMagick; Flags: ignoreversion
-Source: "..\..\ImageMagick\PerlMagick\Image-Magick.tar.gz"; DestDir: "{app}\PerlMagick\x86"; Tasks: install_PerlMagick; Flags: ignoreversion
+Source: "..\..\ImageMagick\PerlMagick\Image-Magick.zip"; DestDir: "{app}\PerlMagick\{#MagickArchitecture}"; Tasks: install_PerlMagick; Flags: ignoreversion
 Source: "..\..\ImageMagick\PerlMagick\demo\*"; DestDir: "{app}\PerlMagick\demo"; Tasks: install_PerlMagick; Flags: ignoreversion
 Source: "PerlMagick-PPM.txt"; DestDir: "{app}\PerlMagick"; DestName: "README.txt"; Tasks: install_PerlMagick; Flags: ignoreversion

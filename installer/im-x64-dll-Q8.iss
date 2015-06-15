@@ -1,5 +1,4 @@
-#ifdef COPYRIGHT
-;  Copyright 1999-2015 ImageMagick Studio LLC, a non-profit organization
+;  Copyright 1999-2013 ImageMagick Studio LLC, a non-profit organization
 ;  dedicated to making software imaging solutions freely available.
 ;
 ;  You may not use this file except in compliance with the License.  You may
@@ -14,6 +13,16 @@
 ;  limitations under the License.
 ;
 ;  Copyright (C) 2003 - 2008 GraphicsMagick Group
-#endif
 
-Name: install_PerlMagick; Description: "Install PerlMagick for Strawberry Perl v5.20"; Flags: unchecked
+; #pragma option -v+
+; #pragma verboselevel 4
+; #define DEBUG 1
+
+#define  public MagickDynamicPackage 1
+#define  public Magick64BitArchitecture 1
+#define  public QuantumDepth "8"
+#include "inc\body.isx"
+
+#ifdef Debug
+  #expr SaveToFile(AddBackslash(SourcePath) + "im-x86-dll-Q8.isp")
+#endif

@@ -1,5 +1,4 @@
-#ifdef COPYRIGHT
-;  Copyright 1999-2010 ImageMagick Studio LLC, a non-profit organization
+;  Copyright 1999-2013 ImageMagick Studio LLC, a non-profit organization
 ;  dedicated to making software imaging solutions freely available.
 ;
 ;  You may not use this file except in compliance with the License.  You may
@@ -12,9 +11,18 @@
 ;  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 ;  See the License for the specific language governing permissions and
 ;  limitations under the License.
-#endif
+;
+;  Copyright (C) 2003 - 2008 GraphicsMagick Group
 
-#define public MagickPackageName "@PACKAGE_NAME@"
-#define public MagickPackageVersion "@PACKAGE_VERSION@"
-#define public MagickPackageVersionAddendum "@PACKAGE_VERSION_ADDENDUM@"
-#define public MagickPackageReleaseDate "@PACKAGE_RELEASE_DATE@"
+; #pragma option -v+
+; #pragma verboselevel 4
+; #define DEBUG 1
+
+#define  public MagickStaticPackage 1
+#define  public Magick64BitArchitecture 1
+#define  public QuantumDepth "8"
+#include "inc\body.isx"
+
+#ifdef Debug
+  #expr SaveToFile(AddBackslash(SourcePath) + "im-x64-static-Q8.isp")
+#endif
