@@ -112,8 +112,8 @@ void Solution::write(const ConfigureWizard &wizard,WaitDialog &waitDialog)
   waitDialog.nextStep(L"Writing configuration");
   writeMagickBaseConfig(wizard);
 
-  waitDialog.nextStep(L"Writing MakeFile.PL");
-  writeMakeFile();
+  waitDialog.nextStep(L"Writing Makefile.PL");
+  writeMakeFile(wizard);
 
   waitDialog.nextStep(L"Writing version");
   writeVersion();
@@ -230,7 +230,7 @@ void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
   }
 }
 
-void Solution::writeMakeFile()
+void Solution::writeMakeFile(const ConfigureWizard &wizard)
 {
   wifstream
     makeFileIn,
@@ -259,17 +259,21 @@ void Solution::writeMakeFile()
   zip << zipIn.rdbuf();
   zip.close();
 
-  makeFileIn.open(L"..\\PerlMagick\\MakeFile.PL.in");
+  makeFileIn.open(L"..\\PerlMagick\\Makefile.PL.in");
   if (!makeFileIn)
     return;
 
-  makeFile.open(L"..\\..\\ImageMagick\\PerlMagick\\MakeFile.PL");
+  makeFile.open(L"..\\..\\ImageMagick\\PerlMagick\\Makefile.PL");
   if (!makeFile)
     return;
 
   while (getline(makeFileIn,line))
   {
     line=replace(line,L"$$LIB_NAME$$",libName);
+    if (wizard.build64bit())
+      line=replace(line,L"$$PLATFORM$$",L"x64");
+    else
+      line=replace(line,L"$$PLATFORM$$",L"x86");
     makeFile << line << endl;
   }
   makeFile.close();
