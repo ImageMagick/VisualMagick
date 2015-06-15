@@ -87,7 +87,8 @@ void Solution::write(const ConfigureWizard &wizard,WaitDialog &waitDialog)
     file;
 
   steps=loadProjectFiles(wizard);
-  waitDialog.setSteps(steps+3); /* write solution, configuration and version */
+  /* write solution, configuration, MakeFile and version */
+  waitDialog.setSteps(steps+4);
 
   file.open(getFileName(wizard));
   if (!file)
@@ -111,6 +112,9 @@ void Solution::write(const ConfigureWizard &wizard,WaitDialog &waitDialog)
   waitDialog.nextStep(L"Writing configuration");
   writeMagickBaseConfig(wizard);
 
+  waitDialog.nextStep(L"Writing MakeFile.PL");
+  writeMakeFile();
+
   waitDialog.nextStep(L"Writing version");
   writeVersion();
 }
@@ -132,7 +136,7 @@ wstring Solution::getFolder()
 
   folder=L"MagickCore";
   if (!PathFileExists((L"..\\..\\ImageMagick\\" + folder).c_str()))
-    folder=L"Magick";
+    folder=L"magick";
   return(folder);
 }
 
@@ -165,7 +169,6 @@ void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
       config << line << endl;
       continue;
     }
-
 
     config << "/*" << endl;
     config << "  Define to build a ImageMagick which uses registry settings or" << endl;
@@ -225,6 +228,52 @@ void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
       config << (*p)->configDefine();
     }
   }
+}
+
+void Solution::writeMakeFile()
+{
+
+  wifstream
+    makeFileIn,
+    zipIn;
+
+  wofstream
+    lib,
+    makeFile,
+    zip;
+
+  wstring
+    libName,
+    line;
+
+  libName=L"CORE_RL_" + getFolder()+ L"_";
+
+  lib=wofstream(L"..\\..\\ImageMagick\\PerlMagick\\" + libName + L".a");
+  if (!lib)
+    return;
+  lib.close();
+
+  zipIn=wifstream(L"..\\PerlMagick\\Zip.ps1", std::ios::binary);
+  if (!zipIn)
+    return;
+  zip=wofstream(L"..\\..\\ImageMagick\\PerlMagick\\Zip.ps1", std::ios::binary);
+  zip << zipIn.rdbuf();
+  zip.close();
+
+  makeFileIn.open(L"..\\PerlMagick\\MakeFile.PL.in");
+  if (!makeFileIn)
+    return;
+
+  makeFile.open(L"..\\..\\ImageMagick\\PerlMagick\\MakeFile.PL");
+  if (!makeFile)
+    return;
+
+  while (getline(makeFileIn,line))
+  {
+    line=replace(line,L"$$LIB_NAME$$",libName);
+    makeFile << line << endl;
+  }
+  makeFile.close();
 }
 
 void Solution::writeVersion()

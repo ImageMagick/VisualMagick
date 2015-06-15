@@ -43,6 +43,8 @@ private:
 
   void writeMagickBaseConfig(const ConfigureWizard &wizard);
 
+  void writeMakeFile();
+
   void writeVersion();
 
   void write(const ConfigureWizard &wizard,wofstream &file);
