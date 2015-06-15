@@ -67,7 +67,7 @@ create-import-library:
   pexports ../../VisualMagick/bin/$$LIB_NAME$$.dll > $$LIB_NAME$$.def
   dlltool -d $$LIB_NAME$$.def -l $$LIB_NAME$$.a
 
-Magick.pm: create-import-library
+Magick.c: create-import-library
 
 Image-Magick.zip: ppd pure_all
   if exist $$PLATFORM$$ del $$PLATFORM$$ /f /q
