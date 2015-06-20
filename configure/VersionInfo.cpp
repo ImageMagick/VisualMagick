@@ -46,19 +46,19 @@ bool VersionInfo::load()
   wstring
     line;
 
-  version.open("..\\..\\ImageMagick\\version.sh");
+  version.open("..\\installer\\inc\\version.isx");
   if (!version)
     return(false);
 
   while (getline(version,line))
   {
-    index=line.find(L"PACKAGE_VERSION=");
+    index=line.find(L"#define public MagickPackageVersion ");
     if (index != string::npos)
-      _version=line.substr(17,line.length()-18);
+      _version=line.substr(37,line.length()-38);
 
-    index=line.find(L"PACKAGE_RELEASE=");
+    index=line.find(L"#define public MagickPackageVersionAddendum ");
     if (index != string::npos)
-      _release=line.substr(17,line.length()-18);
+      _release=line.substr(45,line.length()-46);
   }
 
   return(true);
