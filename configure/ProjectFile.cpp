@@ -561,9 +561,9 @@ void ProjectFile::writeVS2010_2012(wofstream &file,const vector<Project*> &allPr
   if (_wizard->visualStudioVersion() == VS2010)
     file << "    <PlatformToolset>v100</PlatformToolset>" << endl;
   else if (_wizard->visualStudioVersion() == VS2012)
-    file << "    <PlatformToolset>v110</PlatformToolset>" << endl;
+    file << "    <PlatformToolset>v110_xp</PlatformToolset>" << endl;
   else if (_wizard->visualStudioVersion() == VS2013)
-    file << "    <PlatformToolset>v120</PlatformToolset>" << endl;
+    file << "    <PlatformToolset>v120_xp</PlatformToolset>" << endl;
   file << "    <UseOfMfc>false</UseOfMfc>" << endl;
   if (_project->useUnicode())
     file << "    <CharacterSet>Unicode</CharacterSet>" << endl;
