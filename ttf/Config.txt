@@ -61,6 +61,7 @@ ftsnames.c
 ftstream.c
 fttrigon.c
 ftutil.c
+ftxf86.c
 md5.c
 bdfdrivr.c
 bdflib.c
