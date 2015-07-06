@@ -58,7 +58,7 @@ bool VersionInfo::load()
 
     index=line.find(L"#define public MagickPackageVersionAddendum ");
     if (index != string::npos)
-      _release=line.substr(45,line.length()-46);
+      _release=line.substr(46,line.length()-47);
   }
 
   return(true);
