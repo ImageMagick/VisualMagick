@@ -23,6 +23,7 @@ Source: "..\..\ImageMagick\config\locale.xml"; DestDir: {#MagickConfigDirectory}
 Source: "..\..\ImageMagick\config\log.xml"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
 Source: "..\..\ImageMagick\config\magic.xml"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
 Source: "..\..\ImageMagick\config\mime.xml"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
+Source: "..\..\ImageMagick\config\quantization-table.xml"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
 Source: "..\bin\configure.xml"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
 Source: "..\bin\ImageMagick.rdf"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
 Source: "..\bin\delegates.xml"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
