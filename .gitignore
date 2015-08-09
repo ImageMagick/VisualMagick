@@ -1,0 +1,13 @@
+*/*.vcxproj
+
+ImageMagickObject/dlldata.c
+ImageMagickObject/vc*
+
+/bin
+/Debug
+/lib
+
+*.opensdf
+*.sdf
+*.sln
+*.user
