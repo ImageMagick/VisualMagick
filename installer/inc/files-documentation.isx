@@ -19,8 +19,7 @@
 ; Release documentation files
 Source: "..\..\ImageMagick\ChangeLog"; DestDir: "{app}"; Flags: ignoreversion; DestName: "ChangeLog.txt"
 Source: "..\..\ImageMagick\LICENSE"; DestDir: "{app}"; Flags: ignoreversion; DestName: "License.txt"
-Source: "..\..\ImageMagick\NOTICE"; DestDir: "{app}"; Flags: ignoreversion; DestName: "Notice.txt"
-Source: "..\bin\NOTICE"; DestDir: {#MagickAppDirectory}; Flags: ignoreversion;  DestName: "Notice-1.txt"
+Source: "..\NOTICE.txt"; DestDir: "{app}"; Flags: ignoreversion;
 Source: "..\..\ImageMagick\QuickStart.txt"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\..\ImageMagick\README.txt"; DestDir: "{app}"; Flags: ignoreversion
 ; Web pages
