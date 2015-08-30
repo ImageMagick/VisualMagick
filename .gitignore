@@ -10,4 +10,5 @@ ImageMagickObject/vc*
 *.opensdf
 *.sdf
 *.sln
+*.suo
 *.user
