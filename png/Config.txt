@@ -16,7 +16,7 @@ PNG_BUILD_DLL
 [INCLUDES]
 ..\..\zlib
 
-[EXCLUDE]
+[EXCLUDES]
 example.c
 pngtest.c
 
