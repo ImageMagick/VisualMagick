@@ -1,5 +1,9 @@
 */*.vcxproj
 
+/configure/Debug
+/configure/configure.ilk
+/configure/configure.pdb
+
 ImageMagickObject/dlldata.c
 ImageMagickObject/vc*
 
@@ -7,6 +11,7 @@ ImageMagickObject/vc*
 /Debug
 /lib
 
+*.ipch
 *.opensdf
 *.sdf
 *.sln
