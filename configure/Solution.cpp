@@ -333,15 +333,15 @@ void Solution::write(const ConfigureWizard &wizard,wofstream &file)
     file << "Microsoft Visual Studio Solution File, Format Version 11.00" << endl;
     file << "# Visual Studio 2010" << endl;
   }
-  else if (wizard.visualStudioVersion() == VS2012)
+  else
   {
     file << "Microsoft Visual Studio Solution File, Format Version 12.00" << endl;
-    file << "# Visual Studio 2012" << endl;
-  }
-  else if (wizard.visualStudioVersion() == VS2013)
-  {
-    file << "Microsoft Visual Studio Solution File, Format Version 12.00" << endl;
-    file << "# Visual Studio 2013" << endl;
+    if (wizard.visualStudioVersion() == VS2012)
+      file << "# Visual Studio 2012" << endl;
+    else if (wizard.visualStudioVersion() == VS2013)
+      file << "# Visual Studio 2013" << endl;
+    else if (wizard.visualStudioVersion() == VS2015)
+      file << "# Visual Studio 2015" << endl;
   }
 
   foreach (Project*,p,_projects)
