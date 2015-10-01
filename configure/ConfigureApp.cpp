@@ -42,7 +42,11 @@ BOOL ConfigureApp::InitInstance()
   Solution
     solution;
 
-  ConfigureWizard wizard=ConfigureWizard();
+  ConfigureWizard
+    wizard;
+
+  WaitDialog
+    waitDialog;
 
   CommandLineInfo info=CommandLineInfo(wizard);
   ParseCommandLine(info);
@@ -59,7 +63,6 @@ BOOL ConfigureApp::InitInstance()
   if (response != ID_WIZFINISH)
     return(FALSE);
 
-  WaitDialog waitDialog=WaitDialog();
   solution.write(wizard,waitDialog);
   return(TRUE);
 }
