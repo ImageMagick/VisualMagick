@@ -10,9 +10,10 @@ ImageMagickObject/vc*
 /bin
 /Debug
 /lib
+/Release
 
 *.ipch
-*.opensdf
+*.opendb
 *.sdf
 *.sln
 *.suo
