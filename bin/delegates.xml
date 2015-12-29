@@ -63,7 +63,7 @@
   <delegate decode="cdr" command="cmd.exe /c (&quot;uniconvertor&quot; &quot;%i&quot; &quot;%o.svg&quot;) &amp; (move &quot;%o.svg&quot; &quot;%o&quot; >nul)"/>
   <delegate decode="cgm" command="cmd.exe /c (&quot;uniconvertor&quot; &quot;%i&quot; &quot;%o.svg&quot;) &amp; (move &quot;%o.svg&quot; &quot;%o&quot; >nul)"/>
   <delegate decode="compress" stealth="True" command="|uncompress -c &quot;%i&quot;"/>
-  <delegate decode="dng:decode" stealth="True" command="dcraw.exe -6 -w -O &quot;%u.ppm&quot; &quot;%i&quot;"/>
+  <delegate decode="dng:decode" stealth="True" command="dcraw.exe -6 -W -O &quot;%u.ppm&quot; &quot;%i&quot;"/>
   <delegate decode="dot" command="dot -Tps &quot;%i&quot; -o &quot;%o&quot;"/>
   <delegate decode="dvi" command="dvips -q -o &quot;%o&quot; &quot;%i&quot;"/>
   <delegate decode="dxf" command="cmd.exe /c (&quot;uniconvertor&quot; &quot;%i&quot; &quot;%o.svg&quot;) &amp; (move &quot;%o.svg&quot; &quot;%o&quot; >nul)"/>
