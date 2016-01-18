@@ -215,6 +215,15 @@ void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
       config << "#define MAGICKCORE__OPENCL\n#define MAGICKCORE_HAVE_CL_CL_H" << endl;
     else
       config << "#undef MAGICKCORE__OPENCL\n#undef MAGICKCORE_HAVE_CL_CL_H" << endl;
+    config << endl;
+
+    config << "/*" << endl;
+    config << "    Exclude deprecated methods in MagickCore API" << endl;
+    config << "*/" << endl;
+    if (wizard.excludeDeprecated())
+      config << "#define MAGICKCORE_EXCLUDE_DEPRECATED" << endl;
+    else
+      config << "//#define MAGICKCORE_EXCLUDE_DEPRECATED" << endl;
 
     foreach (Project*,p,_projects)
     {

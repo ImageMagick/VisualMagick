@@ -33,6 +33,8 @@ public:
 
   bool build64bit() const;
 
+  bool excludeDeprecated() const;
+
   bool includeIncompatibleLicense() const;
 
   bool includeOptional() const;
@@ -57,6 +59,7 @@ public:
 
 private:
   bool _build64bit;
+  bool _excludeDeprecated;
   bool _includeIncompatibleLicense;
   bool _includeOptional;
   bool _installedSupport;

@@ -29,6 +29,7 @@ TargetPage::TargetPage() : CPropertyPage(IDD_TARGET_PAGE)
   setVisualStudioVersion();
 
   _build64bit=FALSE;
+  _excludeDeprecated=TRUE;
   _includeIncompatibleLicense=FALSE;
   _installedSupport=FALSE;
   _quantumDepth=Q16;
@@ -40,6 +41,16 @@ TargetPage::TargetPage() : CPropertyPage(IDD_TARGET_PAGE)
 
 TargetPage::~TargetPage()
 {
+}
+
+bool TargetPage::excludeDeprecated() const
+{
+  return(_excludeDeprecated == 1);
+}
+
+void TargetPage::excludeDeprecated(bool value)
+{
+  _excludeDeprecated=value;
 }
 
 bool TargetPage::includeIncompatibleLicense() const
@@ -161,6 +172,7 @@ void TargetPage::DoDataExchange(CDataExchange* pDX)
   DDX_CBIndex(pDX,IDC_VISUALSTUDIO,_visualStudioVersion);
   DDX_Check(pDX,IDC_INCLUDE_INCOMPATIBLE,_includeIncompatibleLicense);
   DDX_Check(pDX,IDC_INCLUDE_OPTIONAL,_includeOptional);
+  DDX_Check(pDX,IDC_EXCLUDE_DEPRECATED,_excludeDeprecated);
 }
 
 BOOL TargetPage::OnInitDialog()

@@ -40,6 +40,8 @@ public:
 
   bool build64bit() const;
 
+  bool excludeDeprecated() const;
+
   bool includeIncompatibleLicense() const;
 
   bool includeOptional() const;

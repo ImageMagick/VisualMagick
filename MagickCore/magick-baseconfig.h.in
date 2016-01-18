@@ -39,11 +39,6 @@
 //#define ProvideDllMain
 
 /*
-  Exclude deprecated methods in MagickCore API
-*/
-#define MAGICKCORE_EXCLUDE_DEPRECATED
-
-/*
   Permit enciphering and deciphering image pixels.
 */
 #define MAGICKCORE_CIPHER_SUPPORT

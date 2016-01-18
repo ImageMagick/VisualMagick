@@ -33,6 +33,9 @@ public:
   bool build64bit() const;
   void build64bit(bool value);
 
+  bool excludeDeprecated() const;
+  void excludeDeprecated(bool value);
+
   bool includeIncompatibleLicense() const;
   void includeIncompatibleLicense(bool value);
 
@@ -81,6 +84,7 @@ private:
   void setVisualStudioVersion();
 
   BOOL    _build64bit;
+  BOOL    _excludeDeprecated;
   BOOL    _includeIncompatibleLicense;
   BOOL    _includeOptional;
   BOOL    _installedSupport;

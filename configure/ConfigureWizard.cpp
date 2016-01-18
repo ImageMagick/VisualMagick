@@ -50,6 +50,11 @@ bool ConfigureWizard::build64bit() const
   return(_targetPage.build64bit());
 }
 
+bool ConfigureWizard::excludeDeprecated() const
+{
+  return(_targetPage.excludeDeprecated());
+}
+
 bool ConfigureWizard::includeIncompatibleLicense() const
 {
   return(_targetPage.includeIncompatibleLicense());
@@ -135,6 +140,7 @@ int ConfigureWizard::visualStudioVersion() const
 void ConfigureWizard::parseCommandLineInfo(const CommandLineInfo &info)
 {
   _targetPage.build64bit(info.build64bit());
+  _targetPage.excludeDeprecated(info.excludeDeprecated());
   _targetPage.includeIncompatibleLicense(info.includeIncompatibleLicense());
   _targetPage.includeOptional(info.includeOptional());
   _targetPage.installedSupport(info.installedSupport());

@@ -24,6 +24,7 @@
 CommandLineInfo::CommandLineInfo(const ConfigureWizard &wizard)
 {
   _build64bit=wizard.build64bit();
+  _excludeDeprecated=wizard.excludeDeprecated();
   _includeIncompatibleLicense=wizard.includeIncompatibleLicense();
   _includeOptional=wizard.includeOptional();
   _installedSupport=wizard.installedSupport();
@@ -49,6 +50,11 @@ CommandLineInfo& CommandLineInfo::operator=(const CommandLineInfo& obj)
 bool CommandLineInfo::build64bit() const
 {
   return(_build64bit);
+}
+
+bool CommandLineInfo::excludeDeprecated() const
+{
+  return(_excludeDeprecated);
 }
 
 bool CommandLineInfo::includeIncompatibleLicense() const
@@ -108,6 +114,8 @@ void CommandLineInfo::ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast
 
   if (_wcsicmp(pszParam, L"dmt") == 0)
     _solutionType=DYNAMIC_MT;
+  else if (_wcsicmp(pszParam, L"deprecated") == 0)
+    _excludeDeprecated=FALSE;
   else if (_wcsicmp(pszParam, L"smt") == 0)
     _solutionType=STATIC_MT;
   else if (_wcsicmp(pszParam, L"smtd") == 0)
