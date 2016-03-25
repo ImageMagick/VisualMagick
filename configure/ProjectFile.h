@@ -75,13 +75,13 @@ private:
 
   void writeVS2002Files(wofstream &file,wstring name,const vector<wstring> &collection);
 
-  void writeVS2010_2012(wofstream &file,const vector<Project*> &allProjects);
+  void writeVS2010(wofstream &file,const vector<Project*> &allProjects);
 
-  void writeVS2010_2012ItemDefinitionGroup(wofstream &file,const bool debug);
+  void writeVS2010ItemDefinitionGroup(wofstream &file,const bool debug);
 
-  void writeVS2010_2012Files(wofstream &file,const vector<wstring> &collection);
+  void writeVS2010Files(wofstream &file,const vector<wstring> &collection);
 
-  void writeVS2010_2012ProjectReferences(wofstream &file,const vector<Project*> &allProjects);
+  void writeVS2010ProjectReferences(wofstream &file,const vector<Project*> &allProjects);
 
   wstring                _fileName;
   wstring                _guid;

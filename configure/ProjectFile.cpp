@@ -118,7 +118,7 @@ void ProjectFile::write(const vector<Project*> &allprojects)
   if (_wizard->visualStudioVersion() == VS2002)
     writeVS2002(file);
   else
-    writeVS2010_2012(file,allprojects);
+    writeVS2010(file,allprojects);
 
   file.close();
 }
@@ -530,7 +530,7 @@ void ProjectFile::writeVS2002Files(wofstream &file,wstring name,const vector<wst
   file << "    </Filter>" << endl;
 }
 
-void ProjectFile::writeVS2010_2012(wofstream &file,const vector<Project*> &allProjects)
+void ProjectFile::writeVS2010(wofstream &file,const vector<Project*> &allProjects)
 {
   file << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << endl;
   file << "<Project DefaultTargets=\"Build\" ToolsVersion=\"4.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">" << endl;
@@ -593,20 +593,20 @@ void ProjectFile::writeVS2010_2012(wofstream &file,const vector<Project*> &allPr
   file << "    <IntDir Condition=\"'$(Configuration)|$(Platform)'=='Release|" << _wizard->platform() << "'\">" << getIntermediateDirectoryName(false) << "</IntDir>" << endl;
   file << "  </PropertyGroup>" << endl;
 
-  writeVS2010_2012ItemDefinitionGroup(file,true);
-  writeVS2010_2012ItemDefinitionGroup(file,false);
+  writeVS2010ItemDefinitionGroup(file,true);
+  writeVS2010ItemDefinitionGroup(file,false);
 
-  writeVS2010_2012Files(file,_srcFiles);
-  writeVS2010_2012Files(file,_includeFiles);
-  writeVS2010_2012Files(file,_resourceFiles);
+  writeVS2010Files(file,_srcFiles);
+  writeVS2010Files(file,_includeFiles);
+  writeVS2010Files(file,_resourceFiles);
 
-  writeVS2010_2012ProjectReferences(file,allProjects);
+  writeVS2010ProjectReferences(file,allProjects);
 
   file << "  <Import Project=\"$(VCTargetsPath)\\Microsoft.Cpp.targets\" />" << endl;
   file << "</Project>" << endl;
 }
 
-void ProjectFile::writeVS2010_2012ItemDefinitionGroup(wofstream &file,const bool debug)
+void ProjectFile::writeVS2010ItemDefinitionGroup(wofstream &file,const bool debug)
 {
   wstring
     name;
@@ -622,9 +622,10 @@ void ProjectFile::writeVS2010_2012ItemDefinitionGroup(wofstream &file,const bool
     file << "      <WarningLevel>Level" << _project->warningLevel() << "</WarningLevel>" << endl;
   file << "      <SuppressStartupBanner>true</SuppressStartupBanner>" << endl;
   file << "      <CompileAs>Default</CompileAs>" << endl;
-  file << "      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>" << endl;
+  file << "      <InlineFunctionExpansion>" << (debug ? "Disabled" : "AnySuitable") << "</InlineFunctionExpansion>" << endl;
   file << "      <OpenMPSupport>" << (_wizard->useOpenMP() ? "true" : "false") << "</OpenMPSupport>" << endl;
   file << "      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>" << endl;
+  file << "      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>" << endl;
   file << "      <BasicRuntimeChecks>" << (debug ? "EnableFastChecks" : "Default") <<"</BasicRuntimeChecks>" << endl;
   file << "      <OmitFramePointers>" << (debug ? "false" : "true") <<"</OmitFramePointers>" << endl;
   file << "      <Optimization>" << (debug ? "Disabled" : "Full") <<"</Optimization>" << endl;
@@ -682,7 +683,7 @@ void ProjectFile::writeVS2010_2012ItemDefinitionGroup(wofstream &file,const bool
   file << "  </ItemDefinitionGroup>" << endl;
 }
 
-void ProjectFile::writeVS2010_2012Files(wofstream &file,const vector<wstring> &collection)
+void ProjectFile::writeVS2010Files(wofstream &file,const vector<wstring> &collection)
 {
   int
     count;
@@ -746,7 +747,7 @@ void ProjectFile::writeVS2010_2012Files(wofstream &file,const vector<wstring> &c
   file << "  </ItemGroup>" << endl;
 }
 
-void ProjectFile::writeVS2010_2012ProjectReferences(wofstream &file,const vector<Project*> &allProjects)
+void ProjectFile::writeVS2010ProjectReferences(wofstream &file,const vector<Project*> &allProjects)
 {
   size_t
     index;
