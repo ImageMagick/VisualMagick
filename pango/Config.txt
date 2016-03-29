@@ -19,7 +19,6 @@ HAVE_CAIRO_WIN32
 ..\..\glib
 ..\..\glib\glib
 ..\..\glib\gmodule
-..\..\ttf\include
 
 [EXCLUDES]
 basic-coretext.c
@@ -54,7 +53,6 @@ querymodules.c
 cairo
 glib
 pixman
-ttf
 
 [CONFIG_DEFINE]
 /*
