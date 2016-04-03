@@ -24,25 +24,26 @@
 #include <algorithm>
 #include <map>
 
-ProjectFile::ProjectFile(const ConfigureWizard *wizard,Project* project,const wstring &prefix,const wstring &name)
+ProjectFile::ProjectFile(const ConfigureWizard *wizard,Project *project,
+  const wstring &prefix,const wstring &name)
+  : _wizard(wizard),
+    _project(project),
+    _prefix(prefix),
+    _name(name)
 {
-  _wizard=wizard;
-  _project=project;
-  _prefix=prefix;
-  _name=name;
+  initialize(project);
+  loadAliases();
+}
 
-  setFileName();
-  setGuid();
-
-  foreach(wstring,dep,project->dependencies())
-  {
-    _dependencies.push_back(*dep);
-  }
-
-  foreach(wstring,inc,project->includes())
-  {
-    _includes.push_back(*inc);
-  }
+ProjectFile::ProjectFile(const ConfigureWizard *wizard,Project *project,
+  const wstring &prefix,const wstring &name,const wstring &reference)
+  : _wizard(wizard),
+    _project(project),
+    _prefix(prefix),
+    _name(name),
+    _reference(reference)
+{
+  initialize(project);
 }
 
 vector<wstring> &ProjectFile::dependencies()
@@ -63,6 +64,54 @@ wstring ProjectFile::guid() const
 wstring ProjectFile::name() const
 {
   return(_prefix+L"_"+_name);
+}
+
+vector<wstring> &ProjectFile::aliases()
+{
+  return(_aliases);
+}
+
+void ProjectFile::initialize(Project* project)
+{
+  setFileName();
+  setGuid();
+
+  foreach(wstring,dep,project->dependencies())
+  {
+    _dependencies.push_back(*dep);
+  }
+
+  foreach(wstring,inc,project->includes())
+  {
+    _includes.push_back(*inc);
+  }
+}
+
+void ProjectFile::loadAliases()
+{
+  wifstream
+    aliases;
+
+  wstring
+    fileName,
+    line;
+
+  if (!_project->isExe() || !_project->isModule())
+    return;
+
+  fileName=L"..\\" + _project->name() + L"\\Aliases." + _name + L".txt";
+
+  aliases.open(fileName);
+  if (!aliases)
+    return;
+
+  while (!aliases.eof())
+  {
+    line=readLine(aliases);
+    _aliases.push_back(line);
+  }
+
+  aliases.close();
 }
 
 void ProjectFile::loadConfig()
@@ -129,6 +178,17 @@ bool ProjectFile::isLib() const
     return(false);
 
   return(_project->isLib() || (_wizard->solutionType() != DYNAMIC_MT && _project->isDll()));
+}
+
+void ProjectFile::addFile(const wstring &directory, const wstring &name)
+{
+  wstring
+    file;
+
+  file=directory + L"\\" + name + L".c";
+  if (!PathFileExists(file.c_str()))
+    file=directory + L"\\" + name + L".cpp";
+  _srcFiles.push_back(file);
 }
 
 void ProjectFile::addLines(wifstream &config,vector<wstring> &container)
@@ -201,13 +261,10 @@ void ProjectFile::loadConfig(const wstring &fileName)
 
 void ProjectFile::loadModule(const wstring &directory)
 {
-  wstring
-    file;
-
-  file=directory + L"\\" + _name + L".c";
-  if (!PathFileExists(file.c_str()))
-    file=directory + L"\\" + _name + L".cpp";
-  _srcFiles.push_back(file);
+  if (!_reference.empty())
+    addFile(directory, _reference);
+  else
+    addFile(directory, _name);
 }
 
 void ProjectFile::loadSource()

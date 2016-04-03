@@ -322,6 +322,7 @@ void Project::loadModules(const ConfigureWizard &wizard)
     fileHandle;
 
   ProjectFile
+    *projectAlias,
     *projectFile;
 
   wstring
@@ -352,6 +353,12 @@ void Project::loadModules(const ConfigureWizard &wizard)
       name=name.substr(0, name.find_last_of(L"."));
       projectFile=new ProjectFile(&wizard,this,_modulePrefix,name);
       _files.push_back(projectFile);
+
+      foreach(wstring,alias,projectFile->aliases())
+      {
+        projectAlias=new ProjectFile(&wizard,this,_modulePrefix,*alias,name);
+        _files.push_back(projectAlias);
+      }
 
     } while (FindNextFile(fileHandle,&data));
   }

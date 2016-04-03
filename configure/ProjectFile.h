@@ -27,7 +27,11 @@ class Project;
 class ProjectFile
 {
 public:
-  ProjectFile(const ConfigureWizard *wizard,Project *project,const wstring &prefix,const wstring &name);
+  ProjectFile(const ConfigureWizard *wizard,Project *project,
+    const wstring &prefix,const wstring &name);
+
+  ProjectFile(const ConfigureWizard *wizard,Project *project,
+    const wstring &prefix,const wstring &name,const wstring &reference);
 
   vector<wstring> &dependencies();
 
@@ -37,6 +41,8 @@ public:
 
   wstring name() const;
 
+  vector<wstring> &aliases();
+
   void loadConfig();
 
   void write(const vector<Project*> &allProjects);
@@ -45,11 +51,17 @@ private:
 
   bool isLib() const;
 
+  void addFile(const wstring &directory, const wstring &name);
+
   void addLines(wifstream &config,vector<wstring> &container);
 
   wstring getIntermediateDirectoryName(const bool debug);
 
   wstring getTargetName(const bool debug);
+
+  void initialize(Project* project);
+
+  void loadAliases();
 
   void loadConfig(const wstring &fileName);
 
@@ -83,6 +95,7 @@ private:
 
   void writeVS2010ProjectReferences(wofstream &file,const vector<Project*> &allProjects);
 
+  vector<wstring>        _aliases;
   wstring                _fileName;
   wstring                _guid;
   vector<wstring>        _cppFiles;
@@ -92,6 +105,7 @@ private:
   wstring                _name;
   wstring                _prefix;
   Project               *_project;
+  wstring                _reference;
   vector<wstring>        _resourceFiles;
   vector<wstring>        _srcFiles;
   const ConfigureWizard *_wizard;
