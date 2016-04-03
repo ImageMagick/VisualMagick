@@ -87,7 +87,7 @@ void Solution::write(const ConfigureWizard &wizard,WaitDialog &waitDialog)
     file;
 
   steps=loadProjectFiles(wizard);
-  /* write solution, configuration, MakeFile and version */
+  /* write solution, configuration, MakeFile.PL and version */
   waitDialog.setSteps(steps+4);
 
   file.open(getFileName(wizard));
