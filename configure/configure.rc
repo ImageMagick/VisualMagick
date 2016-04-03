@@ -107,7 +107,7 @@ BEGIN
                     "Button",BS_AUTORADIOBUTTON,153,33,124,10
     CONTROL         "Static Multi-threaded runtimes",IDC_PROJECT_STATIC_MT,
                     "Button",BS_AUTORADIOBUTTON,153,48,109,10
-    GROUPBOX        "Build options",IDC_STATIC,7,90,304,115
+    GROUPBOX        "Build options",IDC_STATIC,7,90,304,130
     CONTROL         "Build 64-bit distribution",IDC_BUILD_64_BIT,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,15,102,100,10
     LTEXT           "Quantum depth",IDC_STATIC,205,102,55,8
@@ -127,10 +127,13 @@ BEGIN
                     WS_TABSTOP,15,160,170,10
     CONTROL         "Build projects that are not compatible with the Apache 2.0 license",
                     IDC_INCLUDE_INCOMPATIBLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    15,175,217,10
+                    15,175,220,10
     CONTROL         "Exclude deprecated methods",
                     IDC_EXCLUDE_DEPRECATED,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
                     15,190,105,10
+    CONTROL         "Use registry settings or hard-coded paths to locate installed components",
+                    IDC_INSTALLED_SUPPORT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    15,205,240,10
 END
 
 IDD_SYSTEM_PAGE DIALOG  0, 0, 318, 233

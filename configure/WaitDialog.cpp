@@ -23,7 +23,6 @@
 WaitDialog::WaitDialog() : CDialog ()
 {
   Create(IDD_WAITDIALOG);
-  ShowWindow(SW_SHOW);
 }
 
 WaitDialog::~WaitDialog()
@@ -41,6 +40,7 @@ int WaitDialog::getSteps() const
 
 void WaitDialog::setSteps(const int steps)
 {
+  ShowWindow(SW_SHOW);
   _steps=steps;
   _current=0;
 }

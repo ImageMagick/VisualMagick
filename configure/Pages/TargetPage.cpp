@@ -173,6 +173,7 @@ void TargetPage::DoDataExchange(CDataExchange* pDX)
   DDX_Check(pDX,IDC_INCLUDE_INCOMPATIBLE,_includeIncompatibleLicense);
   DDX_Check(pDX,IDC_INCLUDE_OPTIONAL,_includeOptional);
   DDX_Check(pDX,IDC_EXCLUDE_DEPRECATED,_excludeDeprecated);
+  DDX_Check(pDX,IDC_INSTALLED_SUPPORT,_installedSupport);
 }
 
 BOOL TargetPage::OnInitDialog()
