@@ -1,4 +1,5 @@
 compare
+composite
 conjure
 convert
 identify
