@@ -1,0 +1,8 @@
+compare
+conjure
+convert
+identify
+magick-script
+mogrify
+montage
+stream
