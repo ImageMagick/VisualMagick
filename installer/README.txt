@@ -1,6 +1,6 @@
 [ The files in this directory are to support the ImageMagick
   setup.exe-style installer package. The following are the instructions
-  foro how to build a Q:8 DLL-based distribution installer package
+  for how to build a Q:8 DLL-based distribution installer package
   using Visual C++ 10.0. ]
 
 	   Steps for building VisualMagick Distribution Package
@@ -25,7 +25,7 @@
    g) File -> "Close Workspace"
 
 2) Open workspace VisualMagick\VisualDynamicMT.sln by double-clicking from
-   Windows Explorer or opening workpace via Visual C++ dialog.
+   Windows Explorer or via Visual C++ dialog.
 
    a) Build -> "Set Active Configuration" -> "All - Win32 Release" -> OK
    b) Build -> "Rebuild All"
