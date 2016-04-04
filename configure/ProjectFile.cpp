@@ -108,7 +108,8 @@ void ProjectFile::loadAliases()
   while (!aliases.eof())
   {
     line=readLine(aliases);
-    _aliases.push_back(line);
+    if (!line.empty())
+      _aliases.push_back(line);
   }
 
   aliases.close();
