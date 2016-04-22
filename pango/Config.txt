@@ -8,9 +8,6 @@ HAVE_CAIRO_WIN32
 
 [DIRECTORIES]
 ..\..\pango
-..\..\pango\modules\arabic
-..\..\pango\modules\basic
-..\..\pango\modules\indic
 ..\..\pango\pango
 ..\..\pango\pango\mini-fribidi
 
@@ -21,16 +18,16 @@ HAVE_CAIRO_WIN32
 ..\..\glib\gmodule
 
 [EXCLUDES]
-basic-coretext.c
-basic-fc.c
+modules.c
 pango.rc
 pangocairo.rc
+pangocairo-coretextfont.c
 pangocairo-coretextfontmap.c
 pangocairo-fcfont.c
 pangocairo-fcfontmap.c
-pangocairo-coretextfont.c
 pangocoretext.c
 pangocoretext-fontmap.c
+pangocoretext-shape.c
 pango-ot-buffer.c
 pango-ot-info.c
 pango-ot-ruleset.c
@@ -38,21 +35,24 @@ pango-ot-tag.c
 pangofc-decoder.c
 pangofc-font.c
 pangofc-fontmap.c
+pangofc-shape.c
+pangoft2.c
 pangoft2.rc
 pangoft2-fontmap.c
 pangoft2-render.c
-pangoft2.c
 pangowin32.rc
 pangoxft.rc
 pangoxft-font.c
 pangoxft-fontmap.c
 pangoxft-render.c
-querymodules.c
 
 [DEPENDENCIES]
 cairo
 glib
 pixman
+
+[LIBRARIES]
+usp10.lib
 
 [CONFIG_DEFINE]
 /*
