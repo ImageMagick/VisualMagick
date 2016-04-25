@@ -1,0 +1,33 @@
+[DLL]
+
+[DEFINES_DLL]
+FLIF_BUILD_DLL
+
+[DIRECTORIES]
+..\..\flif\src
+..\..\flif\src\image
+..\..\flif\src\library
+..\..\flif\src\maniac
+..\..\flif\src\transform
+
+[EXCLUDES]
+flif.cpp
+flif-interface.cpp
+image.cpp
+image-pam.cpp
+image-png.cpp
+image-pnm.cpp
+image-rggb.cpp
+viewflif.c
+
+[INCLUDES]
+..\..\zlib
+
+[DEPENDENCIES]
+zlib
+
+[CONFIG_DEFINE]
+/*
+  Define to use the FLIF library
+*/
+#define MAGICKCORE_FLIF_DELEGATE
