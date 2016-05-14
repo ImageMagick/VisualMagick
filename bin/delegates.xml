@@ -54,7 +54,6 @@
     %w  image columns (width)
     %x  input image x resolution
     %y  input image y resolution
-    %F  sanitized original input filename
 
 -->
 <delegatemap>
@@ -74,8 +73,8 @@
   <delegate decode="pcl:cmyk" stealth="True" command="&quot;pcl6.exe&quot; -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 &quot;-sDEVICE=pamcmyk32&quot; -dTextAlphaBits=%u -dGraphicsAlphaBits=%u &quot;-r%s&quot; %s &quot;-sOutputFile=%s&quot; &quot;%s&quot;"/>
   <delegate decode="pcl:color" stealth="True" command="&quot;pcl6.exe&quot; -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 &quot;-sDEVICE=ppmraw&quot; -dTextAlphaBits=%u -dGraphicsAlphaBits=%u &quot;-r%s&quot; %s &quot;-sOutputFile=%s&quot; &quot;%s&quot;"/>
   <delegate decode="pcl:mono" stealth="True" command="&quot;pcl6.exe&quot; -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 &quot;-sDEVICE=pbmraw&quot; -dTextAlphaBits=%u -dGraphicsAlphaBits=%u &quot;-r%s&quot; %s &quot;-sOutputFile=%s&quot; &quot;%s&quot;"/>
-  <delegate decode="pdf" encode="eps" mode="bi" command="&quot;@PSDelegate@&quot; -q -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -sDEVICE=eps2write &quot;-sOutputFile=%o&quot; -- &quot;%i&quot;"/>
-  <delegate decode="pdf" encode="ps" mode="bi" command="&quot;@PSDelegate@&quot; -q -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 -sDEVICE=ps2write &quot;-sOutputFile=%o&quot; -- &quot;%i&quot;"/>
+  <delegate decode="pdf" encode="eps" mode="bi" command="&quot;@PSDelegate@&quot; -q -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -sDEVICE=eps2write -sPDFPassword=&quot;%a&quot; &quot;-sOutputFile=%o&quot; -- &quot;%i&quot;"/>
+  <delegate decode="pdf" encode="ps" mode="bi" command="&quot;@PSDelegate@&quot; -q -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 -sDEVICE=ps2write -sPDFPassword=&quot;%a&quot; &quot;-sOutputFile=%o&quot; -- &quot;%i&quot;"/>
   <delegate decode="pgp" command="pgpv -fq &quot;%i&quot;"/>
   <delegate decode="png" encode="launch" spawn="True" mode="encode" command="imdisplay &quot;%i&quot;" />
   <delegate decode="png" encode="show" spawn="True" mode="encode" command="imdisplay &quot;%i&quot;" />
@@ -97,5 +96,5 @@
   <delegate decode="xps:cmyk" stealth="True" command="&quot;gxps.exe&quot; -q -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 &quot;-sDEVICE=pamcmyk32&quot; -dTextAlphaBits=%u -dGraphicsAlphaBits=%u &quot;-r%s&quot; %s &quot;-sOutputFile=%s&quot; &quot;%s&quot;"/>
   <delegate decode="xps:color" stealth="True" command="&quot;gxps.exe&quot; -q -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 &quot;-sDEVICE=pnmraw&quot; -dTextAlphaBits=%u -dGraphicsAlphaBits=%u &quot;-r%s&quot; %s &quot;-sOutputFile=%s&quot; &quot;%s&quot;"/>
   <delegate decode="xps:mono" stealth="True" command="&quot;gxps.exe&quot; -q -dQUIET -dSAFER -dBATCH -dNOPAUSE -dNOPROMPT -dMaxBitmap=500000000 -dAlignToPixels=0 -dGridFitTT=2 &quot;-sDEVICE=pbmraw&quot; -dTextAlphaBits=%u -dGraphicsAlphaBits=%u &quot;-r%s&quot; %s &quot;-sOutputFile=%s&quot; &quot;%s&quot;"/>
-  <delegate encode="mpeg:encode" stealth="True" command="&quot;ffmpeg.exe&quot; -nostdin -v -1 -i &quot;%F%%d.jpg&quot; &quot;%u.%m&quot;"/>
+  <delegate encode="mpeg:encode" stealth="True" command="&quot;ffmpeg.exe&quot; -nostdin -v -1 -i &quot;%f%%d.jpg&quot; &quot;%u.%m&quot;"/>
 </delegatemap>

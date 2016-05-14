@@ -32,14 +32,18 @@
 
   The /repository file system is restricted to read only.  We use a glob
   expression to match all paths that start with /repository:
-  
+
     <policy domain="path" rights="read" pattern="/repository/*" />
+
+  Lets prevent users from executing any image filters:
+
+    <policy domain="filter" rights="none" pattern="*" />
 
   Any large image is cached to disk rather than memory:
 
     <policy domain="resource" name="area" value="1GB"/>
 
-  Define arguments for the memory, map, area, width, height, and disk resources
+  Define arguments for the memory, map, area, width, height and disk resources
   with SI prefixes (.e.g 100MB).  In addition, resource policies are maximums
   for each instance of ImageMagick (e.g. policy memory limit 1GB, -limit 2GB
   exceeds policy maximum so memory limit is 1GB).
@@ -48,8 +52,8 @@
   <!-- <policy domain="resource" name="temporary-path" value="/tmp"/> -->
   <!-- <policy domain="resource" name="memory" value="2GiB"/> -->
   <!-- <policy domain="resource" name="map" value="4GiB"/> -->
-  <!-- <policy domain="resource" name="width" value="100MP"/> -->
-  <!-- <policy domain="resource" name="height" value="100MP"/> -->
+  <!-- <policy domain="resource" name="width" value="10MP"/> -->
+  <!-- <policy domain="resource" name="height" value="10MP"/> -->
   <!-- <policy domain="resource" name="area" value="1GB"/> -->
   <!-- <policy domain="resource" name="disk" value="16EB"/> -->
   <!-- <policy domain="resource" name="file" value="768"/> -->
@@ -57,5 +61,8 @@
   <!-- <policy domain="resource" name="throttle" value="0"/> -->
   <!-- <policy domain="resource" name="time" value="3600"/> -->
   <!-- <policy domain="system" name="precision" value="6"/> -->
+  <!-- <policy domain="coder" rights="none" pattern="MVG" /> -->
+  <!-- <policy domain="delegate" rights="none" pattern="HTTPS" /> -->
+  <!-- <policy domain="path" rights="none" pattern="@*" /> -->
   <policy domain="cache" name="shared-secret" value="passphrase"/>
 </policymap>
