@@ -42,6 +42,7 @@ afloader.c
 afmodule.c
 afpic.c
 afranges.c
+afshaper.c
 afwarp.c
 hbshim.c
 basepic.c
@@ -52,6 +53,7 @@ ftcalc.c
 ftcid.c
 ftdbgmem.c
 ftgloadr.c
+fthash.c
 ftmac.c
 ftobjs.c
 ftoutln.c
