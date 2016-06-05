@@ -284,6 +284,10 @@ void ProjectFile::loadSource()
     if (PathFileExists(resourceFile.c_str()))
       _resourceFiles.push_back(resourceFile);
   }
+
+  resourceFile=L"..\\" + _project->name() + L"\\Resource.rc";
+  if (PathFileExists(resourceFile.c_str()))
+    _resourceFiles.push_back(resourceFile);
 }
 
 void ProjectFile::loadSource(const wstring &directory)
