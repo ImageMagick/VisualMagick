@@ -1,6 +1,7 @@
 */*.vcxproj
 
 /configure/Debug
+/configure/Release
 /configure/configure.ilk
 /configure/configure.pdb
 
