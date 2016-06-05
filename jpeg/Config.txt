@@ -100,7 +100,7 @@ jidctred-sse2.asm
 jquantf-sse2.asm
 jquanti-sse2.asm
 jccolor-mmx.asm
-jcgryext-mmx.asm
+jcgray-mmx.asm
 jcsample-mmx.asm
 jdcolor-mmx.asm
 jdmerge-mmx.asm
