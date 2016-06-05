@@ -279,11 +279,11 @@ void ProjectFile::loadSource()
       loadModule(*d);
     else
       loadSource(*d);
-  }
 
-  resourceFile=L"..\\" + _project->name() + L"\\Resource.rc";
-  if (PathFileExists(resourceFile.c_str()))
-    _resourceFiles.push_back(resourceFile);
+    resourceFile=*d + L"\\ImageMagick\\Resource.rc";
+    if (PathFileExists(resourceFile.c_str()))
+      _resourceFiles.push_back(resourceFile);
+  }
 }
 
 void ProjectFile::loadSource(const wstring &directory)
@@ -309,7 +309,7 @@ void ProjectFile::loadSource(const wstring &directory)
     if (contains((_wizard->build64bit() ? _project->excludesX64() : _project->excludesX86()),data.cFileName))
       continue;
 
-    if (endsWith(data.cFileName,L".asm") || endsWith(data.cFileName,L".c") || endsWith(data.cFileName,L".cpp") || endsWith(data.cFileName,L".nasm"))
+    if (endsWith(data.cFileName,L".asm") || endsWith(data.cFileName,L".c") || endsWith(data.cFileName,L".cpp"))
       _srcFiles.push_back(directory + L"\\" + data.cFileName);
     else if (endsWith(data.cFileName,L".h"))
       _includeFiles.push_back(directory + L"\\" + data.cFileName);
@@ -519,26 +519,29 @@ void ProjectFile::writeVS2002Files(wofstream &file,wstring name,const vector<wst
   {
     if (endsWith((*f),L".asm"))
     {
-      file << "      <File RelativePath=\"" << *f << "\">" << endl;
-      file << "        <FileConfiguration Name=\"Debug|" << _wizard->platform() << "\">" << endl;
-      file << "          <Tool Name=\"VCCustomBuildTool\" CommandLine=\"ml" << (_wizard->build64bit() ? "64" : "") << " /nologo /c /Cx " << (_wizard->build64bit() ? "" : "/safeseh /coff") << " /Fo&quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
-      file << "        </FileConfiguration>" << endl;
-      file << "        <FileConfiguration Name=\"Release|" << _wizard->platform() << "\">" << endl;
-      file << "          <Tool Name=\"VCCustomBuildTool\" CommandLine=\"ml" << (_wizard->build64bit() ? "64" : "") << " /nologo /c /Cx " << (_wizard->build64bit() ? "" : "/safeseh /coff") << " /Fo&quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
-      file << "        </FileConfiguration>" << endl;
-      file << "      </File>" << endl;
-    }
-    else if (endsWith((*f),L".nasm"))
-    {
-      folder=(*f).substr(0,(*f).find_last_of(L"\\") + 1);
-      file << "      <File RelativePath=\"" << *f << "\">" << endl;
-      file << "        <FileConfiguration Name=\"Debug|" << _wizard->platform() << "\">" << endl;
-      file << "          <Tool Name=\"VCCustomBuildTool\" CommandLine=\"..\\build\\nasm -fwin" << (_wizard->build64bit() ? "64" : "32") << " -DWIN" << (_wizard->build64bit() ? "64 -D__x86_64__" : "32") << " -I" << folder << " -o &quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
-      file << "        </FileConfiguration>" << endl;
-      file << "        <FileConfiguration Name=\"Release|" << _wizard->platform() << "\">" << endl;
-      file << "          <Tool Name=\"VCCustomBuildTool\" CommandLine=\"..\\build\\nasm -fwin" << (_wizard->build64bit() ? "64" : "32") << " -DWIN" << (_wizard->build64bit() ? "64 -D__x86_64__" : "32") << " -I" << folder << " -o &quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
-      file << "        </FileConfiguration>" << endl;
-      file << "      </File>" << endl;
+      if (!_project->useNasm())
+      {
+        file << "      <File RelativePath=\"" << *f << "\">" << endl;
+        file << "        <FileConfiguration Name=\"Debug|" << _wizard->platform() << "\">" << endl;
+        file << "          <Tool Name=\"VCCustomBuildTool\" CommandLine=\"ml" << (_wizard->build64bit() ? "64" : "") << " /nologo /c /Cx " << (_wizard->build64bit() ? "" : "/safeseh /coff") << " /Fo&quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
+        file << "        </FileConfiguration>" << endl;
+        file << "        <FileConfiguration Name=\"Release|" << _wizard->platform() << "\">" << endl;
+        file << "          <Tool Name=\"VCCustomBuildTool\" CommandLine=\"ml" << (_wizard->build64bit() ? "64" : "") << " /nologo /c /Cx " << (_wizard->build64bit() ? "" : "/safeseh /coff") << " /Fo&quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
+        file << "        </FileConfiguration>" << endl;
+        file << "      </File>" << endl;
+      }
+      else
+      {
+        folder=(*f).substr(0,(*f).find_last_of(L"\\") + 1);
+        file << "      <File RelativePath=\"" << *f << "\">" << endl;
+        file << "        <FileConfiguration Name=\"Debug|" << _wizard->platform() << "\">" << endl;
+        file << "          <Tool Name=\"VCCustomBuildTool\" CommandLine=\"..\\build\\nasm -fwin" << (_wizard->build64bit() ? "64" : "32") << " -DWIN" << (_wizard->build64bit() ? "64 -D__x86_64__" : "32") << " -I" << folder << " -o &quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
+        file << "        </FileConfiguration>" << endl;
+        file << "        <FileConfiguration Name=\"Release|" << _wizard->platform() << "\">" << endl;
+        file << "          <Tool Name=\"VCCustomBuildTool\" CommandLine=\"..\\build\\nasm -fwin" << (_wizard->build64bit() ? "64" : "32") << " -DWIN" << (_wizard->build64bit() ? "64 -D__x86_64__" : "32") << " -I" << folder << " -o &quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
+        file << "        </FileConfiguration>" << endl;
+        file << "      </File>" << endl;
+      }
     }
     else if (endsWith((*f),L".c"))
     {
@@ -766,18 +769,21 @@ void ProjectFile::writeVS2010Files(wofstream &file,const vector<wstring> &collec
       file << "    <ClInclude Include=\"" << *f << "\" />" << endl;
     else if (endsWith((*f),L".asm"))
     {
-      file << "    <CustomBuild Include=\"" << *f << "\">" << endl;
-      file << "      <Command>ml" << (_wizard->build64bit() ? "64" : "") << " /nologo /c /Cx " << (_wizard->build64bit() ? "" : "/safeseh /coff") << " /Fo\"$(IntDir)%(Filename).obj\" \"%(FullPath)\"</Command>" << endl;
-      file << "      <Outputs>$(IntDir)%(Filename).obj;%(Outputs)</Outputs>" << endl;
-      file << "    </CustomBuild>" << endl;
-    }
-    else if (endsWith((*f),L".nasm"))
-    {
-      folder=(*f).substr(0,(*f).find_last_of(L"\\") + 1);
-      file << "    <CustomBuild Include=\"" << *f << "\">" << endl;
-      file << "      <Command>..\\build\\nasm -fwin" << (_wizard->build64bit() ? "64" : "32") << " -DWIN" << (_wizard->build64bit() ? "64 -D__x86_64__" : "32") << " -I" << folder << " -o \"$(IntDir)%(Filename).obj\" \"%(FullPath)\"</Command>" << endl;
-      file << "      <Outputs>$(IntDir)%(Filename).obj;%(Outputs)</Outputs>" << endl;
-      file << "    </CustomBuild>" << endl;
+      if (!_project->useNasm())
+      {
+        file << "    <CustomBuild Include=\"" << *f << "\">" << endl;
+        file << "      <Command>ml" << (_wizard->build64bit() ? "64" : "") << " /nologo /c /Cx " << (_wizard->build64bit() ? "" : "/safeseh /coff") << " /Fo\"$(IntDir)%(Filename).obj\" \"%(FullPath)\"</Command>" << endl;
+        file << "      <Outputs>$(IntDir)%(Filename).obj;%(Outputs)</Outputs>" << endl;
+        file << "    </CustomBuild>" << endl;
+      }
+      else
+      {
+        folder=(*f).substr(0,(*f).find_last_of(L"\\") + 1);
+        file << "    <CustomBuild Include=\"" << *f << "\">" << endl;
+        file << "      <Command>..\\build\\nasm -fwin" << (_wizard->build64bit() ? "64" : "32") << " -DWIN" << (_wizard->build64bit() ? "64 -D__x86_64__" : "32") << " -I" << folder << " -o \"$(IntDir)%(Filename).obj\" \"%(FullPath)\"</Command>" << endl;
+        file << "      <Outputs>$(IntDir)%(Filename).obj;%(Outputs)</Outputs>" << endl;
+        file << "    </CustomBuild>" << endl;
+      }
     }
     else
     {

@@ -123,6 +123,11 @@ vector<wstring> &Project::references()
   return(_references);
 }
 
+bool Project::useNasm() const
+{
+  return(_useNasm);
+}
+
 bool Project::useUnicode() const
 {
   return(_useUnicode);
@@ -221,6 +226,7 @@ Project::Project(wstring name)
   _isEnabled=true;
   _isOptional=false;
   _type=UNDEFINEDTYPE;
+  _useNasm=false;
   _useUnicode=false;
   _warningLevel=0;
 }
@@ -305,6 +311,8 @@ void Project::loadConfig(wifstream &config)
       _moduleDefinitionFile=readLine(config);
     else if (line == L"[MODULE_PREFIX]")
       _modulePrefix=readLine(config);
+    else if (line == L"[NASM]")
+      _useNasm=true;
     else if (line == L"[OPTIONAL]")
       _isOptional=true;
     else if (line == L"[REFERENCES]")

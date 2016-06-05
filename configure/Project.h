@@ -67,6 +67,8 @@ public:
 
   vector<wstring> &references();
 
+  bool useNasm() const;
+
   bool useUnicode() const;
 
   int warningLevel() const;
@@ -105,6 +107,7 @@ private:
   wstring              _name;
   vector<wstring>      _references;
   int                  _type;
+  bool                 _useNasm;
   bool                 _useUnicode;
   int                  _warningLevel;
 };
