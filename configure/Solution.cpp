@@ -323,8 +323,8 @@ void Solution::writeVersion()
     line=replace(line,L"@MAGICK_LIB_VERSION_TEXT@",versionInfo.version());
     line=replace(line,L"@MAGICK_LIB_VERSION_NUMBER@",versionInfo.versionNumber());
     line=replace(line,L"@PACKAGE_VERSION_ADDENDUM@",versionInfo.libAddendum());
-    line=replace(line,L"@MAGICK_LIBRARY_CURRENT@",versionInfo.majorVersion());
-    line=replace(line,L"@MAGICK_LIBRARY_CURRENT_MIN@",versionInfo.majorVersion());
+    line=replace(line,L"@MAGICK_LIBRARY_CURRENT@",versionInfo.interfaceVersion());
+    line=replace(line,L"@MAGICK_LIBRARY_CURRENT_MIN@",versionInfo.interfaceMinVersion());
     line=replace(line,L"@PACKAGE_RELEASE_DATE@",versionInfo.releaseDate());
     version << line << endl;
   }

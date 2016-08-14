@@ -25,6 +25,16 @@ VersionInfo::VersionInfo()
 {
 }
 
+wstring VersionInfo::interfaceMinVersion() const
+{
+  return(L"0");
+}
+
+wstring VersionInfo::interfaceVersion() const
+{
+  return(_interfaceVersion);
+}
+
 wstring VersionInfo::libAddendum() const
 {
   return(L"-"+_release);
@@ -60,6 +70,20 @@ bool VersionInfo::load()
     if (index != string::npos)
       _release=line.substr(46,line.length()-47);
   }
+  version.close();
+
+  version.open("..\\..\\ImageMagick\\version.sh");
+  if (!version)
+    return(false);
+
+  while (getline(version,line))
+  {
+    index=line.find(L"MAGICK_LIBRARY_CURRENT=");
+    if (index != string::npos)
+      _interfaceVersion=line.substr(23,line.length()-23);
+  }
+
+  version.close();
 
   return(true);
 }

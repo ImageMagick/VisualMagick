@@ -26,6 +26,10 @@ public:
 
   VersionInfo();
 
+  wstring interfaceMinVersion() const;
+
+  wstring interfaceVersion() const;
+
   wstring libAddendum() const;
 
   wstring libVersion() const;
@@ -42,6 +46,7 @@ public:
 
 private:
 
+  wstring _interfaceVersion;
   wstring _version;
   wstring _release;
 };
