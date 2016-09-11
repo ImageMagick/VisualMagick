@@ -1,16 +1,12 @@
 [DLL]
 
 [DEFINES]
-CMS_NO_HALF_SUPPORT
 __CONSOLE__
 _LCMSLIB_
 
 [DIRECTORIES]
 ..\..\lcms\include
 ..\..\lcms\src
-
-[EXCLUDES]
-acconfig.h
 
 [CONFIG_DEFINE]
 /*
