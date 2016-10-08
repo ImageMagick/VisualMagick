@@ -4,6 +4,7 @@
 FLIF_BUILD_DLL
 
 [DIRECTORIES]
+..\..\flif\extern
 ..\..\flif\src
 ..\..\flif\src\image
 ..\..\flif\src\library
@@ -14,6 +15,7 @@ FLIF_BUILD_DLL
 flif.cpp
 flif-interface.cpp
 image.cpp
+image-metadata.cpp
 image-pam.cpp
 image-png.cpp
 image-pnm.cpp
