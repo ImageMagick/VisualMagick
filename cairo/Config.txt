@@ -63,6 +63,7 @@ cairo-xcb-connection-core.c
 cairo-xcb-connection-render.c
 cairo-xcb-connection-shm.c
 cairo-xcb-connection.c
+cairo-xcb-resources.c
 cairo-xcb-screen.c
 cairo-xcb-shm.c
 cairo-xcb-surface-core.c
