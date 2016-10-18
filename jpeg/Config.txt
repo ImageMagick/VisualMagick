@@ -102,6 +102,7 @@ jccolext-sse2.asm
 jccolor-sse2.asm
 jcgray-sse2.asm
 jcgryext-sse2.asm
+jchuff-sse2.asm
 jcsample-sse2.asm
 jdcolext-sse2.asm
 jdcolor-sse2.asm
