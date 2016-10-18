@@ -17,9 +17,6 @@ EXCLUDE_PGX_SUPPORT
 ..\..\jp2\src\libjasper\jp2
 ..\..\jp2\src\libjasper\jpc
 
-[MODULE_DEFINITION_FILE]
-..\..\jp2\jasper.def
-
 [EXCLUDES]
 dummy.c
 
