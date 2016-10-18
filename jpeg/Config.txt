@@ -26,6 +26,7 @@ jsimd_arm.c
 jsimd_arm64.c
 jsimd_mips.c
 jsimd_none.c
+jsimd_powerpc.c
 jstdhuff.c
 rdbmp.c
 rdcolmap.c
@@ -56,12 +57,29 @@ jdcolext-sse2.asm
 jdcolext-sse2-64.asm
 jdmrgext-sse2.asm
 jdmrgext-sse2-64.asm
+jccolext-altivec.c
+jccolor-altivec.c
+jcgray-altivec.c
+jcgryext-altivec.c
+jcsample-altivec.c
+jdcolext-altivec.c
+jdcolor-altivec.c
+jdmerge-altivec.c
+jdmrgext-altivec.c
+jdsample-altivec.c
+jfdctfst-altivec.c
+jfdctint-altivec.c
+jidctfst-altivec.c
+jidctint-altivec.c
+jquanti-altivec.c
+jsimd_altivec.h
 
 [EXCLUDES_X86]
 jccolext-sse2-64.asm
 jccolor-sse2-64.asm
 jcgray-sse2-64.asm
 jcgryext-sse2-64.asm
+jchuff-sse2-64.asm
 jcsample-sse2-64.asm
 jdcolext-sse2-64.asm
 jdcolor-sse2-64.asm
