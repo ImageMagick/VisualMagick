@@ -13,6 +13,7 @@ CCITT_SUPPORT
 
 [DIRECTORIES]
 ..\..\tiff\libtiff
+..\..\tiff\port
 
 [INCLUDES]
 ..\..\jpeg
@@ -34,6 +35,11 @@ tif_msdos.c
 tif_win32.c
 tif_vms.c
 tif_win3.c
+getopt.c
+lfind.c
+strtoul.c
+strtoull.c
+strcasecmp.c
 
 [DEPENDENCIES]
 jpeg
