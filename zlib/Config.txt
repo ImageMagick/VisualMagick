@@ -1,5 +1,8 @@
 [DLL]
 
+[DEFINES_DLL]
+ZLIB_DLL
+
 [DIRECTORIES]
 ..\..\zlib
 
