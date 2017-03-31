@@ -221,6 +221,15 @@ wstring TargetPage::getEnvironmentVariable(const wchar_t *name)
   return(value);
 }
 
+bool TargetPage::hasVisualStudioFolder(const wchar_t *name)
+{
+  wstring
+    path;
+
+  path=getEnvironmentVariable(L"ProgramFiles(x86)") + L"\\Microsoft Visual Studio\\" + name;
+  return(PathFileExists(path.c_str()) ? true : false);
+}
+
 bool TargetPage::openCLIncludePathExists(const wchar_t *name)
 {
   _openCLIncludePath=getEnvironmentVariable(name) + L"\\include";
@@ -243,7 +252,9 @@ void TargetPage::setOpenCLIncludePath()
 
 void TargetPage::setVisualStudioVersion()
 {
-  if (!getEnvironmentVariable(L"VS140COMNTOOLS").empty())
+  if (hasVisualStudioFolder(L"2017"))
+    _visualStudioVersion = VS2017;
+  else if (!getEnvironmentVariable(L"VS140COMNTOOLS").empty())
     _visualStudioVersion = VS2015;
   else if (!getEnvironmentVariable(L"VS120COMNTOOLS").empty())
     _visualStudioVersion = VS2013;

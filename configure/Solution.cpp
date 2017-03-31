@@ -351,6 +351,8 @@ void Solution::write(const ConfigureWizard &wizard,wofstream &file)
       file << "# Visual Studio 2013" << endl;
     else if (wizard.visualStudioVersion() == VS2015)
       file << "# Visual Studio 2015" << endl;
+    else if (wizard.visualStudioVersion() == VS2017)
+      file << "# Visual Studio 2017" << endl;
   }
 
   foreach (Project*,p,_projects)

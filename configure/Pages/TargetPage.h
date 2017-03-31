@@ -77,6 +77,8 @@ private:
 
   wstring getEnvironmentVariable(const wchar_t *name);
 
+  bool hasVisualStudioFolder(const wchar_t *name);
+
   bool openCLIncludePathExists(const wchar_t *name);
 
   void setOpenCLIncludePath();
