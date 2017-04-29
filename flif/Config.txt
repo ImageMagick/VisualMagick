@@ -2,6 +2,7 @@
 
 [DEFINES_DLL]
 FLIF_BUILD_DLL
+HAS_ENCODER
 
 [DIRECTORIES]
 ..\..\flif\extern
