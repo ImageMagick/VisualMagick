@@ -29,6 +29,9 @@ viewflif.c
 [DEPENDENCIES]
 zlib
 
+[VISUAL_STUDIO]
+2013
+
 [CONFIG_DEFINE]
 /*
   Define to use the FLIF library
