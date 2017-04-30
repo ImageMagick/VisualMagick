@@ -96,4 +96,20 @@ static inline wstring replace(const wstring &str, const wstring &from, const wst
   return(result);
 }
 
+static inline int parseVisualStudioVersion(const wstring &version)
+{
+  if (version == L"2010")
+    return(VS2010);
+  else if (version == L"2012")
+    return(VS2012);
+  else if (version == L"2013")
+    return(VS2013);
+  else if (version == L"2015")
+    return(VS2015);
+  else if (version == L"2017")
+    return(VS2017);
+
+  return(VS2002);
+}
+
 #endif // __Shared__

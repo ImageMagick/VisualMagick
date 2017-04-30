@@ -115,6 +115,11 @@ void ProjectFile::loadAliases()
   aliases.close();
 }
 
+bool ProjectFile::isSupported(const int visualStudioVersion) const
+{
+  return(visualStudioVersion >= _visualStudioVersion);
+}
+
 void ProjectFile::loadConfig()
 {
   HANDLE
@@ -255,6 +260,8 @@ void ProjectFile::loadConfig(const wstring &fileName)
       addLines(config,_includes);
     else if (line == L"[CPP]")
       addLines(config,_cppFiles);
+    else if (line == L"[VISUAL_STUDIO]")
+      _visualStudioVersion=parseVisualStudioVersion(readLine(config));
   }
 
   config.close();

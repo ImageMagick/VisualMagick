@@ -43,6 +43,8 @@ public:
 
   vector<wstring> &aliases();
 
+  bool isSupported(const int visualStudioVersion) const;
+
   void loadConfig();
 
   void write(const vector<Project*> &allProjects);
@@ -108,6 +110,7 @@ private:
   wstring                _reference;
   vector<wstring>        _resourceFiles;
   vector<wstring>        _srcFiles;
+  int                    _visualStudioVersion;
   const ConfigureWizard *_wizard;
 };
 

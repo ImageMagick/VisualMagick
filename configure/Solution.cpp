@@ -34,6 +34,9 @@ int Solution::loadProjectFiles(const ConfigureWizard &wizard)
   count=0;
   foreach (Project*,p,_projects)
   {
+    if (!(*p)->isSupported(wizard.visualStudioVersion()))
+      continue;
+
     if (!(*p)->loadFiles(wizard))
       continue;
 
@@ -42,6 +45,8 @@ int Solution::loadProjectFiles(const ConfigureWizard &wizard)
       (*pf)->loadConfig();
       count++;
     }
+
+    (*p)->checkFiles(wizard.visualStudioVersion());
   }
 
   return(count);

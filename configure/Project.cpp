@@ -103,6 +103,11 @@ bool Project::isModule() const
   return((_type == DLLMODULETYPE) || (_type == EXEMODULETYPE));
 }
 
+bool Project::isSupported(const int visualStudioVersion) const
+{
+  return(visualStudioVersion >= _visualStudioVersion);
+}
+
 vector<wstring> &Project::libraries()
 {
   return(_libraries);
@@ -136,6 +141,17 @@ bool Project::useUnicode() const
 int Project::warningLevel() const
 {
   return(_warningLevel);
+}
+
+void Project::checkFiles(const int visualStudioVersion)
+{
+   std::vector<ProjectFile*>
+     newFiles(_files.size());
+
+  auto filter=[visualStudioVersion](ProjectFile* p){ return p->isSupported(visualStudioVersion); };
+  auto it=std::copy_if(_files.begin(),_files.end(),newFiles.begin(),filter);
+  newFiles.resize(std::distance(newFiles.begin(),it));
+  _files=newFiles;
 }
 
 Project* Project::create(wstring name)
@@ -229,6 +245,7 @@ Project::Project(wstring name)
   _useNasm=false;
   _useUnicode=false;
   _warningLevel=0;
+  _visualStudioVersion=VS2002;
 }
 
 void Project::addLines(wifstream &config,wstring &value)
@@ -319,6 +336,8 @@ void Project::loadConfig(wifstream &config)
       addLines(config,_references);
     else if (line == L"[UNICODE]")
       _useUnicode=true;
+    else if (line == L"[VISUAL_STUDIO]")
+      _visualStudioVersion=parseVisualStudioVersion(readLine(config));
     else if (line == L"[WARNING_LEVEL]")
       _warningLevel=stoi(readLine(config));
   }

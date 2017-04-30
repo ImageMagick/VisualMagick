@@ -59,6 +59,8 @@ public:
 
   bool isModule() const;
 
+  bool isSupported(const int visualStudioVersion) const;
+
   vector<wstring> &libraries();
 
   wstring moduleDefinitionFile() const;
@@ -72,6 +74,8 @@ public:
   bool useUnicode() const;
 
   int warningLevel() const;
+
+  void checkFiles(const int visualStudioVersion);
 
   static Project* create(wstring name);
 
@@ -109,6 +113,7 @@ private:
   int                  _type;
   bool                 _useNasm;
   bool                 _useUnicode;
+  int                  _visualStudioVersion;
   int                  _warningLevel;
 };
 
