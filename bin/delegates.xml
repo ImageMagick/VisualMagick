@@ -58,7 +58,7 @@
 -->
 <delegatemap>
   <delegate decode="browse" stealth="True" spawn="True" command="cmd.exe /c start &quot;&quot; http://www.imagemagick.org/"/>
-  <delegate decode="dng:decode" stealth="True" command="dcraw.exe -6 -W -v -O &quot;%u.ppm&quot; &quot;%i&quot;"/>
+  <delegate decode="dng:decode" stealth="True" command="dcraw.exe -6 -W -O &quot;%u.ppm&quot; &quot;%i&quot;"/>
   <delegate decode="dot" command="dot -Tps &quot;%i&quot; -o &quot;%o&quot;"/>
   <delegate decode="dvi" command="dvips -q -o &quot;%o&quot; &quot;%i&quot;"/>
   <delegate decode="edit" stealth="True" command="notepad &quot;%o&quot;"/>
