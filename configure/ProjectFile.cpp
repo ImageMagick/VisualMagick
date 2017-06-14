@@ -711,6 +711,9 @@ void ProjectFile::writeVS2010ItemDefinitionGroup(wofstream &file,const bool debu
   writePreprocessorDefinitions(file,debug);
   file << ";%(PreprocessorDefinitions)</PreprocessorDefinitions>" << endl;
   file << "      <MultiProcessorCompilation>true</MultiProcessorCompilation>" << endl;
+  if (_wizard->visualStudioVersion() >= VS2015) {
+	  file << "      <AdditionalOptions>/source-charset:utf-8 %(AdditionalOptions)</AdditionalOptions>" << endl;
+  }
   file << "    </ClCompile>" << endl;
   file << "    <ResourceCompile>" << endl;
   file << "      <PreprocessorDefinitions>" << (debug ? "_DEBUG" : "NDEBUG") <<";%(PreprocessorDefinitions)</PreprocessorDefinitions>" << endl;
