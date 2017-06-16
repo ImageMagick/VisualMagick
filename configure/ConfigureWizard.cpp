@@ -137,6 +137,11 @@ int ConfigureWizard::visualStudioVersion() const
   return(_targetPage.visualStudioVersion());
 }
 
+bool ConfigureWizard::zeroConfigurationSupport() const
+{
+  return(_targetPage.zeroConfigurationSupport());
+}
+
 void ConfigureWizard::parseCommandLineInfo(const CommandLineInfo &info)
 {
   _targetPage.build64bit(info.build64bit());
@@ -150,6 +155,7 @@ void ConfigureWizard::parseCommandLineInfo(const CommandLineInfo &info)
   _targetPage.useOpenCL(info.useOpenCL());
   _targetPage.useOpenMP(info.useOpenMP());
   _targetPage.visualStudioVersion(info.visualStudioVersion());
+  _targetPage.zeroConfigurationSupport(info.zeroConfigurationSupport());
 }
 
 BEGIN_MESSAGE_MAP(ConfigureWizard,CPropertySheet)

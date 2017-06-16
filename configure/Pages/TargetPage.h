@@ -65,6 +65,9 @@ public:
   int visualStudioVersion() const;
   void visualStudioVersion(int value);
 
+  bool zeroConfigurationSupport() const;
+  void zeroConfigurationSupport(bool value);
+
 protected:
 
   virtual void DoDataExchange(CDataExchange* pDX);
@@ -97,6 +100,7 @@ private:
   BOOL    _useOpenCL;
   BOOL    _useOpenMP;
   int     _visualStudioVersion;
+  BOOL    _zeroConfigurationSupport;
 };
 
 #endif // __TargetPage__

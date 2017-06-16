@@ -84,7 +84,7 @@ IDR_MAINFRAME           ICON                    "Resources\\Configure.ico"
 // Dialog
 //
 
-IDD_WELCOME_PAGE DIALOG  0, 0, 318, 233
+IDD_WELCOME_PAGE DIALOG  0, 0, 318, 240
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Welcome to the VisualMagick configuration tool."
 FONT 8, "MS Sans Serif"
@@ -93,7 +93,7 @@ BEGIN
     CONTROL         132,IDC_STATIC,"Static",SS_BITMAP,91,7,132,126
 END
 
-IDD_TARGET_PAGE DIALOGEX 0, 0, 318, 233
+IDD_TARGET_PAGE DIALOGEX 0, 0, 318, 240
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Target Setup"
 FONT 8, "MS Sans Serif", 0, 0, 0x0
@@ -107,7 +107,7 @@ BEGIN
                     "Button",BS_AUTORADIOBUTTON,153,33,124,10
     CONTROL         "Static Multi-threaded runtimes",IDC_PROJECT_STATIC_MT,
                     "Button",BS_AUTORADIOBUTTON,153,48,109,10
-    GROUPBOX        "Build options",IDC_STATIC,7,90,304,130
+    GROUPBOX        "Build options",IDC_STATIC,7,90,304,145
     CONTROL         "Build 64-bit distribution",IDC_BUILD_64_BIT,"Button",
                     BS_AUTOCHECKBOX | WS_TABSTOP,15,102,100,10
     LTEXT           "Quantum depth",IDC_STATIC,205,102,55,8
@@ -134,6 +134,9 @@ BEGIN
     CONTROL         "Use registry settings or hard-coded paths to locate installed components",
                     IDC_INSTALLED_SUPPORT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
                     15,205,240,10
+    CONTROL         "Use zero configuration",
+                    IDC_ZERO_CONFIGURATION_SUPPORT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    15,220,90,10
 END
 
 IDD_SYSTEM_PAGE DIALOG  0, 0, 318, 233

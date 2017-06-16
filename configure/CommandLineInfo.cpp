@@ -107,6 +107,11 @@ int CommandLineInfo::visualStudioVersion() const
   return(_visualStudioVersion);
 }
 
+bool CommandLineInfo::zeroConfigurationSupport() const
+{
+  return(_zeroConfigurationSupport);
+}
+
 void CommandLineInfo::ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast)
 {
   if (!bFlag)
@@ -158,4 +163,6 @@ void CommandLineInfo::ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast
     _visualStudioVersion=VS2015;
   else if (_wcsicmp(pszParam, L"VS2017") == 0)
     _visualStudioVersion=VS2017;
+  else if (_wcsicmp(pszParam, L"zeroConfigurationSupport") == 0)
+    _zeroConfigurationSupport=true;
 }

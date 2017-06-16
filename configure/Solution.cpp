@@ -223,12 +223,21 @@ void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
     config << endl;
 
     config << "/*" << endl;
-    config << "    Exclude deprecated methods in MagickCore API" << endl;
+    config << "  Exclude deprecated methods in MagickCore API" << endl;
     config << "*/" << endl;
     if (wizard.excludeDeprecated())
       config << "#define MAGICKCORE_EXCLUDE_DEPRECATED" << endl;
     else
       config << "//#define MAGICKCORE_EXCLUDE_DEPRECATED" << endl;
+    config << endl;
+
+    config << "/*" << endl;
+    config << "  Define to only use the built-in (in-memory) settings." << endl;
+    config << "*/" << endl;
+    if (wizard.zeroConfigurationSupport())
+      config << "#define MAGICKCORE_ZERO_CONFIGURATION_SUPPORT" << endl;
+    else
+      config << "//#define MAGICKCORE_ZERO_CONFIGURATION_SUPPORT" << endl;
 
     foreach (Project*,p,_projects)
     {

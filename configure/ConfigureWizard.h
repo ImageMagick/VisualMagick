@@ -72,6 +72,8 @@ public:
 
   int visualStudioVersion() const;
 
+  bool zeroConfigurationSupport() const;
+
   void parseCommandLineInfo(const CommandLineInfo &info);
 
 protected:

@@ -159,6 +159,16 @@ void TargetPage::visualStudioVersion(int value)
   _visualStudioVersion=value;
 }
 
+bool TargetPage::zeroConfigurationSupport() const
+{
+  return(_zeroConfigurationSupport);
+}
+
+void TargetPage::zeroConfigurationSupport(bool value)
+{
+  _zeroConfigurationSupport=value;
+}
+
 void TargetPage::DoDataExchange(CDataExchange* pDX)
 {
   CPropertyPage::DoDataExchange(pDX);
@@ -174,6 +184,7 @@ void TargetPage::DoDataExchange(CDataExchange* pDX)
   DDX_Check(pDX,IDC_INCLUDE_OPTIONAL,_includeOptional);
   DDX_Check(pDX,IDC_EXCLUDE_DEPRECATED,_excludeDeprecated);
   DDX_Check(pDX,IDC_INSTALLED_SUPPORT,_installedSupport);
+  DDX_Check(pDX,IDC_ZERO_CONFIGURATION_SUPPORT,_zeroConfigurationSupport);
 }
 
 BOOL TargetPage::OnInitDialog()

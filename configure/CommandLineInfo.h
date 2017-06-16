@@ -55,6 +55,8 @@ public:
 
   int visualStudioVersion() const;
 
+  bool zeroConfigurationSupport() const;
+
   virtual void ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast);
 
 private:
@@ -70,6 +72,7 @@ private:
   bool _useOpenCL;
   bool _useOpenMP;
   int  _visualStudioVersion;
+  bool  _zeroConfigurationSupport;
 };
 
 #endif // __CommandLineInfo__
