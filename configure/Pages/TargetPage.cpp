@@ -37,6 +37,7 @@ TargetPage::TargetPage() : CPropertyPage(IDD_TARGET_PAGE)
   _useHDRI=PathFileExists(L"..\\MagickCore") ? TRUE : FALSE;
   _useOpenCL=!_openCLIncludePath.empty();
   _useOpenMP=TRUE;
+  _zeroConfigurationSupport=FALSE;
 }
 
 TargetPage::~TargetPage()
@@ -264,11 +265,11 @@ void TargetPage::setOpenCLIncludePath()
 void TargetPage::setVisualStudioVersion()
 {
   if (hasVisualStudioFolder(L"2017"))
-    _visualStudioVersion = VS2017;
+    _visualStudioVersion=VS2017;
   else if (!getEnvironmentVariable(L"VS140COMNTOOLS").empty())
-    _visualStudioVersion = VS2015;
+    _visualStudioVersion=VS2015;
   else if (!getEnvironmentVariable(L"VS120COMNTOOLS").empty())
-    _visualStudioVersion = VS2013;
+    _visualStudioVersion=VS2013;
   else if (!getEnvironmentVariable(L"VS110COMNTOOLS").empty())
     _visualStudioVersion=VS2012;
   else if (!getEnvironmentVariable(L"VS100COMNTOOLS").empty())

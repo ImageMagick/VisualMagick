@@ -35,6 +35,7 @@ CommandLineInfo::CommandLineInfo(const ConfigureWizard &wizard)
   _useOpenCL=wizard.useOpenCL();
   _useOpenMP=wizard.useOpenMP();
   _visualStudioVersion=wizard.visualStudioVersion();
+  _zeroConfigurationSupport=wizard.zeroConfigurationSupport();
 }
 
 CommandLineInfo::CommandLineInfo(const CommandLineInfo& obj)
