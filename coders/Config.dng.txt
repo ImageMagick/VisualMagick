@@ -2,4 +2,4 @@
 ..\..\libraw\libraw
 
 [DEPENDENCIES]
-raw
+libraw
