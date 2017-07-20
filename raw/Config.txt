@@ -1,0 +1,26 @@
+[DLL]
+
+[DEFINES]
+LIBRAW_BUILDLIB
+
+[DIRECTORIES]
+..\..\raw\internal
+..\..\raw\src
+
+[INCLUDES]
+..\..\raw
+
+[EXCLUDES]
+aahd_demosaic.cpp
+dcb_demosaic.cpp
+dcb_demosaicing.c
+dht_demosaic.cpp
+libraw_xtrans_compressed.cpp
+libraw_x3f.cpp
+wf_filtering.cpp
+
+[CONFIG_DEFINE]
+/*
+  Define to use the Raw library
+*/
+#define MAGICKCORE_RAW_R_DELEGATE
