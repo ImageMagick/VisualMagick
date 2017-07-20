@@ -1,5 +1,5 @@
 [INCLUDES]
-..\..\raw\libraw
+..\..\libraw\libraw
 
 [DEPENDENCIES]
 raw

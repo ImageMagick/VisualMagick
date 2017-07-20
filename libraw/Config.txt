@@ -4,11 +4,11 @@
 LIBRAW_BUILDLIB
 
 [DIRECTORIES]
-..\..\raw\internal
-..\..\raw\src
+..\..\libraw\internal
+..\..\libraw\src
 
 [INCLUDES]
-..\..\raw
+..\..\libraw
 
 [EXCLUDES]
 aahd_demosaic.cpp
