@@ -25,9 +25,9 @@ RSVG_COMPILATION
 ..\..\tiff\libtiff
 
 [EXCLUDES]
+fallback-c89.c
+gdk_pixbuf.rc
 gdk-pixbuf-csource.c
-gdk-pixbuf-marshal.c
-gdk-pixbuf-pixdata.c
 io-gdip-animation.c
 io-gdip-bmp.c
 io-gdip-emf.c
