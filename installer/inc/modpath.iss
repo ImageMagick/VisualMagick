@@ -135,10 +135,7 @@ var
 begin
   appdir := ExpandConstant('{app}')
   if CurUninstallStep = usUninstall then begin
-    if LoadStringsFromFile(appdir + '\uninsTasks.txt', selectedTasks) then
-      if Pos('modifypath', selectedTasks[0]) > 0 then
-        ModPath();
-    DeleteFile(appdir + '\uninsTasks.txt')
+    ModPath();
   end;
 end;
 
