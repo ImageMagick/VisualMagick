@@ -129,11 +129,7 @@ begin
 end;
 
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
-var
-  appdir:      String;
-  selectedTasks:  TArrayOfString;
 begin
-  appdir := ExpandConstant('{app}')
   if CurUninstallStep = usUninstall then begin
     ModPath();
   end;
