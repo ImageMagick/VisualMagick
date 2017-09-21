@@ -47,6 +47,8 @@ public:
 
   void loadConfig();
 
+  void merge(ProjectFile *projectFile);
+
   void write(const vector<Project*> &allProjects);
 
 private:
@@ -65,13 +67,13 @@ private:
 
   void loadAliases();
 
-  void loadConfig(const wstring &fileName);
-
   void loadModule(const wstring &directory);
 
   void loadSource();
 
   void loadSource(const wstring &directory);
+
+  void merge(vector<wstring> &input, vector<wstring> &output);
 
   void setFileName();
 

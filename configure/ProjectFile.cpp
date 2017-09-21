@@ -123,41 +123,43 @@ bool ProjectFile::isSupported(const int visualStudioVersion) const
 
 void ProjectFile::loadConfig()
 {
-  HANDLE
-    fileHandle;
+  wifstream
+    config;
 
   wstring
-    fileName;
-
-  WIN32_FIND_DATA
-    data;
+    fileName,
+    line;
 
   if (!_project->isModule())
     return;
 
-  if (_wizard->solutionType() == DYNAMIC_MT)
+  fileName=L"..\\" + _project->name() + L"\\Config." + _name + L".txt";
+
+  config.open(fileName);
+  if (!config)
+    return;
+
+  while (!config.eof())
   {
-    fileName=L"..\\" + _project->name() + L"\\Config." + _name + L".txt";
-    loadConfig(fileName);
+    line=readLine(config);
+    if (line == L"[DEPENDENCIES]")
+      addLines(config,_dependencies);
+    else if (line == L"[INCLUDES]")
+      addLines(config,_includes);
+    else if (line == L"[CPP]")
+      addLines(config,_cppFiles);
+    else if (line == L"[VISUAL_STUDIO]")
+      _visualStudioVersion=parseVisualStudioVersion(readLine(config));
   }
-  else
-  {
-    fileHandle=FindFirstFile((L"..\\" + _project->name() + L"\\*.txt").c_str(),&data);
-    do
-    {
-      if (fileHandle == INVALID_HANDLE_VALUE)
-        return;
 
-      if ((data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == FILE_ATTRIBUTE_DIRECTORY)
-        continue;
+  config.close();
+}
 
-      if (wcscmp(data.cFileName,L"Config.txt") == 0)
-        continue;
-
-      loadConfig(L"..\\" + _project->name() + L"\\" + data.cFileName);
-
-    } while (FindNextFile(fileHandle,&data));
-  }
+void ProjectFile::merge(ProjectFile *projectFile)
+{
+  merge(projectFile->_dependencies,_dependencies);
+  merge(projectFile->_includes,_includes);
+  merge(projectFile->_cppFiles,_cppFiles);
 }
 
 void ProjectFile::write(const vector<Project*> &allprojects)
@@ -240,34 +242,6 @@ wstring ProjectFile::getTargetName(const bool debug)
   return(targetName);
 }
 
-void ProjectFile::loadConfig(const wstring &fileName)
-{
-  wifstream
-    config;
-
-  wstring
-    line;
-
-  config.open(fileName);
-  if (!config)
-    return;
-
-  while (!config.eof())
-  {
-    line=readLine(config);
-    if (line == L"[DEPENDENCIES]")
-      addLines(config,_dependencies);
-    else if (line == L"[INCLUDES]")
-      addLines(config,_includes);
-    else if (line == L"[CPP]")
-      addLines(config,_cppFiles);
-    else if (line == L"[VISUAL_STUDIO]")
-      _visualStudioVersion=parseVisualStudioVersion(readLine(config));
-  }
-
-  config.close();
-}
-
 void ProjectFile::loadModule(const wstring &directory)
 {
   if (!_reference.empty())
@@ -331,6 +305,15 @@ void ProjectFile::loadSource(const wstring &directory)
   } while (FindNextFile(fileHandle,&data));
 
   FindClose(fileHandle);
+}
+
+void ProjectFile::merge(vector<wstring> &input, vector<wstring> &output)
+{
+  foreach (wstring,value,input)
+  {
+    if (std::find(output.begin(),output.end(), *value) == output.end())
+      output.push_back(*value);
+  }
 }
 
 void ProjectFile::setFileName()

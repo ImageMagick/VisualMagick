@@ -47,6 +47,8 @@ int Solution::loadProjectFiles(const ConfigureWizard &wizard)
     }
 
     (*p)->checkFiles(wizard.visualStudioVersion());
+
+    (*p)->mergeProjectFiles(wizard);
   }
 
   return(count);

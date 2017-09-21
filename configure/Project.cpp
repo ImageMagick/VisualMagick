@@ -154,6 +154,23 @@ void Project::checkFiles(const int visualStudioVersion)
   _files=newFiles;
 }
 
+void Project::mergeProjectFiles(const ConfigureWizard &wizard)
+{
+  ProjectFile
+    *projectFile;
+
+  if ((_type != DLLMODULETYPE) || (wizard.solutionType() == DYNAMIC_MT))
+    return;
+
+  projectFile=new ProjectFile(&wizard,this,L"CORE",_name);
+  foreach (ProjectFile*,pf,_files)
+  {
+    projectFile->merge((*pf));
+  }
+  _files.clear();
+  _files.push_back(projectFile);
+}
+
 Project* Project::create(wstring name)
 {
   wifstream
@@ -196,13 +213,7 @@ bool Project::loadFiles(const ConfigureWizard &wizard)
     }
     case DLLMODULETYPE:
     {
-      if (wizard.solutionType() == DYNAMIC_MT)
-        loadModules(wizard);
-      else
-      {
-        projectFile=new ProjectFile(&wizard,this,L"CORE",_name);
-        _files.push_back(projectFile);
-      }
+      loadModules(wizard);
       break;
     }
     case DLLTYPE:

@@ -77,6 +77,8 @@ public:
 
   void checkFiles(const int visualStudioVersion);
 
+  void mergeProjectFiles(const ConfigureWizard &wizard);
+
   static Project* create(wstring name);
 
   bool loadFiles(const ConfigureWizard &wizard);
