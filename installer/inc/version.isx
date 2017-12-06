@@ -1,5 +1,5 @@
 #ifdef COPYRIGHT
-;  Copyright 1999-2017 ImageMagick Studio LLC, a non-profit organizati3n
+;  Copyright 1999-2018 ImageMagick Studio LLC, a non-profit organizati3n
 ;  dedicated to making software imaging solutions freely available.
 ;
 ;  You may not use this file except in compliance with the License.  You may
@@ -18,5 +18,5 @@
 
 #define public MagickPackageName "ImageMagick"
 #define public MagickPackageVersion "7.0.7"
-#define public MagickPackageVersionAddendum "-14"
+#define public MagickPackageVersionAddendum "-15"
 #define public MagickPackageReleaseDate GetDateTimeString("yyyy/mm/dd", "-", "")
