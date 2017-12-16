@@ -29,8 +29,7 @@ Source: "..\..\ImageMagick\images\*.jpg"; DestDir: "{app}\images"; Flags: ignore
 Source: "..\..\ImageMagick\images\*.png"; DestDir: "{app}\images"; Flags: ignoreversion
 Source: "..\..\ImageMagick\images\patterns\*.png"; DestDir: "{app}\images\patterns"; Flags: ignoreversion
 Source: "..\..\ImageMagick\www\source\*.*"; DestDir: "{app}\www\source"; Flags: ignoreversion
-Source: "..\..\ImageMagick\www\css\*.*"; DestDir: "{app}\www\css"; Flags: ignoreversion
-Source: "..\..\ImageMagick\www\js\*.*"; DestDir: "{app}\www\js"; Flags: ignoreversion
+Source: "..\..\ImageMagick\www\assets\*.*"; DestDir: "{app}\www\assets"; Flags: ignoreversion
 Source: "..\..\ImageMagick\www\*.ico"; DestDir: "{app}\www"; Flags: ignoreversion
 Source: "..\..\ImageMagick\www\*.html"; DestDir: "{app}\www"; Flags: ignoreversion
 Source: "..\..\ImageMagick\www\Magick++\*.html"; DestDir: "{app}\www\Magick++"; Flags: ignoreversion
