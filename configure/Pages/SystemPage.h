@@ -32,6 +32,8 @@ public:
 
   wstring binDirectory() const;
 
+  wstring fuzzBinDirectory() const;
+
   wstring intermediateDirectoryDebug() const;
 
   wstring intermediateDirectoryRelease() const;
@@ -45,6 +47,8 @@ protected:
   virtual void DoDataExchange(CDataExchange* pDX);
 
   afx_msg void OnBinDirBrowse();
+
+  afx_msg void OnFuzzBinDirBrowse();
 
   virtual BOOL OnInitDialog();
 
@@ -65,6 +69,7 @@ private:
   void setDirectory(const wstring &title,CString &directory);
 
   CString _binDirectory;
+  CString _fuzzBinDirectory;
   CString _intermediateDirectoryDebug;
   CString _intermediateDirectoryRelease;
   CString _libDirectory;

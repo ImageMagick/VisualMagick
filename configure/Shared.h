@@ -33,12 +33,14 @@ enum {VS2002, VS2010, VS2012, VS2013, VS2015, VS2017};
 
 enum {Q8, Q16, Q32, Q64};
 
+const vector<wstring> validSrcFiles = {L".c", L".cpp", L".cc"};
+
 #define foreach(type,var,collection) for(std::vector<type>::iterator var = collection.begin(); var != collection.end(); var++)
 #define foreach_const(type,var,collection) for(std::vector<type>::const_iterator var = collection.begin(); var != collection.end(); var++)
 
-static inline bool contains(vector<wstring> &container, const wstring s)
+static inline bool contains(const vector<wstring> &container, const wstring s)
 {
-  foreach(wstring,c,container)
+  foreach_const(wstring,c,container)
   {
     if (*c == s)
       return(true);
@@ -56,6 +58,15 @@ static inline bool endsWith(const wstring &s,const wstring &end)
     return false;
 
   return(s.substr(index) == end);
+}
+
+static inline bool startsWith(const wstring &s,const wstring &start)
+{
+  size_t
+    index;
+
+  index=s.rfind(start);
+  return(index != wstring::npos);
 }
 
 static inline wstring trim(const wstring &s)
@@ -110,6 +121,17 @@ static inline int parseVisualStudioVersion(const wstring &version)
     return(VS2017);
 
   return(VS2002);
+}
+
+static inline bool isValidSrcFile(const wstring &fileName)
+{
+  foreach_const(wstring,ext,validSrcFiles)
+  {
+    if (endsWith(fileName,*ext))
+      return(true);
+  }
+
+  return(false);
 }
 
 #endif // __Shared__

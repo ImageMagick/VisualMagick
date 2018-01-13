@@ -55,6 +55,8 @@ public:
 
   bool isExe() const;
 
+  bool isFuzz() const;
+
   bool isLib() const;
 
   bool isModule() const;

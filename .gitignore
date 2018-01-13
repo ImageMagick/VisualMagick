@@ -9,7 +9,7 @@ ImageMagickObject/dlldata.c
 ImageMagickObject/vc*
 
 /.vs
-/bin
+bin
 /Debug
 /lib
 /Release

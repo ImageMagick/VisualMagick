@@ -154,15 +154,18 @@ BEGIN
     LTEXT           "Intermediate files Debug directory:",IDC_STATIC,13,74, 147,9
     EDITTEXT        IDC_INTERMEDIATE_DEBUG,13,85,259,12,ES_AUTOHSCROLL
     PUSHBUTTON      "Browse",IDC_INTERMEDIATE_DEBUG_BROWSE,275,85,30,13
-    GROUPBOX        "Output files directory setup:",IDC_STATIC,7,113,304,89
+    GROUPBOX        "Output files directory setup:",IDC_STATIC,7,113,304,117
     LTEXT           "Please specify were the executables, libraries, and DLL's should be placed:",
                     IDC_STATIC,13,127,291,11
     LTEXT           "Exe and DLL directory:",IDC_STATIC,13,144,147,9
     EDITTEXT        IDC_BIN_DIR,13,155,259,12,ES_AUTOHSCROLL
     PUSHBUTTON      "Browse",IDC_BIN_DIR_BROWSE,275,155,30,13
-    LTEXT           "Library directory:",IDC_STATIC,13,171,147,9
-    EDITTEXT        IDC_LIB_DIR,13,183,259,12,ES_AUTOHSCROLL
-    PUSHBUTTON      "Browse",IDC_LIB_DIR_BROWSE,275,183,30,13
+    LTEXT           "Fuzz exe directory:",IDC_STATIC,13,171,147,9
+    EDITTEXT        IDC_FUZZ_BIN_DIR,13,183,259,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_FUZZ_BIN_DIR_BROWSE,275,183,30,13
+    LTEXT           "Library directory:",IDC_STATIC,13,199,147,9
+    EDITTEXT        IDC_LIB_DIR,13,211,259,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_LIB_DIR_BROWSE,275,211,30,13
 END
 
 IDD_FINISHED_PAGE DIALOG  0, 0, 318, 233

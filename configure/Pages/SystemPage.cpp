@@ -27,6 +27,7 @@ IMPLEMENT_DYNCREATE(SystemPage, CPropertyPage)
 SystemPage::SystemPage() : CPropertyPage(IDD_SYSTEM_PAGE)
 {
   _binDirectory="..\\bin\\";
+  _fuzzBinDirectory="..\\fuzz\\bin\\";
   _intermediateDirectoryDebug = "..\\Debug\\";
   _intermediateDirectoryRelease = "..\\Release\\";
   _libDirectory="..\\lib\\";
@@ -39,6 +40,11 @@ SystemPage::~SystemPage()
 wstring SystemPage::binDirectory() const
 {
   return(addBackslash(_binDirectory));
+}
+
+wstring SystemPage::fuzzBinDirectory() const
+{
+  return(addBackslash(_fuzzBinDirectory));
 }
 
 wstring SystemPage::intermediateDirectoryDebug() const
@@ -73,12 +79,18 @@ void SystemPage::DoDataExchange(CDataExchange* pDX)
   DDX_Text(pDX,IDC_INTERMEDIATE_RELEASE,_intermediateDirectoryRelease);
   DDX_Text(pDX,IDC_INTERMEDIATE_DEBUG,_intermediateDirectoryDebug);
   DDX_Text(pDX,IDC_BIN_DIR,_binDirectory);
+  DDX_Text(pDX,IDC_FUZZ_BIN_DIR,_fuzzBinDirectory);
   DDX_Text(pDX,IDC_LIB_DIR,_libDirectory);
 }
 
 void SystemPage::OnBinDirBrowse()
 {
   setDirectory(L"Select Bin directory",_binDirectory);
+}
+
+void SystemPage::OnFuzzBinDirBrowse()
+{
+  setDirectory(L"Select Fuzz Bin directory",_fuzzBinDirectory);
 }
 
 BOOL SystemPage::OnInitDialog() 
@@ -109,6 +121,7 @@ BEGIN_MESSAGE_MAP(SystemPage, CPropertyPage)
   ON_BN_CLICKED(IDC_INTERMEDIATE_RELEASE_BROWSE,OnIntermediateDirectoryReleaseBrowse)
   ON_BN_CLICKED(IDC_INTERMEDIATE_DEBUG_BROWSE, OnIntermediateDirectoryDebugBrowse)
   ON_BN_CLICKED(IDC_BIN_DIR, OnBinDirBrowse)
+  ON_BN_CLICKED(IDC_FUZZ_BIN_DIR, OnFuzzBinDirBrowse)
   ON_BN_CLICKED(IDC_BIN_DIR_BROWSE, OnLibDirBrowse)
 END_MESSAGE_MAP()
 

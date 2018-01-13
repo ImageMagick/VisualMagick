@@ -55,6 +55,8 @@ private:
 
   bool isLib() const;
 
+  wstring outputDirectory() const;
+
   void addFile(const wstring &directory, const wstring &name);
 
   void addLines(wifstream &config,vector<wstring> &container);
@@ -64,6 +66,8 @@ private:
   wstring getTargetName(const bool debug);
 
   void initialize(Project* project);
+
+  bool isSrcFile(const wstring &fileName);
 
   void loadAliases();
 

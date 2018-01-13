@@ -33,12 +33,14 @@
 #define IDC_INTERMEDIATE_RELEASE_BROWSE 1019
 #define IDC_BIN_DIR                     1020
 #define IDC_BIN_DIR_BROWSE              1021
-#define IDC_LIB_DIR                     1022
-#define IDC_LIB_DIR_BROWSE              1023
-#define IDC_FINISHED_TEXT               1024
-#define IDD_WAITDIALOG                  1025
-#define IDC_MSGCTRL                     1026
-#define IDC_PROGRESSCTRL                1027
+#define IDC_FUZZ_BIN_DIR                1022
+#define IDC_FUZZ_BIN_DIR_BROWSE         1023
+#define IDC_LIB_DIR                     1024
+#define IDC_LIB_DIR_BROWSE              1025
+#define IDC_FINISHED_TEXT               1026
+#define IDD_WAITDIALOG                  1027
+#define IDC_MSGCTRL                     1028
+#define IDC_PROGRESSCTRL                1029
 
 // Next default values for new objects
 // 

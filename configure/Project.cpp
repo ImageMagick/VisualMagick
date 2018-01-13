@@ -93,6 +93,11 @@ bool Project::isExe() const
   return((_type == EXETYPE) || (_type == EXEMODULETYPE) || (_type == APPTYPE));
 }
 
+bool Project::isFuzz() const
+{
+  return(_modulePrefix == L"FUZZ");
+}
+
 bool Project::isLib() const
 {
   return((_type == STATICTYPE));
@@ -383,9 +388,12 @@ void Project::loadModules(const ConfigureWizard &wizard)
       if (contains(_excludes,data.cFileName))
         continue;
 
+      if (startsWith(data.cFileName,L"main."))
+        continue;
+
       name=data.cFileName;
 
-      if (!endsWith(name,L".c") && !endsWith(name,L".cpp"))
+      if (!isValidSrcFile(data.cFileName))
         continue;
 
       name=name.substr(0, name.find_last_of(L"."));

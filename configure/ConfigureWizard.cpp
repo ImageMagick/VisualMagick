@@ -55,6 +55,11 @@ bool ConfigureWizard::excludeDeprecated() const
   return(_targetPage.excludeDeprecated());
 }
 
+wstring ConfigureWizard::fuzzBinDirectory() const
+{
+  return(_systemPage.fuzzBinDirectory());
+}
+
 bool ConfigureWizard::includeIncompatibleLicense() const
 {
   return(_targetPage.includeIncompatibleLicense());

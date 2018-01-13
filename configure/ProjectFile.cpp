@@ -88,6 +88,14 @@ void ProjectFile::initialize(Project* project)
   }
 }
 
+bool ProjectFile::isSrcFile(const wstring &fileName)
+{
+  if (endsWith(fileName,L".asm"))
+    return(true);
+
+  return(isValidSrcFile(fileName));
+}
+
 void ProjectFile::loadAliases()
 {
   wifstream
@@ -189,15 +197,46 @@ bool ProjectFile::isLib() const
   return(_project->isLib() || (_wizard->solutionType() != DYNAMIC_MT && _project->isDll()));
 }
 
+wstring ProjectFile::outputDirectory() const
+{
+  if (_project->isFuzz())
+    return(_wizard->fuzzBinDirectory());
+
+  if (isLib())
+    return(_wizard->libDirectory());
+
+  return(_wizard->binDirectory());
+}
+
 void ProjectFile::addFile(const wstring &directory, const wstring &name)
 {
   wstring
     file;
 
-  file=directory + L"\\" + name + L".c";
-  if (!PathFileExists(file.c_str()))
-    file=directory + L"\\" + name + L".cpp";
-  _srcFiles.push_back(file);
+  foreach_const(wstring,ext,validSrcFiles)
+  {
+    file=directory + L"\\" + name + *ext;
+
+    if (PathFileExists(file.c_str()))
+    {
+      _srcFiles.push_back(file);
+      break;
+    }
+  }
+
+  if (!_project->isExe())
+    return;
+
+  foreach_const(wstring,ext,validSrcFiles)
+  {
+    file=directory + L"\\main" + *ext;
+
+    if (PathFileExists(file.c_str()))
+    {
+      _srcFiles.push_back(file);
+      break;
+    }
+  }
 }
 
 void ProjectFile::addLines(wifstream &config,vector<wstring> &container)
@@ -295,7 +334,7 @@ void ProjectFile::loadSource(const wstring &directory)
     if (contains((_wizard->build64bit() ? _project->excludesX64() : _project->excludesX86()),data.cFileName))
       continue;
 
-    if (endsWith(data.cFileName,L".asm") || endsWith(data.cFileName,L".c") || endsWith(data.cFileName,L".cpp"))
+    if (isSrcFile(data.cFileName))
       _srcFiles.push_back(directory + L"\\" + data.cFileName);
     else if (endsWith(data.cFileName,L".h"))
       _includeFiles.push_back(directory + L"\\" + data.cFileName);
@@ -419,7 +458,7 @@ void ProjectFile::writeVS2002Configuration(wofstream &file,const bool debug)
 
   file << "    <Configuration" << endl;
   file << "      Name=\"" << (debug ? "Debug" : "Release") << "|" << _wizard->platform() << "\"" << endl;
-  file << "      OutputDirectory=\"" << (isLib() ? _wizard->libDirectory() : _wizard->binDirectory()) << "\"" << endl;
+  file << "      OutputDirectory=\"" << outputDirectory() << "\"" << endl;
   file << "      IntermediateDirectory=\"" << getIntermediateDirectoryName(debug) << "\""  << endl;
   if (isLib())
     file << "      ConfigurationType=\"4\""  << endl;
@@ -637,7 +676,7 @@ void ProjectFile::writeVS2010(wofstream &file,const vector<Project*> &allProject
   if (_wizard->visualStudioVersion() == VS2010)
     file << "    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>" << endl;
   file << "    <LinkIncremental>false</LinkIncremental>" << endl;
-  file << "    <OutDir>" << (isLib() ? _wizard->libDirectory() : _wizard->binDirectory()) << "</OutDir>" << endl;
+  file << "    <OutDir>" << outputDirectory() << "</OutDir>" << endl;
   if (_project->isExe())
   {
     file << "    <TargetName>" << _name << "</TargetName>" << endl;

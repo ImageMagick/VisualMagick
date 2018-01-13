@@ -42,6 +42,8 @@ public:
 
   bool excludeDeprecated() const;
 
+  wstring fuzzBinDirectory() const;
+
   bool includeIncompatibleLicense() const;
 
   bool includeOptional() const;
