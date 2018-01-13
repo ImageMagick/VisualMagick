@@ -162,7 +162,7 @@ void TargetPage::visualStudioVersion(int value)
 
 bool TargetPage::zeroConfigurationSupport() const
 {
-  return(_zeroConfigurationSupport);
+  return(_zeroConfigurationSupport != 0);
 }
 
 void TargetPage::zeroConfigurationSupport(bool value)
