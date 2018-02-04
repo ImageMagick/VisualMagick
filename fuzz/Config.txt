@@ -14,6 +14,7 @@ BUILD_MAIN
 
 [EXCLUDES]
 encoder_list.cc
+encoder_utils.cc
 travis.cc
 utils.cc
 
