@@ -1,0 +1,5 @@
+[INCLUDES]
+..\..\libde265
+
+[DEPENDENCIES]
+libde265
