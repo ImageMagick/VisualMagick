@@ -1,0 +1,20 @@
+[DLL]
+
+[DEFINES_DLL]
+LIBDE265_EXPORTS
+
+[DIRECTORIES]
+..\..\libde265\extra
+..\..\libde265\libde265
+
+[INCLUDES]
+..\..\libde265
+
+[EXCLUDES]
+en265.cc
+
+[CONFIG_DEFINE]
+/*
+  Define to use the libde265 library
+*/
+#define MAGICKCORE_HEIC_DELEGATE
