@@ -33,6 +33,8 @@ public:
 
   vector<wstring> &definesDll();
 
+  vector<wstring> &definesLib();
+
   vector<wstring> &dependencies();
 
   vector<wstring> &directories();
@@ -99,6 +101,7 @@ private:
   wstring              _configDefine;
   vector<wstring>      _defines;
   vector<wstring>      _definesDll;
+  vector<wstring>      _definesLib;
   vector<wstring>      _dependencies;
   vector<wstring>      _directories;
   vector<wstring>      _excludes;

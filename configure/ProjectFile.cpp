@@ -410,7 +410,13 @@ void ProjectFile::writePreprocessorDefinitions(wofstream &file,const bool debug)
     file << ";" << *def;
   }
   if (isLib() || (_wizard->solutionType() != DYNAMIC_MT && (_project->isExe() || _project->isCom())))
+  {
+    foreach (wstring,def,_project->definesLib())
+    {
+      file << ";" << *def;
+    }
     file << ";_LIB";
+  }
   else if (_project->isDll())
   {
     foreach (wstring,def,_project->definesDll())

@@ -36,6 +36,11 @@ vector<wstring> &Project::definesDll()
   return(_definesDll);
 }
 
+vector<wstring> &Project::definesLib()
+{
+  return(_definesLib);
+}
+
 vector<wstring> &Project::dependencies()
 {
   return(_dependencies);
@@ -310,6 +315,8 @@ void Project::loadConfig(wifstream &config)
       addLines(config,_configDefine);
     else if (line == L"[DEFINES_DLL]")
       addLines(config,_definesDll);
+    else if (line == L"[DEFINES_LIB]")
+      addLines(config,_definesLib);
     else if (line == L"[DEFINES]")
       addLines(config,_defines);
     else if (line == L"[DEPENDENCIES]")
