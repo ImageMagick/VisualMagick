@@ -1,5 +1,8 @@
 [DLLMODULE]
 
+[DEFINES_LIB]
+LZMA_API_STATIC
+
 [DIRECTORIES]
 ..\..\ImageMagick\coders
 

@@ -1,7 +1,9 @@
 [INCLUDES]
 ..\..\bzlib
+..\..\liblzma\src\liblzma\api
 ..\..\zlib
 
 [DEPENDENCIES]
 bzlib
+liblzma
 zlib
