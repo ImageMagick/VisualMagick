@@ -1,0 +1,33 @@
+[DLL]
+
+[DEFINES]
+HAVE_CONFIG_H
+
+[DEFINES_DLL]
+DLL_EXPORT
+
+[DIRECTORIES]
+..\..\liblzma\src\common
+..\..\liblzma\src\liblzma\api
+..\..\liblzma\src\liblzma\check
+..\..\liblzma\src\liblzma\common
+..\..\liblzma\src\liblzma\delta
+..\..\liblzma\src\liblzma\lz
+..\..\liblzma\src\liblzma\lzma
+..\..\liblzma\src\liblzma\rangecoder
+..\..\liblzma\src\liblzma\simple
+..\..\liblzma\windows
+
+[EXCLUDES]
+crc32_small.c
+crc32_tablegen.c
+crc64_small.c
+crc64_tablegen.c
+common_w32res.rc
+price_tablegen.c
+
+[CONFIG_DEFINE]
+/*
+  Define to use the lzma compression library
+*/
+#define MAGICKCORE_LZMA_DELEGATE
