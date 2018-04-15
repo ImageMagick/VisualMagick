@@ -24,6 +24,7 @@ crc32_tablegen.c
 crc64_small.c
 crc64_tablegen.c
 common_w32res.rc
+fastpos_tablegen.c
 price_tablegen.c
 
 [CONFIG_DEFINE]
