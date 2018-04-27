@@ -1,5 +1,4 @@
 [INCLUDES]
-..\..\libde265
 ..\..\libheif\src
 
 [DEPENDENCIES]
