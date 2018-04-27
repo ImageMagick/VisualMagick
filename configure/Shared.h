@@ -33,7 +33,8 @@ enum {VS2002, VS2010, VS2012, VS2013, VS2015, VS2017};
 
 enum {Q8, Q16, Q32, Q64};
 
-const vector<wstring> validSrcFiles = {L".c", L".cpp", L".cc"};
+static const wstring validSrcFilesArr[] = {L".c", L".cpp", L".cc"};
+const vector<wstring> validSrcFiles(validSrcFilesArr, std::end(validSrcFilesArr));
 
 #define foreach(type,var,collection) for(std::vector<type>::iterator var = collection.begin(); var != collection.end(); var++)
 #define foreach_const(type,var,collection) for(std::vector<type>::const_iterator var = collection.begin(); var != collection.end(); var++)
