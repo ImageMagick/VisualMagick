@@ -3,3 +3,4 @@
 
 [DEPENDENCIES]
 libheif
+libde265
