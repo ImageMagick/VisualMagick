@@ -61,4 +61,3 @@ tiff
   Define to use the RSVG library
 */
 #define MAGICKCORE_RSVG_DELEGATE
-#define MAGICKCORE_CAIRO_DELEGATE

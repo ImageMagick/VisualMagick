@@ -81,3 +81,9 @@ glib
 pixman
 png
 zlib
+
+[CONFIG_DEFINE]
+/*
+  Define to use the CAIRO library
+*/
+#define MAGICKCORE_CAIRO_DELEGATE
