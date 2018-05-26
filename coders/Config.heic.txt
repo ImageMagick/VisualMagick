@@ -1,5 +1,5 @@
 [INCLUDES]
-..\..\libheif\src
+..\..\libheif\libheif
 
 [DEPENDENCIES]
 libheif
