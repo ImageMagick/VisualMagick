@@ -15,7 +15,7 @@ aahd_demosaic.cpp
 dcb_demosaic.cpp
 dcb_demosaicing.c
 dht_demosaic.cpp
-libraw_xtrans_compressed.cpp
+libraw_fuji_compressed.cpp
 libraw_x3f.cpp
 wf_filtering.cpp
 
