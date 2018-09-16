@@ -319,6 +319,9 @@ void ProjectFile::loadSource(const wstring &directory)
   WIN32_FIND_DATA
     data;
 
+  if (contains((_wizard->build64bit() ? _project->excludesX64() : _project->excludesX86()),directory))
+    return;
+
   fileHandle=FindFirstFile((directory + L"\\*.*").c_str(),&data);
   do
   {
