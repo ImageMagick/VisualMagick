@@ -45,12 +45,16 @@ wrrle.c
 wrtarga.c
 jccolext-avx2.asm
 jccolext-sse2.asm
+jccolext-mmx.asm
 jcgryext-avx2.asm
 jcgryext-sse2.asm
+jcgryext-mmx.asm
 jdcolext-avx2.asm
 jdcolext-sse2.asm
+jdcolext-mmx.asm
 jdmrgext-avx2.asm
 jdmrgext-sse2.asm
+jdmrgext-mmx.asm
 
 [EXCLUDES_X86]
 ..\..\jpeg\simd\x86_64
