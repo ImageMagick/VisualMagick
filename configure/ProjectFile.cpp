@@ -393,11 +393,11 @@ void ProjectFile::writeAdditionalDependencies(wofstream &file,const wstring &sep
 
 void ProjectFile::writeAdditionalIncludeDirectories(wofstream &file,const wstring &separator)
 {
-  foreach (wstring,dir,_includes)
+  foreach (wstring,dir,_project->directories())
   {
     file << separator << *dir;
   }
-  foreach (wstring,dir,_project->directories())
+  foreach (wstring,dir,_includes)
   {
     file << separator << *dir;
   }
