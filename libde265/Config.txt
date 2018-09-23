@@ -17,3 +17,4 @@ LIBDE265_EXPORTS
 
 [INCLUDES]
 ..\..\libde265
+..\..\libde265\libde265
