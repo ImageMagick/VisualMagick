@@ -294,14 +294,14 @@ void ProjectFile::loadSource()
   wstring
     resourceFile;
 
-  foreach (wstring,d,_project->directories())
+  foreach (wstring,dir,_project->directories())
   {
     if ((_project->isModule()) && (_project->isExe() || (_project->isDll() && _wizard->solutionType() == DYNAMIC_MT)))
-      loadModule(*d);
+      loadModule(*dir);
     else
-      loadSource(*d);
+      loadSource(*dir);
 
-    resourceFile=*d + L"\\ImageMagick\\Resource.rc";
+    resourceFile=*dir + L"\\ImageMagick\\Resource.rc";
     if (PathFileExists(resourceFile.c_str()))
       _resourceFiles.push_back(resourceFile);
   }
@@ -393,13 +393,27 @@ void ProjectFile::writeAdditionalDependencies(wofstream &file,const wstring &sep
 
 void ProjectFile::writeAdditionalIncludeDirectories(wofstream &file,const wstring &separator)
 {
-  foreach (wstring,dir,_project->directories())
+  foreach (wstring,projectDir,_project->directories())
   {
-    file << separator << *dir;
+    bool
+      skip;
+
+    skip=false;
+    foreach (wstring,includeDir,_includes)
+    {
+      if ((*projectDir).find(*includeDir) == 0)
+      {
+        skip=true;
+        break;
+      }
+    }
+
+    if (!skip)
+      file << separator << *projectDir;
   }
-  foreach (wstring,dir,_includes)
+  foreach (wstring,includeDir,_includes)
   {
-    file << separator << *dir;
+    file << separator << *includeDir;
   }
   if (_wizard->useOpenCL())
     file << separator << _wizard->openCLIncludePath();
