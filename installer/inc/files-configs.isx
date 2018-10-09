@@ -21,7 +21,6 @@ Source: "..\..\ImageMagick\config\colors.xml"; DestDir: {#MagickConfigDirectory}
 Source: "..\..\ImageMagick\config\english.xml"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
 Source: "..\..\ImageMagick\config\locale.xml"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
 Source: "..\..\ImageMagick\config\log.xml"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
-Source: "..\..\ImageMagick\config\magic.xml"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
 Source: "..\..\ImageMagick\config\mime.xml"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
 Source: "..\..\ImageMagick\config\quantization-table.xml"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
 Source: "..\bin\configure.xml"; DestDir: {#MagickConfigDirectory}; Flags: confirmoverwrite
