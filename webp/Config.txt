@@ -3,6 +3,9 @@
 [DEFINES]
 _WEBPLIB_
 
+[INCLUDES]
+..\..\webp
+
 [DIRECTORIES]
 ..\..\webp\src
 ..\..\webp\src\dec
