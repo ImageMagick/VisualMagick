@@ -9,6 +9,8 @@
 ws2_32.lib
 
 [EXCLUDES]
+nanoftp.c
+nanohttp.c
 runsuite.c
 runtest.c
 runxmlconf.c
