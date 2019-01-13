@@ -56,28 +56,20 @@ bool VersionInfo::load()
   wstring
     line;
 
-  version.open("..\\installer\\inc\\version.isx");
-  if (!version)
-    return(false);
-
-  while (getline(version,line))
-  {
-    index=line.find(L"#define public MagickPackageVersion ");
-    if (index != string::npos)
-      _version=line.substr(37,line.length()-38);
-
-    index=line.find(L"#define public MagickPackageVersionAddendum ");
-    if (index != string::npos)
-      _release=line.substr(46,line.length()-47);
-  }
-  version.close();
-
   version.open("..\\..\\ImageMagick\\version.sh");
   if (!version)
     return(false);
 
   while (getline(version,line))
   {
+    index=line.find(L"PACKAGE_VERSION=");
+    if (index != string::npos)
+      _version=line.substr(17,line.length()-18);
+
+    index=line.find(L"PACKAGE_RELEASE=");
+    if (index != string::npos)
+      _release=line.substr(17,line.length()-18);
+
     index=line.find(L"MAGICK_LIBRARY_CURRENT=");
     if (index != string::npos)
       _interfaceVersion=line.substr(23,line.length()-23);
