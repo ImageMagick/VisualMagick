@@ -74,6 +74,8 @@ public:
 
   int visualStudioVersion() const;
 
+  wstring visualStudioVersionName() const;
+
   bool zeroConfigurationSupport() const;
 
   void parseCommandLineInfo(const CommandLineInfo &info);

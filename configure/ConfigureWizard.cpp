@@ -142,6 +142,20 @@ int ConfigureWizard::visualStudioVersion() const
   return(_targetPage.visualStudioVersion());
 }
 
+wstring ConfigureWizard::visualStudioVersionName() const
+{
+  switch(_targetPage.visualStudioVersion())
+  {
+    case VS2002: return(L"VS2002");
+    case VS2010: return(L"VS2010");
+    case VS2012: return(L"VS2012");
+    case VS2013: return(L"VS2013");
+    case VS2015: return(L"VS2015");
+    case VS2017: return(L"VS2017");
+    default: return(L"VS");
+  }
+}
+
 bool ConfigureWizard::zeroConfigurationSupport() const
 {
   return(_targetPage.zeroConfigurationSupport());

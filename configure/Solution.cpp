@@ -123,7 +123,7 @@ void Solution::write(const ConfigureWizard &wizard,WaitDialog &waitDialog)
   writeMakeFile(wizard);
 
   waitDialog.nextStep(L"Writing version");
-  writeVersion();
+  writeVersion(wizard);
 }
 
 wstring Solution::getFileName(const ConfigureWizard &wizard)
@@ -304,13 +304,8 @@ void Solution::writeMakeFile(const ConfigureWizard &wizard)
   makeFile.close();
 }
 
-void Solution::writeVersion()
+void Solution::writeVersion(const ConfigureWizard &wizard)
 {
-  wifstream
-    versionIn;
-
-  wofstream
-    version;
 
   wstring
     folder,
@@ -319,20 +314,36 @@ void Solution::writeVersion()
   VersionInfo
     versionInfo;
 
-  folder=getFolder();
-
-  versionIn.open(L"..\\" + folder + L"\\version.h.in");
-  if (!versionIn)
-    return;
-
-  version.open(L"..\\..\\ImageMagick\\" + folder + L"\\version.h");
-  if (!version)
-    return;
-
   if (!versionInfo.load())
     return;
 
-  while (getline(versionIn,line))
+  folder=getFolder();
+
+  writeVersion(wizard,versionInfo,L"..\\"+folder+L"\\version.h.in",L"..\\..\\ImageMagick\\"+folder+L"\\version.h");
+  writeVersion(wizard,versionInfo,L"..\\installer\\inc\\version.isx.in",L"..\\installer\\inc\\version.isx");
+  writeVersion(wizard,versionInfo,L"..\\bin\\configure.xml.in",L"..\\bin\\configure.xml");
+}
+
+void Solution::writeVersion(const ConfigureWizard &wizard,const VersionInfo &versionInfo, wstring input, wstring output)
+{
+  wifstream
+    inputStream;
+
+  wofstream
+    outputStream;
+
+  wstring
+    line;
+
+  inputStream.open(input);
+  if (!inputStream)
+    return;
+
+  outputStream.open(output);
+  if (!outputStream)
+    return;
+
+  while (getline(inputStream,line))
   {
     line=replace(line,L"@PACKAGE_NAME@",L"ImageMagick");
     line=replace(line,L"@PACKAGE_LIB_VERSION@",versionInfo.libVersion());
@@ -342,8 +353,12 @@ void Solution::writeVersion()
     line=replace(line,L"@MAGICK_LIBRARY_CURRENT@",versionInfo.interfaceVersion());
     line=replace(line,L"@MAGICK_LIBRARY_CURRENT_MIN@",versionInfo.interfaceMinVersion());
     line=replace(line,L"@PACKAGE_RELEASE_DATE@",versionInfo.releaseDate());
-    version << line << endl;
+    line=replace(line,L"@VS_VERSION@",wizard.visualStudioVersionName());
+    outputStream << line << endl;
   }
+
+  inputStream.close();
+  outputStream.close();
 }
 
 void Solution::write(const ConfigureWizard &wizard,wofstream &file)

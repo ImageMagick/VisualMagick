@@ -22,6 +22,7 @@
 
 #include "Project.h"
 #include "ConfigureWizard.h"
+#include "VersionInfo.h"
 #include "WaitDialog.h"
 
 class Solution
@@ -45,7 +46,9 @@ private:
 
   void writeMakeFile(const ConfigureWizard &wizard);
 
-  void writeVersion();
+  void writeVersion(const ConfigureWizard &wizard);
+
+  void writeVersion(const ConfigureWizard &wizard,const VersionInfo &versionInfo,wstring input,wstring output);
 
   void write(const ConfigureWizard &wizard,wofstream &file);
 
