@@ -16,7 +16,7 @@
 ;  Copyright (C) 2003 - 2008 GraphicsMagick Group
 #endif
 
-#define public MagickPackageName "ImageMagick"
-#define public MagickPackageVersion "7.0.8"
-#define public MagickPackageVersionAddendum "-24"
-#define public MagickPackageReleaseDate GetDateTimeString("yyyy/mm/dd", "-", "")
+#define public MagickPackageName "@PACKAGE_NAME@"
+#define public MagickPackageVersion "@MAGICK_LIB_VERSION_TEXT@"
+#define public MagickPackageVersionAddendum "@PACKAGE_VERSION_ADDENDUM@"
+#define public MagickPackageReleaseDate "@PACKAGE_RELEASE_DATE@"
