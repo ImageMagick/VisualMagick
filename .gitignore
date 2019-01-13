@@ -5,6 +5,8 @@
 /configure/configure.ilk
 /configure/configure.pdb
 
+/installer/inc/version.isx
+
 ImageMagickObject/dlldata.c
 ImageMagickObject/vc*
 
