@@ -21,3 +21,4 @@ _WEBPLIB_
   Define to use the WebP library
 */
 #define MAGICKCORE_WEBP_DELEGATE
+#define MAGICKCORE_WEBPMUX_DELEGATE
