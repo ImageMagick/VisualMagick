@@ -42,7 +42,22 @@ wstring VersionInfo::libAddendum() const
 
 wstring VersionInfo::libVersion() const
 {
-  return(L"0x"+replace(_version,L".",L""));
+  vector<wstring>
+    result;
+
+  wstring
+    line;
+
+  wstringstream
+    inpput(_version),
+    output;
+
+  output << L"0x";
+
+  while(std::getline(inpput,line,L'.'))
+    output << std::uppercase << std::hex << std::stoi(line);
+
+  return(output.str());
 }
 
 bool VersionInfo::load()
