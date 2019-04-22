@@ -42,9 +42,6 @@ wstring VersionInfo::libAddendum() const
 
 wstring VersionInfo::libVersion() const
 {
-  vector<wstring>
-    result;
-
   wstring
     line;
 
