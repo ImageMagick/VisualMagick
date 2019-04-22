@@ -27,7 +27,7 @@ VersionInfo::VersionInfo()
 
 wstring VersionInfo::interfaceMinVersion() const
 {
-  return(L"0");
+  return(_interfaceVersion);
 }
 
 wstring VersionInfo::interfaceVersion() const
