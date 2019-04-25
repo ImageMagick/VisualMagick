@@ -686,6 +686,8 @@ void ProjectFile::writeVS2010(wofstream &file,const vector<Project*> &allProject
     file << "    <PlatformToolset>v140_xp</PlatformToolset>" << endl;
   else if (_wizard->visualStudioVersion() == VS2017)
     file << "    <PlatformToolset>v141</PlatformToolset>" << endl;
+  else if (_wizard->visualStudioVersion() == VS2019)
+    file << "    <PlatformToolset>v142</PlatformToolset>" << endl;
   file << "    <UseOfMfc>false</UseOfMfc>" << endl;
   if (_project->useUnicode())
     file << "    <CharacterSet>Unicode</CharacterSet>" << endl;

@@ -264,7 +264,9 @@ void TargetPage::setOpenCLIncludePath()
 
 void TargetPage::setVisualStudioVersion()
 {
-  if (hasVisualStudioFolder(L"2017"))
+  if (hasVisualStudioFolder(L"2019"))
+    _visualStudioVersion=VS2019;
+  else if (hasVisualStudioFolder(L"2017"))
     _visualStudioVersion=VS2017;
   else if (!getEnvironmentVariable(L"VS140COMNTOOLS").empty())
     _visualStudioVersion=VS2015;
