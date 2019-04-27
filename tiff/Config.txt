@@ -2,20 +2,15 @@
 
 [DEFINES]
 _TIFFLIB_
-DEFAULT_EXTRASAMPLE_AS_ALPHA
-LOGLUV_SUPPORT
-NEXT_SUPPORT
-THUNDER_SUPPORT
-LZW_SUPPORT
-PACKBITS_SUPPORT
-CCITT_SUPPORT
 
 [DIRECTORIES]
 ..\..\tiff\libtiff
 ..\..\tiff\port
 
 [INCLUDES]
+..\..\jbig\libjbig
 ..\..\jpeg
+..\..\webp\src
 ..\..\zlib
 
 [MODULE_DEFINITION_FILE]
@@ -41,7 +36,9 @@ strtoull.c
 strcasecmp.c
 
 [DEPENDENCIES]
+jbig
 jpeg
+webp
 zlib
 
 [CONFIG_DEFINE]
