@@ -120,6 +120,8 @@ static inline int parseVisualStudioVersion(const wstring &version)
     return(VS2015);
   else if (version == L"2017")
     return(VS2017);
+  else if (version == L"2019")
+    return(2019);
 
   return(VS2002);
 }

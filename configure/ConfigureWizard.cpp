@@ -152,6 +152,7 @@ wstring ConfigureWizard::visualStudioVersionName() const
     case VS2013: return(L"VS2013");
     case VS2015: return(L"VS2015");
     case VS2017: return(L"VS2017");
+    case VS2019: return(L"VS2019");
     default: return(L"VS");
   }
 }
