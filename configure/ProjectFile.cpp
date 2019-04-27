@@ -444,6 +444,8 @@ void ProjectFile::writePreprocessorDefinitions(wofstream &file,const bool debug)
   }
   if (_project->isExe() && _wizard->solutionType() != STATIC_MT)
     file << ";_AFXDLL";
+  if (_wizard->includeIncompatibleLicense())
+    file << ";_AFXDLL,_MAGICK_INCOMPATIBLE_LICENSES_";
 }
 
 void ProjectFile::writeVS2002(wofstream &file)
