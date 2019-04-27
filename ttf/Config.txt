@@ -71,8 +71,10 @@ ftcglyph.c
 ftcimage.c
 ftcmanag.c
 ftcmru.c
+ftcolor.c
 ftcsbits.c
 ftdbgmem.c
+fterrors.c
 ftfntfmt.c
 ftgloadr.c
 ftgrays.c
