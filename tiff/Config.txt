@@ -31,6 +31,8 @@ tif_vms.c
 tif_win3.c
 getopt.c
 lfind.c
+strtol.c
+strtoll.c
 strtoul.c
 strtoull.c
 strcasecmp.c
