@@ -9,13 +9,13 @@ _MAGICKLIB_
 [INCLUDES]
 ..\..\ImageMagick
 ..\..\bzlib
+..\..\freetype\include
 ..\..\glib
 ..\..\glib\glib
 ..\..\libxml\include
 ..\..\lcms\include
 ..\..\lqr
 ..\..\lqr\lqr
-..\..\ttf\include
 ..\..\zlib
 
 [EXCLUDES]
@@ -25,11 +25,11 @@ widget.c
 
 [DEPENDENCIES]
 bzlib
+freetype
 glib
 lcms
 libxml
 lqr
-ttf
 zlib
 
 [WARNING_LEVEL]
