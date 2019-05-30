@@ -789,7 +789,7 @@ void ProjectFile::writeVS2010ItemDefinitionGroup(wofstream &file,const bool debu
     file << ";%(AdditionalDependencies)</AdditionalDependencies>" << endl;
     file << "      <SuppressStartupBanner>true</SuppressStartupBanner>" << endl;
     file << "      <TargetMachine>Machine" << (_wizard->build64bit() ? "X64" : "X86") << "</TargetMachine>" << endl;
-    file << "      <GenerateDebugInformation>true</GenerateDebugInformation>" << endl;
+    file << "      <GenerateDebugInformation>" << (debug ? "true" : "false") << "</GenerateDebugInformation>" << endl;
     file << "      <ProgramDatabaseFile>" << _wizard->binDirectory() << (_project->isExe() ? _name : name) << ".pdb</ProgramDatabaseFile>" << endl;
     file << "      <ImportLibrary>" << _wizard->libDirectory() << name << ".lib</ImportLibrary>" << endl;
     if (!_project->isConsole())
