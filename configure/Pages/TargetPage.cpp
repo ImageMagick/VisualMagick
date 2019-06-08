@@ -25,7 +25,6 @@ IMPLEMENT_DYNCREATE(TargetPage, CPropertyPage)
 
 TargetPage::TargetPage() : CPropertyPage(IDD_TARGET_PAGE)
 {
-  setOpenCLIncludePath();
   setVisualStudioVersion();
 
   _build64bit=FALSE;
@@ -35,7 +34,7 @@ TargetPage::TargetPage() : CPropertyPage(IDD_TARGET_PAGE)
   _quantumDepth=Q16;
   _solutionType=DYNAMIC_MT;
   _useHDRI=PathFileExists(L"..\\MagickCore") ? TRUE : FALSE;
-  _useOpenCL=!_openCLIncludePath.empty();
+  _useOpenCL=TRUE;
   _useOpenMP=TRUE;
   _zeroConfigurationSupport=FALSE;
 }
@@ -94,11 +93,6 @@ void TargetPage::build64bit(bool value)
   _build64bit=value;
 }
 
-wstring TargetPage::openCLIncludePath() const
-{
-  return(_openCLIncludePath);
-}
-
 int TargetPage::quantumDepth() const
 {
   return(_quantumDepth);
@@ -136,8 +130,7 @@ bool TargetPage::useOpenCL() const
 
 void TargetPage::useOpenCL(bool value)
 {
-  if (!_openCLIncludePath.empty())
-    _useOpenCL=value;
+  _useOpenCL=value;
 }
 
 bool TargetPage::useOpenMP() const
@@ -190,16 +183,7 @@ void TargetPage::DoDataExchange(CDataExchange* pDX)
 
 BOOL TargetPage::OnInitDialog()
 {
-  CButton
-    *openCL;
-
   CPropertyPage::OnInitDialog();
-
-  if (_openCLIncludePath.empty())
-  {
-    openCL=(CButton*) GetDlgItem(IDC_OPEN_CL);
-    openCL->EnableWindow(FALSE);
-  }
 
   UpdateData(FALSE);
 
@@ -240,26 +224,6 @@ bool TargetPage::hasVisualStudioFolder(const wchar_t *name)
 
   path=getEnvironmentVariable(L"ProgramFiles(x86)") + L"\\Microsoft Visual Studio\\" + name;
   return(PathFileExists(path.c_str()) ? true : false);
-}
-
-bool TargetPage::openCLIncludePathExists(const wchar_t *name)
-{
-  _openCLIncludePath=getEnvironmentVariable(name) + L"\\include";
-  return(PathFileExists(_openCLIncludePath.c_str()) ? true : false);
-}
-
-void TargetPage::setOpenCLIncludePath()
-{
-  if (openCLIncludePathExists(L"AMDAPPSDKROOT"))
-    return;
-
-  if (openCLIncludePathExists(L"CUDA_PATH"))
-    return;
-
-  if (openCLIncludePathExists(L"INTELOCLSDKROOT"))
-    return;
-
-  _openCLIncludePath=L"";
 }
 
 void TargetPage::setVisualStudioVersion()

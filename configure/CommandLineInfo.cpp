@@ -32,7 +32,7 @@ CommandLineInfo::CommandLineInfo(const ConfigureWizard &wizard)
   _quantumDepth=wizard.quantumDepth();
   _solutionType=wizard.solutionType();
   _useHDRI=wizard.useHDRI();
-  _useOpenCL=wizard.useOpenCL();
+  _useOpenCL=true;
   _useOpenMP=wizard.useOpenMP();
   _visualStudioVersion=wizard.visualStudioVersion();
   _zeroConfigurationSupport=wizard.zeroConfigurationSupport();

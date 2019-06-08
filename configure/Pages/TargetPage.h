@@ -45,8 +45,6 @@ public:
   bool installedSupport() const;
   void installedSupport(bool value);
 
-  wstring openCLIncludePath() const;
-
   int quantumDepth() const;
   void quantumDepth(int value);
 
@@ -82,10 +80,6 @@ private:
 
   bool hasVisualStudioFolder(const wchar_t *name);
 
-  bool openCLIncludePathExists(const wchar_t *name);
-
-  void setOpenCLIncludePath();
-
   void setVisualStudioVersion();
 
   BOOL    _build64bit;
@@ -93,7 +87,6 @@ private:
   BOOL    _includeIncompatibleLicense;
   BOOL    _includeOptional;
   BOOL    _installedSupport;
-  wstring _openCLIncludePath;
   int     _quantumDepth;
   int     _solutionType;
   BOOL    _useHDRI;

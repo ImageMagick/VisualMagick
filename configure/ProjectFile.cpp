@@ -416,7 +416,7 @@ void ProjectFile::writeAdditionalIncludeDirectories(wofstream &file,const wstrin
     file << separator << *includeDir;
   }
   if (_wizard->useOpenCL())
-    file << separator << _wizard->openCLIncludePath();
+    file << separator << L"..\\..\\VisualMagick\\OpenCL";
 }
 
 void ProjectFile::writePreprocessorDefinitions(wofstream &file,const bool debug)

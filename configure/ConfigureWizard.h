@@ -56,8 +56,6 @@ public:
 
   wstring libDirectory() const;
 
-  wstring openCLIncludePath() const;
-
   wstring platform() const;
 
   int quantumDepth() const;

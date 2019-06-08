@@ -90,11 +90,6 @@ wstring ConfigureWizard::libDirectory() const
   return(_systemPage.libDirectory());
 }
 
-wstring ConfigureWizard::openCLIncludePath() const
-{
-  return(_targetPage.openCLIncludePath());
-}
-
 wstring ConfigureWizard::platform() const
 {
   return(_targetPage.build64bit() ? L"x64" : L"Win32");
