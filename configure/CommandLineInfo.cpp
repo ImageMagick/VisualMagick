@@ -150,6 +150,8 @@ void CommandLineInfo::ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast
     _quantumDepth=Q32;
   else if (_wcsicmp(pszParam, L"Q64") == 0)
     _quantumDepth=Q64;
+  else if ((_wcsicmp(pszParam, L"x86") == 0) || (_wcsicmp(pszParam, L"Win32") == 0))
+    _build64bit=false;
   else if (_wcsicmp(pszParam, L"x64") == 0)
     _build64bit=true;
   else if (_wcsicmp(pszParam, L"VS2002") == 0)
