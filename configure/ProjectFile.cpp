@@ -715,6 +715,8 @@ void ProjectFile::writeVS2010(wofstream &file,const vector<Project*> &allProject
   }
   file << "    <IntDir Condition=\"'$(Configuration)|$(Platform)'=='Debug|" << _wizard->platform() << "'\">" << getIntermediateDirectoryName(true) << "</IntDir>" << endl;
   file << "    <IntDir Condition=\"'$(Configuration)|$(Platform)'=='Release|" << _wizard->platform() << "'\">" << getIntermediateDirectoryName(false) << "</IntDir>" << endl;
+  if (_wizard->visualStudioVersion() >= VS2019)
+    file << "    <UseDebugLibraries Condition=\"'$(Configuration)|$(Platform)'=='Debug|" << _wizard->platform() << "'\">true</UseDebugLibraries>" << endl;
   file << "  </PropertyGroup>" << endl;
 
   writeVS2010ItemDefinitionGroup(file,true);
