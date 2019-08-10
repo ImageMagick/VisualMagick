@@ -751,7 +751,7 @@ void ProjectFile::writeVS2010ItemDefinitionGroup(wofstream &file,const bool debu
   file << "      <InlineFunctionExpansion>" << (debug ? "Disabled" : "AnySuitable") << "</InlineFunctionExpansion>" << endl;
   file << "      <OpenMPSupport>" << (_wizard->useOpenMP() ? "true" : "false") << "</OpenMPSupport>" << endl;
   file << "      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>" << endl;
-  file << "      <ProgramDataBaseFileName>$(OutDir)$(TargetName).pdb</ProgramDataBaseFileName>" << endl;
+  file << "      <ProgramDatabaseFile>" << _wizard->binDirectory() << (_project->isExe() ? _name : name) << ".pdb</ProgramDatabaseFile>" << endl;
   file << "      <BasicRuntimeChecks>" << (debug ? "EnableFastChecks" : "Default") <<"</BasicRuntimeChecks>" << endl;
   file << "      <OmitFramePointers>" << (debug ? "false" : "true") <<"</OmitFramePointers>" << endl;
   file << "      <Optimization>" << (debug ? "Disabled" : "Full") <<"</Optimization>" << endl;
