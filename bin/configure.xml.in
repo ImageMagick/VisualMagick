@@ -13,6 +13,6 @@
   <configure name="VERSION" value="@MAGICK_LIB_VERSION_TEXT@"/>
   <configure name="CC" value="@VS_VERSION@"/>
   <configure name="HOST" value="Windows"/>
-  <configure name="COPYRIGHT" value="Copyright (C) 1999-2019 ImageMagick Studio LLC"/>
+  <configure name="COPYRIGHT" value="Copyright (C) 1999-2020 ImageMagick Studio LLC"/>
   <configure name="WEBSITE" value="http://www.imagemagick.org"/>
 </configuremap>
