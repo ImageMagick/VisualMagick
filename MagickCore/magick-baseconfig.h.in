@@ -146,7 +146,7 @@ typedef long ssize_t;
 #endif
 #define __func__  __FUNCTION__
 
-#define MAGICKCORE_SIZEOF_VOID_P  (sizeof(void *))
+#define MAGICKCORE_SIZEOF_VOID_P  8
 
 /*
   Define to 1 if you have the <ft2build.h> header file.
