@@ -237,9 +237,9 @@ void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
     config << "  Define to only use the built-in (in-memory) settings." << endl;
     config << "*/" << endl;
     if (wizard.zeroConfigurationSupport())
-      config << "#define MAGICKCORE_ZERO_CONFIGURATION_SUPPORT" << endl;
+      config << "#define MAGICKCORE_ZERO_CONFIGURATION_SUPPORT 1" << endl;
     else
-      config << "//#define MAGICKCORE_ZERO_CONFIGURATION_SUPPORT" << endl;
+      config << "//#define MAGICKCORE_ZERO_CONFIGURATION_SUPPORT 1" << endl;
 
     foreach (Project*,p,_projects)
     {
