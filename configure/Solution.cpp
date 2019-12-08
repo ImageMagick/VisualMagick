@@ -239,7 +239,7 @@ void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
     if (wizard.zeroConfigurationSupport())
       config << "#define MAGICKCORE_ZERO_CONFIGURATION_SUPPORT 1" << endl;
     else
-      config << "//#define MAGICKCORE_ZERO_CONFIGURATION_SUPPORT 1" << endl;
+      config << "#define MAGICKCORE_ZERO_CONFIGURATION_SUPPORT 0" << endl;
 
     foreach (Project*,p,_projects)
     {
