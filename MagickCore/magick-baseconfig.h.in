@@ -316,6 +316,7 @@ typedef long ssize_t;
 #endif
 #pragma warning(disable: 4101) /* 'identifier' : unreferenced local variable */
 #pragma warning(disable: 4201) /* nonstandard extension used : nameless struct/union */
+#pragma warning(disable: 4204) /* nonstandard extension used: non-constant aggregate initializer */
 #pragma warning(disable: 4130) /* 'operator' : logical operation on address of string constant */
 #pragma warning(disable: 4459) /* 'identifier' : declaration of 'foo' hides global declaration */
 #pragma warning(disable: 6993) /* Code analysis ignores OpenMP constructs; analyzing single-threaded code */
