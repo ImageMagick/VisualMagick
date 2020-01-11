@@ -1,9 +1,15 @@
 [DLL]
 
+[DEFINES_LIB]
+LIBXML_STATIC
+
 [DIRECTORIES]
 ..\..\libxml
 ..\..\libxml\include
 ..\..\libxml\include\libxml
+
+[INCLUDES]
+..\..\zlib
 
 [LIBRARIES]
 ws2_32.lib
@@ -39,6 +45,9 @@ triostr.c
 xmlcatalog.c
 xmllint.c
 xpath.c
+
+[DEPENDENCIES]
+zlib
 
 [CONFIG_DEFINE]
 /*
