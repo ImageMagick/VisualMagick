@@ -119,6 +119,9 @@ void Solution::write(const ConfigureWizard &wizard,WaitDialog &waitDialog)
   waitDialog.nextStep(L"Writing configuration");
   writeMagickBaseConfig(wizard);
 
+  waitDialog.nextStep(L"Writing threshold-map.h");
+  writeThresholdMap(wizard);
+
   waitDialog.nextStep(L"Writing Makefile.PL");
   writeMakeFile(wizard);
 
@@ -304,6 +307,48 @@ void Solution::writeMakeFile(const ConfigureWizard &wizard)
   makeFile.close();
 }
 
+void Solution::writeThresholdMap(const ConfigureWizard &wizard)
+{
+  wifstream
+    inputStream;
+
+  wofstream
+    outputStream;
+
+  wstring
+    line;
+
+  if (!wizard.zeroConfigurationSupport())
+    return;
+
+  inputStream.open(L"..\\bin\\thresholds.xml");
+  if (!inputStream)
+    return;
+
+  outputStream.open(L"..\\..\\ImageMagick\\MagickCore\\threshold-map.h");
+  if (!outputStream)
+    {
+      inputStream.close();
+      return;
+    }
+
+  outputStream << "static const char *const BuiltinMap=" << endl;
+
+  while (getline(inputStream,line))
+  {
+    if (line.length() == 0)
+      continue;
+
+    line=replace(line,L"\"",L"\\\"");
+    outputStream << "\"" << line << "\"" << endl;
+  }
+
+  outputStream << ";";
+
+  inputStream.close();
+  outputStream.close();
+}
+
 void Solution::writeVersion(const ConfigureWizard &wizard)
 {
 
@@ -341,7 +386,10 @@ void Solution::writeVersion(const ConfigureWizard &wizard,const VersionInfo &ver
 
   outputStream.open(output);
   if (!outputStream)
-    return;
+    {
+      inputStream.close();
+      return;
+    }
 
   while (getline(inputStream,line))
   {

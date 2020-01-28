@@ -103,7 +103,7 @@ static inline wstring replace(const wstring &str, const wstring &from, const wst
   while (index != string::npos)
   {
     result.replace(index,from.length(),to);
-    index=result.find(from);
+    index=result.find(from,index+to.length());
   }
   return(result);
 }

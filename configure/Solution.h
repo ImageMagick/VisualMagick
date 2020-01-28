@@ -46,6 +46,8 @@ private:
 
   void writeMakeFile(const ConfigureWizard &wizard);
 
+  void writeThresholdMap(const ConfigureWizard &wizard);
+
   void writeVersion(const ConfigureWizard &wizard);
 
   void writeVersion(const ConfigureWizard &wizard,const VersionInfo &versionInfo,wstring input,wstring output);
