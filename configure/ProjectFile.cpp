@@ -737,6 +737,8 @@ void ProjectFile::writeVS2010ItemDefinitionGroup(wofstream &file,const bool debu
   wstring
     name;
 
+  name=getTargetName(debug);
+
   file << "  <ItemDefinitionGroup Condition=\"'$(Configuration)|$(Platform)'=='" << (debug ? "Debug" : "Release") << "|" << _wizard->platform() << "'\">" << endl;
   file << "    <ClCompile>" << endl;
   file << "      <RuntimeLibrary>MultiThreaded" << (debug ? "Debug" : "") << (_wizard->solutionType() == STATIC_MT ? "" : "DLL") << "</RuntimeLibrary>" << endl;
@@ -769,8 +771,6 @@ void ProjectFile::writeVS2010ItemDefinitionGroup(wofstream &file,const bool debu
   file << "      <PreprocessorDefinitions>" << (debug ? "_DEBUG" : "NDEBUG") <<";%(PreprocessorDefinitions)</PreprocessorDefinitions>" << endl;
   file << "      <Culture>0x0409</Culture>" << endl;
   file << "    </ResourceCompile>" << endl;
-
-  name=getTargetName(debug);
 
   if (isLib())
   {
