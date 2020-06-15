@@ -24,6 +24,7 @@ SUPPORT_UTF8
 ..\..\glib\gio\gvdb
 ..\..\glib\gio\win32
 ..\..\glib\glib
+..\..\glib\glib\dirent
 ..\..\glib\glib\gnulib
 ..\..\glib\glib\gobject
 ..\..\glib\glib\libcharset
@@ -99,12 +100,15 @@ gio-tool-set.c
 gio-tool-trash.c
 gio-tool-tree.c
 gio-querymodules.c
+giowin32-private.c
 glib.rc
 glib-compile-resources.c
 glib-compile-schemas.c
 glib-genmarshal.c
 glib-unix.c
 gmenuexporter.c
+gmemorymonitordbus.c
+gmemorymonitorportal.c
 gmodule.rc
 gmodule-ar.c
 gmodule-beos.c
@@ -136,12 +140,14 @@ gspawn-win32-helper-console.c
 gspawn-win64-helper.c
 gspawn-win64-helper-console.c
 gspawn.c
+gstdio-private.c
 gsubprocess.c
 gsubprocesslauncher.c
 gtester.c
 gtestdbus.c
 gthreadedsocketservice.c
 gthread-posix.c
+gtrashportal.c
 gunixconnection.c
 gunixcredentialsmessage.c
 gunixfdlist.c
@@ -153,6 +159,9 @@ gunixoutputstream.c
 gunixsocketaddress.c
 gunixvolume.c
 gunixvolumemonitor.c
+gwin32-private.c
+gwin32notificationbackend.c
+isnan.c
 xdp-dbus.c
 win_iconv.c
 
