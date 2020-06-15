@@ -16,8 +16,8 @@ cjpeg.c
 djpeg.c
 jccolext.c
 jcstest.c
-jdatadst.c
-jdatasrc.c
+jdatadst-tj.c
+jdatasrc-tj.c
 jdcolext.c
 jdcol565.c
 jdmrgext.c
