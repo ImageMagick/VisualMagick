@@ -1,5 +1,5 @@
 [INCLUDES]
-..\..\exr\openexr\config
+..\..\exr\openexr
 ..\..\exr\openexr\IlmImf
 
 [DEPENDENCIES]
