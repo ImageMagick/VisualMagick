@@ -16,7 +16,7 @@
 ;  Copyright (C) 2003 - 2008 GraphicsMagick Group
 #endif
 
-#define  public MSVCRedist "C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\redist"
+#define  MSVCRedist GetEnv('VCToolsRedistDir')
 
 #ifdef Magick64BitArchitecture
   #define  public MagickArchitecture "x64"
@@ -28,16 +28,16 @@
 ; MSVC Runtime DLLs.
 ;
 ; C runtime
-Source: {#MSVCRedist}\{#MagickArchitecture}\Microsoft.VC120.CRT\msvcr120.dll; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
+Source: {#MSVCRedist}\{#MagickArchitecture}\Microsoft.VC142.CRT\vcruntime14*.dll; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
 
 ; C++ standard runtime
-Source: {#MSVCRedist}\{#MagickArchitecture}\Microsoft.VC120.CRT\msvcp120.dll; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
+Source: {#MSVCRedist}\{#MagickArchitecture}\Microsoft.VC142.CRT\msvcp14*.dll; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
 
 ; OpenMP runtime
-Source: {#MSVCRedist}\{#MagickArchitecture}\Microsoft.VC120.OPENMP\vcomp120.dll; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
+Source: {#MSVCRedist}\{#MagickArchitecture}\Microsoft.VC142.OPENMP\vcomp140.dll; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
 
 ; MFC C++ runtime
-Source: {#MSVCRedist}\{#MagickArchitecture}\Microsoft.VC120.MFC\mfc120u.dll;   DestDir: {#MagickLibDirectory}; Flags: ignoreversion
+Source: {#MSVCRedist}\{#MagickArchitecture}\Microsoft.VC142.MFC\mfc140u.dll; DestDir: {#MagickLibDirectory}; Flags: ignoreversion
 
 ; DLLs
 #ifdef MagickDynamicPackage
