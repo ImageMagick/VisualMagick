@@ -61,6 +61,8 @@ private:
 
   void addLines(wifstream &config,vector<wstring> &container);
 
+  wstring getFilter(const wstring &fileName,vector<wstring> &filters);
+
   wstring getIntermediateDirectoryName(const bool debug);
 
   wstring getTargetName(const bool debug);
@@ -102,6 +104,8 @@ private:
   void writeVS2010ItemDefinitionGroup(wofstream &file,const bool debug);
 
   void writeVS2010Files(wofstream &file,const vector<wstring> &collection);
+
+  void writeVS2010Filter(wofstream &file);
 
   void writeVS2010ProjectReferences(wofstream &file,const vector<Project*> &allProjects);
 

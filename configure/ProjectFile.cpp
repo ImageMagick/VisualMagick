@@ -201,6 +201,14 @@ void ProjectFile::write(const vector<Project*> &allprojects)
     writeVS2010(file,allprojects);
 
   file.close();
+
+  file.open(L"..\\" + _project->name() + L"\\" + _fileName + L".filters");
+  if (!file)
+    return;
+
+  writeVS2010Filter(file);
+
+  file.close();
 }
 
 bool ProjectFile::isLib() const
@@ -267,6 +275,31 @@ void ProjectFile::addLines(wifstream &config,vector<wstring> &container)
     if (!contains(container,line))
       container.push_back(line);
   }
+}
+
+wstring ProjectFile::getFilter(const wstring &fileName,vector<wstring> &filters)
+{
+  wstring
+    filter,
+    folder;
+
+  filter=replace(fileName,L"..\\",L"");
+  if (filter.find_first_of(L"\\") == filter.find_last_of(L"\\"))
+    return L"";
+
+  filter=filter.substr(filter.find_first_of(L"\\") + 1);
+
+  folder=filter;
+  while (folder.find_first_of(L"\\") != -1)
+  {
+    folder=folder.substr(0, folder.find_last_of(L"\\"));
+    if (!contains(filters, folder))
+      filters.push_back(folder);
+  }
+
+  filter=filter.substr(0, filter.find_last_of(L"\\"));
+
+  return filter;
 }
 
 wstring ProjectFile::getIntermediateDirectoryName(const bool debug)
@@ -887,6 +920,63 @@ void ProjectFile::writeVS2010Files(wofstream &file,const vector<wstring> &collec
     }
   }
   file << "  </ItemGroup>" << endl;
+}
+
+void ProjectFile::writeVS2010Filter(wofstream &file)
+{
+  wstring
+    filter;
+
+  vector<wstring>
+    filters;
+
+  file << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << endl;
+  file << "<Project ToolsVersion=\"4.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">" << endl;
+  file << "  <ItemGroup>" << endl;
+  foreach_const (wstring,f,_srcFiles)
+  {
+    filter=getFilter(*f,filters);
+    if (filter != L"")
+    {
+      file << "    <ClCompile Include=\"" << *f << "\">" << endl;
+      file << "      <Filter>" << filter << "</Filter>" << endl;
+      file << "    </ClCompile>" << endl;
+    }
+    else
+      file << "    <ClCompile Include=\"" << *f << "\" />" << endl;
+  }
+  file << "  </ItemGroup>" << endl;
+  file << "  <ItemGroup>" << endl;
+  foreach_const (wstring,f,_includeFiles)
+  {
+    filter=getFilter(*f,filters);
+    if (filter != L"")
+    {
+      file << "    <CLInclude Include=\"" << *f << "\">" << endl;
+      file << "      <Filter>" << filter << "</Filter>" << endl;
+      file << "    </CLInclude>" << endl;
+    }
+    else
+      file << "    <CLInclude Include=\"" << *f << "\" />" << endl;
+  }
+  file << "  </ItemGroup>" << endl;
+  file << "  <ItemGroup>" << endl;
+  foreach_const (wstring,f,filters)
+  {
+    UUID
+      guid;
+
+    WCHAR*
+      wGuid = NULL;
+
+    UuidCreate(&guid);
+    UuidToStringW(&guid,(RPC_WSTR*)&wGuid);
+    file << "    <Filter Include=\"" << *f << "\">" << endl;
+    file << "      <UniqueIdentifier>{" << wGuid << "}</UniqueIdentifier>" << endl;
+    file << "    </Filter>" << endl;
+  }
+  file << "  </ItemGroup>" << endl;
+  file << "</Project>" << endl;
 }
 
 void ProjectFile::writeVS2010ProjectReferences(wofstream &file,const vector<Project*> &allProjects)
