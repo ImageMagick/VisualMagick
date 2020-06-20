@@ -96,6 +96,20 @@ bool ProjectFile::isSrcFile(const wstring &fileName)
   return(isValidSrcFile(fileName));
 }
 
+bool ProjectFile::isExcluded(const wstring &fileName)
+{
+  if (contains(_project->excludes(),fileName))
+    return true;
+
+  if (contains((_wizard->build64bit() ? _project->excludesX64() : _project->excludesX86()),fileName))
+    return true;
+
+  if (endsWith(fileName,L".h"))
+    return isExcluded(replace(fileName,L".h",L".c")) || isExcluded(replace(fileName,L".h",L".cc"));
+
+  return false;
+}
+
 void ProjectFile::loadAliases()
 {
   wifstream
@@ -331,10 +345,7 @@ void ProjectFile::loadSource(const wstring &directory)
     if ((data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) == FILE_ATTRIBUTE_DIRECTORY)
       continue;
 
-    if (contains(_project->excludes(),data.cFileName))
-      continue;
-
-    if (contains((_wizard->build64bit() ? _project->excludesX64() : _project->excludesX86()),data.cFileName))
+    if (isExcluded(data.cFileName))
       continue;
 
     if (isSrcFile(data.cFileName))

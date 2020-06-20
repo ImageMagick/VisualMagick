@@ -69,6 +69,8 @@ private:
 
   bool isSrcFile(const wstring &fileName);
 
+  bool isExcluded(const wstring &fileName);
+
   void loadAliases();
 
   void loadModule(const wstring &directory);
