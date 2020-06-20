@@ -16,6 +16,12 @@
 
 [EXCLUDES]
 aom_encoder.c
+blk_sse_sum.c
+cdef_block_avx2.c
+cdef_block_neon.c
+cdef_block_sse2.c
+cdef_block_sse4.c
+cdef_block_ssse3.c
 debug_util.c
 inspection.c
 psnr.c
