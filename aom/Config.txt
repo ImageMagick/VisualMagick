@@ -20,6 +20,7 @@ debug_util.c
 inspection.c
 psnr.c
 sad.c
+sse.c
 ssim.c
 variance.c
 vmaf.c
