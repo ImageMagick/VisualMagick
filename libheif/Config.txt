@@ -1,6 +1,7 @@
 [DLL]
 
 [DEFINES]
+HAVE_AOM
 HAVE_LIBDE265
 
 [DEFINES_LIB]
@@ -14,6 +15,7 @@ LIBHEIF_EXPORTS
 ..\..\libheif\libheif
 
 [INCLUDES]
+..\..\aom
 ..\..\libde265
 ..\..\libheif
 
@@ -21,9 +23,11 @@ LIBHEIF_EXPORTS
 box_fuzzer.cc
 encoder_fuzzer.cc
 file_fuzzer.cc
+heif_encoder_aom.cc
 heif_encoder_x265.cc
 
 [DEPENDENCIES]
+aom
 libde265
 
 [CONFIG_DEFINE]
