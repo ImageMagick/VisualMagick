@@ -4,4 +4,3 @@
 
 [DEPENDENCIES]
 libheif
-libde265
