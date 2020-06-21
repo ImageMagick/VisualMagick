@@ -75,7 +75,7 @@ void ProjectFile::initialize(Project* project)
 {
   _visualStudioVersion=VS2002;
   setFileName();
-  setGuid();
+  _guid=createGuid();
 
   foreach(wstring,dep,project->dependencies())
   {
@@ -412,7 +412,7 @@ void ProjectFile::setFileName()
    _fileName+=L".vcxproj";
 }
 
-void ProjectFile::setGuid()
+wstring ProjectFile::createGuid()
 {
   GUID
     guid;
@@ -420,11 +420,15 @@ void ProjectFile::setGuid()
   RPC_WSTR
     guidStr;
 
+  wstring
+    result;
+
   CoCreateGuid(&guid);
   UuidToString(&guid,&guidStr);
-  _guid=wstring((wchar_t *) guidStr);
-  transform(_guid.begin(),_guid.end(),_guid.begin(),::toupper);
+  result=wstring((wchar_t *) guidStr);
+  transform(result.begin(),result.end(),result.begin(),::toupper);
   RpcStringFree(&guidStr);
+  return result;
 }
 
 void ProjectFile::writeAdditionalDependencies(wofstream &file,const wstring &separator)
@@ -963,16 +967,8 @@ void ProjectFile::writeVS2010Filter(wofstream &file)
   file << "  <ItemGroup>" << endl;
   foreach_const (wstring,f,filters)
   {
-    UUID
-      guid;
-
-    WCHAR*
-      wGuid = NULL;
-
-    UuidCreate(&guid);
-    UuidToStringW(&guid,(RPC_WSTR*)&wGuid);
     file << "    <Filter Include=\"" << *f << "\">" << endl;
-    file << "      <UniqueIdentifier>{" << wGuid << "}</UniqueIdentifier>" << endl;
+    file << "      <UniqueIdentifier>{" << createGuid() << "}</UniqueIdentifier>" << endl;
     file << "    </Filter>" << endl;
   }
   file << "  </ItemGroup>" << endl;

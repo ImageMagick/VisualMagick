@@ -61,6 +61,8 @@ private:
 
   void addLines(wifstream &config,vector<wstring> &container);
 
+  wstring createGuid();
+
   wstring getFilter(const wstring &fileName,vector<wstring> &filters);
 
   wstring getIntermediateDirectoryName(const bool debug);
@@ -84,8 +86,6 @@ private:
   void merge(vector<wstring> &input, vector<wstring> &output);
 
   void setFileName();
-
-  void setGuid();
 
   void writeAdditionalDependencies(wofstream &file,const wstring &separator);
 
