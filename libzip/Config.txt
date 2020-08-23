@@ -5,10 +5,10 @@
 
 [INCLUDES]
 ..\..\bzlib
+..\..\liblzma\src\liblzma\api
 ..\..\zlib
 
 [EXCLUDES]
-zip_algorithm_xz.c
 zip_crypto_commoncrypto.c
 zip_crypto_gnutls.c
 zip_crypto_mbedtls.c
@@ -22,6 +22,7 @@ zip_mkstempm.c
 
 [DEPENDENCIES]
 bzlib
+liblzma
 zlib
 
 [CONFIG_DEFINE]
