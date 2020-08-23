@@ -1,0 +1,31 @@
+[DLL]
+
+[DIRECTORIES]
+..\..\libzip\lib
+
+[INCLUDES]
+..\..\bzlib
+..\..\zlib
+
+[EXCLUDES]
+zip_algorithm_xz.c
+zip_crypto_commoncrypto.c
+zip_crypto_gnutls.c
+zip_crypto_mbedtls.c
+zip_crypto_openssl.c
+zip_fdopen.c
+zip_random_unix.c
+zip_random_uwp.c
+zip_source_file_stdio.c
+zip_source_file_stdio_named.c
+zip_mkstempm.c
+
+[DEPENDENCIES]
+bzlib
+zlib
+
+[CONFIG_DEFINE]
+/*
+  Define if you have LIBZIP library
+*/
+#define MAGICKCORE_LIBZIP_DELEGATE
