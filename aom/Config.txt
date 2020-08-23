@@ -10,13 +10,14 @@
 ..\..\aom\av1
 ..\..\aom\av1\common
 ..\..\aom\av1\decoder
+..\..\aom\av1\encoder
+..\..\aom\third_party\fastfeat
+..\..\aom\third_party\vector
 
 [INCLUDES]
 ..\..\aom
 
 [EXCLUDES]
-aom_encoder.c
-blk_sse_sum.c
 cdef_block_avx2.c
 cdef_block_neon.c
 cdef_block_sse2.c
@@ -24,9 +25,5 @@ cdef_block_sse4.c
 cdef_block_ssse3.c
 debug_util.c
 inspection.c
-psnr.c
-sad.c
-sse.c
-ssim.c
-variance.c
+tune_vmaf.c
 vmaf.c
