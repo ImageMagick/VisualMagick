@@ -23,6 +23,7 @@ LIBHEIF_EXPORTS
 box_fuzzer.cc
 encoder_fuzzer.cc
 file_fuzzer.cc
+heif_encoder_rav1e.cc
 heif_encoder_x265.cc
 
 [DEPENDENCIES]
