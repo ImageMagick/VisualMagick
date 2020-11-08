@@ -233,15 +233,21 @@ wstring ProjectFile::outputDirectory() const
 void ProjectFile::addFile(const wstring &directory, const wstring &name)
 {
   wstring
-    file;
+    header_file,
+    src_file;
 
   foreach_const(wstring,ext,validSrcFiles)
   {
-    file=directory + L"\\" + name + *ext;
+    src_file=directory + L"\\" + name + *ext;
 
-    if (PathFileExists(file.c_str()))
+    if (PathFileExists(src_file.c_str()))
     {
-      _srcFiles.push_back(file);
+      _srcFiles.push_back(src_file);
+
+      header_file=directory + L"\\" + name + L".h";
+      if (PathFileExists(header_file.c_str()))
+        _includeFiles.push_back(header_file);
+
       break;
     }
   }
@@ -251,11 +257,16 @@ void ProjectFile::addFile(const wstring &directory, const wstring &name)
 
   foreach_const(wstring,ext,validSrcFiles)
   {
-    file=directory + L"\\main" + *ext;
+    src_file=directory + L"\\main" + *ext;
 
-    if (PathFileExists(file.c_str()))
+    if (PathFileExists(src_file.c_str()))
     {
-      _srcFiles.push_back(file);
+      _srcFiles.push_back(src_file);
+
+      header_file=directory + L"\\" + name + L".h";
+      if (PathFileExists(header_file.c_str()))
+        _includeFiles.push_back(header_file);
+
       break;
     }
   }
