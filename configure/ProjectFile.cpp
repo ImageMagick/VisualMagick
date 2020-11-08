@@ -423,8 +423,8 @@ wstring ProjectFile::createGuid()
   wstring
     result;
 
-  CoCreateGuid(&guid);
-  UuidToString(&guid,&guidStr);
+  (void) CoCreateGuid(&guid);
+  (void) UuidToString(&guid,&guidStr);
   result=wstring((wchar_t *) guidStr);
   transform(result.begin(),result.end(),result.begin(),::toupper);
   RpcStringFree(&guidStr);
