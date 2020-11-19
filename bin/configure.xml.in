@@ -14,5 +14,5 @@
   <configure name="CC" value="@VS_VERSION@"/>
   <configure name="HOST" value="Windows"/>
   <configure name="COPYRIGHT" value="Copyright (C) 1999-2020 ImageMagick Studio LLC"/>
-  <configure name="WEBSITE" value="http://www.imagemagick.org"/>
+  <configure name="WEBSITE" value="https://imagemagick.org"/>
 </configuremap>
