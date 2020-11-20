@@ -25,6 +25,7 @@ Source: "..\..\ImageMagick\README.txt"; DestDir: "{app}"; Flags: ignoreversion
 ; Web pages
 Source: "..\..\ImageMagick\index.html"; DestDir: "{app}"; Flags: ignoreversion isreadme
 Source: "..\..\ImageMagick\images\*.gif"; DestDir: "{app}\images"; Flags: ignoreversion
+Source: "..\..\ImageMagick\images\*.ico"; DestDir: "{app}\images"; Flags: ignoreversion
 Source: "..\..\ImageMagick\images\*.jpg"; DestDir: "{app}\images"; Flags: ignoreversion
 Source: "..\..\ImageMagick\images\*.png"; DestDir: "{app}\images"; Flags: ignoreversion
 Source: "..\..\ImageMagick\images\patterns\*.png"; DestDir: "{app}\images\patterns"; Flags: ignoreversion
