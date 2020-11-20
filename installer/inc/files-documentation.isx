@@ -38,5 +38,3 @@ Source: "..\..\ImageMagick\www\Magick++\*.png"; DestDir: "{app}\www\Magick++"; F
 Source: "..\..\ImageMagick\www\Magick++\COPYING"; DestDir: "{app}\www\Magick++"; Flags: ignoreversion; DestName: "Copyright.txt"
 Source: "..\..\ImageMagick\www\Magick++\README.txt"; DestDir: "{app}\www\Magick++"; Flags: ignoreversion
 Source: "..\..\ImageMagick\www\api\*.html"; DestDir: "{app}\www\api"; Flags: ignoreversion
-Source: "..\..\ImageMagick\www\api\MagickCore\*.*"; DestDir: "{app}\www\api\MagickCore"; Flags: ignoreversion
-Source: "..\..\ImageMagick\www\api\MagickWand\*.*"; DestDir: "{app}\www\api\MagickWand"; Flags: ignoreversion
