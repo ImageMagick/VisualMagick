@@ -1,0 +1,9 @@
+[STATIC]
+
+[DIRECTORIES]
+..\..\brotli\c\common
+..\..\brotli\c\dec
+..\..\brotli\c\enc
+
+[INCLUDES]
+..\..\brotli\c\include
