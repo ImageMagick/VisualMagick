@@ -1,0 +1,10 @@
+[STATIC]
+
+[DIRECTORIES]
+..\..\highway\hwy
+
+[INCLUDES]
+..\..\highway
+
+[EXCLUDES]
+*_test.cc
