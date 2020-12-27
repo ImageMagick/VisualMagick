@@ -39,16 +39,6 @@ const vector<wstring> validSrcFiles(validSrcFilesArr, std::end(validSrcFilesArr)
 #define foreach(type,var,collection) for(std::vector<type>::iterator var = collection.begin(); var != collection.end(); var++)
 #define foreach_const(type,var,collection) for(std::vector<type>::const_iterator var = collection.begin(); var != collection.end(); var++)
 
-static inline bool contains(const vector<wstring> &container, const wstring s)
-{
-  foreach_const(wstring,c,container)
-  {
-    if (*c == s)
-      return(true);
-  }
-  return(false);
-}
-
 static inline bool endsWith(const wstring &s,const wstring &end)
 {
   size_t
@@ -68,6 +58,18 @@ static inline bool startsWith(const wstring &s,const wstring &start)
 
   index=s.rfind(start);
   return(index != wstring::npos);
+}
+
+static inline bool contains(const vector<wstring> &container, const wstring s)
+{
+  foreach_const(wstring,c,container)
+  {
+    if (*c == s)
+      return(true);
+    if ((*c)[0] == '*')
+      return(endsWith(s,(*c).substr(1)));
+  }
+  return(false);
 }
 
 static inline wstring trim(const wstring &s)
