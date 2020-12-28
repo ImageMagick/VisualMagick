@@ -86,6 +86,11 @@ void ProjectFile::initialize(Project* project)
   {
     _includes.push_back(*inc);
   }
+
+  foreach(wstring,inc,project->definesLib())
+  {
+    _definesLib.push_back(*inc);
+  }
 }
 
 bool ProjectFile::isSrcFile(const wstring &fileName)
@@ -172,6 +177,8 @@ void ProjectFile::loadConfig()
       addLines(config,_cppFiles);
     else if (line == L"[VISUAL_STUDIO]")
       _visualStudioVersion=parseVisualStudioVersion(readLine(config));
+    else if (line == L"[DEFINES_LIB]")
+      addLines(config,_definesLib);
   }
 
   config.close();
@@ -182,6 +189,7 @@ void ProjectFile::merge(ProjectFile *projectFile)
   merge(projectFile->_dependencies,_dependencies);
   merge(projectFile->_includes,_includes);
   merge(projectFile->_cppFiles,_cppFiles);
+  merge(projectFile->_definesLib,_definesLib);
 }
 
 void ProjectFile::write(const vector<Project*> &allprojects)
@@ -487,7 +495,7 @@ void ProjectFile::writePreprocessorDefinitions(wofstream &file,const bool debug)
   }
   if (isLib() || (_wizard->solutionType() != DYNAMIC_MT && (_project->isExe() || _project->isCom())))
   {
-    foreach (wstring,def,_project->definesLib())
+    foreach (wstring,def,_definesLib)
     {
       file << ";" << *def;
     }

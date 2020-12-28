@@ -116,6 +116,7 @@ private:
   vector<wstring>        _dependencies;
   vector<wstring>        _includeFiles;
   vector<wstring>        _includes;
+  vector<wstring>        _definesLib;
   wstring                _name;
   wstring                _prefix;
   Project               *_project;
