@@ -2,5 +2,8 @@
 ..\..\libheif
 ..\..\libheif\libheif
 
+[DEFINES_LIB]
+LIBHEIF_STATIC_BUILD
+
 [DEPENDENCIES]
 libheif
