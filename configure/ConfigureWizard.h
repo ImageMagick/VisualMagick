@@ -64,6 +64,8 @@ public:
 
   int solutionType() const;
 
+  wstring targetCpu() const;
+
   bool useHDRI() const;
 
   bool useOpenCL() const;

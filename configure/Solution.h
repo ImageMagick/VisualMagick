@@ -38,6 +38,8 @@ public:
 
 private:
 
+  void checkKeyword(const wstring keyword);
+
   wstring getFileName(const ConfigureWizard &wizard);
 
   wstring getFolder();

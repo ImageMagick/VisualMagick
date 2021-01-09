@@ -117,6 +117,11 @@ int ConfigureWizard::solutionType() const
   return(_targetPage.solutionType());
 }
 
+wstring ConfigureWizard::targetCpu() const
+{
+  return(_targetPage.build64bit() ? L"x64" : L"x86");
+}
+
 bool ConfigureWizard::useHDRI() const
 {
   return(_targetPage.useHDRI());

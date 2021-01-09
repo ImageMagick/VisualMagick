@@ -298,10 +298,7 @@ void Solution::writeMakeFile(const ConfigureWizard &wizard)
   while (getline(makeFileIn,line))
   {
     line=replace(line,L"$$LIB_NAME$$",libName);
-    if (wizard.build64bit())
-      line=replace(line,L"$$PLATFORM$$",L"x64");
-    else
-      line=replace(line,L"$$PLATFORM$$",L"x86");
+    line=replace(line,L"$$PLATFORM$$",wizard.targetCpu());
     makeFile << line << endl;
   }
   makeFile.close();
@@ -364,13 +361,17 @@ void Solution::writeVersion(const ConfigureWizard &wizard)
 
   folder=getFolder();
 
-  writeVersion(wizard,versionInfo,L"..\\"+folder+L"\\version.h.in",L"..\\..\\ImageMagick\\"+folder+L"\\version.h");
+  writeVersion(wizard,versionInfo,L"..\\..\\ImageMagick\\"+folder+L"\\version.h.in",L"..\\..\\ImageMagick\\"+folder+L"\\version.h");
+  writeVersion(wizard,versionInfo,L"..\\..\\ImageMagick\\config\\configure.xml.in",L"..\\bin\\configure.xml");
   writeVersion(wizard,versionInfo,L"..\\installer\\inc\\version.isx.in",L"..\\installer\\inc\\version.isx");
-  writeVersion(wizard,versionInfo,L"..\\bin\\configure.xml.in",L"..\\bin\\configure.xml");
 }
 
 void Solution::writeVersion(const ConfigureWizard &wizard,const VersionInfo &versionInfo, wstring input, wstring output)
 {
+  size_t
+    start,
+    end;
+
   wifstream
     inputStream;
 
@@ -393,20 +394,55 @@ void Solution::writeVersion(const ConfigureWizard &wizard,const VersionInfo &ver
 
   while (getline(inputStream,line))
   {
-    line=replace(line,L"@PACKAGE_NAME@",L"ImageMagick");
-    line=replace(line,L"@PACKAGE_LIB_VERSION@",versionInfo.libVersion());
-    line=replace(line,L"@MAGICK_LIB_VERSION_TEXT@",versionInfo.version());
+    line=replace(line,L"@CC@",wizard.visualStudioVersionName());
+    line=replace(line,L"@CXX@",wizard.visualStudioVersionName());
+    line=replace(line,L"@DOCUMENTATION_PATH@",L"unavailable");
+    line=replace(line,L"@LIB_VERSION@",versionInfo.version());
     line=replace(line,L"@MAGICK_LIB_VERSION_NUMBER@",versionInfo.versionNumber());
-    line=replace(line,L"@PACKAGE_VERSION_ADDENDUM@",versionInfo.libAddendum());
+    line=replace(line,L"@MAGICK_LIB_VERSION_TEXT@",versionInfo.version());
     line=replace(line,L"@MAGICK_LIBRARY_CURRENT@",versionInfo.interfaceVersion());
     line=replace(line,L"@MAGICK_LIBRARY_CURRENT_MIN@",versionInfo.interfaceMinVersion());
+    line=replace(line,L"@MAGICK_TARGET_CPU@",wizard.targetCpu());
+    line=replace(line,L"@MAGICK_TARGET_OS@",L"Windows");
+    line=replace(line,L"@PACKAGE_BASE_VERSION@",versionInfo.version());
+    line=replace(line,L"@PACKAGE_LIB_VERSION@",versionInfo.libVersion());
+    line=replace(line,L"@PACKAGE_LIB_VERSION_NUMBER@",versionInfo.versionNumber());
+    line=replace(line,L"@PACKAGE_NAME@",L"ImageMagick");
+    line=replace(line,L"@PACKAGE_VERSION_ADDENDUM@",versionInfo.libAddendum());
     line=replace(line,L"@PACKAGE_RELEASE_DATE@",versionInfo.releaseDate());
-    line=replace(line,L"@VS_VERSION@",wizard.visualStudioVersionName());
+    line=replace(line,L"@QUANTUM_DEPTH@",to_wstring(wizard.quantumDepth()));
+    line=replace(line,L"@RELEASE_DATE@",versionInfo.releaseDate());
+    line=replace(line,L"@TARGET_OS@",L"Windows");
+    line=replace(line,L"@VERSION@",versionInfo.version());
+    start=line.find(L"@");
+    if (start != string::npos)
+    {
+      end=line.find(L"@",start+1);
+      if (end != string::npos)
+        checkKeyword(line.substr(start+1,end-start-1));
+      continue;
+    }
     outputStream << line << endl;
   }
 
   inputStream.close();
   outputStream.close();
+}
+
+void Solution::checkKeyword(const wstring keyword)
+{
+  vector<wstring> skipableKeywords={
+    L"MAGICKPP_LIB_VERSION_TEXT",L"MAGICKPP_LIBRARY_VERSION_INFO",L"MAGICKPP_LIBRARY_CURRENT",L"MAGICKPP_LIBRARY_CURRENT_MIN",
+    L"MAGICK_CFLAGS",L"CODER_PATH",L"CONFIGURE_PATH",L"CONFIGURE_ARGS",L"MAGICK_CPPFLAGS",L"CXXFLAGS",L"DEFS",L"MAGICK_DELEGATES",
+    L"DISTCHECK_CONFIG_FLAGS",L"EXEC_PREFIX_DIR",L"EXECUTABLE_PATH",L"MAGICK_FEATURES",L"FILTER_PATH",L"MAGICK_GIT_REVISION",
+    L"host",L"INCLUDE_PATH",L"MAGICK_LDFLAGS",L"LIBRARY_PATH",L"MAGICK_LIBS",L"MAGICK_PCFLAGS",L"PREFIX_DIR",L"SHAREARCH_PATH",
+    L"SHARE_PATH",L"MAGICK_TARGET_VENDOR"
+  };
+
+ if (contains(skipableKeywords,keyword))
+   return;
+
+  throw exception();
 }
 
 void Solution::write(const ConfigureWizard &wizard,wofstream &file)
