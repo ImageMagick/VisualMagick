@@ -46,9 +46,13 @@ public:
 
 private:
 
+  void loadValue(const wstring line, const wstring keyword, wstring *value);
+
+  wstring _major;
+  wstring _minor;
+  wstring _micro;
+  wstring _patchlevel;
   wstring _interfaceVersion;
-  wstring _version;
-  wstring _release;
 };
 
 #endif // __VersionInfo__

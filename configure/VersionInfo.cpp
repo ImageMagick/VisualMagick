@@ -37,36 +37,39 @@ wstring VersionInfo::interfaceVersion() const
 
 wstring VersionInfo::libAddendum() const
 {
-  return(L"-"+_release);
+  return(L"-"+_patchlevel);
 }
 
 wstring VersionInfo::libVersion() const
 {
-  wstring
-    line;
-
-  wstringstream
-    inpput(_version),
-    output;
-
-  output << L"0x";
-
-  while(std::getline(inpput,line,L'.'))
-    output << std::uppercase << std::hex << std::stoi(line);
-
-  return(output.str());
+  return L"0x"+_major+_minor+L"A";
 }
 
 bool VersionInfo::load()
 {
-  wifstream
-    version;
-
   size_t
     index;
 
+  wifstream
+    configure,
+    version;
+
   wstring
     line;
+
+  configure.open("..\\..\\ImageMagick\\configure.ac");
+  if (!configure)
+    return(false);
+
+  while (getline(configure,line))
+  {
+    loadValue(line,L"major",&_major);
+    loadValue(line,L"minor",&_minor);
+    loadValue(line,L"micro",&_micro);
+    loadValue(line,L"patchlevel",&_patchlevel);
+  }
+
+  configure.close();
 
   version.open("..\\..\\ImageMagick\\version.sh");
   if (!version)
@@ -74,14 +77,6 @@ bool VersionInfo::load()
 
   while (getline(version,line))
   {
-    index=line.find(L"PACKAGE_VERSION=");
-    if (index != string::npos)
-      _version=line.substr(17,line.length()-18);
-
-    index=line.find(L"PACKAGE_RELEASE=");
-    if (index != string::npos)
-      _release=line.substr(17,line.length()-18);
-
     index=line.find(L"MAGICK_LIBRARY_CURRENT=");
     if (index != string::npos)
       _interfaceVersion=line.substr(23,line.length()-23);
@@ -89,16 +84,27 @@ bool VersionInfo::load()
 
   version.close();
 
-  return(true);
+  return(_major != L"" && _minor != L"" && _micro != L"" && _patchlevel != L"" && _interfaceVersion != L"");
 }
 
-wstring VersionInfo::majorVersion() const
+void VersionInfo::loadValue(const wstring line,const wstring keyword,wstring *value)
 {
   size_t
     index;
 
-  index=_version.find(L".");
-  return(_version.substr(0,index));
+  wstring
+    line_start;
+
+  line_start=L"m4_define([magick_"+keyword+L"_version], [";
+  index=line.find(line_start);
+  if (index == string::npos)
+    return;
+  *value=line.substr(line_start.length(),line.length()-line_start.length()-2);
+}
+
+wstring VersionInfo::majorVersion() const
+{
+  return(_major);
 }
 
 wstring VersionInfo::releaseDate() const
@@ -114,17 +120,17 @@ wstring VersionInfo::releaseDate() const
 
   time(&t);
   (void) localtime_s(&tm,&t);
-  (void) wcsftime(buffer, sizeof(buffer), L"%Y-%m-%d", &tm);
+  (void) wcsftime(buffer,11,L"%Y-%m-%d",&tm);
 
   return(wstring(buffer));
 }
 
 wstring VersionInfo::version() const
 {
-  return(_version);
+  return _major+L"."+_minor+L"."+_micro;
 }
 
 wstring VersionInfo::versionNumber() const
 {
-  return(replace(_version,L".",L",")+L","+_release);
+  return _major+L","+_minor+L","+_micro+L","+_patchlevel;
 }
