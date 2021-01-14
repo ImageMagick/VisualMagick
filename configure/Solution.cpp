@@ -450,9 +450,7 @@ void Solution::write(const ConfigureWizard &wizard,wofstream &file)
   size_t
     i;
 
-  if (wizard.visualStudioVersion() == VS2002)
-    file << "Microsoft Visual Studio Solution File, Format Version 7.00" << endl;
-  else if (wizard.visualStudioVersion() == VS2010)
+  if (wizard.visualStudioVersion() == VS2010)
   {
     file << "Microsoft Visual Studio Solution File, Format Version 11.00" << endl;
     file << "# Visual Studio 2010" << endl;
@@ -484,68 +482,20 @@ void Solution::write(const ConfigureWizard &wizard,wofstream &file)
   file << "EndProject" << endl;
 
   file << "Global" << endl;
-  if (wizard.visualStudioVersion() == VS2002)
-  {
-    file << "\tGlobalSection(SolutionConfiguration) = preSolution" << endl;
-    file << "\t\tConfigName.0 = Debug" << endl;
-    file << "\t\tConfigName.1 = Release" << endl;
-  }
-  else
-  {
-    file << "\tGlobalSection(SolutionConfigurationPlatforms) = preSolution" << endl;
-    file << "\t\tDebug|" << wizard.platform() << " = Debug|" << wizard.platform() << endl;
-    file << "\t\tRelease|" << wizard.platform() << " = Release|" << wizard.platform() << endl;
-  }
+  file << "\tGlobalSection(SolutionConfigurationPlatforms) = preSolution" << endl;
+  file << "\t\tDebug|" << wizard.platform() << " = Debug|" << wizard.platform() << endl;
+  file << "\t\tRelease|" << wizard.platform() << " = Release|" << wizard.platform() << endl;
   file << "\tEndGlobalSection" << endl;
 
-  if (wizard.visualStudioVersion() == VS2002)
-  {
-    file << "\tGlobalSection(ProjectDependencies) = postSolution" << endl;
-    foreach (Project*,p,_projects)
-    {
-      foreach (ProjectFile*,pf,(*p)->files())
-      {
-        i=0;
-        foreach (wstring,dep,(*pf)->dependencies())
-        {
-          foreach (Project*,depp,_projects)
-          {
-            if ((*depp)->name() != *dep)
-              continue;
-
-            foreach (ProjectFile*,deppf,(*depp)->files())
-            {
-              file << "\t\t{" << (*pf)->guid() << "}." << i++ << " = {" << (*deppf)->guid() << "}" << endl;
-            }
-          }
-        }
-      }
-    }
-    file << "\tEndGlobalSection" << endl;
-  }
-
-  if (wizard.visualStudioVersion() == VS2002)
-    file << "\tGlobalSection(ProjectConfiguration) = postSolution" << endl;
-  else
-    file << "\tGlobalSection(ProjectConfigurationPlatforms) = postSolution" << endl;
+  file << "\tGlobalSection(ProjectConfigurationPlatforms) = postSolution" << endl;
   foreach (Project*,p,_projects)
   {
     foreach (ProjectFile*,pf,(*p)->files())
     {
-      if (wizard.visualStudioVersion() == VS2002)
-      {
-        file << "\t\t{" << (*pf)->guid() << "}.Debug.ActiveCfg = Debug|" << wizard.platform() << endl;
-        file << "\t\t{" << (*pf)->guid() << "}.Debug.Build.0 = Debug|" << wizard.platform() << endl;
-        file << "\t\t{" << (*pf)->guid() << "}.Release.ActiveCfg = Release|" << wizard.platform() << endl;
-        file << "\t\t{" << (*pf)->guid() << "}.Release.Build.0 = Release|" << wizard.platform() << endl;
-      }
-      else
-      {
-        file << "\t\t{" << (*pf)->guid() << "}.Debug|" << wizard.platform() << ".ActiveCfg = Debug|" << wizard.platform() << endl;
-        file << "\t\t{" << (*pf)->guid() << "}.Debug|" << wizard.platform() << ".Build.0 = Debug|" << wizard.platform() << endl;
-        file << "\t\t{" << (*pf)->guid() << "}.Release|" << wizard.platform() << ".ActiveCfg = Release|" << wizard.platform() << endl;
-        file << "\t\t{" << (*pf)->guid() << "}.Release|" << wizard.platform() << ".Build.0 = Release|" << wizard.platform() << endl;
-      }
+      file << "\t\t{" << (*pf)->guid() << "}.Debug|" << wizard.platform() << ".ActiveCfg = Debug|" << wizard.platform() << endl;
+      file << "\t\t{" << (*pf)->guid() << "}.Debug|" << wizard.platform() << ".Build.0 = Debug|" << wizard.platform() << endl;
+      file << "\t\t{" << (*pf)->guid() << "}.Release|" << wizard.platform() << ".ActiveCfg = Release|" << wizard.platform() << endl;
+      file << "\t\t{" << (*pf)->guid() << "}.Release|" << wizard.platform() << ".Build.0 = Release|" << wizard.platform() << endl;
     }
   }
   file << "\tEndGlobalSection" << endl;

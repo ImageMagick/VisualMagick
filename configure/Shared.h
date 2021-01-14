@@ -29,7 +29,9 @@ enum {DYNAMIC_MT, STATIC_MTD, STATIC_MT};
 
 enum {UNDEFINEDTYPE, APPTYPE, COMTYPE, DLLTYPE, DLLMODULETYPE, EXETYPE, EXEMODULETYPE, STATICTYPE};
 
-enum {VS2002, VS2010, VS2012, VS2013, VS2015, VS2017, VS2019};
+enum {VS2010, VS2012, VS2013, VS2015, VS2017, VS2019};
+
+#define VSLATEST VS2019
 
 enum {Q8, Q16, Q32, Q64};
 
@@ -123,9 +125,9 @@ static inline int parseVisualStudioVersion(const wstring &version)
   else if (version == L"2017")
     return(VS2017);
   else if (version == L"2019")
-    return(2019);
+    return(VS2019);
 
-  return(VS2002);
+  return(VSLATEST);
 }
 
 static inline bool isValidSrcFile(const wstring &fileName)

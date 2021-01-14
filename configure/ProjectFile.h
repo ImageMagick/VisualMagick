@@ -93,21 +93,15 @@ private:
 
   void writePreprocessorDefinitions(wofstream &file,const bool debug);
 
-  void writeVS2002(wofstream &file);
+  void write(wofstream &file,const vector<Project*> &allProjects);
 
-  void writeVS2002Configuration(wofstream &file,const bool debug);
+  void writeItemDefinitionGroup(wofstream &file,const bool debug);
 
-  void writeVS2002Files(wofstream &file,wstring name,const vector<wstring> &collection);
+  void writeFiles(wofstream &file,const vector<wstring> &collection);
 
-  void writeVS2010(wofstream &file,const vector<Project*> &allProjects);
+  void writeFilter(wofstream &file);
 
-  void writeVS2010ItemDefinitionGroup(wofstream &file,const bool debug);
-
-  void writeVS2010Files(wofstream &file,const vector<wstring> &collection);
-
-  void writeVS2010Filter(wofstream &file);
-
-  void writeVS2010ProjectReferences(wofstream &file,const vector<Project*> &allProjects);
+  void writeProjectReferences(wofstream &file,const vector<Project*> &allProjects);
 
   vector<wstring>        _aliases;
   wstring                _fileName;

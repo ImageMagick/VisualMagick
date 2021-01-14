@@ -73,7 +73,7 @@ vector<wstring> &ProjectFile::aliases()
 
 void ProjectFile::initialize(Project* project)
 {
-  _visualStudioVersion=VS2002;
+  _visualStudioVersion=VSLATEST;
   setFileName();
   _guid=createGuid();
 
@@ -203,10 +203,7 @@ void ProjectFile::write(const vector<Project*> &allprojects)
 
   loadSource();
 
-  if (_wizard->visualStudioVersion() == VS2002)
-    writeVS2002(file);
-  else
-    writeVS2010(file,allprojects);
+  write(file,allprojects);
 
   file.close();
 
@@ -214,7 +211,7 @@ void ProjectFile::write(const vector<Project*> &allprojects)
   if (!file)
     return;
 
-  writeVS2010Filter(file);
+  writeFilter(file);
 
   file.close();
 }
@@ -423,12 +420,7 @@ void ProjectFile::merge(vector<wstring> &input, vector<wstring> &output)
 
 void ProjectFile::setFileName()
 {
-  _fileName=_prefix+L"_"+_name+L"_"+_wizard->solutionName();
-
-  if (_wizard->visualStudioVersion() == VS2002)
-    _fileName+=L".vcproj";
-  else
-   _fileName+=L".vcxproj";
+  _fileName=_prefix+L"_"+_name+L"_"+_wizard->solutionName()+L".vcxproj";
 }
 
 wstring ProjectFile::createGuid()
@@ -515,209 +507,7 @@ void ProjectFile::writePreprocessorDefinitions(wofstream &file,const bool debug)
     file << ";_AFXDLL,_MAGICK_INCOMPATIBLE_LICENSES_";
 }
 
-void ProjectFile::writeVS2002(wofstream &file)
-{
-  file << "<?xml version=\"1.0\" encoding = \"Windows-1252\"?>" << endl;
-  file << "<VisualStudioProject" << endl;
-  file << "  ProjectType=\"Visual C++\"" << endl;
-  file << "  Version=\"7.00\"" << endl;
-  file << "  Name=\"" << _prefix << "_" << _name << "\"" << endl;
-  file << "  ProjectGUID=\"{" << _guid << "}\"" << endl;
-  file << "  Keyword=\"" << _wizard->platform() << "Proj\">" << endl;
-  file << "  <Platforms>" << endl;
-  file << "    <Platform Name=\"" << _wizard->platform() << "\"/>" << endl;
-  file << "  </Platforms>" << endl;
-  file << "  <Configurations>" << endl;
-
-  writeVS2002Configuration(file,false);
-  writeVS2002Configuration(file,true);
-
-  file << "  </Configurations>" << endl;
-  file << "  <Files>" << endl;
-
-  writeVS2002Files(file,L"src",_srcFiles);
-  writeVS2002Files(file,L"include",_includeFiles);
-  writeVS2002Files(file,L"resource",_resourceFiles);
-
-  file << "  </Files>" << endl;
-  file << "</VisualStudioProject>" << endl;
-}
-
-void ProjectFile::writeVS2002Configuration(wofstream &file,const bool debug)
-{
-  wstring
-    name;
-
-  file << "    <Configuration" << endl;
-  file << "      Name=\"" << (debug ? "Debug" : "Release") << "|" << _wizard->platform() << "\"" << endl;
-  file << "      OutputDirectory=\"" << outputDirectory() << "\"" << endl;
-  file << "      IntermediateDirectory=\"" << getIntermediateDirectoryName(debug) << "\""  << endl;
-  if (isLib())
-    file << "      ConfigurationType=\"4\""  << endl;
-  else if (_project->isDll())
-    file << "      ConfigurationType=\"2\""  << endl;
-  else if (_project->isExe())
-    file << "      ConfigurationType=\"1\""  << endl;
-  file << "      UseOfMFC=\"0\""  << endl;
-  file << "      ATLMinimizesCRunTimeLibraryUsage=\"FALSE\""  << endl;
-  file << "      CharacterSet=\"2\">"  << endl;
-  file << "      <Tool" << endl;
-  file << "        Name=\"VCCLCompilerTool\"" << endl;
-  file << "        RuntimeLibrary=\"";
-  if (_wizard->solutionType() == STATIC_MT)
-     file << (debug ? "1" : "0") << "\"" << endl;
-  else
-     file << (debug ? "3" : "2") << "\"" << endl;
-  file << "        StringPooling=\"TRUE\"" << endl;
-  file << "        EnableFunctionLevelLinking=\"TRUE\"" << endl;
-  file << "        WarningLevel=\"" << _project->warningLevel() << "\"" << endl;
-  file << "        UsePrecompiledHeader=\"0\"" << endl;
-  file << "        SuppressStartupBanner=\"TRUE\"" << endl;
-  file << "        CompileAs=\"0\"" << endl;
-  file << "        InlineFunctionExpansion=\"2\"" << endl;
-  file << "        OpenMP=\"" << (_wizard->useOpenMP() ? "TRUE" : "FALSE") << "\"" << endl;
-  file << "        DebugInformationFormat=\"3\"" << endl;
-  file << "        BasicRuntimeChecks=\"" << (debug ? "3" : "0") << "\"" << endl;
-  file << "        OmitFramePointers=\"" << (debug ? "FALSE" : "TRUE") << "\"" << endl;
-  file << "        Optimization=\"" << (debug ? "0" : "3") << "\"" << endl;
-  file << "        AdditionalIncludeDirectories=\".";
-  writeAdditionalIncludeDirectories(file,L",");
-  file << "\"" << endl;
-  file << "        PreprocessorDefinitions=\"";
-  writePreprocessorDefinitions(file,debug);
-  file << "\"/>" << endl;
-  file << "      <Tool" << endl;;
-  file << "        Name=\"VCMIDLTool\"/>" << endl;
-  file << "      <Tool" << endl;
-  file << "        Name=\"VCResourceCompilerTool\"" << endl;
-  file << "        PreprocessorDefinitions=\"" << (debug ? "_DEBUG" : "NDEBUG") << "\"" << endl;;
-  file << "        Culture=\"1033\"/>" << endl;
-  file << "      <Tool" << endl;
-  file << "        Name=\"" << (isLib() ? "VCLibrarianTool" : "VCLinkerTool") << "\"" << endl;
-  file << "        AdditionalLibraryDirectories=\"" << _wizard->libDirectory() << "\"" << endl;
-  file << "        AdditionalDependencies=\"/MACHINE:" << (_wizard->build64bit() ? "AMD64" : "X86") << "";
-  writeAdditionalDependencies(file,L" ");
-  file << "\"" << endl;
-  file << "        SuppressStartupBanner=\"TRUE\"" << endl;
-  file << "        LinkIncremental=\"1\"" << endl;
-  file << "        TargetMachine=\"" << (_wizard->build64bit() ? "17" : "1") << "\"" << endl;
-  file << "        SubSystem=\"" << (_project->isConsole() ? "1" : "2") << "\"" << endl;
-
-  name=getTargetName(debug);
-
-  if (isLib())
-    file << "        OutputFile=\"" << _wizard->libDirectory() << name << ".lib\"/>" << endl;
-  else if (_project->isDll())
-  {
-    if (!_project->moduleDefinitionFile().empty())
-      file << "        ModuleDefinitionFile=\"" << _project->moduleDefinitionFile() << "\"" << endl;
-    file << "        LinkDLL=\"TRUE\"" << endl;
-    file << "        GenerateDebugInformation=\"TRUE\"" << endl;
-    file << "        ProgramDatabaseFile=\"" << _wizard->binDirectory() << name << ".pdb\"" << endl;
-    file << "        ImportLibrary=\"" << _wizard->libDirectory() << name << ".lib\"" << endl;
-    file << "        OutputFile=\"" << _wizard->binDirectory() << name << ".dll\"/>" << endl;
-  }
-  else if (_project->isExe())
-  {
-    file << "        GenerateDebugInformation=\"TRUE\"" << endl;
-    file << "        ProgramDatabaseFile=\"" << _wizard->binDirectory() << _name << ".pdb\"" << endl;
-    file << "        ImportLibrary=\"" << _wizard->libDirectory() << name << ".lib\"" << endl;
-    file << "        OutputFile=\"" << _wizard->binDirectory() << _name << ".exe\"/>" << endl;
-  }
-  file << "    </Configuration>" << endl;
-}
-
-void ProjectFile::writeVS2002Files(wofstream &file,wstring name,const vector<wstring> &collection)
-{
-  int
-    count;
-
-  map<wstring, int>
-    fileCount;
-
-  wstring
-    fileName,
-    folder,
-    objFile;
-
-  file << "    <Filter Name=\"" << name << "\" Filter=\"\">" << endl;
-  foreach_const (wstring,f,collection)
-  {
-    if (endsWith((*f),L".asm"))
-    {
-      if (!_project->useNasm())
-      {
-        file << "      <File RelativePath=\"" << *f << "\">" << endl;
-        file << "        <FileConfiguration Name=\"Debug|" << _wizard->platform() << "\">" << endl;
-        file << "          <Tool Name=\"VCCustomBuildTool\" CommandLine=\"ml" << (_wizard->build64bit() ? "64" : "") << " /nologo /c /Cx " << (_wizard->build64bit() ? "" : "/safeseh /coff") << " /Fo&quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
-        file << "        </FileConfiguration>" << endl;
-        file << "        <FileConfiguration Name=\"Release|" << _wizard->platform() << "\">" << endl;
-        file << "          <Tool Name=\"VCCustomBuildTool\" CommandLine=\"ml" << (_wizard->build64bit() ? "64" : "") << " /nologo /c /Cx " << (_wizard->build64bit() ? "" : "/safeseh /coff") << " /Fo&quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
-        file << "        </FileConfiguration>" << endl;
-        file << "      </File>" << endl;
-      }
-      else
-      {
-        folder=(*f).substr(0,(*f).find_last_of(L"\\") + 1);
-        file << "      <File RelativePath=\"" << *f << "\">" << endl;
-        file << "        <FileConfiguration Name=\"Debug|" << _wizard->platform() << "\">" << endl;
-        file << "          <Tool Name=\"VCCustomBuildTool\" CommandLine=\"..\\build\\nasm -fwin" << (_wizard->build64bit() ? "64" : "32") << " -DWIN" << (_wizard->build64bit() ? "64 -D__x86_64__" : "32") << " -I" << folder << " -o &quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
-        file << "        </FileConfiguration>" << endl;
-        file << "        <FileConfiguration Name=\"Release|" << _wizard->platform() << "\">" << endl;
-        file << "          <Tool Name=\"VCCustomBuildTool\" CommandLine=\"..\\build\\nasm -fwin" << (_wizard->build64bit() ? "64" : "32") << " -DWIN" << (_wizard->build64bit() ? "64 -D__x86_64__" : "32") << " -I" << folder << " -o &quot;$(IntDir)\\$(InputName).obj&quot; &quot;$(InputPath)&quot;\" Outputs=\"$(IntDir)\\$(InputName).obj\"/>" << endl;
-        file << "        </FileConfiguration>" << endl;
-        file << "      </File>" << endl;
-      }
-    }
-    else if (endsWith((*f),L".c"))
-    {
-      if (contains(_cppFiles,(*f)))
-      {
-        file << "      <File RelativePath=\"" << *f << "\">" << endl;
-        file << "        <FileConfiguration Name=\"Debug|" << _wizard->platform() << "\">" << endl;
-        file << "          <Tool Name=\"VCCLCompilerTool\" CompileAs=\"2\"/>" << endl;
-        file << "        </FileConfiguration>" << endl;
-        file << "        <FileConfiguration Name=\"Release|" << _wizard->platform() << "\">" << endl;
-        file << "          <Tool Name=\"VCCLCompilerTool\" CompileAs=\"2\"/>" << endl;
-        file << "        </FileConfiguration>" << endl;
-        file << "      </File>" << endl;
-      }
-      else
-      {
-        fileName=(*f).substr((*f).find_last_of(L"\\") + 1);
-
-        count=1;
-        if (fileCount.find(fileName) == fileCount.end())
-          fileCount.insert(make_pair(fileName,count));
-        else
-          count=++fileCount[fileName];
-
-        if (count == 1)
-          {
-            file << "      <File RelativePath=\"" << *f << "\"/>" << endl;
-          }
-        else
-        {
-          objFile=(*f).substr(0,(*f).find_last_of(L".") + 1);
-          objFile=objFile.substr(objFile.find_last_of(L"\\") + 1);
-          file << "      <File RelativePath=\"" << *f << "\">" << endl;
-          file << "        <FileConfiguration Name=\"Debug|" << _wizard->platform() << "\">" << endl;
-          file << "          <Tool Name=\"VCCLCompilerTool\" ObjectFile=\"$(IntDir)\\" << objFile << count << ".obj\"/>" << endl;
-          file << "        </FileConfiguration>" << endl;
-          file << "        <FileConfiguration Name=\"Release|" << _wizard->platform() << "\">" << endl;
-          file << "          <Tool Name=\"VCCLCompilerTool\" ObjectFile=\"$(IntDir)\\" << objFile << count << ".obj\"/>" << endl;
-          file << "        </FileConfiguration>" << endl;
-          file << "      </File>" << endl;
-        }
-      }
-    }
-    else
-      file << "      <File RelativePath=\"" << *f << "\"/>" << endl;
-  }
-  file << "    </Filter>" << endl;
-}
-
-void ProjectFile::writeVS2010(wofstream &file,const vector<Project*> &allProjects)
+void ProjectFile::write(wofstream &file,const vector<Project*> &allProjects)
 {
   file << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << endl;
   file << "<Project DefaultTargets=\"Build\" ToolsVersion=\"4.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">" << endl;
@@ -786,20 +576,20 @@ void ProjectFile::writeVS2010(wofstream &file,const vector<Project*> &allProject
     file << "    <UseDebugLibraries Condition=\"'$(Configuration)|$(Platform)'=='Debug|" << _wizard->platform() << "'\">true</UseDebugLibraries>" << endl;
   file << "  </PropertyGroup>" << endl;
 
-  writeVS2010ItemDefinitionGroup(file,true);
-  writeVS2010ItemDefinitionGroup(file,false);
+  writeItemDefinitionGroup(file,true);
+  writeItemDefinitionGroup(file,false);
 
-  writeVS2010Files(file,_srcFiles);
-  writeVS2010Files(file,_includeFiles);
-  writeVS2010Files(file,_resourceFiles);
+  writeFiles(file,_srcFiles);
+  writeFiles(file,_includeFiles);
+  writeFiles(file,_resourceFiles);
 
-  writeVS2010ProjectReferences(file,allProjects);
+  writeProjectReferences(file,allProjects);
 
   file << "  <Import Project=\"$(VCTargetsPath)\\Microsoft.Cpp.targets\" />" << endl;
   file << "</Project>" << endl;
 }
 
-void ProjectFile::writeVS2010ItemDefinitionGroup(wofstream &file,const bool debug)
+void ProjectFile::writeItemDefinitionGroup(wofstream &file,const bool debug)
 {
   wstring
     name;
@@ -878,7 +668,7 @@ void ProjectFile::writeVS2010ItemDefinitionGroup(wofstream &file,const bool debu
   file << "  </ItemDefinitionGroup>" << endl;
 }
 
-void ProjectFile::writeVS2010Files(wofstream &file,const vector<wstring> &collection)
+void ProjectFile::writeFiles(wofstream &file,const vector<wstring> &collection)
 {
   int
     count;
@@ -945,7 +735,7 @@ void ProjectFile::writeVS2010Files(wofstream &file,const vector<wstring> &collec
   file << "  </ItemGroup>" << endl;
 }
 
-void ProjectFile::writeVS2010Filter(wofstream &file)
+void ProjectFile::writeFilter(wofstream &file)
 {
   wstring
     filter;
@@ -994,7 +784,7 @@ void ProjectFile::writeVS2010Filter(wofstream &file)
   file << "</Project>" << endl;
 }
 
-void ProjectFile::writeVS2010ProjectReferences(wofstream &file,const vector<Project*> &allProjects)
+void ProjectFile::writeProjectReferences(wofstream &file,const vector<Project*> &allProjects)
 {
   size_t
     index;
