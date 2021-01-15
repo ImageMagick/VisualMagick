@@ -57,7 +57,7 @@ bool VersionInfo::load()
   wstring
     line;
 
-  configure.open("..\\..\\ImageMagick\\configure.ac");
+  configure.open("..\\..\\ImageMagick\\m4\\version.m4");
   if (!configure)
     return(false);
 
