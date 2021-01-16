@@ -47,39 +47,23 @@ wstring VersionInfo::libVersion() const
 
 bool VersionInfo::load()
 {
-  size_t
-    index;
-
   wifstream
-    configure,
     version;
 
   wstring
     line;
 
-  configure.open("..\\..\\ImageMagick\\m4\\version.m4");
-  if (!configure)
-    return(false);
-
-  while (getline(configure,line))
-  {
-    loadValue(line,L"major",&_major);
-    loadValue(line,L"minor",&_minor);
-    loadValue(line,L"micro",&_micro);
-    loadValue(line,L"patchlevel",&_patchlevel);
-  }
-
-  configure.close();
-
-  version.open("..\\..\\ImageMagick\\version.sh");
+  version.open("..\\..\\ImageMagick\\m4\\version.m4");
   if (!version)
     return(false);
 
   while (getline(version,line))
   {
-    index=line.find(L"MAGICK_LIBRARY_CURRENT=");
-    if (index != string::npos)
-      _interfaceVersion=line.substr(23,line.length()-23);
+    loadValue(line,L"major_version",&_major);
+    loadValue(line,L"minor_version",&_minor);
+    loadValue(line,L"micro_version",&_micro);
+    loadValue(line,L"patchlevel_version",&_patchlevel);
+    loadValue(line,L"library_current",&_interfaceVersion);
   }
 
   version.close();
@@ -95,7 +79,7 @@ void VersionInfo::loadValue(const wstring line,const wstring keyword,wstring *va
   wstring
     line_start;
 
-  line_start=L"m4_define([magick_"+keyword+L"_version], [";
+  line_start=L"m4_define([magick_"+keyword+L"], [";
   index=line.find(line_start);
   if (index == string::npos)
     return;
