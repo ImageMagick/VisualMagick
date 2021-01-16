@@ -398,12 +398,17 @@ void Solution::writeVersion(const ConfigureWizard &wizard,const VersionInfo &ver
     line=replace(line,L"@CXX@",wizard.visualStudioVersionName());
     line=replace(line,L"@DOCUMENTATION_PATH@",L"unavailable");
     line=replace(line,L"@LIB_VERSION@",versionInfo.version());
-    line=replace(line,L"@MAGICK_LIB_VERSION_NUMBER@",versionInfo.versionNumber());
+    line=replace(line,L"@MAGICK_LIB_VERSION_NUMBER@",versionInfo.libVersionNumber());
     line=replace(line,L"@MAGICK_LIB_VERSION_TEXT@",versionInfo.version());
     line=replace(line,L"@MAGICK_LIBRARY_CURRENT@",versionInfo.interfaceVersion());
-    line=replace(line,L"@MAGICK_LIBRARY_CURRENT_MIN@",versionInfo.interfaceMinVersion());
+    line=replace(line,L"@MAGICK_LIBRARY_CURRENT_MIN@",versionInfo.interfaceVersion());
     line=replace(line,L"@MAGICK_TARGET_CPU@",wizard.targetCpu());
     line=replace(line,L"@MAGICK_TARGET_OS@",L"Windows");
+    line=replace(line,L"@MAGICKPP_LIB_VERSION_TEXT@",versionInfo.version());
+    line=replace(line,L"@MAGICKPP_LIBRARY_CURRENT@",versionInfo.ppInterfaceVersion());
+    line=replace(line,L"@MAGICKPP_LIBRARY_CURRENT_MIN@",versionInfo.ppInterfaceVersion());
+    line=replace(line,L"@MAGICKPP_LIBRARY_VERSION_INFO@",versionInfo.ppLibVersionNumber());
+    line=replace(line,L"@MAGICKPP_LIBRARY_VERSION_TEXT@",versionInfo.version());
     line=replace(line,L"@PACKAGE_BASE_VERSION@",versionInfo.version());
     line=replace(line,L"@PACKAGE_LIB_VERSION@",versionInfo.libVersion());
     line=replace(line,L"@PACKAGE_LIB_VERSION_NUMBER@",versionInfo.versionNumber());
@@ -432,7 +437,6 @@ void Solution::writeVersion(const ConfigureWizard &wizard,const VersionInfo &ver
 void Solution::checkKeyword(const wstring keyword)
 {
   vector<wstring> skipableKeywords={
-    L"MAGICKPP_LIB_VERSION_TEXT",L"MAGICKPP_LIBRARY_VERSION_INFO",L"MAGICKPP_LIBRARY_CURRENT",L"MAGICKPP_LIBRARY_CURRENT_MIN",
     L"MAGICK_CFLAGS",L"CODER_PATH",L"CONFIGURE_PATH",L"CONFIGURE_ARGS",L"MAGICK_CPPFLAGS",L"CXXFLAGS",L"DEFS",L"MAGICK_DELEGATES",
     L"DISTCHECK_CONFIG_FLAGS",L"EXEC_PREFIX_DIR",L"EXECUTABLE_PATH",L"MAGICK_FEATURES",L"FILTER_PATH",L"MAGICK_GIT_REVISION",
     L"host",L"INCLUDE_PATH",L"MAGICK_LDFLAGS",L"LIBRARY_PATH",L"MAGICK_LIBS",L"MAGICK_PCFLAGS",L"PREFIX_DIR",L"SHAREARCH_PATH",
@@ -447,9 +451,6 @@ void Solution::checkKeyword(const wstring keyword)
 
 void Solution::write(const ConfigureWizard &wizard,wofstream &file)
 {
-  size_t
-    i;
-
   if (wizard.visualStudioVersion() == VS2010)
   {
     file << "Microsoft Visual Studio Solution File, Format Version 11.00" << endl;

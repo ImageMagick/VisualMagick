@@ -26,17 +26,21 @@ public:
 
   VersionInfo();
 
-  wstring interfaceMinVersion() const;
-
   wstring interfaceVersion() const;
 
   wstring libAddendum() const;
 
   wstring libVersion() const;
 
+  wstring libVersionNumber() const;
+
   bool load();
 
   wstring majorVersion() const;
+
+  wstring ppLibVersionNumber() const;
+
+  wstring ppInterfaceVersion() const;
 
   wstring releaseDate() const;
 
@@ -52,7 +56,12 @@ private:
   wstring _minor;
   wstring _micro;
   wstring _patchlevel;
-  wstring _interfaceVersion;
+  wstring _libraryCurrent;
+  wstring _libraryRevision;
+  wstring _libraryAge;
+  wstring _ppLibraryCurrent;
+  wstring _ppLibraryRevision;
+  wstring _ppLibraryAge;
 };
 
 #endif // __VersionInfo__

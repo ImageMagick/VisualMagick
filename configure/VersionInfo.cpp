@@ -25,14 +25,9 @@ VersionInfo::VersionInfo()
 {
 }
 
-wstring VersionInfo::interfaceMinVersion() const
-{
-  return(_interfaceVersion);
-}
-
 wstring VersionInfo::interfaceVersion() const
 {
-  return(_interfaceVersion);
+  return(_libraryCurrent);
 }
 
 wstring VersionInfo::libAddendum() const
@@ -42,7 +37,12 @@ wstring VersionInfo::libAddendum() const
 
 wstring VersionInfo::libVersion() const
 {
-  return L"0x"+_major+_minor+L"A";
+  return(L"0x"+_major+_minor+L"A");
+}
+
+wstring VersionInfo::libVersionNumber() const
+{
+  return(_libraryCurrent+L","+_libraryRevision+L","+_libraryAge);
 }
 
 bool VersionInfo::load()
@@ -59,16 +59,23 @@ bool VersionInfo::load()
 
   while (getline(version,line))
   {
-    loadValue(line,L"major_version",&_major);
-    loadValue(line,L"minor_version",&_minor);
-    loadValue(line,L"micro_version",&_micro);
-    loadValue(line,L"patchlevel_version",&_patchlevel);
-    loadValue(line,L"library_current",&_interfaceVersion);
+    loadValue(line,L"_major_version",&_major);
+    loadValue(line,L"_minor_version",&_minor);
+    loadValue(line,L"_micro_version",&_micro);
+    loadValue(line,L"_patchlevel_version",&_patchlevel);
+    loadValue(line,L"_library_current",&_libraryCurrent);
+    loadValue(line,L"_library_revision",&_libraryRevision);
+    loadValue(line,L"_library_age",&_libraryAge);
+    loadValue(line,L"pp_library_current",&_ppLibraryCurrent);
+    loadValue(line,L"pp_library_revision",&_ppLibraryRevision);
+    loadValue(line,L"pp_library_age",&_ppLibraryAge);
   }
 
   version.close();
 
-  return(_major != L"" && _minor != L"" && _micro != L"" && _patchlevel != L"" && _interfaceVersion != L"");
+  return(_major != L"" && _minor != L"" && _micro != L"" && _patchlevel != L"" &&
+         _libraryCurrent != L"" && _libraryRevision != L"" && _libraryAge != L"" &&
+         _ppLibraryCurrent != L"" && _ppLibraryRevision != L"" && _ppLibraryAge != L"");
 }
 
 void VersionInfo::loadValue(const wstring line,const wstring keyword,wstring *value)
@@ -79,7 +86,7 @@ void VersionInfo::loadValue(const wstring line,const wstring keyword,wstring *va
   wstring
     line_start;
 
-  line_start=L"m4_define([magick_"+keyword+L"], [";
+  line_start=L"m4_define([magick"+keyword+L"], [";
   index=line.find(line_start);
   if (index == string::npos)
     return;
@@ -89,6 +96,16 @@ void VersionInfo::loadValue(const wstring line,const wstring keyword,wstring *va
 wstring VersionInfo::majorVersion() const
 {
   return(_major);
+}
+
+wstring VersionInfo::ppLibVersionNumber() const
+{
+  return(_ppLibraryCurrent+L":"+_ppLibraryRevision+L":"+_ppLibraryAge);
+}
+
+wstring VersionInfo::ppInterfaceVersion() const
+{
+  return(_ppLibraryCurrent);
 }
 
 wstring VersionInfo::releaseDate() const
