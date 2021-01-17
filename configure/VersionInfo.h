@@ -59,6 +59,7 @@ private:
   wstring _libraryCurrent;
   wstring _libraryRevision;
   wstring _libraryAge;
+  wstring _libVersion;
   wstring _ppLibraryCurrent;
   wstring _ppLibraryRevision;
   wstring _ppLibraryAge;

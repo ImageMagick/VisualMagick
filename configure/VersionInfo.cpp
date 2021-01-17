@@ -37,7 +37,7 @@ wstring VersionInfo::libAddendum() const
 
 wstring VersionInfo::libVersion() const
 {
-  return(L"0x"+_major+_minor+L"A");
+  return(_libVersion);
 }
 
 wstring VersionInfo::libVersionNumber() const
@@ -66,6 +66,7 @@ bool VersionInfo::load()
     loadValue(line,L"_library_current",&_libraryCurrent);
     loadValue(line,L"_library_revision",&_libraryRevision);
     loadValue(line,L"_library_age",&_libraryAge);
+    loadValue(line,L"_lib_version",&_libVersion);
     loadValue(line,L"pp_library_current",&_ppLibraryCurrent);
     loadValue(line,L"pp_library_revision",&_ppLibraryRevision);
     loadValue(line,L"pp_library_age",&_ppLibraryAge);
@@ -73,9 +74,9 @@ bool VersionInfo::load()
 
   version.close();
 
-  return(_major != L"" && _minor != L"" && _micro != L"" && _patchlevel != L"" &&
-         _libraryCurrent != L"" && _libraryRevision != L"" && _libraryAge != L"" &&
-         _ppLibraryCurrent != L"" && _ppLibraryRevision != L"" && _ppLibraryAge != L"");
+  return(_major != L"" && _minor != L"" && _micro != L"" && _patchlevel != L"" && _libraryCurrent != L"" &&
+         _libraryRevision != L"" && _libraryAge != L"" && _libVersion != L"" && _ppLibraryCurrent != L"" &&
+         _ppLibraryRevision != L"" && _ppLibraryAge != L"");
 }
 
 void VersionInfo::loadValue(const wstring line,const wstring keyword,wstring *value)
