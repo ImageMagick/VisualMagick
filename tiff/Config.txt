@@ -9,7 +9,7 @@ _TIFFLIB_
 
 [INCLUDES]
 ..\..\jbig\libjbig
-..\..\jpeg
+..\..\jpeg-turbo
 ..\..\webp\src
 ..\..\zlib
 
@@ -39,7 +39,7 @@ strcasecmp.c
 
 [DEPENDENCIES]
 jbig
-jpeg
+jpeg-turbo
 webp
 zlib
 

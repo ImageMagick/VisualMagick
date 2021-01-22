@@ -6,9 +6,9 @@
 WITH_SIMD
 
 [DIRECTORIES]
-..\..\jpeg
-..\..\jpeg\simd\i386
-..\..\jpeg\simd\x86_64
+..\..\jpeg-turbo
+..\..\jpeg-turbo\simd\i386
+..\..\jpeg-turbo\simd\x86_64
 
 [EXCLUDES]
 cdjpeg.c
@@ -59,10 +59,10 @@ jdmrgext-sse2.asm
 jdmrgext-mmx.asm
 
 [EXCLUDES_X86]
-..\..\jpeg\simd\x86_64
+..\..\jpeg-turbo\simd\x86_64
 
 [EXCLUDES_X64]
-..\..\jpeg\simd\i386
+..\..\jpeg-turbo\simd\i386
 
 [CONFIG_DEFINE]
 /*

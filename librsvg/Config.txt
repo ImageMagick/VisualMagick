@@ -19,7 +19,7 @@ RSVG_COMPILATION
 ..\..\glib\gmodule
 ..\..\harfbuzz\src
 ..\..\jp2\src\libjasper\include
-..\..\jpeg
+..\..\jpeg-turbo
 ..\..\libxml\include
 ..\..\pango
 ..\..\png
@@ -51,7 +51,7 @@ cairo
 croco
 glib
 jp2
-jpeg
+jpeg-turbo
 libxml
 pango
 png

@@ -8,8 +8,8 @@ NO_LCMS
 
 [INCLUDES]
 ..\..\jp2\src\libjasper\include
-..\..\jpeg
+..\..\jpeg-turbo
 
 [DEPENDENCIES]
 jp2
-jpeg
+jpeg-turbo
