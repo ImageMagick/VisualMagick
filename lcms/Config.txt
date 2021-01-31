@@ -1,5 +1,8 @@
 [DLL]
 
+[LICENSE]
+..\..\lcms\COPYING
+
 [DEFINES]
 __CONSOLE__
 _LCMSLIB_

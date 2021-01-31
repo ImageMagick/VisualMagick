@@ -1,5 +1,8 @@
 [DLL]
 
+[LICENSE]
+..\..\flif\LICENSE_Apache2
+
 [DEFINES]
 HAS_ENCODER
 

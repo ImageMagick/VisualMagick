@@ -123,6 +123,11 @@ vector<wstring> &Project::libraries()
   return(_libraries);
 }
 
+wstring Project::license() const
+{
+  return(_license);
+}
+
 wstring Project::moduleDefinitionFile() const
 {
   return(_moduleDefinitionFile);
@@ -204,13 +209,7 @@ bool Project::loadFiles(const ConfigureWizard &wizard)
 
   _files.clear();
 
-  if (!_isEnabled)
-    return(false);
-
-  if (_hasIncompatibleLicense && !wizard.includeIncompatibleLicense())
-    return(false);
-
-  if (_isOptional && !wizard.includeOptional())
+  if (shouldSkip(wizard))
     return(false);
 
   switch(_type)
@@ -253,6 +252,20 @@ bool Project::loadFiles(const ConfigureWizard &wizard)
   }
 
   return(true);
+}
+
+bool Project::shouldSkip(const ConfigureWizard &wizard)
+{
+  if (!_isEnabled)
+    return(true);
+
+  if (_hasIncompatibleLicense && !wizard.includeIncompatibleLicense())
+    return(true);
+
+  if (_isOptional && !wizard.includeOptional())
+    return(true);
+
+  return(false);
 }
 
 Project::Project(wstring name)
@@ -363,6 +376,8 @@ void Project::loadConfig(wifstream &config)
       _visualStudioVersion=parseVisualStudioVersion(readLine(config));
     else if (line == L"[WARNING_LEVEL]")
       _warningLevel=stoi(readLine(config));
+    else if (line == L"[LICENSE]")
+      _license=readFile(readLine(config));
   }
 }
 

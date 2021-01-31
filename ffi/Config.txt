@@ -1,5 +1,8 @@
 [STATIC]
 
+[LICENSE]
+..\..\ffi\LICENSE
+
 [DIRECTORIES]
 ..\..\ffi\include
 ..\..\ffi\src

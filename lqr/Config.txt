@@ -1,5 +1,8 @@
 [DLL]
 
+[LICENSE]
+..\..\lqr\COPYING.LESSER
+
 [DEFINES]
 LQR_EXPORTS
 

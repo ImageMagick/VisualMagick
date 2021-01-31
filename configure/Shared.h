@@ -94,6 +94,25 @@ static inline wstring readLine(wifstream &stream)
   return(trim(line));
 }
 
+static inline wstring readFile(const wstring &fileName)
+{
+  wifstream
+    file;
+
+  wstring
+    content;
+
+  file.open(fileName);
+  if (!file)
+    throw exception();
+
+  content=trim(wstring((istreambuf_iterator<wchar_t>(file)), istreambuf_iterator<wchar_t>()));
+
+  file.close();
+
+  return (content);
+}
+
 static inline wstring replace(const wstring &str, const wstring &from, const wstring &to)
 {
   size_t

@@ -1,5 +1,8 @@
 [DLL]
 
+[LICENSE]
+..\..\libxml\COPYING
+
 [DEFINES_LIB]
 LIBXML_STATIC
 

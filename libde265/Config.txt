@@ -1,5 +1,8 @@
 [STATIC]
 
+[LICENSE]
+..\..\libde265\COPYING
+
 [DEFINES]
 HAVE_STDINT_H
 

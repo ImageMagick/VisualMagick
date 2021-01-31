@@ -1,5 +1,8 @@
 [DLL]
 
+[LICENSE]
+..\..\bzlib\LICENSE
+
 [DEFINES]
 _WIN32
 BZ_EXPORT

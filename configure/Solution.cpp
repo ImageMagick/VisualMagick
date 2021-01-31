@@ -127,6 +127,9 @@ void Solution::write(const ConfigureWizard &wizard,WaitDialog &waitDialog)
 
   waitDialog.nextStep(L"Writing version");
   writeVersion(wizard);
+
+  waitDialog.nextStep(L"Writing NOTICE.txt");
+  writeNotice(wizard);
 }
 
 wstring Solution::getFileName(const ConfigureWizard &wizard)
@@ -304,6 +307,46 @@ void Solution::writeMakeFile(const ConfigureWizard &wizard)
   makeFile.close();
 }
 
+void Solution::writeNotice(const ConfigureWizard &wizard)
+{
+  wofstream
+    notice;
+
+  vector<wstring>
+    licenses;
+
+  notice.open(L"..\\..\\VisualMagick\\NOTICE.txt");
+  if (!notice)
+    return;
+
+  notice << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << endl << endl;
+  notice << "[ Imagemagick ] copyright:" << endl << endl;
+  notice << readFile(L"..\\..\\ImageMagick/LICENSE");
+  notice << endl << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << endl << endl;
+
+  foreach (Project*,p,_projects)
+  {
+    if (((*p)->license() == L"") || ((*p)->shouldSkip(wizard)))
+      continue;
+
+    if (contains(licenses,(*p)->license()))
+      continue;
+
+    notice << "[ ";
+    foreach (Project*,q,_projects)
+    {
+      if ((*p)->license() == (*q)->license())
+        notice << (*q)->name() << " ";
+    }
+    notice << "] copyright:" << endl << endl;
+    notice << (*p)->license() << endl;
+    notice << endl << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << endl << endl;
+    licenses.push_back((*p)->license());
+  }
+
+  notice.close();
+}
+
 void Solution::writeThresholdMap(const ConfigureWizard &wizard)
 {
   wifstream
@@ -443,7 +486,7 @@ void Solution::checkKeyword(const wstring keyword)
     L"SHARE_PATH",L"MAGICK_TARGET_VENDOR"
   };
 
- if (contains(skipableKeywords,keyword))
+  if (contains(skipableKeywords,keyword))
    return;
 
   throw exception();

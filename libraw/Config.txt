@@ -1,5 +1,8 @@
 [DLL]
 
+[LICENSE]
+..\..\libraw\COPYRIGHT
+
 [DEFINES]
 LIBRAW_BUILDLIB
 

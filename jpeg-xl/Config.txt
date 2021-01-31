@@ -1,5 +1,8 @@
 [DLL]
 
+[LICENSE]
+..\..\jpeg-xl\LICENSE
+
 [DIRECTORIES]
 ..\..\jpeg-xl\lib\jxl
 ..\..\jpeg-xl\lib\jxl\base

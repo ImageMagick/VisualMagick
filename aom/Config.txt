@@ -1,5 +1,8 @@
 [STATIC]
 
+[LICENSE]
+..\..\aom\LICENSE
+
 [DIRECTORIES]
 ..\..\aom\aom\src
 ..\..\aom\aom_dsp

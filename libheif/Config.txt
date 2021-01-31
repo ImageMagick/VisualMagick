@@ -1,5 +1,8 @@
 [DLL]
 
+[LICENSE]
+..\..\libheif\COPYING
+
 [DEFINES]
 HAVE_AOM
 HAVE_LIBDE265

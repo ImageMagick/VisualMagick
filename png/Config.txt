@@ -1,5 +1,8 @@
 [DLL]
 
+[LICENSE]
+..\..\png\LICENSE
+
 [DEFINES]
 _PNGLIB_
 __WIN32DLL__

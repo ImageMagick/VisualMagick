@@ -1,5 +1,8 @@
 [DLL]
 
+[LICENSE]
+..\..\freetype\docs\FTL.TXT
+
 [DEFINES]
 _TTFLIB_
 FT2_BUILD_LIBRARY

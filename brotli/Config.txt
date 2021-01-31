@@ -1,5 +1,8 @@
 [STATIC]
 
+[LICENSE]
+..\..\brotli\LICENSE
+
 [DIRECTORIES]
 ..\..\brotli\c\common
 ..\..\brotli\c\dec

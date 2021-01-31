@@ -1,5 +1,8 @@
 [STATIC]
 
+[LICENSE]
+..\..\pixman\COPYING
+
 [DEFINES]
 PACKAGE
 

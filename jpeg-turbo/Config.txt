@@ -1,5 +1,8 @@
 [DLL]
 
+[LICENSE]
+..\..\jpeg-turbo\LICENSE
+
 [NASM]
 
 [DEFINES]

@@ -1,5 +1,8 @@
 [DLL]
 
+[LICENSE]
+..\..\zlib\COPYRIGHT
+
 [DEFINES_DLL]
 ZLIB_DLL
 

@@ -1,5 +1,8 @@
 [DLL]
 
+[LICENSE]
+..\..\libzip\LICENSE
+
 [DIRECTORIES]
 ..\..\libzip\lib
 

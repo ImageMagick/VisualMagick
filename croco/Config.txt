@@ -1,5 +1,8 @@
 [STATIC]
 
+[LICENSE]
+..\..\croco\COPYING
+
 [DIRECTORIES]
 ..\..\croco\src
 

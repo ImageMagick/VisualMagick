@@ -1,5 +1,8 @@
 [DLL]
 
+[LICENSE]
+..\..\tiff\COPYRIGHT
+
 [DEFINES]
 _TIFFLIB_
 

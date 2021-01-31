@@ -67,6 +67,8 @@ public:
 
   vector<wstring> &libraries();
 
+  wstring license() const;
+
   wstring moduleDefinitionFile() const;
 
   wstring name() const;
@@ -81,11 +83,13 @@ public:
 
   void checkFiles(const int visualStudioVersion);
 
-  void mergeProjectFiles(const ConfigureWizard &wizard);
-
   static Project* create(wstring name);
 
   bool loadFiles(const ConfigureWizard &wizard);
+
+  void mergeProjectFiles(const ConfigureWizard &wizard);
+
+  bool shouldSkip(const ConfigureWizard &wizard);
 
 private:
   Project(wstring name);
@@ -122,6 +126,7 @@ private:
   bool                 _useUnicode;
   int                  _visualStudioVersion;
   int                  _warningLevel;
+  wstring              _license;
 };
 
 #endif // __Project__

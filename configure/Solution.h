@@ -48,6 +48,8 @@ private:
 
   void writeMakeFile(const ConfigureWizard &wizard);
 
+  void writeNotice(const ConfigureWizard &wizard);
+
   void writeThresholdMap(const ConfigureWizard &wizard);
 
   void writeVersion(const ConfigureWizard &wizard);
