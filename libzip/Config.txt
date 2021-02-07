@@ -30,6 +30,6 @@ zlib
 
 [CONFIG_DEFINE]
 /*
-  Define if you have LIBZIP library
+  Define if you have ZIP library
 */
-#define MAGICKCORE_LIBZIP_DELEGATE
+#define MAGICKCORE_ZIP_DELEGATE
