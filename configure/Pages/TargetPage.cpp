@@ -241,6 +241,6 @@ void TargetPage::setVisualStudioVersion()
   else if (!getEnvironmentVariable(L"VS100COMNTOOLS").empty())
     _visualStudioVersion=VS2010;
   else
-    _visualStudioVersion=VSLATEST;
+    _visualStudioVersion=VSEARLIEST;
 }
 
