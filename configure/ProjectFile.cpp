@@ -73,7 +73,7 @@ vector<wstring> &ProjectFile::aliases()
 
 void ProjectFile::initialize(Project* project)
 {
-  _visualStudioVersion=VSLATEST;
+  _visualStudioVersion=VSEARLIEST;
   setFileName();
   _guid=createGuid();
 

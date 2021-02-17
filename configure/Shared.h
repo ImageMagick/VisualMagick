@@ -31,7 +31,7 @@ enum {UNDEFINEDTYPE, APPTYPE, COMTYPE, DLLTYPE, DLLMODULETYPE, EXETYPE, EXEMODUL
 
 enum {VS2010, VS2012, VS2013, VS2015, VS2017, VS2019};
 
-#define VSLATEST VS2019
+#define VSEARLIEST VS2010
 
 enum {Q8, Q16, Q32, Q64};
 
@@ -146,7 +146,7 @@ static inline int parseVisualStudioVersion(const wstring &version)
   else if (version == L"2019")
     return(VS2019);
 
-  return(VSLATEST);
+  return(VSEARLIEST);
 }
 
 static inline bool isValidSrcFile(const wstring &fileName)

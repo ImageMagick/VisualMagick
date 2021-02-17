@@ -279,7 +279,7 @@ Project::Project(wstring name)
   _useNasm=false;
   _useUnicode=false;
   _warningLevel=0;
-  _visualStudioVersion=VSLATEST;
+  _visualStudioVersion=VSEARLIEST;
 }
 
 void Project::addLines(wifstream &config,wstring &value)
