@@ -117,7 +117,7 @@ private:
   wstring                _reference;
   vector<wstring>        _resourceFiles;
   vector<wstring>        _srcFiles;
-  int                    _visualStudioVersion;
+  int                    _minimumVisualStudioVersion;
   const ConfigureWizard *_wizard;
 };
 

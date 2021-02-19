@@ -73,7 +73,7 @@ vector<wstring> &ProjectFile::aliases()
 
 void ProjectFile::initialize(Project* project)
 {
-  _visualStudioVersion=VSEARLIEST;
+  _minimumVisualStudioVersion=VSEARLIEST;
   setFileName();
   _guid=createGuid();
 
@@ -145,7 +145,7 @@ void ProjectFile::loadAliases()
 
 bool ProjectFile::isSupported(const int visualStudioVersion) const
 {
-  return(visualStudioVersion >= _visualStudioVersion);
+  return(visualStudioVersion >= _minimumVisualStudioVersion);
 }
 
 void ProjectFile::loadConfig()
@@ -176,7 +176,7 @@ void ProjectFile::loadConfig()
     else if (line == L"[CPP]")
       addLines(config,_cppFiles);
     else if (line == L"[VISUAL_STUDIO]")
-      _visualStudioVersion=parseVisualStudioVersion(readLine(config));
+      _minimumVisualStudioVersion=parseVisualStudioVersion(readLine(config));
     else if (line == L"[DEFINES_LIB]")
       addLines(config,_definesLib);
   }

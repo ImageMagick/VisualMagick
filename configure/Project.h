@@ -124,7 +124,7 @@ private:
   int                  _type;
   bool                 _useNasm;
   bool                 _useUnicode;
-  int                  _visualStudioVersion;
+  int                  _minimumVisualStudioVersion;
   int                  _warningLevel;
   wstring              _license;
 };

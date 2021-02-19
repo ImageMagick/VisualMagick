@@ -115,7 +115,7 @@ bool Project::isModule() const
 
 bool Project::isSupported(const int visualStudioVersion) const
 {
-  return(visualStudioVersion >= _visualStudioVersion);
+  return(visualStudioVersion >= _minimumVisualStudioVersion);
 }
 
 vector<wstring> &Project::libraries()
@@ -279,7 +279,7 @@ Project::Project(wstring name)
   _useNasm=false;
   _useUnicode=false;
   _warningLevel=0;
-  _visualStudioVersion=VSEARLIEST;
+  _minimumVisualStudioVersion=VSEARLIEST;
 }
 
 void Project::addLines(wifstream &config,wstring &value)
@@ -373,7 +373,7 @@ void Project::loadConfig(wifstream &config)
     else if (line == L"[UNICODE]")
       _useUnicode=true;
     else if (line == L"[VISUAL_STUDIO]")
-      _visualStudioVersion=parseVisualStudioVersion(readLine(config));
+      _minimumVisualStudioVersion=parseVisualStudioVersion(readLine(config));
     else if (line == L"[WARNING_LEVEL]")
       _warningLevel=stoi(readLine(config));
     else if (line == L"[LICENSE]")
