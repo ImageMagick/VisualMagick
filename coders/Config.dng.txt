@@ -1,5 +1,8 @@
 [INCLUDES]
 ..\..\libraw\libraw
 
+[DEFINES_LIB]
+LIBRAW_NODLL
+
 [DEPENDENCIES]
 libraw

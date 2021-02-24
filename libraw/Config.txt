@@ -3,8 +3,11 @@
 [LICENSE]
 ..\..\libraw\COPYRIGHT
 
-[DEFINES]
+[DEFINES_DLL]
 LIBRAW_BUILDLIB
+
+[DEFINES_LIB]
+LIBRAW_NODLL
 
 [DIRECTORIES]
 ..\..\libraw\internal
