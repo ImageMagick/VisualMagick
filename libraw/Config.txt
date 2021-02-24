@@ -9,9 +9,21 @@ LIBRAW_BUILDLIB
 [DIRECTORIES]
 ..\..\libraw\internal
 ..\..\libraw\src
+..\..\libraw\src\decoders
+..\..\libraw\src\demosaic
+..\..\libraw\src\integration
+..\..\libraw\src\metadata
+..\..\libraw\src\postprocessing
+..\..\libraw\src\preprocessing
+..\..\libraw\src\tables
+..\..\libraw\src\utils
+..\..\libraw\src\write
 
 [INCLUDES]
 ..\..\libraw
+
+[EXCLUDES]
+*_ph.cpp
 
 [CONFIG_DEFINE]
 /*
