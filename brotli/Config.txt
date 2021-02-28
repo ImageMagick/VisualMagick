@@ -10,3 +10,6 @@
 
 [INCLUDES]
 ..\..\brotli\c\include
+
+[VISUAL_STUDIO]
+2019

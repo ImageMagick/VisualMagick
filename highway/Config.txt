@@ -11,3 +11,6 @@
 
 [EXCLUDES]
 *_test.cc
+
+[VISUAL_STUDIO]
+2019

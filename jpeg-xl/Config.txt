@@ -38,6 +38,9 @@ brotli
 highway
 lcms
 
+[VISUAL_STUDIO]
+2019
+
 [CONFIG_DEFINE]
 /*
   Define to use the jpeg-xl library
