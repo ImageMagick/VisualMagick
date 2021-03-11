@@ -31,6 +31,7 @@ JXL_INTERNAL_LIBRARY_BUILD
 ..\..\lcms\include
 
 [EXCLUDES]
+*_gbench.cc
 *_test.cc
 
 [DEPENDENCIES]
