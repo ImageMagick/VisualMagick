@@ -69,8 +69,8 @@ static inline bool contains(const vector<wstring> &container, const wstring s)
   {
     if (*c == s)
       return(true);
-    if ((*c)[0] == '*')
-      return(endsWith(s,(*c).substr(1)));
+    if (((*c)[0] == '*') && (endsWith(s,(*c).substr(1))))
+      return(true);
   }
   return(false);
 }
