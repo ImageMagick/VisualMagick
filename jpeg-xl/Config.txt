@@ -11,6 +11,7 @@
 ..\..\jpeg-xl\lib\jxl\modular
 ..\..\jpeg-xl\lib\jxl\modular\encoding
 ..\..\jpeg-xl\lib\jxl\modular\transform
+..\..\jpeg-xl\lib\threads
 
 [DEFINES]
 JPEGXL_MAJOR_VERSION=0
@@ -19,9 +20,11 @@ JPEGXL_PATCH_VERSION=0
 
 [DEFINES_LIB]
 JXL_STATIC_DEFINE
+JXL_THREADS_STATIC_DEFINE
 
 [DEFINES_DLL]
 JXL_INTERNAL_LIBRARY_BUILD
+JXL_THREADS_INTERNAL_LIBRARY_BUILD
 
 [INCLUDES]
 ..\..\jpeg-xl
