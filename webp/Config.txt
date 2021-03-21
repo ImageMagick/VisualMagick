@@ -19,6 +19,9 @@ _WEBPLIB_
 ..\..\webp\src\utils
 ..\..\webp\src\webp
 
+[EXCLUDES]
+libwebpmux.rc
+
 [CONFIG_DEFINE]
 /*
   Define to use the WebP library
