@@ -49,7 +49,7 @@ static inline bool endsWith(const wstring &s,const wstring &end)
 
   index=s.rfind(end);
   if (index == wstring::npos)
-    return false;
+    return(false);
 
   return(s.substr(index) == end);
 }

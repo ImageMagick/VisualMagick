@@ -90,6 +90,9 @@ void Solution::write(const ConfigureWizard &wizard,WaitDialog &waitDialog)
   int
     steps;
 
+  VersionInfo
+    versionInfo;
+
   wofstream
     file;
 
@@ -125,11 +128,14 @@ void Solution::write(const ConfigureWizard &wizard,WaitDialog &waitDialog)
   waitDialog.nextStep(L"Writing Makefile.PL");
   writeMakeFile(wizard);
 
+  if (!versionInfo.load())
+    return;
+
   waitDialog.nextStep(L"Writing version");
-  writeVersion(wizard);
+  writeVersion(wizard,versionInfo);
 
   waitDialog.nextStep(L"Writing NOTICE.txt");
-  writeNotice(wizard);
+  writeNotice(wizard,versionInfo);
 }
 
 wstring Solution::getFileName(const ConfigureWizard &wizard)
@@ -307,21 +313,18 @@ void Solution::writeMakeFile(const ConfigureWizard &wizard)
   makeFile.close();
 }
 
-void Solution::writeNotice(const ConfigureWizard &wizard)
+void Solution::writeNotice(const ConfigureWizard &wizard,const VersionInfo &versionInfo)
 {
   wofstream
     notice;
-
-  vector<wstring>
-    licenses;
 
   notice.open(L"..\\..\\VisualMagick\\NOTICE.txt");
   if (!notice)
     return;
 
   notice << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << endl << endl;
-  notice << "[ Imagemagick ] copyright:" << endl << endl;
-  notice << readFile(L"..\\..\\ImageMagick/LICENSE");
+  notice << "[ Imagemagick " << versionInfo.versionString() << "] copyright:" << endl << endl;
+  notice << readFile(L"..\\..\\ImageMagick\\LICENSE");
   notice << endl << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << endl << endl;
 
   foreach (Project*,p,_projects)
@@ -329,19 +332,9 @@ void Solution::writeNotice(const ConfigureWizard &wizard)
     if (((*p)->license() == L"") || ((*p)->shouldSkip(wizard)))
       continue;
 
-    if (contains(licenses,(*p)->license()))
-      continue;
-
-    notice << "[ ";
-    foreach (Project*,q,_projects)
-    {
-      if ((*p)->license() == (*q)->license())
-        notice << (*q)->name() << " ";
-    }
-    notice << "] copyright:" << endl << endl;
+    notice << "[ " << (*p)->name() << " " << (*p)->version() << " ] copyright:" << endl << endl;
     notice << (*p)->license() << endl;
     notice << endl << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << endl << endl;
-    licenses.push_back((*p)->license());
   }
 
   notice.close();
@@ -389,18 +382,12 @@ void Solution::writeThresholdMap(const ConfigureWizard &wizard)
   outputStream.close();
 }
 
-void Solution::writeVersion(const ConfigureWizard &wizard)
+void Solution::writeVersion(const ConfigureWizard &wizard,const VersionInfo &versionInfo)
 {
 
   wstring
     folder,
     line;
-
-  VersionInfo
-    versionInfo;
-
-  if (!versionInfo.load())
-    return;
 
   folder=getFolder();
 
@@ -409,7 +396,7 @@ void Solution::writeVersion(const ConfigureWizard &wizard)
   writeVersion(wizard,versionInfo,L"..\\installer\\inc\\version.isx.in",L"..\\installer\\inc\\version.isx");
 }
 
-void Solution::writeVersion(const ConfigureWizard &wizard,const VersionInfo &versionInfo, wstring input, wstring output)
+void Solution::writeVersion(const ConfigureWizard &wizard,const VersionInfo &versionInfo,wstring input,wstring output)
 {
   size_t
     start,

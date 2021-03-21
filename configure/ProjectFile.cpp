@@ -363,13 +363,9 @@ void ProjectFile::loadSource()
       loadModule(*dir);
     else
       loadSource(*dir);
-
-    resourceFile=*dir + L"\\ImageMagick\\Resource.rc";
-    if (PathFileExists(resourceFile.c_str()))
-      _resourceFiles.push_back(resourceFile);
   }
 
-  resourceFile=L"..\\" + _project->name() + L"\\Resource.rc";
+  resourceFile=L"..\\..\\" + _project->name() + L"\\ImageMagick\\ImageMagick.rc";
   if (PathFileExists(resourceFile.c_str()))
     _resourceFiles.push_back(resourceFile);
 }

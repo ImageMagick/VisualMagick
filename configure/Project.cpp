@@ -153,6 +153,11 @@ bool Project::useUnicode() const
   return(_useUnicode);
 }
 
+wstring Project::version() const
+{
+  return _version;
+}
+
 int Project::warningLevel() const
 {
   return(_warningLevel);
@@ -197,6 +202,7 @@ Project* Project::create(wstring name)
 
   Project* project = new Project(name);
   project->loadConfig(config);
+  project->loadVersion();
 
   config.close();
   return(project);
@@ -418,7 +424,7 @@ void Project::loadModules(const ConfigureWizard &wizard)
       if (!isValidSrcFile(data.cFileName))
         continue;
 
-      name=name.substr(0, name.find_last_of(L"."));
+      name=name.substr(0,name.find_last_of(L"."));
       projectFile=new ProjectFile(&wizard,this,_modulePrefix,name);
       _files.push_back(projectFile);
 
@@ -430,4 +436,33 @@ void Project::loadModules(const ConfigureWizard &wizard)
 
     } while (FindNextFile(fileHandle,&data));
   }
+}
+
+void Project::loadVersion()
+{
+  wifstream
+    version;
+
+  wstring
+    line;
+
+  version.open(L"..\\..\\" + _name + L"\\ImageMagick\\ImageMagick.version.h");
+  if (!version)
+    {
+      _version=L"unknown";
+      return;
+    }
+
+  while (!version.eof())
+  {
+    line=readLine(version);
+    if (!startsWith(line,L"DELEGATE_VERSION_NUM"))
+      continue;
+
+    _version=line.substr(line.find_last_of(L" "));
+    _version=replace(_version,L",",L".");
+    _version=trim(_version);
+  }
+
+  version.close();
 }

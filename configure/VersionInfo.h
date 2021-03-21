@@ -48,6 +48,8 @@ public:
 
   wstring versionNumber() const;
 
+  wstring versionString() const;
+
 private:
 
   void loadValue(const wstring line, const wstring keyword, wstring *value);

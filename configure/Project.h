@@ -79,6 +79,8 @@ public:
 
   bool useUnicode() const;
 
+  wstring version() const;
+
   int warningLevel() const;
 
   void checkFiles(const int visualStudioVersion);
@@ -102,6 +104,8 @@ private:
 
   void loadModules(const ConfigureWizard &wizard);
 
+  void loadVersion();
+
   wstring              _configDefine;
   vector<wstring>      _defines;
   vector<wstring>      _definesDll;
@@ -117,6 +121,7 @@ private:
   bool                 _isEnabled;
   bool                 _isOptional;
   vector<wstring>      _libraries;
+  wstring              _license;
   wstring              _moduleDefinitionFile;
   wstring              _modulePrefix;
   wstring              _name;
@@ -125,8 +130,8 @@ private:
   bool                 _useNasm;
   bool                 _useUnicode;
   int                  _minimumVisualStudioVersion;
+  wstring              _version;
   int                  _warningLevel;
-  wstring              _license;
 };
 
 #endif // __Project__
