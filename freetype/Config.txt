@@ -97,6 +97,7 @@ ftspic.c
 ftstream.c
 fttrigon.c
 ftutil.c
+ftver.rc
 ftzopen.c
 gxvbsln.c
 gxvcommn.c
