@@ -151,41 +151,11 @@ typedef long ssize_t;
 #define MAGICKCORE_SIZEOF_VOID_P  8
 
 /*
-  Define to 1 if you have the <ft2build.h> header file.
-*/
-#define MAGICKCORE_HAVE_FT2BUILD_H 1
-
-/*
-  Define to 1 if you have the `ftruncate' function.
-*/
-#define MAGICKCORE_HAVE_FTRUNCATE 1
-
-/*
-  Define to support memory mapping files for improved performance
-*/
-#define MAGICKCORE_HAVE_MMAP 1
-
-/*
-  Define to 1 if you have the `raise' function.
-*/
-#define MAGICKCORE_HAVE_RAISE 1
-
-/*
-  Define to 1 if you have the `memmove' function.
-*/
-#define MAGICKCORE_HAVE_MEMMOVE 1
-
-/*
   Define to 1 if you have the `strtod_l' function.
 */
 #if defined(_VISUALC_) && (_MSC_VER >= 1400)
 #define MAGICKCORE_HAVE_STRTOD_L 1
 #endif
-
-/*
-  Define to 1 if you have the `sysconf' function.
-*/
-#define MAGICKCORE_HAVE_SYSCONF 1
 
 /*
   Define to 1 if you have the `vfprintf_l' function.
@@ -205,41 +175,6 @@ typedef long ssize_t;
 #if defined(_VISUALC_) && (_MSC_VER >= 1400)
 #define MAGICKCORE_HAVE_VSNPRINTF_L 1
 #endif
-
-/*
-  Define to 1 if you have the `popen' function.
-*/
-#define MAGICKCORE_HAVE_POPEN 1
-
-/*
-  Define to 1 if you have the `strcasecmp' function.
-*/
-#define MAGICKCORE_HAVE_STRCASECMP 1
-
-/*
-  Define to 1 if you have the `strncasecmp' function.
-*/
-#define MAGICKCORE_HAVE_STRNCASECMP 1
-
-/*
-  Define to 1 if you have the `tempnam' function.
-*/
-#define MAGICKCORE_HAVE_TEMPNAM 1
-
-/*
-  Define to include the <sys/types.h> header file
-*/
-#define MAGICKCORE_HAVE_SYS_TYPES_H 1
-
-/*
-  Define to 1 if you have the `_wfopen' function.
-*/
-#define MAGICKCORE_HAVE__WFOPEN 1
-
-/*
-  Define to 1 if you have the `_wstat' function.
-*/
-#define MAGICKCORE_HAVE__WSTAT 1
 
 #if defined(_VISUALC_) && (_MSC_VER >= 1310)
 #define MAGICKCORE_HAVE__ALIGNED_MALLOC 1
