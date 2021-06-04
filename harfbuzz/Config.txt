@@ -22,19 +22,7 @@ dump-use-data.cc
 harfbuzz.cc
 main.cc
 test.cc
-test-algs.cc
-test-array.cc
-test-bimap.cc
-test-buffer-serialize.cc
-test-gpos-size-params.cc
-test-gsub-would-substitute.cc
-test-iter.cc
-test-meta.cc
-test-number.cc
-test-ot-glyphname.cc
-test-ot-meta.cc
-test-ot-name.cc
-test-unicode-ranges.cc
+test-*
 
 [DEPENDENCIES]
 glib
