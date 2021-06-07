@@ -1470,7 +1470,7 @@ Apache License
 
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
-[ freetype 2.10.0 ] copyright:
+[ freetype 2.10.4 ] copyright:
 
 The FreeType Project LICENSE
                     ----------------------------

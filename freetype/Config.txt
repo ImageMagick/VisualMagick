@@ -4,9 +4,10 @@
 ..\..\freetype\docs\FTL.TXT
 
 [DEFINES]
-_TTFLIB_
 FT2_BUILD_LIBRARY
-_MBCS
+
+[DEFINES_DLL]
+FT2_DLL
 
 [DIRECTORIES]
 ..\..\freetype\include
