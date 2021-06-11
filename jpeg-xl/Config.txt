@@ -43,7 +43,7 @@ highway
 lcms
 
 [VISUAL_STUDIO]
-2019
+2017
 
 [CONFIG_DEFINE]
 /*
