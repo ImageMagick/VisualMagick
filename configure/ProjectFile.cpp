@@ -368,6 +368,11 @@ void ProjectFile::loadSource()
   resourceFile=L"..\\..\\" + _project->name() + L"\\ImageMagick\\ImageMagick.rc";
   if (PathFileExists(resourceFile.c_str()))
     _resourceFiles.push_back(resourceFile);
+
+  /* This resource file is used by the ImageMagick projects */
+  resourceFile=L"..\\" + _project->name() + L"\\ImageMagick.rc";
+  if (PathFileExists(resourceFile.c_str()))
+    _resourceFiles.push_back(resourceFile);
 }
 
 void ProjectFile::loadSource(const wstring &directory)

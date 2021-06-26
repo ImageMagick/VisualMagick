@@ -32,7 +32,7 @@ BEGIN
             VALUE "FileVersion", MagickLibVersionText "\0"
             VALUE "ProductVersion", MagickLibVersionText "\0"
             VALUE "CompanyName", "ImageMagick Studio\0"
-            VALUE "LegalCopyright", "Copyright Bob Friesenhahn 1999-2008, Dirk Lemstra 2013-2015\0"
+            VALUE "LegalCopyright", "Copyright Bob Friesenhahn 1999-2008, Dirk Lemstra 2013-now\0"
             VALUE "Comments", MagickVersion "\0"
         END
     END
