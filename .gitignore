@@ -7,14 +7,18 @@
 
 /installer/inc/version.isx
 
+/utilities/ImageMagick.version.h
+
 ImageMagickObject/dlldata.c
 ImageMagickObject/vc*
 
-/.vs
+.vs
 bin
 /Debug
 /lib
 /Release
+
+NOTICE.txt
 
 *.db
 *.ipch

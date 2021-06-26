@@ -394,6 +394,7 @@ void Solution::writeVersion(const ConfigureWizard &wizard,const VersionInfo &ver
   writeVersion(wizard,versionInfo,L"..\\..\\ImageMagick\\"+folder+L"\\version.h.in",L"..\\..\\ImageMagick\\"+folder+L"\\version.h");
   writeVersion(wizard,versionInfo,L"..\\..\\ImageMagick\\config\\configure.xml.in",L"..\\bin\\configure.xml");
   writeVersion(wizard,versionInfo,L"..\\installer\\inc\\version.isx.in",L"..\\installer\\inc\\version.isx");
+  writeVersion(wizard,versionInfo,L"..\\utilities\\ImageMagick.version.h.in",L"..\\utilities\\ImageMagick.version.h");
 }
 
 void Solution::writeVersion(const ConfigureWizard &wizard,const VersionInfo &versionInfo,wstring input,wstring output)
@@ -448,7 +449,7 @@ void Solution::writeVersion(const ConfigureWizard &wizard,const VersionInfo &ver
     line=replace(line,L"@QUANTUM_DEPTH@",to_wstring(wizard.quantumDepth()));
     line=replace(line,L"@RELEASE_DATE@",versionInfo.releaseDate());
     line=replace(line,L"@TARGET_OS@",L"Windows");
-    line=replace(line,L"@VERSION@",versionInfo.version());
+    line=replace(line,L"@VERSION@",versionInfo.versionString());
     start=line.find(L"@");
     if (start != string::npos)
     {
