@@ -3,6 +3,9 @@
 [LICENSE]
 ..\..\raqm\COPYING
 
+[DEFINES_LIB]
+FRIBIDI_LIB_STATIC
+
 [DIRECTORIES]
 ..\..\raqm\src
 
