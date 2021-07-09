@@ -5,12 +5,14 @@
 
 [DEFINES]
 HAVE_GLIB
+HAVE_FREETYPE
 HARFBUZZ_COMPILATION
 
 [DIRECTORIES]
 ..\..\harfbuzz\src
 
 [INCLUDES]
+..\..\freetype\include
 ..\..\glib
 ..\..\glib\glib
 
@@ -25,4 +27,5 @@ test.cc
 test-*
 
 [DEPENDENCIES]
+freetype
 glib

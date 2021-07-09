@@ -16,6 +16,7 @@ _MAGICKLIB_
 ..\..\lcms\include
 ..\..\lqr
 ..\..\lqr\lqr
+..\..\raqm\src
 ..\..\zlib
 
 [EXCLUDES]
@@ -29,6 +30,7 @@ freetype
 lcms
 libxml
 lqr
+raqm
 zlib
 
 [WARNING_LEVEL]
