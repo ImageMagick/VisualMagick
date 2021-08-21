@@ -25,7 +25,6 @@ DLL_EXPORT
 ..\..\freetype\src\pshinter
 ..\..\freetype\src\psnames
 ..\..\freetype\src\raster
-..\..\freetype\src\sdf
 ..\..\freetype\src\sfnt
 ..\..\freetype\src\smooth
 ..\..\freetype\src\truetype
@@ -53,7 +52,6 @@ psaux.c
 pshinter.c
 psnames.c
 raster.c
-sdf.c
 sfnt.c
 smooth.c
 truetype.c
