@@ -7,7 +7,7 @@
 FT2_BUILD_LIBRARY
 
 [DEFINES_DLL]
-FT2_DLL
+DLL_EXPORT
 
 [DIRECTORIES]
 ..\..\freetype\include
@@ -25,6 +25,7 @@ FT2_DLL
 ..\..\freetype\src\pshinter
 ..\..\freetype\src\psnames
 ..\..\freetype\src\raster
+..\..\freetype\src\sdf
 ..\..\freetype\src\sfnt
 ..\..\freetype\src\smooth
 ..\..\freetype\src\truetype
@@ -165,6 +166,7 @@ psstack.c
 psconv.c
 psobjs.c
 rastpic.c
+sdf.c
 sfdriver.c
 sfntpic.c
 sfobjs.c
