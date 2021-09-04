@@ -222,7 +222,7 @@ bool TargetPage::hasVisualStudioFolder(const wchar_t *name)
   wstring
     path;
 
-  path=getEnvironmentVariable(L"ProgramFiles") + L"\\Microsoft Visual Studio\\" + name;
+  path=getEnvironmentVariable(L"ProgramW6432") + L"\\Microsoft Visual Studio\\" + name;
   if (PathFileExists(path.c_str()))
     return(true);
   path=getEnvironmentVariable(L"ProgramFiles(x86)") + L"\\Microsoft Visual Studio\\" + name;
