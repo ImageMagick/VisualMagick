@@ -26,6 +26,8 @@ public:
 
   VersionInfo();
 
+  wstring fullVersion() const;
+
   wstring interfaceVersion() const;
 
   wstring libAddendum() const;
@@ -47,8 +49,6 @@ public:
   wstring version() const;
 
   wstring versionNumber() const;
-
-  wstring versionString() const;
 
 private:
 

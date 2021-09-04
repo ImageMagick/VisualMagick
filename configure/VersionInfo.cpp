@@ -25,6 +25,11 @@ VersionInfo::VersionInfo()
 {
 }
 
+wstring VersionInfo::fullVersion() const
+{
+  return _major+L"."+_minor+L"."+_micro+L"."+_patchlevel;
+}
+
 wstring VersionInfo::interfaceVersion() const
 {
   return(_libraryCurrent);
@@ -135,9 +140,4 @@ wstring VersionInfo::version() const
 wstring VersionInfo::versionNumber() const
 {
   return _major+L","+_minor+L","+_micro+L","+_patchlevel;
-}
-
-wstring VersionInfo::versionString() const
-{
-  return _major+L"."+_minor+L"."+_micro+L"-"+_patchlevel;
 }

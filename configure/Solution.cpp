@@ -323,7 +323,7 @@ void Solution::writeNotice(const ConfigureWizard &wizard,const VersionInfo &vers
     return;
 
   notice << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << endl << endl;
-  notice << "[ Imagemagick " << versionInfo.versionString() << "] copyright:" << endl << endl;
+  notice << "[ Imagemagick " << versionInfo.version() << versionInfo.libAddendum() << "] copyright:" << endl << endl;
   notice << readFile(L"..\\..\\ImageMagick\\LICENSE");
   notice << endl << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << endl << endl;
 
@@ -441,6 +441,7 @@ void Solution::writeVersion(const ConfigureWizard &wizard,const VersionInfo &ver
     line=replace(line,L"@MAGICKPP_LIBRARY_VERSION_INFO@",versionInfo.ppLibVersionNumber());
     line=replace(line,L"@MAGICKPP_LIBRARY_VERSION_TEXT@",versionInfo.version());
     line=replace(line,L"@PACKAGE_BASE_VERSION@",versionInfo.version());
+    line=replace(line,L"@PACKAGE_FULL_VERSION@",versionInfo.fullVersion());
     line=replace(line,L"@PACKAGE_LIB_VERSION@",versionInfo.libVersion());
     line=replace(line,L"@PACKAGE_LIB_VERSION_NUMBER@",versionInfo.versionNumber());
     line=replace(line,L"@PACKAGE_NAME@",L"ImageMagick");
@@ -449,7 +450,6 @@ void Solution::writeVersion(const ConfigureWizard &wizard,const VersionInfo &ver
     line=replace(line,L"@QUANTUM_DEPTH@",to_wstring(wizard.quantumDepth()));
     line=replace(line,L"@RELEASE_DATE@",versionInfo.releaseDate());
     line=replace(line,L"@TARGET_OS@",L"Windows");
-    line=replace(line,L"@VERSION@",versionInfo.versionString());
     start=line.find(L"@");
     if (start != string::npos)
     {
