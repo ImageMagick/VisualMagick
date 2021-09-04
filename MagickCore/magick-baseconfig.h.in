@@ -106,19 +106,8 @@ $$CONFIG$$
 #  define _WIN32_WINNT  0x0502
 #endif
 
-/*
-  Use Visual C++ C inline method extension to improve performance
-*/
 #define _magickcore_inline __inline
-
-/*
-  Visual C++ does not define restrict by default.
-*/
-#if (_MSC_VER >= 1400)
-#  define _magickcore_restrict __restrict
-#else
-#  define _magickcore_restrict
-#endif
+#define _magickcore_restrict __restrict
 
 /*
   Visual C++ does not define double_t, float_t, or ssize_t by default.
@@ -148,37 +137,13 @@ typedef long ssize_t;
 #endif
 #define __func__  __FUNCTION__
 
-#define MAGICKCORE_SIZEOF_VOID_P  8
+#define MAGICKCORE_SIZEOF_VOID_P 8
 
-/*
-  Define to 1 if you have the `strtod_l' function.
-*/
-#if defined(_VISUALC_) && (_MSC_VER >= 1400)
 #define MAGICKCORE_HAVE_STRTOD_L 1
-#endif
-
-/*
-  Define to 1 if you have the `vfprintf_l' function.
-*/
-#if defined(_VISUALC_) && (_MSC_VER >= 1400)
 #define MAGICKCORE_HAVE_VFPRINTF_L 1
-#endif
-
-/*
-  Define to 1 if you have the `vsnprintf' function.
-*/
 #define MAGICKCORE_HAVE_VSNPRINTF 1
-
-/*
-  Define to 1 if you have the `vsnprintf_' function.
-*/
-#if defined(_VISUALC_) && (_MSC_VER >= 1400)
 #define MAGICKCORE_HAVE_VSNPRINTF_L 1
-#endif
-
-#if defined(_VISUALC_) && (_MSC_VER >= 1310)
 #define MAGICKCORE_HAVE__ALIGNED_MALLOC 1
-#endif
 #define MAGICKCORE_HAVE_VSNPRINTF 1
 #define MAGICKCORE_HAVE_GETTIMEOFDAY
 #define MAGICKCORE_HAVE_SETVBUF 1
