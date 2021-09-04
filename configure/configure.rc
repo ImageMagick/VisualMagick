@@ -266,7 +266,7 @@ BEGIN
             VALUE "FileVersion", "7, 0, 0, 0\0"
             VALUE "ProductVersion", "7, 0, 0, 0\0"
             VALUE "CompanyName", "ImageMagick Studio\0"
-            VALUE "LegalCopyright", "Copyright 2014-2016 ImageMagick Studio LLC\0"
+            VALUE "LegalCopyright", "Copyright 2014-2021 ImageMagick Studio LLC\0"
             VALUE "Comments", "Win32 Configure Application\0"
         END
     END
