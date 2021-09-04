@@ -29,9 +29,9 @@ enum {DYNAMIC_MT, STATIC_MTD, STATIC_MT};
 
 enum {UNDEFINEDTYPE, APPTYPE, COMTYPE, DLLTYPE, DLLMODULETYPE, EXETYPE, EXEMODULETYPE, STATICTYPE};
 
-enum {VS2010, VS2012, VS2013, VS2015, VS2017, VS2019, VS2022};
+enum {VS2012, VS2013, VS2015, VS2017, VS2019, VS2022};
 
-#define VSEARLIEST VS2010
+#define VSEARLIEST VS2012
 #define VSLATEST VS2022
 
 enum {Q8, Q16, Q32, Q64};
@@ -136,9 +136,7 @@ static inline wstring replace(const wstring &str, const wstring &from, const wst
 
 static inline int parseVisualStudioVersion(const wstring &version)
 {
-  if (version == L"2010")
-    return(VS2010);
-  else if (version == L"2012")
+  if (version == L"2012")
     return(VS2012);
   else if (version == L"2013")
     return(VS2013);

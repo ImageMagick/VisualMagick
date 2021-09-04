@@ -536,9 +536,7 @@ void ProjectFile::write(wofstream &file,const vector<Project*> &allProjects)
     file << "    <ConfigurationType>DynamicLibrary</ConfigurationType>" << endl;
   else if (_project->isExe())
     file << "    <ConfigurationType>Application</ConfigurationType>" << endl;
-  if (_wizard->visualStudioVersion() == VS2010)
-    file << "    <PlatformToolset>v100</PlatformToolset>" << endl;
-  else if (_wizard->visualStudioVersion() == VS2012)
+  if (_wizard->visualStudioVersion() == VS2012)
     file << "    <PlatformToolset>v110_xp</PlatformToolset>" << endl;
   else if (_wizard->visualStudioVersion() == VS2013)
     file << "    <PlatformToolset>v120_xp</PlatformToolset>" << endl;
@@ -560,8 +558,6 @@ void ProjectFile::write(wofstream &file,const vector<Project*> &allProjects)
   file << "  <Import Project=\"$(VCTargetsPath)\\Microsoft.Cpp.props\" />" << endl;
 
   file << "  <PropertyGroup>" << endl;
-  if (_wizard->visualStudioVersion() == VS2010)
-    file << "    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>" << endl;
   file << "    <LinkIncremental>false</LinkIncremental>" << endl;
   file << "    <OutDir>" << outputDirectory() << "</OutDir>" << endl;
   if (_project->isExe())

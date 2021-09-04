@@ -146,7 +146,6 @@ wstring ConfigureWizard::visualStudioVersionName() const
 {
   switch(_targetPage.visualStudioVersion())
   {
-    case VS2010: return(L"VS2010");
     case VS2012: return(L"VS2012");
     case VS2013: return(L"VS2013");
     case VS2015: return(L"VS2015");

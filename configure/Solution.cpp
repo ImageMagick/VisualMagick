@@ -482,27 +482,19 @@ void Solution::checkKeyword(const wstring keyword)
 
 void Solution::write(const ConfigureWizard &wizard,wofstream &file)
 {
-  if (wizard.visualStudioVersion() == VS2010)
-  {
-    file << "Microsoft Visual Studio Solution File, Format Version 11.00" << endl;
-    file << "# Visual Studio 2010" << endl;
-  }
-  else
-  {
-    file << "Microsoft Visual Studio Solution File, Format Version 12.00" << endl;
-    if (wizard.visualStudioVersion() == VS2012)
-      file << "# Visual Studio 2012" << endl;
-    else if (wizard.visualStudioVersion() == VS2013)
-      file << "# Visual Studio 2013" << endl;
-    else if (wizard.visualStudioVersion() == VS2015)
-      file << "# Visual Studio 2015" << endl;
-    else if (wizard.visualStudioVersion() == VS2017)
-      file << "# Visual Studio 2017" << endl;
-    else if (wizard.visualStudioVersion() == VS2019)
-      file << "# Visual Studio 2019" << endl;
-    else if (wizard.visualStudioVersion() == VS2022)
-      file << "# Visual Studio 2022" << endl;
-  }
+  file << "Microsoft Visual Studio Solution File, Format Version 12.00" << endl;
+  if (wizard.visualStudioVersion() == VS2012)
+    file << "# Visual Studio 2012" << endl;
+  else if (wizard.visualStudioVersion() == VS2013)
+    file << "# Visual Studio 2013" << endl;
+  else if (wizard.visualStudioVersion() == VS2015)
+    file << "# Visual Studio 2015" << endl;
+  else if (wizard.visualStudioVersion() == VS2017)
+    file << "# Visual Studio 2017" << endl;
+  else if (wizard.visualStudioVersion() == VS2019)
+    file << "# Visual Studio 2019" << endl;
+  else if (wizard.visualStudioVersion() == VS2022)
+    file << "# Visual Studio 2022" << endl;
 
   foreach (Project*,p,_projects)
   {
