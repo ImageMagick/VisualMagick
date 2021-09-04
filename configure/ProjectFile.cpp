@@ -548,6 +548,8 @@ void ProjectFile::write(wofstream &file,const vector<Project*> &allProjects)
     file << "    <PlatformToolset>v141</PlatformToolset>" << endl;
   else if (_wizard->visualStudioVersion() == VS2019)
     file << "    <PlatformToolset>v142</PlatformToolset>" << endl;
+  else if (_wizard->visualStudioVersion() == VS2022)
+    file << "    <PlatformToolset>v143</PlatformToolset>" << endl;
   file << "    <UseOfMfc>false</UseOfMfc>" << endl;
   if (_project->useUnicode())
     file << "    <CharacterSet>Unicode</CharacterSet>" << endl;

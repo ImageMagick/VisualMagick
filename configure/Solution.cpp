@@ -500,6 +500,8 @@ void Solution::write(const ConfigureWizard &wizard,wofstream &file)
       file << "# Visual Studio 2017" << endl;
     else if (wizard.visualStudioVersion() == VS2019)
       file << "# Visual Studio 2019" << endl;
+    else if (wizard.visualStudioVersion() == VS2022)
+      file << "# Visual Studio 2022" << endl;
   }
 
   foreach (Project*,p,_projects)

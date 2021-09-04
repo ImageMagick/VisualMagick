@@ -222,13 +222,18 @@ bool TargetPage::hasVisualStudioFolder(const wchar_t *name)
   wstring
     path;
 
+  path=getEnvironmentVariable(L"ProgramFiles") + L"\\Microsoft Visual Studio\\" + name;
+  if (PathFileExists(path.c_str()))
+    return(true);
   path=getEnvironmentVariable(L"ProgramFiles(x86)") + L"\\Microsoft Visual Studio\\" + name;
   return(PathFileExists(path.c_str()) ? true : false);
 }
 
 void TargetPage::setVisualStudioVersion()
 {
-  if (hasVisualStudioFolder(L"2019"))
+  if (hasVisualStudioFolder(L"2022"))
+    _visualStudioVersion=VS2022;
+  else if (hasVisualStudioFolder(L"2019"))
     _visualStudioVersion=VS2019;
   else if (hasVisualStudioFolder(L"2017"))
     _visualStudioVersion=VS2017;
