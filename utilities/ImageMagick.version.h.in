@@ -1,2 +1,2 @@
 #define MagickUtilitiesVersionNumber @PACKAGE_LIB_VERSION_NUMBER@
-#define MagickUtilitiesVersionText   "@VERSION@"
+#define MagickUtilitiesVersionText   "@MAGICK_LIB_VERSION_TEXT@@PACKAGE_VERSION_ADDENDUM@"
