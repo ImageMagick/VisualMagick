@@ -289,6 +289,7 @@ Project::Project(wstring name)
   _type=UNDEFINEDTYPE;
   _useNasm=false;
   _useUnicode=false;
+  _treatWarningAsError=false;
   _warningLevel=0;
   _minimumVisualStudioVersion=VSEARLIEST;
 }
