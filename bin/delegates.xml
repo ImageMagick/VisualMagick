@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <!DOCTYPE delegatemap [
-<!ELEMENT delegatemap (delegate)+>
-<!ELEMENT delegate (#PCDATA)>
-<!ATTLIST delegate decode CDATA #IMPLIED>
-<!ATTLIST delegate encode CDATA #IMPLIED>
-<!ATTLIST delegate mode CDATA #IMPLIED>
-<!ATTLIST delegate spawn CDATA #IMPLIED>
-<!ATTLIST delegate stealth CDATA #IMPLIED>
-<!ATTLIST delegate thread-support CDATA #IMPLIED>
-<!ATTLIST delegate command CDATA #REQUIRED>
+  <!ELEMENT delegatemap (delegate)+>
+  <!ELEMENT delegate (#PCDATA)>
+  <!ATTLIST delegate decode CDATA #IMPLIED>
+  <!ATTLIST delegate encode CDATA #IMPLIED>
+  <!ATTLIST delegate mode CDATA #IMPLIED>
+  <!ATTLIST delegate spawn CDATA #IMPLIED>
+  <!ATTLIST delegate stealth CDATA #IMPLIED>
+  <!ATTLIST delegate thread-support CDATA #IMPLIED>
+  <!ATTLIST delegate command CDATA #REQUIRED>
 ]>
 <!--
   Delegate command file.
