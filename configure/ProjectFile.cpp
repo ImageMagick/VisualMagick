@@ -603,10 +603,9 @@ void ProjectFile::writeItemDefinitionGroup(wofstream &file,const bool debug)
   if (_project->warningLevel() == 0)
     file << "      <WarningLevel>TurnOffAllWarnings</WarningLevel>" << endl;
   else
-    {
-      file << "      <WarningLevel>Level" << _project->warningLevel() << "</WarningLevel>" << endl;
-      file << "      <TreatWarningAsError>true</TreatWarningAsError>" << endl;
-    }
+    file << "      <WarningLevel>Level" << _project->warningLevel() << "</WarningLevel>" << endl;
+  if (_project->treatWarningAsError())
+    file << "      <TreatWarningAsError>true</TreatWarningAsError>" << endl;
   file << "      <SuppressStartupBanner>true</SuppressStartupBanner>" << endl;
   file << "      <CompileAs>Default</CompileAs>" << endl;
   file << "      <InlineFunctionExpansion>" << (debug ? "Disabled" : "AnySuitable") << "</InlineFunctionExpansion>" << endl;

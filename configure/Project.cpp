@@ -143,6 +143,11 @@ vector<wstring> &Project::references()
   return(_references);
 }
 
+bool Project::treatWarningAsError() const
+{
+  return(_treatWarningAsError);
+}
+
 bool Project::useNasm() const
 {
   return(_useNasm);
@@ -382,6 +387,8 @@ void Project::loadConfig(wifstream &config)
       _minimumVisualStudioVersion=parseVisualStudioVersion(readLine(config));
     else if (line == L"[WARNING_LEVEL]")
       _warningLevel=stoi(readLine(config));
+    else if (line == L"[TREAT_WARNING_AS_ERROR]")
+      _treatWarningAsError=true;
     else if (line == L"[LICENSE]")
       _license=readFile(readLine(config));
   }

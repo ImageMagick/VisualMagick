@@ -75,6 +75,8 @@ public:
 
   vector<wstring> &references();
 
+  bool treatWarningAsError() const;
+
   bool useNasm() const;
 
   bool useUnicode() const;
@@ -92,6 +94,7 @@ public:
   void mergeProjectFiles(const ConfigureWizard &wizard);
 
   bool shouldSkip(const ConfigureWizard &wizard);
+
 
 private:
   Project(wstring name);
@@ -126,6 +129,7 @@ private:
   wstring              _modulePrefix;
   wstring              _name;
   vector<wstring>      _references;
+  bool                 _treatWarningAsError;
   int                  _type;
   bool                 _useNasm;
   bool                 _useUnicode;
