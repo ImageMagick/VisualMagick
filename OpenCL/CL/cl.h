@@ -116,7 +116,7 @@ typedef struct _cl_image_desc {
     union {
       cl_mem                  buffer;
       cl_mem                  mem_object;
-    };
+    } im_cl_buffer;
 } cl_image_desc;
 
 typedef struct _cl_buffer_region {
