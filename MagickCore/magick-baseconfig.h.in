@@ -158,6 +158,7 @@ typedef long ssize_t;
 #define MAGICKCORE_HAVE_STRING_H 1
 #define MAGICKCORE_HAVE_J0 1
 #define MAGICKCORE_HAVE_J1 1
+#define SETJMP_IS_THREAD_SAFE 1
 
 /*
   Tiff features.
