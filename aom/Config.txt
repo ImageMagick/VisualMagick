@@ -10,6 +10,7 @@
 ..\..\aom\aom_scale
 ..\..\aom\aom_util
 ..\..\aom\aom_scale\generic
+..\..\aom\common
 ..\..\aom\av1
 ..\..\aom\av1\common
 ..\..\aom\av1\decoder
@@ -21,6 +22,10 @@
 ..\..\aom
 
 [EXCLUDES]
+args.c
+av1_config.c
+av1_temporal_denoiser.c
+butteraugli.c
 cdef_block_avx2.c
 cdef_block_neon.c
 cdef_block_sse2.c
@@ -28,5 +33,19 @@ cdef_block_sse4.c
 cdef_block_ssse3.c
 debug_util.c
 inspection.c
+ivfdec.c
+ivfenc.c
+md5_utils.c
+obudec.c
+rawenc.c
+tools_common.c
 tune_vmaf.c
+tune_butteraugli.c
+video_reader.c
+video_writer.c
 vmaf.c
+warnings.c
+webmdec.cc
+webmenc.cc
+y4menc.c
+y4minput.c
