@@ -14,6 +14,7 @@ ImageMagickObject/dlldata.c
 ImageMagickObject/vc*
 
 .vs
+.vscode
 bin
 /Debug
 /lib
