@@ -624,9 +624,10 @@ void ProjectFile::writeItemDefinitionGroup(wofstream &file,const bool debug)
   file << "      <MultiProcessorCompilation>true</MultiProcessorCompilation>" << endl;
   if (_wizard->visualStudioVersion() >= VS2015)
     file << "      <AdditionalOptions>/source-charset:utf-8 %(AdditionalOptions)</AdditionalOptions>" << endl;
-  if (_wizard->visualStudioVersion() >= VS2019)
+  if (_wizard->visualStudioVersion() >= VS2019) {
     file << "      <LanguageStandard>stdcpp17</LanguageStandard>" << endl;
     file << "      <LanguageStandard_C>stdc17</LanguageStandard_C>" << endl;
+  }
   file << "    </ClCompile>" << endl;
   file << "    <ResourceCompile>" << endl;
   file << "      <PreprocessorDefinitions>" << (debug ? "_DEBUG" : "NDEBUG") <<";%(PreprocessorDefinitions)</PreprocessorDefinitions>" << endl;
