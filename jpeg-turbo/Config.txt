@@ -33,7 +33,6 @@ rdcolmap.c
 rdgif.c
 rdjpgcom.c
 rdppm.c
-rdrle.c
 rdswitch.c
 rdtarga.c
 tjbench.c
@@ -46,7 +45,6 @@ wrbmp.c
 wrgif.c
 wrjpgcom.c
 wrppm.c
-wrrle.c
 wrtarga.c
 jccolext-avx2.asm
 jccolext-sse2.asm
