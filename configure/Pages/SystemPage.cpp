@@ -125,7 +125,7 @@ BEGIN_MESSAGE_MAP(SystemPage, CPropertyPage)
   ON_BN_CLICKED(IDC_BIN_DIR_BROWSE, OnLibDirBrowse)
 END_MESSAGE_MAP()
 
-wstring SystemPage::addBackslash(const CString &directory) const
+wstring SystemPage::addBackslash(const CStringW &directory) const
 {
   if (directory.GetAt(directory.GetLength()-1) != '\\')
     return(wstring(directory) + L"\\");
@@ -172,7 +172,7 @@ bool SystemPage::browseForFolder(const wchar_t *title, wchar_t *retval)
   return(true);
 }
 
-void SystemPage::setDirectory(const wstring &title,CString &directory)
+void SystemPage::setDirectory(const wstring &title,CStringW &directory)
 {
   wchar_t
     path[_MAX_PATH];

@@ -62,17 +62,17 @@ protected:
 
 private:
 
-  wstring addBackslash(const CString &directory) const;
+  wstring addBackslash(const CStringW &directory) const;
 
   bool browseForFolder(const wchar_t *title, wchar_t *retval);
 
-  void setDirectory(const wstring &title,CString &directory);
+  void setDirectory(const wstring &title,CStringW &directory);
 
-  CString _binDirectory;
-  CString _fuzzBinDirectory;
-  CString _intermediateDirectoryDebug;
-  CString _intermediateDirectoryRelease;
-  CString _libDirectory;
+  CStringW _binDirectory;
+  CStringW _fuzzBinDirectory;
+  CStringW _intermediateDirectoryDebug;
+  CStringW _intermediateDirectoryRelease;
+  CStringW _libDirectory;
 };
 
 #endif // __SystemPage__
