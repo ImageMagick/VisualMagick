@@ -97,7 +97,7 @@ static inline wstring readLine(wifstream &stream)
   return(trim(line));
 }
 
-static inline wstring readFile(const wstring &fileName)
+static inline wstring readLicense(const wstring &fileName)
 {
   wifstream
     file;
@@ -107,7 +107,7 @@ static inline wstring readFile(const wstring &fileName)
 
   file.open(fileName);
   if (!file)
-    throw exception();
+    return L"UNABLE TO OPEN LICENSE FILE: " + fileName;
 
   content=trim(wstring((istreambuf_iterator<wchar_t>(file)), istreambuf_iterator<wchar_t>()));
 

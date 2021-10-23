@@ -391,7 +391,7 @@ void Project::loadConfig(wifstream &config)
     else if (line == L"[TREAT_WARNING_AS_ERROR]")
       _treatWarningAsError=true;
     else if (line == L"[LICENSE]")
-      _license=readFile(readLine(config));
+      _license=readLicense(readLine(config));
   }
 }
 

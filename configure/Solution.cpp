@@ -324,7 +324,7 @@ void Solution::writeNotice(const ConfigureWizard &wizard,const VersionInfo &vers
 
   notice << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << endl << endl;
   notice << "[ Imagemagick " << versionInfo.version() << versionInfo.libAddendum() << "] copyright:" << endl << endl;
-  notice << readFile(L"..\\..\\ImageMagick\\LICENSE");
+  notice << readLicense(L"..\\..\\ImageMagick\\LICENSE");
   notice << endl << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << endl << endl;
 
   foreach (Project*,p,_projects)
