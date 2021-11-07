@@ -239,10 +239,6 @@ void TargetPage::setVisualStudioVersion()
     _visualStudioVersion=VS2017;
   else if (!getEnvironmentVariable(L"VS140COMNTOOLS").empty())
     _visualStudioVersion=VS2015;
-  else if (!getEnvironmentVariable(L"VS120COMNTOOLS").empty())
-    _visualStudioVersion=VS2013;
-  else if (!getEnvironmentVariable(L"VS110COMNTOOLS").empty())
-    _visualStudioVersion=VS2012;
   else
     _visualStudioVersion=VSLATEST;
 }

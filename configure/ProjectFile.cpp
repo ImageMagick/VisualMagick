@@ -536,11 +536,7 @@ void ProjectFile::write(wofstream &file,const vector<Project*> &allProjects)
     file << "    <ConfigurationType>DynamicLibrary</ConfigurationType>" << endl;
   else if (_project->isExe())
     file << "    <ConfigurationType>Application</ConfigurationType>" << endl;
-  if (_wizard->visualStudioVersion() == VS2012)
-    file << "    <PlatformToolset>v110_xp</PlatformToolset>" << endl;
-  else if (_wizard->visualStudioVersion() == VS2013)
-    file << "    <PlatformToolset>v120_xp</PlatformToolset>" << endl;
-  else if (_wizard->visualStudioVersion() == VS2015)
+  if (_wizard->visualStudioVersion() == VS2015)
     file << "    <PlatformToolset>v140_xp</PlatformToolset>" << endl;
   else if (_wizard->visualStudioVersion() == VS2017)
     file << "    <PlatformToolset>v141</PlatformToolset>" << endl;
@@ -624,7 +620,7 @@ void ProjectFile::writeItemDefinitionGroup(wofstream &file,const bool debug)
   file << "      <MultiProcessorCompilation>true</MultiProcessorCompilation>" << endl;
   if (_wizard->visualStudioVersion() >= VS2015)
     file << "      <AdditionalOptions>/source-charset:utf-8 %(AdditionalOptions)</AdditionalOptions>" << endl;
-  if (_wizard->visualStudioVersion() >= VS2019) {
+  if (_wizard->visualStudioVersion() >= VS2017) {
     file << "      <LanguageStandard>stdcpp17</LanguageStandard>" << endl;
     file << "      <LanguageStandard_C>stdc17</LanguageStandard_C>" << endl;
   }

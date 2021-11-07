@@ -154,10 +154,6 @@ void CommandLineInfo::ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast
     _build64bit=false;
   else if (_wcsicmp(pszParam, L"x64") == 0)
     _build64bit=true;
-  else if (_wcsicmp(pszParam, L"VS2012") == 0)
-    _visualStudioVersion=VS2012;
-  else if (_wcsicmp(pszParam, L"VS2013") == 0)
-    _visualStudioVersion=VS2013;
   else if (_wcsicmp(pszParam, L"VS2015") == 0)
     _visualStudioVersion=VS2015;
   else if (_wcsicmp(pszParam, L"VS2017") == 0)
