@@ -231,9 +231,9 @@ void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
     config << "  Define to enable OpenCL" << endl;
     config << "*/" << endl;
     if (wizard.useOpenCL())
-      config << "#define MAGICKCORE__OPENCL\n#define MAGICKCORE_HAVE_CL_CL_H" << endl;
+      config << "#define MAGICKCORE_HAVE_CL_CL_H" << endl;
     else
-      config << "#undef MAGICKCORE__OPENCL\n#undef MAGICKCORE_HAVE_CL_CL_H" << endl;
+      config << "#undef MAGICKCORE_HAVE_CL_CL_H" << endl;
     config << endl;
 
     config << "/*" << endl;
