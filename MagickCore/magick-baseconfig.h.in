@@ -45,12 +45,12 @@
 */
 #define MAGICKCORE_CIPHER_SUPPORT
 
-$$CONFIG$$
-
 /*
-  Define to use the Windows GDI32 library (for clipboard and emf modules)
+  Define to use the Windows GDI32 library (for clipboard, emf and screenshot modules)
 */
 #define MAGICKCORE_WINGDI32_DELEGATE
+
+$$CONFIG$$
 
 /*
   Hard Coded Paths
@@ -159,50 +159,6 @@ typedef long ssize_t;
 #define MAGICKCORE_HAVE_J0 1
 #define MAGICKCORE_HAVE_J1 1
 #define SETJMP_IS_THREAD_SAFE 1
-
-/*
-  Tiff features.
-*/
-
-/*
-  Define to 1 if you have the <tiffconf.h> header file.
-*/
-#define MAGICKCORE_HAVE_TIFFCONF_H 1
-
-/*
-  Define to 1 if you have the `TIFFMergeFieldInfo' function.
-*/
-#define MAGICKCORE_HAVE_TIFFMERGEFIELDINFO 1
-
-/*
-  Define to 1 if you have the `TIFFSetErrorHandlerExt' function.
-*/
-#define MAGICKCORE_HAVE_TIFFSETERRORHANDLEREXT 1
-
-/*
-  Define to 1 if you have the `TIFFSetTagExtender' function.
-*/
-#define MAGICKCORE_HAVE_TIFFSETTAGEXTENDER 1
-
-/*
-  Define to 1 if you have the `TIFFSetWarningHandlerExt' function.
-*/
-#define MAGICKCORE_HAVE_TIFFSETWARNINGHANDLEREXT 1
-
-/*
-  Define to 1 if you have the `TIFFReadEXIFDirectory' function.
-*/
-#define MAGICKCORE_HAVE_TIFFREADEXIFDIRECTORY 1
-
-/*
-  Define to 1 if you have the `TIFFSwabArrayOfTriples' function.
-*/
-#define MAGICKCORE_HAVE_TIFFSWABARRAYOFTRIPLES 1
-
-/*
-  Define to 1 if you have the `TIFFIsBigEndian' function.
-*/
-#define MAGICKCORE_HAVE_TIFFISBIGENDIAN  1
 
 /*
   Disable specific warnings.
