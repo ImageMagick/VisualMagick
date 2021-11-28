@@ -3,6 +3,3 @@
 
 [DEPENDENCIES]
 flif
-
-[VISUAL_STUDIO]
-2013
