@@ -1,6 +1,9 @@
 [INCLUDES]
 ..\..\exr\openexr
-..\..\exr\openexr\IlmImf
+..\..\exr\openexr\src\lib\OpenEXR
+
+[DEFINES_DLL]
+OPENEXR_DLL
 
 [DEPENDENCIES]
 exr

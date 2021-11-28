@@ -12,26 +12,23 @@ IMATH_EXPORTS
 
 [DEFINES_DLL]
 OPENEXR_DLL
+OPENEXR_EXPORTS
+OPENEXRCORE_EXPORTS
 
 [DIRECTORIES]
-..\..\exr\ilmbase
-..\..\exr\ilmbase\config.windows
-..\..\exr\ilmbase\half
-..\..\exr\ilmbase\Iex
-..\..\exr\ilmbase\IlmThread
-..\..\exr\ilmbase\IMath
+..\..\exr\imath
+..\..\exr\imath\src\Imath
 ..\..\exr\openexr
-..\..\exr\openexr\config.windows
-..\..\exr\openexr\IlmImf
+..\..\exr\openexr\src\lib\Iex
+..\..\exr\openexr\src\lib\IlmThread
+..\..\exr\openexr\src\lib\OpenEXR
+..\..\exr\openexr\src\lib\OpenEXRCore
 
 [INCLUDES]
 ..\..\zlib
 
 [EXCLUDES]
 b44ExpLogTable.cpp
-eLut.cpp
-ImathBox.cpp
-ImathShear.cpp
 toFloat.cpp
 
 [DEPENDENCIES]
