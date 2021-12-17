@@ -8,13 +8,18 @@
 ..\..\ffi\src
 ..\..\ffi\src\x86
 
+[DEFINES]
+FFI_BUILDING
+
 [EXCLUDES]
 dlmalloc.c
+ffi64.c
 java_raw_api.c
 
 [EXCLUDES_X64]
+ffi.c
 win32.asm
 
 [EXCLUDES_X86]
-ffi64.c
+ffiw64.c
 win64.asm
