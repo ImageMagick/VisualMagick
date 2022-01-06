@@ -95,6 +95,11 @@ wstring ConfigureWizard::platform() const
   return(_targetPage.build64bit() ? L"x64" : L"Win32");
 }
 
+wstring ConfigureWizard::platformName() const
+{
+  return(_targetPage.build64bit() ? L"x64" : L"x86");
+}
+
 int ConfigureWizard::quantumDepth() const
 {
   return(_targetPage.quantumDepth());

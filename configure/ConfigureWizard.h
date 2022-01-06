@@ -58,6 +58,8 @@ public:
 
   wstring platform() const;
 
+  wstring platformName() const;
+
   int quantumDepth() const;
 
   wstring solutionName() const;

@@ -506,8 +506,8 @@ void Solution::write(const ConfigureWizard &wizard,wofstream &file)
 
   file << "Global" << endl;
   file << "\tGlobalSection(SolutionConfigurationPlatforms) = preSolution" << endl;
-  file << "\t\tDebug|" << wizard.platform() << " = Debug|" << wizard.platform() << endl;
-  file << "\t\tRelease|" << wizard.platform() << " = Release|" << wizard.platform() << endl;
+  file << "\t\tDebug|" << wizard.platformName() << " = Debug|" << wizard.platformName() << endl;
+  file << "\t\tRelease|" << wizard.platformName() << " = Release|" << wizard.platformName() << endl;
   file << "\tEndGlobalSection" << endl;
 
   file << "\tGlobalSection(ProjectConfigurationPlatforms) = postSolution" << endl;
@@ -515,10 +515,10 @@ void Solution::write(const ConfigureWizard &wizard,wofstream &file)
   {
     foreach (ProjectFile*,pf,(*p)->files())
     {
-      file << "\t\t{" << (*pf)->guid() << "}.Debug|" << wizard.platform() << ".ActiveCfg = Debug|" << wizard.platform() << endl;
-      file << "\t\t{" << (*pf)->guid() << "}.Debug|" << wizard.platform() << ".Build.0 = Debug|" << wizard.platform() << endl;
-      file << "\t\t{" << (*pf)->guid() << "}.Release|" << wizard.platform() << ".ActiveCfg = Release|" << wizard.platform() << endl;
-      file << "\t\t{" << (*pf)->guid() << "}.Release|" << wizard.platform() << ".Build.0 = Release|" << wizard.platform() << endl;
+      file << "\t\t{" << (*pf)->guid() << "}.Debug|" << wizard.platformName() << ".ActiveCfg = Debug|" << wizard.platform() << endl;
+      file << "\t\t{" << (*pf)->guid() << "}.Debug|" << wizard.platformName() << ".Build.0 = Debug|" << wizard.platform() << endl;
+      file << "\t\t{" << (*pf)->guid() << "}.Release|" << wizard.platformName() << ".ActiveCfg = Release|" << wizard.platform() << endl;
+      file << "\t\t{" << (*pf)->guid() << "}.Release|" << wizard.platformName() << ".Build.0 = Release|" << wizard.platform() << endl;
     }
   }
   file << "\tEndGlobalSection" << endl;
