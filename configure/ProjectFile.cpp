@@ -293,6 +293,17 @@ void ProjectFile::addLines(wifstream &config,vector<wstring> &container)
   }
 }
 
+wstring ProjectFile::asmOptions()
+{
+  switch (_wizard->platform())
+  {
+    case Platform::X86: return(L"ml /nologo /c /Cx /Fo\"$(IntDir)%(Filename).obj\" \"%(FullPath)\"");
+    case Platform::X64: return(L"ml64 /nologo /c /Cx /safeseh /coff /Fo\"$(IntDir)%(Filename).obj\" \"%(FullPath)\"");
+    case Platform::ARM64: return(L"armasm64 \"%(FullPath)\" -o \"$(IntDir)%(Filename).obj\"");
+    default: throw;
+  }
+}
+
 wstring ProjectFile::getFilter(const wstring &fileName,vector<wstring> &filters)
 {
   wstring
@@ -408,6 +419,17 @@ void ProjectFile::loadSource(const wstring &directory)
   } while (FindNextFile(fileHandle,&data));
 
   FindClose(fileHandle);
+}
+
+wstring ProjectFile::nasmOptions()
+{
+  switch (_wizard->platform())
+  {
+    case Platform::X86: return(L"..\\build\\nasm -fwin32 -DWIN32 -o \"$(IntDir)%(Filename).obj\" \"%(FullPath)\"");
+    case Platform::X64: return(L"..\\build\\nasm -fwin64 -DWIN64 -D__x86_64__ -o \"$(IntDir)%(Filename).obj\" \"%(FullPath)\"");
+    case Platform::ARM64: return(L"");
+    default: throw;
+  }
 }
 
 void ProjectFile::merge(vector<wstring> &input, vector<wstring> &output)
@@ -697,7 +719,7 @@ void ProjectFile::writeFiles(wofstream &file,const vector<wstring> &collection)
       if (!_project->useNasm())
       {
         file << "    <CustomBuild Include=\"" << *f << "\">" << endl;
-        file << "      <Command>ml" << (_wizard->platform() == Platform::X64 ? "64" : "") << " /nologo /c /Cx " << (_wizard->platform() == Platform::X64 ? "" : "/safeseh /coff") << " /Fo\"$(IntDir)%(Filename).obj\" \"%(FullPath)\"</Command>" << endl;
+        file << "      <Command>" << asmOptions() << "</Command>" << endl;
         file << "      <Outputs>$(IntDir)%(Filename).obj;%(Outputs)</Outputs>" << endl;
         file << "    </CustomBuild>" << endl;
       }
@@ -705,7 +727,7 @@ void ProjectFile::writeFiles(wofstream &file,const vector<wstring> &collection)
       {
         folder=(*f).substr(0,(*f).find_last_of(L"\\") + 1);
         file << "    <CustomBuild Include=\"" << *f << "\">" << endl;
-        file << "      <Command>..\\build\\nasm -fwin" << (_wizard->platform() == Platform::X64 ? "64" : "32") << " -DWIN" << (_wizard->platform() == Platform::X64 ? "64 -D__x86_64__" : "32") << " -I" << folder << " -o \"$(IntDir)%(Filename).obj\" \"%(FullPath)\"</Command>" << endl;
+        file << "      <Command>" << nasmOptions() << "</Command>" << endl;
         file << "      <Outputs>$(IntDir)%(Filename).obj;%(Outputs)</Outputs>" << endl;
         file << "    </CustomBuild>" << endl;
       }

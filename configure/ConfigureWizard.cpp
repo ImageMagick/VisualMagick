@@ -90,6 +90,7 @@ wstring ConfigureWizard::machineName() const
   {
     case Platform::X86: return(L"X86");
     case Platform::X64: return(L"X64");
+    case Platform::ARM64: return(L"ARM64");
     default: throw;
   }
 }
@@ -105,6 +106,7 @@ wstring ConfigureWizard::platformName() const
   {
     case Platform::X86: return(L"Win32");
     case Platform::X64: return(L"x64");
+    case Platform::ARM64: return(L"ARM64");
     default: throw;
   }
 }
@@ -115,6 +117,7 @@ wstring ConfigureWizard::platformAlias() const
   {
     case Platform::X86: return(L"x86");
     case Platform::X64: return(L"x64");
+    case Platform::ARM64: return(L"arm64");
     default: throw;
   }
 }

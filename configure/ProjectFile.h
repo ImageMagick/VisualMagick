@@ -61,6 +61,8 @@ private:
 
   void addLines(wifstream &config,vector<wstring> &container);
 
+  wstring asmOptions();
+
   wstring createGuid();
 
   wstring getFilter(const wstring &fileName,vector<wstring> &filters);
@@ -82,6 +84,8 @@ private:
   void loadSource();
 
   void loadSource(const wstring &directory);
+
+  wstring nasmOptions();
 
   void merge(vector<wstring> &input, vector<wstring> &output);
 

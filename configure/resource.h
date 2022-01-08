@@ -16,7 +16,7 @@
 #define IDC_PROJECT_DYNAMIC_MT          1001
 #define IDC_PROJECT_STATIC_MT_DLL       1002
 #define IDC_PROJECT_STATIC_MT           1003
-#define IDC_BUILD_64_BIT                1005
+#define IDC_PLATFORM                    1005
 #define IDC_QUANTUM_DEPTH               1006
 #define IDC_HDRI                        1007
 #define IDC_VISUALSTUDIO                1008

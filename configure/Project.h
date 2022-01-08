@@ -114,13 +114,14 @@ private:
   vector<wstring>      _definesLib;
   vector<wstring>      _dependencies;
   vector<wstring>      _directories;
+  bool                 _disabledARM64;
   vector<wstring>      _excludes;
-  vector<wstring>      _excludesX64;
   vector<wstring>      _excludesX86;
+  vector<wstring>      _excludesX64;
+  vector<wstring>      _excludesARM64;
   vector<ProjectFile*> _files;
   bool                 _hasIncompatibleLicense;
   vector<wstring>      _includes;
-  bool                 _isEnabled;
   bool                 _isOptional;
   vector<wstring>      _libraries;
   wstring              _license;

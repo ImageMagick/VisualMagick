@@ -29,7 +29,7 @@ enum class SolutionType {DYNAMIC_MT, STATIC_MTD, STATIC_MT};
 
 enum class QuantumDepth {Q8, Q16, Q32, Q64};
 
-enum class Platform {X86, X64};
+enum class Platform {X86, X64, ARM64};
 
 enum class ProjectType {UNDEFINEDTYPE, APPTYPE, COMTYPE, DLLTYPE, DLLMODULETYPE, EXETYPE, EXEMODULETYPE, STATICTYPE};
 

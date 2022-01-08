@@ -166,13 +166,13 @@ void TargetPage::DoDataExchange(CDataExchange* pDX)
 {
   CPropertyPage::DoDataExchange(pDX);
 
-  DDX_Check(pDX,IDC_BUILD_64_BIT,(int&) _platform);
   DDX_CBIndex(pDX,IDC_QUANTUM_DEPTH,(int&) _quantumDepth);
+  DDX_CBIndex(pDX,IDC_PLATFORM,(int&) _platform);
+  DDX_CBIndex(pDX,IDC_VISUALSTUDIO,(int&) _visualStudioVersion);
   DDX_Radio(pDX,IDC_PROJECT_DYNAMIC_MT,(int&) _solutionType);
   DDX_Check(pDX,IDC_HDRI,_useHDRI);
   DDX_Check(pDX,IDC_OPEN_CL,_useOpenCL);
   DDX_Check(pDX,IDC_OPEN_MP,_useOpenMP);
-  DDX_CBIndex(pDX,IDC_VISUALSTUDIO,(int&) _visualStudioVersion);
   DDX_Check(pDX,IDC_INCLUDE_INCOMPATIBLE,_includeIncompatibleLicense);
   DDX_Check(pDX,IDC_INCLUDE_OPTIONAL,_includeOptional);
   DDX_Check(pDX,IDC_EXCLUDE_DEPRECATED,_excludeDeprecated);

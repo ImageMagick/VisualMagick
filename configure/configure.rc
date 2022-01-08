@@ -108,20 +108,24 @@ BEGIN
     CONTROL         "Static Multi-threaded runtimes",IDC_PROJECT_STATIC_MT,
                     "Button",BS_AUTORADIOBUTTON,153,48,109,10
     GROUPBOX        "Build options",IDC_STATIC,7,90,304,145
-    CONTROL         "Build 64-bit distribution",IDC_BUILD_64_BIT,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,15,102,100,10
     LTEXT           "Quantum depth",IDC_STATIC,205,102,55,8
     COMBOBOX        IDC_QUANTUM_DEPTH,260,100,47,50,CBS_DROPDOWNLIST |
                     WS_VSCROLL | WS_TABSTOP
-    CONTROL         "Enable HDRI",IDC_HDRI,"Button",BS_AUTOCHECKBOX |
-                    WS_TABSTOP,15,115,66,10
-    LTEXT           "Visual Studio Version",IDC_STATIC,188,117,70,8
-    COMBOBOX        IDC_VISUALSTUDIO,260,115,47,40,CBS_DROPDOWNLIST | WS_VSCROLL |
+    LTEXT           "Platform",IDC_STATIC,228,117,70,8
+    COMBOBOX        IDC_PLATFORM,260,115,47,40,CBS_DROPDOWNLIST | WS_VSCROLL |
                     WS_TABSTOP
+    LTEXT           "Visual Studio Version",IDC_STATIC,188,132,70,8
+    COMBOBOX        IDC_VISUALSTUDIO,260,130,47,40,CBS_DROPDOWNLIST | WS_VSCROLL |
+                    WS_TABSTOP
+    CONTROL         "Enable HDRI",IDC_HDRI,"Button",BS_AUTOCHECKBOX |
+                    WS_TABSTOP,15,100,66,10
     CONTROL         "Enable OpenMP",IDC_OPEN_MP,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,15,130,66,10
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,115,66,10
     CONTROL         "Enable OpenCL",IDC_OPEN_CL,"Button",BS_AUTOCHECKBOX |
-                    WS_TABSTOP,15,145,66,10
+                    WS_TABSTOP,15,130,66,10
+    CONTROL         "Use zero configuration",
+                    IDC_ZERO_CONFIGURATION_SUPPORT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    15,145,90,10
     CONTROL         "Include all demo, test, appl, and contrib directories",
                     IDC_INCLUDE_OPTIONAL,"Button",BS_AUTOCHECKBOX |
                     WS_TABSTOP,15,160,170,10
@@ -134,9 +138,6 @@ BEGIN
     CONTROL         "Use registry settings or hard-coded paths to locate installed components",
                     IDC_INSTALLED_SUPPORT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
                     15,205,240,10
-    CONTROL         "Use zero configuration",
-                    IDC_ZERO_CONFIGURATION_SUPPORT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    15,220,90,10
 END
 
 IDD_SYSTEM_PAGE DIALOG  0, 0, 318, 233
@@ -284,21 +285,27 @@ END
 IDD_TARGET_PAGE DLGINIT
 BEGIN
     IDC_QUANTUM_DEPTH, 0x403, 4, 0,
-0x3851, 0x00,
+0x3851, 0x0000,
     IDC_QUANTUM_DEPTH, 0x403, 4, 0,
 0x3151, 0x0036,
     IDC_QUANTUM_DEPTH, 0x403, 4, 0,
 0x3351, 0x0032,
     IDC_QUANTUM_DEPTH, 0x403, 4, 0,
 0x3651, 0x0034,
+    IDC_PLATFORM, 0x403, 4, 0,
+0x3858, 0x0036,
+    IDC_PLATFORM, 0x403, 4, 0,
+0x3658, 0x0034,
+    IDC_PLATFORM, 0x403, 6, 0,
+0x5241, 0x364d, 0x0034,
     IDC_VISUALSTUDIO, 0x403, 6, 0,
-0x3032, 0x3531, 0x00,
+0x3032, 0x3531, 0x0000,
     IDC_VISUALSTUDIO, 0x403, 6, 0,
-0x3032, 0x3731, 0x00,
+0x3032, 0x3731, 0x0000,
     IDC_VISUALSTUDIO, 0x403, 6, 0,
-0x3032, 0x3931, 0x00,
+0x3032, 0x3931, 0x0000,
     IDC_VISUALSTUDIO, 0x403, 6, 0,
-0x3032, 0x3232, 0x00,
+0x3032, 0x3232, 0x0000,
     0
 END
 

@@ -71,6 +71,7 @@ vector<wstring> &Project::platformExcludes(Platform platform)
   {
     case Platform::X86: return(_excludesX86);
     case Platform::X64: return(_excludesX64);
+    case Platform::ARM64: return(_excludesARM64);
     default: throw;
   }
 }
@@ -266,7 +267,7 @@ bool Project::loadFiles(const ConfigureWizard &wizard)
 
 bool Project::shouldSkip(const ConfigureWizard &wizard)
 {
-  if (!_isEnabled)
+  if (_disabledARM64 && wizard.platform() == Platform::ARM64)
     return(true);
 
   if (_hasIncompatibleLicense && !wizard.includeIncompatibleLicense())
@@ -283,7 +284,7 @@ Project::Project(wstring name)
   _name=name;
 
   _hasIncompatibleLicense=false;
-  _isEnabled=true;
+  _disabledARM64=false;
   _isOptional=false;
   _type=ProjectType::UNDEFINEDTYPE;
   _useNasm=false;
@@ -347,8 +348,8 @@ void Project::loadConfig(wifstream &config)
       addLines(config,_dependencies);
     else if (line == L"[DIRECTORIES]")
       addLines(config,_directories);
-    else if (line == L"[DISABLED]")
-      _isEnabled=false;
+    else if (line == L"[DISABLED_ARM64]")
+      _disabledARM64=true;
     else if (line == L"[DLL]")
       _type=ProjectType::DLLTYPE;
     else if (line == L"[DLLMODULE]")
@@ -363,6 +364,8 @@ void Project::loadConfig(wifstream &config)
       addLines(config,_excludesX86);
     else if (line == L"[EXCLUDES_X64]")
       addLines(config,_excludesX64);
+    else if (line == L"[EXCLUDES_ARM64]")
+      addLines(config,_excludesARM64);
     else if (line == L"[INCLUDES]")
       addLines(config,_includes);
     else if (line == L"[INCOMPATIBLE_LICENSE]")
