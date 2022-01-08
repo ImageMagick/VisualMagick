@@ -131,7 +131,7 @@ private:
   wstring              _name;
   vector<wstring>      _references;
   bool                 _treatWarningAsError;
-  int                  _type;
+  ProjectType          _type;
   bool                 _useNasm;
   bool                 _useUnicode;
   VisualStudioVersion  _minimumVisualStudioVersion;

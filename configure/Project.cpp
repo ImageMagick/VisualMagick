@@ -79,22 +79,22 @@ bool Project::isConsole() const
 {
   if (!isExe())
     return(false);
-  return(_type != APPTYPE);
+  return(_type != ProjectType::APPTYPE);
 }
 
 bool Project::isCom() const
 {
-  return(_type == COMTYPE);
+  return(_type == ProjectType::COMTYPE);
 }
 
 bool Project::isDll() const
 {
-  return((_type == DLLTYPE) || (_type == DLLMODULETYPE) || (_type == COMTYPE));
+  return((_type == ProjectType::DLLTYPE) || (_type == ProjectType::DLLMODULETYPE) || (_type == ProjectType::COMTYPE));
 }
 
 bool Project::isExe() const
 {
-  return((_type == EXETYPE) || (_type == EXEMODULETYPE) || (_type == APPTYPE));
+  return((_type == ProjectType::EXETYPE) || (_type == ProjectType::EXEMODULETYPE) || (_type == ProjectType::APPTYPE));
 }
 
 bool Project::isFuzz() const
@@ -104,12 +104,12 @@ bool Project::isFuzz() const
 
 bool Project::isLib() const
 {
-  return((_type == STATICTYPE));
+  return((_type == ProjectType::STATICTYPE));
 }
 
 bool Project::isModule() const
 {
-  return((_type == DLLMODULETYPE) || (_type == EXEMODULETYPE));
+  return((_type == ProjectType::DLLMODULETYPE) || (_type == ProjectType::EXEMODULETYPE));
 }
 
 bool Project::isSupported(const VisualStudioVersion visualStudioVersion) const
@@ -183,7 +183,7 @@ void Project::mergeProjectFiles(const ConfigureWizard &wizard)
   ProjectFile
     *projectFile;
 
-  if ((_type != DLLMODULETYPE) || (wizard.solutionType() == SolutionType::DYNAMIC_MT))
+  if ((_type != ProjectType::DLLMODULETYPE) || (wizard.solutionType() == SolutionType::DYNAMIC_MT))
     return;
 
   projectFile=new ProjectFile(&wizard,this,L"CORE",_name);
@@ -224,36 +224,36 @@ bool Project::loadFiles(const ConfigureWizard &wizard)
 
   switch(_type)
   {
-    case COMTYPE:
+    case ProjectType::COMTYPE:
     {
       projectFile=new ProjectFile(&wizard,this,L"COM",_name);
       _files.push_back(projectFile);
       break;
     }
-    case DLLMODULETYPE:
+    case ProjectType::DLLMODULETYPE:
     {
       loadModules(wizard);
       break;
     }
-    case DLLTYPE:
+    case ProjectType::DLLTYPE:
     {
       projectFile=new ProjectFile(&wizard,this,L"CORE",_name);
       _files.push_back(projectFile);
       break;
     }
-    case APPTYPE:
-    case EXETYPE:
+    case ProjectType::APPTYPE:
+    case ProjectType::EXETYPE:
     {
       projectFile=new ProjectFile(&wizard,this,L"UTIL",_name);
       _files.push_back(projectFile);
       break;
     }
-    case EXEMODULETYPE:
+    case ProjectType::EXEMODULETYPE:
     {
       loadModules(wizard);
       break;
     }
-    case STATICTYPE:
+    case ProjectType::STATICTYPE:
     {
       projectFile=new ProjectFile(&wizard,this,L"CORE",_name);
       _files.push_back(projectFile);
@@ -285,7 +285,7 @@ Project::Project(wstring name)
   _hasIncompatibleLicense=false;
   _isEnabled=true;
   _isOptional=false;
-  _type=UNDEFINEDTYPE;
+  _type=ProjectType::UNDEFINEDTYPE;
   _useNasm=false;
   _useUnicode=false;
   _treatWarningAsError=false;
@@ -332,9 +332,9 @@ void Project::loadConfig(wifstream &config)
   {
     line=readLine(config);
     if (line == L"[APP]")
-      _type=APPTYPE;
+      _type=ProjectType::APPTYPE;
     else if (line == L"[COM]")
-      _type=COMTYPE;
+      _type=ProjectType::COMTYPE;
     else if (line == L"[CONFIG_DEFINE]")
       addLines(config,_configDefine);
     else if (line == L"[DEFINES_DLL]")
@@ -350,13 +350,13 @@ void Project::loadConfig(wifstream &config)
     else if (line == L"[DISABLED]")
       _isEnabled=false;
     else if (line == L"[DLL]")
-      _type=DLLTYPE;
+      _type=ProjectType::DLLTYPE;
     else if (line == L"[DLLMODULE]")
-      _type=DLLMODULETYPE;
+      _type=ProjectType::DLLMODULETYPE;
     else if (line == L"[EXE]")
-      _type=EXETYPE;
+      _type=ProjectType::EXETYPE;
     else if (line == L"[EXEMODULE]")
-      _type=EXEMODULETYPE;
+      _type=ProjectType::EXEMODULETYPE;
     else if (line == L"[EXCLUDES]")
       addLines(config,_excludes);
     else if (line == L"[EXCLUDES_X86]")
@@ -368,7 +368,7 @@ void Project::loadConfig(wifstream &config)
     else if (line == L"[INCOMPATIBLE_LICENSE]")
       _hasIncompatibleLicense=true;
     else if (line == L"[STATIC]")
-      _type=STATICTYPE;
+      _type=ProjectType::STATICTYPE;
     else if (line == L"[LIBRARIES]")
       addLines(config,_libraries);
     else if (line == L"[MODULE_DEFINITION_FILE]")
