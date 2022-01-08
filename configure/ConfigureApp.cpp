@@ -36,7 +36,7 @@ ConfigureApp::ConfigureApp()
 
 BOOL ConfigureApp::InitInstance()
 {
-  int
+  INT_PTR
     response;
 
   Solution
