@@ -16,3 +16,8 @@ pixman-mips-dspr2.c
 pixman-mmx.c
 pixman-region.c
 pixman-vmx.c
+
+[EXCLUDES_ARM64]
+pixman-sse2.c
+pixman-sse3.c
+pixman-ssse3.c
