@@ -18,7 +18,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 */
 #include "..\stdafx.h"
-#include "..\Shared.h"
 #include "TargetPage.h"
 
 IMPLEMENT_DYNCREATE(TargetPage, CPropertyPage)
@@ -32,7 +31,7 @@ TargetPage::TargetPage() : CPropertyPage(IDD_TARGET_PAGE)
   _includeIncompatibleLicense=FALSE;
   _installedSupport=FALSE;
   _quantumDepth=Q16;
-  _solutionType=DYNAMIC_MT;
+  _solutionType=SolutionType::DYNAMIC_MT;
   _useHDRI=PathFileExists(L"..\\MagickCore") ? TRUE : FALSE;
   _useOpenCL=TRUE;
   _useOpenMP=TRUE;
@@ -103,12 +102,12 @@ void TargetPage::quantumDepth(int value)
   _quantumDepth=value;
 }
 
-int TargetPage::solutionType() const
+SolutionType TargetPage::solutionType() const
 {
   return(_solutionType);
 }
 
-void TargetPage::solutionType(int value)
+void TargetPage::solutionType(SolutionType value)
 {
   _solutionType=value;
 }
@@ -169,7 +168,7 @@ void TargetPage::DoDataExchange(CDataExchange* pDX)
 
   DDX_Check(pDX,IDC_BUILD_64_BIT,_build64bit);
   DDX_CBIndex(pDX,IDC_QUANTUM_DEPTH,_quantumDepth);
-  DDX_Radio(pDX,IDC_PROJECT_DYNAMIC_MT,_solutionType);
+  DDX_Radio(pDX,IDC_PROJECT_DYNAMIC_MT,(int&) _solutionType);
   DDX_Check(pDX,IDC_HDRI,_useHDRI);
   DDX_Check(pDX,IDC_OPEN_CL,_useOpenCL);
   DDX_Check(pDX,IDC_OPEN_MP,_useOpenMP);

@@ -21,6 +21,7 @@
 #define __CommandLineInfo__
 
 #include "ConfigureWizard.h"
+#include "Shared.h"
 
 class CommandLineInfo : public CCommandLineInfo
 {
@@ -45,7 +46,7 @@ public:
 
   int quantumDepth() const;
 
-  int solutionType() const;
+  SolutionType solutionType() const;
 
   bool useHDRI() const;
 
@@ -60,19 +61,19 @@ public:
   virtual void ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast);
 
 private:
-  bool _build64bit;
-  bool _excludeDeprecated;
-  bool _includeIncompatibleLicense;
-  bool _includeOptional;
-  bool _installedSupport;
-  bool _noWizard;
-  int  _quantumDepth;
-  int  _solutionType;
-  bool _useHDRI;
-  bool _useOpenCL;
-  bool _useOpenMP;
-  int  _visualStudioVersion;
-  bool  _zeroConfigurationSupport;
+  bool         _build64bit;
+  bool         _excludeDeprecated;
+  bool         _includeIncompatibleLicense;
+  bool         _includeOptional;
+  bool         _installedSupport;
+  bool         _noWizard;
+  int          _quantumDepth;
+  SolutionType _solutionType;
+  bool         _useHDRI;
+  bool         _useOpenCL;
+  bool         _useOpenMP;
+  int          _visualStudioVersion;
+  bool         _zeroConfigurationSupport;
 };
 
 #endif // __CommandLineInfo__

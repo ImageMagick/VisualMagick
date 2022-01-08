@@ -184,7 +184,7 @@ void Project::mergeProjectFiles(const ConfigureWizard &wizard)
   ProjectFile
     *projectFile;
 
-  if ((_type != DLLMODULETYPE) || (wizard.solutionType() == DYNAMIC_MT))
+  if ((_type != DLLMODULETYPE) || (wizard.solutionType() == SolutionType::DYNAMIC_MT))
     return;
 
   projectFile=new ProjectFile(&wizard,this,L"CORE",_name);

@@ -20,6 +20,8 @@
 #ifndef __TargetPage__
 #define __TargetPage__
 
+#include "..\Shared.h"
+
 class TargetPage : public CPropertyPage
 {
   DECLARE_DYNCREATE(TargetPage)
@@ -48,8 +50,8 @@ public:
   int quantumDepth() const;
   void quantumDepth(int value);
 
-  int solutionType() const;
-  void solutionType(int value);
+  SolutionType solutionType() const;
+  void solutionType(SolutionType value);
 
   bool useHDRI() const;
   void useHDRI(bool value);
@@ -82,18 +84,18 @@ private:
 
   void setVisualStudioVersion();
 
-  BOOL    _build64bit;
-  BOOL    _excludeDeprecated;
-  BOOL    _includeIncompatibleLicense;
-  BOOL    _includeOptional;
-  BOOL    _installedSupport;
-  int     _quantumDepth;
-  int     _solutionType;
-  BOOL    _useHDRI;
-  BOOL    _useOpenCL;
-  BOOL    _useOpenMP;
-  int     _visualStudioVersion;
-  BOOL    _zeroConfigurationSupport;
+  BOOL         _build64bit;
+  BOOL         _excludeDeprecated;
+  BOOL         _includeIncompatibleLicense;
+  BOOL         _includeOptional;
+  BOOL         _installedSupport;
+  int          _quantumDepth;
+  SolutionType _solutionType;
+  BOOL         _useHDRI;
+  BOOL         _useOpenCL;
+  BOOL         _useOpenMP;
+  int          _visualStudioVersion;
+  BOOL         _zeroConfigurationSupport;
 };
 
 #endif // __TargetPage__

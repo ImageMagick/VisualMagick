@@ -21,7 +21,6 @@
 #include "resource.h"
 #include "ConfigureWizard.h"
 #include "CommandLineInfo.h"
-#include "Shared.h"
 
 IMPLEMENT_DYNAMIC(ConfigureWizard,CPropertySheet)
 
@@ -107,17 +106,17 @@ int ConfigureWizard::quantumDepth() const
 
 wstring ConfigureWizard::solutionName() const
 {
-  if (solutionType() == DYNAMIC_MT)
+  if (solutionType() == SolutionType::DYNAMIC_MT)
     return(L"DynamicMT");
-  else if (solutionType() == STATIC_MTD)
+  else if (solutionType() == SolutionType::STATIC_MTD)
     return(L"StaticMTD");
-  else if (solutionType() == STATIC_MT)
+  else if (solutionType() == SolutionType::STATIC_MT)
     return(L"StaticMT");
   else
     return(L"ThisShouldNeverHappen");
 }
 
-int ConfigureWizard::solutionType() const
+SolutionType ConfigureWizard::solutionType() const
 {
   return(_targetPage.solutionType());
 }

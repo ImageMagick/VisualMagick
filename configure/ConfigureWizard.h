@@ -24,6 +24,7 @@
 #include "Pages\TargetPage.h"
 #include "Pages\SystemPage.h"
 #include "Pages\FinishedPage.h"
+#include "Shared.h"
 
 class CommandLineInfo;
 
@@ -64,7 +65,7 @@ public:
 
   wstring solutionName() const;
 
-  int solutionType() const;
+  SolutionType solutionType() const;
 
   wstring targetCpu() const;
 

@@ -221,7 +221,7 @@ bool ProjectFile::isLib() const
   if (_project->isCom())
     return(false);
 
-  return(_project->isLib() || (_wizard->solutionType() != DYNAMIC_MT && _project->isDll()));
+  return(_project->isLib() || (_wizard->solutionType() != SolutionType::DYNAMIC_MT && _project->isDll()));
 }
 
 wstring ProjectFile::outputDirectory() const
@@ -359,7 +359,7 @@ void ProjectFile::loadSource()
 
   foreach (wstring,dir,_project->directories())
   {
-    if ((_project->isModule()) && (_project->isExe() || (_project->isDll() && _wizard->solutionType() == DYNAMIC_MT)))
+    if ((_project->isModule()) && (_project->isExe() || (_project->isDll() && _wizard->solutionType() == SolutionType::DYNAMIC_MT)))
       loadModule(*dir);
     else
       loadSource(*dir);
@@ -486,7 +486,7 @@ void ProjectFile::writePreprocessorDefinitions(wofstream &file,const bool debug)
   {
     file << ";" << *def;
   }
-  if (isLib() || (_wizard->solutionType() != DYNAMIC_MT && (_project->isExe() || _project->isCom())))
+  if (isLib() || (_wizard->solutionType() != SolutionType::DYNAMIC_MT && (_project->isExe() || _project->isCom())))
   {
     foreach (wstring,def,_definesLib)
     {
@@ -502,7 +502,7 @@ void ProjectFile::writePreprocessorDefinitions(wofstream &file,const bool debug)
     }
     file << ";_DLL;_MAGICKMOD_";
   }
-  if (_project->isExe() && _wizard->solutionType() != STATIC_MT)
+  if (_project->isExe() && _wizard->solutionType() != SolutionType::STATIC_MT)
     file << ";_AFXDLL";
   if (_wizard->includeIncompatibleLicense())
     file << ";_AFXDLL,_MAGICK_INCOMPATIBLE_LICENSES_";
@@ -593,7 +593,7 @@ void ProjectFile::writeItemDefinitionGroup(wofstream &file,const bool debug)
 
   file << "  <ItemDefinitionGroup Condition=\"'$(Configuration)|$(Platform)'=='" << (debug ? "Debug" : "Release") << "|" << _wizard->platform() << "'\">" << endl;
   file << "    <ClCompile>" << endl;
-  file << "      <RuntimeLibrary>MultiThreaded" << (debug ? "Debug" : "") << (_wizard->solutionType() == STATIC_MT ? "" : "DLL") << "</RuntimeLibrary>" << endl;
+  file << "      <RuntimeLibrary>MultiThreaded" << (debug ? "Debug" : "") << (_wizard->solutionType() == SolutionType::STATIC_MT ? "" : "DLL") << "</RuntimeLibrary>" << endl;
   file << "      <StringPooling>true</StringPooling>" << endl;
   file << "      <FunctionLevelLinking>true</FunctionLevelLinking>" << endl;
   if (_project->warningLevel() == 0)

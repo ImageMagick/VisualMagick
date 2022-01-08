@@ -19,7 +19,6 @@
 */
 #include "stdafx.h"
 #include "CommandLineInfo.h"
-#include "Shared.h"
 
 CommandLineInfo::CommandLineInfo(const ConfigureWizard &wizard)
 {
@@ -83,7 +82,7 @@ int CommandLineInfo::quantumDepth() const
   return(_quantumDepth);
 }
 
-int CommandLineInfo::solutionType() const
+SolutionType CommandLineInfo::solutionType() const
 {
   return(_solutionType);
 }
@@ -119,13 +118,13 @@ void CommandLineInfo::ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast
     return;
 
   if (_wcsicmp(pszParam, L"dmt") == 0)
-    _solutionType=DYNAMIC_MT;
+    _solutionType=SolutionType::DYNAMIC_MT;
   else if (_wcsicmp(pszParam, L"deprecated") == 0)
     _excludeDeprecated=FALSE;
   else if (_wcsicmp(pszParam, L"smt") == 0)
-    _solutionType=STATIC_MT;
+    _solutionType=SolutionType::STATIC_MT;
   else if (_wcsicmp(pszParam, L"smtd") == 0)
-    _solutionType=STATIC_MTD;
+    _solutionType=SolutionType::STATIC_MTD;
   else if (_wcsicmp(pszParam, L"hdri") == 0)
     _useHDRI=true;
   else if (_wcsicmp(pszParam, L"incompatibleLicense") == 0)
