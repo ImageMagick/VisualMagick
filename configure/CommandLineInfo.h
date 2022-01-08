@@ -32,8 +32,6 @@ public:
 
   CommandLineInfo& operator =(const CommandLineInfo& obj);
 
-  bool build64bit() const;
-
   bool excludeDeprecated() const;
 
   bool includeIncompatibleLicense() const;
@@ -43,6 +41,8 @@ public:
   bool installedSupport() const;
 
   bool noWizard() const;
+
+  Platform platform() const;
 
   QuantumDepth quantumDepth() const;
 
@@ -61,7 +61,7 @@ public:
   virtual void ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast);
 
 private:
-  bool                _build64bit;
+  Platform            _platform;
   bool                _excludeDeprecated;
   bool                _includeIncompatibleLicense;
   bool                _includeOptional;

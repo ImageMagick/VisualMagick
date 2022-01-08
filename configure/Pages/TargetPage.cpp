@@ -26,7 +26,7 @@ TargetPage::TargetPage() : CPropertyPage(IDD_TARGET_PAGE)
 {
   setVisualStudioVersion();
 
-  _build64bit=FALSE;
+  _platform=Platform::X64;
   _excludeDeprecated=TRUE;
   _includeIncompatibleLicense=FALSE;
   _installedSupport=FALSE;
@@ -82,14 +82,14 @@ void TargetPage::installedSupport(bool value)
 	_installedSupport = value;
 }
 
-bool TargetPage::build64bit() const
+Platform TargetPage::platform() const
 {
-  return(_build64bit == 1);
+  return(_platform);
 }
 
-void TargetPage::build64bit(bool value)
+void TargetPage::platform(Platform value)
 {
-  _build64bit=value;
+  _platform=value;
 }
 
 QuantumDepth TargetPage::quantumDepth() const
@@ -166,7 +166,7 @@ void TargetPage::DoDataExchange(CDataExchange* pDX)
 {
   CPropertyPage::DoDataExchange(pDX);
 
-  DDX_Check(pDX,IDC_BUILD_64_BIT,_build64bit);
+  DDX_Check(pDX,IDC_BUILD_64_BIT,(int&) _platform);
   DDX_CBIndex(pDX,IDC_QUANTUM_DEPTH,(int&) _quantumDepth);
   DDX_Radio(pDX,IDC_PROJECT_DYNAMIC_MT,(int&) _solutionType);
   DDX_Check(pDX,IDC_HDRI,_useHDRI);

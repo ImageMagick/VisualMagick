@@ -39,8 +39,6 @@ public:
 
   wstring binDirectory() const;
 
-  bool build64bit() const;
-
   bool excludeDeprecated() const;
 
   wstring fuzzBinDirectory() const;
@@ -57,17 +55,19 @@ public:
 
   wstring libDirectory() const;
 
-  wstring platform() const;
+  wstring machineName() const;
+
+  Platform platform() const;
 
   wstring platformName() const;
+
+  wstring platformAlias() const;
 
   QuantumDepth quantumDepth() const;
 
   wstring solutionName() const;
 
   SolutionType solutionType() const;
-
-  wstring targetCpu() const;
 
   bool useHDRI() const;
 

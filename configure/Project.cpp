@@ -55,16 +55,6 @@ vector<wstring> &Project::excludes()
   return(_excludes);
 }
 
-vector<wstring> &Project::excludesX64()
-{
-  return(_excludesX64);
-}
-
-vector<wstring> &Project::excludesX86()
-{
-  return(_excludesX86);
-}
-
 vector<ProjectFile*> &Project::files()
 {
   return(_files);
@@ -73,6 +63,16 @@ vector<ProjectFile*> &Project::files()
 vector<wstring> &Project::includes()
 {
   return(_includes);
+}
+
+vector<wstring> &Project::platformExcludes(Platform platform)
+{
+  switch (platform)
+  {
+    case Platform::X86: return(_excludesX86);
+    case Platform::X64: return(_excludesX64);
+    default: throw;
+  }
 }
 
 bool Project::isConsole() const

@@ -307,7 +307,7 @@ void Solution::writeMakeFile(const ConfigureWizard &wizard)
   while (getline(makeFileIn,line))
   {
     line=replace(line,L"$$LIB_NAME$$",libName);
-    line=replace(line,L"$$PLATFORM$$",wizard.targetCpu());
+    line=replace(line,L"$$PLATFORM$$",wizard.platformAlias());
     makeFile << line << endl;
   }
   makeFile.close();
@@ -433,7 +433,7 @@ void Solution::writeVersion(const ConfigureWizard &wizard,const VersionInfo &ver
     line=replace(line,L"@MAGICK_LIB_VERSION_TEXT@",versionInfo.version());
     line=replace(line,L"@MAGICK_LIBRARY_CURRENT@",versionInfo.interfaceVersion());
     line=replace(line,L"@MAGICK_LIBRARY_CURRENT_MIN@",versionInfo.interfaceVersion());
-    line=replace(line,L"@MAGICK_TARGET_CPU@",wizard.targetCpu());
+    line=replace(line,L"@MAGICK_TARGET_CPU@",wizard.platformAlias());
     line=replace(line,L"@MAGICK_TARGET_OS@",L"Windows");
     line=replace(line,L"@MAGICKPP_LIB_VERSION_TEXT@",versionInfo.version());
     line=replace(line,L"@MAGICKPP_LIBRARY_CURRENT@",versionInfo.ppInterfaceVersion());
@@ -506,8 +506,8 @@ void Solution::write(const ConfigureWizard &wizard,wofstream &file)
 
   file << "Global" << endl;
   file << "\tGlobalSection(SolutionConfigurationPlatforms) = preSolution" << endl;
-  file << "\t\tDebug|" << wizard.platformName() << " = Debug|" << wizard.platformName() << endl;
-  file << "\t\tRelease|" << wizard.platformName() << " = Release|" << wizard.platformName() << endl;
+  file << "\t\tDebug|" << wizard.platformAlias() << " = Debug|" << wizard.platformAlias() << endl;
+  file << "\t\tRelease|" << wizard.platformAlias() << " = Release|" << wizard.platformAlias() << endl;
   file << "\tEndGlobalSection" << endl;
 
   file << "\tGlobalSection(ProjectConfigurationPlatforms) = postSolution" << endl;
@@ -515,10 +515,10 @@ void Solution::write(const ConfigureWizard &wizard,wofstream &file)
   {
     foreach (ProjectFile*,pf,(*p)->files())
     {
-      file << "\t\t{" << (*pf)->guid() << "}.Debug|" << wizard.platformName() << ".ActiveCfg = Debug|" << wizard.platform() << endl;
-      file << "\t\t{" << (*pf)->guid() << "}.Debug|" << wizard.platformName() << ".Build.0 = Debug|" << wizard.platform() << endl;
-      file << "\t\t{" << (*pf)->guid() << "}.Release|" << wizard.platformName() << ".ActiveCfg = Release|" << wizard.platform() << endl;
-      file << "\t\t{" << (*pf)->guid() << "}.Release|" << wizard.platformName() << ".Build.0 = Release|" << wizard.platform() << endl;
+      file << "\t\t{" << (*pf)->guid() << "}.Debug|" << wizard.platformAlias() << ".ActiveCfg = Debug|" << wizard.platformName() << endl;
+      file << "\t\t{" << (*pf)->guid() << "}.Debug|" << wizard.platformAlias() << ".Build.0 = Debug|" << wizard.platformName() << endl;
+      file << "\t\t{" << (*pf)->guid() << "}.Release|" << wizard.platformAlias() << ".ActiveCfg = Release|" << wizard.platformName() << endl;
+      file << "\t\t{" << (*pf)->guid() << "}.Release|" << wizard.platformAlias() << ".Build.0 = Release|" << wizard.platformName() << endl;
     }
   }
   file << "\tEndGlobalSection" << endl;

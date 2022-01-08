@@ -44,11 +44,6 @@ wstring ConfigureWizard::binDirectory() const
   return(_systemPage.binDirectory());
 }
 
-bool ConfigureWizard::build64bit() const
-{
-  return(_targetPage.build64bit());
-}
-
 bool ConfigureWizard::excludeDeprecated() const
 {
   return(_targetPage.excludeDeprecated());
@@ -89,14 +84,39 @@ wstring ConfigureWizard::libDirectory() const
   return(_systemPage.libDirectory());
 }
 
-wstring ConfigureWizard::platform() const
+wstring ConfigureWizard::machineName() const
 {
-  return(_targetPage.build64bit() ? L"x64" : L"Win32");
+  switch (platform())
+  {
+    case Platform::X86: return(L"X86");
+    case Platform::X64: return(L"X64");
+    default: throw;
+  }
+}
+
+Platform ConfigureWizard::platform() const
+{
+  return(_targetPage.platform());
 }
 
 wstring ConfigureWizard::platformName() const
 {
-  return(_targetPage.build64bit() ? L"x64" : L"x86");
+  switch (platform())
+  {
+    case Platform::X86: return(L"Win32");
+    case Platform::X64: return(L"x64");
+    default: throw;
+  }
+}
+
+wstring ConfigureWizard::platformAlias() const
+{
+  switch (platform())
+  {
+    case Platform::X86: return(L"x86");
+    case Platform::X64: return(L"x64");
+    default: throw;
+  }
 }
 
 QuantumDepth ConfigureWizard::quantumDepth() const
@@ -119,11 +139,6 @@ wstring ConfigureWizard::solutionName() const
 SolutionType ConfigureWizard::solutionType() const
 {
   return(_targetPage.solutionType());
-}
-
-wstring ConfigureWizard::targetCpu() const
-{
-  return(_targetPage.build64bit() ? L"x64" : L"x86");
 }
 
 bool ConfigureWizard::useHDRI() const
@@ -165,7 +180,7 @@ bool ConfigureWizard::zeroConfigurationSupport() const
 
 void ConfigureWizard::parseCommandLineInfo(const CommandLineInfo &info)
 {
-  _targetPage.build64bit(info.build64bit());
+  _targetPage.platform(info.platform());
   _targetPage.excludeDeprecated(info.excludeDeprecated());
   _targetPage.includeIncompatibleLicense(info.includeIncompatibleLicense());
   _targetPage.includeOptional(info.includeOptional());

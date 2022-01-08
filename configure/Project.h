@@ -42,13 +42,11 @@ public:
 
   vector<wstring> &excludes();
 
-  vector<wstring> &excludesX64();
-
-  vector<wstring> &excludesX86();
-
   vector<ProjectFile*> &files();
 
   vector<wstring> &includes();
+
+  vector<wstring> &platformExcludes(Platform platform);
 
   bool isConsole() const;
 

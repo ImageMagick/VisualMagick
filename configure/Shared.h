@@ -31,6 +31,8 @@ enum class ProjectType {UNDEFINEDTYPE, APPTYPE, COMTYPE, DLLTYPE, DLLMODULETYPE,
 
 enum class VisualStudioVersion {VS2015, VS2017, VS2019, VS2022};
 
+enum class Platform {X86, X64};
+
 #define VSEARLIEST VisualStudioVersion::VS2015
 #define VSLATEST VisualStudioVersion::VS2022
 

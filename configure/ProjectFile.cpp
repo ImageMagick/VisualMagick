@@ -106,7 +106,7 @@ bool ProjectFile::isExcluded(const wstring &fileName)
   if (contains(_project->excludes(),fileName))
     return true;
 
-  if (contains((_wizard->build64bit() ? _project->excludesX64() : _project->excludesX86()),fileName))
+  if (contains(_project->platformExcludes(_wizard->platform()),fileName))
     return true;
 
   if (endsWith(fileName,L".h"))
@@ -324,7 +324,7 @@ wstring ProjectFile::getIntermediateDirectoryName(const bool debug)
     directoryName;
 
   directoryName = (debug ? _wizard->intermediateDirectoryDebug() : _wizard->intermediateDirectoryRelease());
-  directoryName += _wizard->solutionName() + L"-" + _wizard->platform();
+  directoryName += _wizard->solutionName() + L"-" + _wizard->platformName();
   directoryName += L"\\" + _prefix + L"_" + _name + L"\\";
   return(directoryName);
 }
@@ -383,7 +383,7 @@ void ProjectFile::loadSource(const wstring &directory)
   WIN32_FIND_DATA
     data;
 
-  if (contains((_wizard->build64bit() ? _project->excludesX64() : _project->excludesX86()),directory))
+  if (contains(_project->platformExcludes(_wizard->platform()),directory))
     return;
 
   fileHandle=FindFirstFile((directory + L"\\*.*").c_str(),&data);
@@ -513,19 +513,19 @@ void ProjectFile::write(wofstream &file,const vector<Project*> &allProjects)
   file << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << endl;
   file << "<Project DefaultTargets=\"Build\" ToolsVersion=\"4.0\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\">" << endl;
   file << "  <ItemGroup Label=\"ProjectConfigurations\">" << endl;
-  file << "    <ProjectConfiguration Include=\"Debug|" << _wizard->platform() << "\">" << endl;
+  file << "    <ProjectConfiguration Include=\"Debug|" << _wizard->platformName() << "\">" << endl;
   file << "      <Configuration>Debug</Configuration>" << endl;
-  file << "      <Platform>" << _wizard->platform() << "</Platform>" << endl;
+  file << "      <Platform>" << _wizard->platformName() << "</Platform>" << endl;
   file << "    </ProjectConfiguration>" << endl;
-  file << "    <ProjectConfiguration Include=\"Release|" << _wizard->platform() << "\">" << endl;
+  file << "    <ProjectConfiguration Include=\"Release|" << _wizard->platformName() << "\">" << endl;
   file << "      <Configuration>Release</Configuration>" << endl;
-  file << "      <Platform>" << _wizard->platform() << "</Platform>" << endl;
+  file << "      <Platform>" << _wizard->platformName() << "</Platform>" << endl;
   file << "    </ProjectConfiguration>" << endl;
   file << "  </ItemGroup>" << endl;
   file << "  <PropertyGroup Label=\"Globals\">" << endl;
   file << "    <ProjectName>" << _prefix << "_" << _name << "</ProjectName>" << endl;
   file << "    <ProjectGuid>{" << _guid << "}</ProjectGuid>" << endl;
-  file << "    <Keyword>" << _wizard->platform() << "Proj</Keyword>" << endl;
+  file << "    <Keyword>" << _wizard->platformName() << "Proj</Keyword>" << endl;
   file << "  </PropertyGroup>" << endl;
   file << "  <Import Project=\"$(VCTargetsPath)\\Microsoft.Cpp.Default.props\" />" << endl;
 
@@ -562,13 +562,13 @@ void ProjectFile::write(wofstream &file,const vector<Project*> &allProjects)
   }
   else
   {
-    file << "    <TargetName Condition=\"'$(Configuration)|$(Platform)'=='Debug|" << _wizard->platform() << "'\">" << getTargetName(true) << "</TargetName>" << endl;
-    file << "    <TargetName Condition=\"'$(Configuration)|$(Platform)'=='Release|" << _wizard->platform() << "'\">" << getTargetName(false) << "</TargetName>" << endl;
+    file << "    <TargetName Condition=\"'$(Configuration)|$(Platform)'=='Debug|" << _wizard->platformName() << "'\">" << getTargetName(true) << "</TargetName>" << endl;
+    file << "    <TargetName Condition=\"'$(Configuration)|$(Platform)'=='Release|" << _wizard->platformName() << "'\">" << getTargetName(false) << "</TargetName>" << endl;
   }
-  file << "    <IntDir Condition=\"'$(Configuration)|$(Platform)'=='Debug|" << _wizard->platform() << "'\">" << getIntermediateDirectoryName(true) << "</IntDir>" << endl;
-  file << "    <IntDir Condition=\"'$(Configuration)|$(Platform)'=='Release|" << _wizard->platform() << "'\">" << getIntermediateDirectoryName(false) << "</IntDir>" << endl;
+  file << "    <IntDir Condition=\"'$(Configuration)|$(Platform)'=='Debug|" << _wizard->platformName() << "'\">" << getIntermediateDirectoryName(true) << "</IntDir>" << endl;
+  file << "    <IntDir Condition=\"'$(Configuration)|$(Platform)'=='Release|" << _wizard->platformName() << "'\">" << getIntermediateDirectoryName(false) << "</IntDir>" << endl;
   if (_wizard->visualStudioVersion() >= VisualStudioVersion::VS2019)
-    file << "    <UseDebugLibraries Condition=\"'$(Configuration)|$(Platform)'=='Debug|" << _wizard->platform() << "'\">true</UseDebugLibraries>" << endl;
+    file << "    <UseDebugLibraries Condition=\"'$(Configuration)|$(Platform)'=='Debug|" << _wizard->platformName() << "'\">true</UseDebugLibraries>" << endl;
   file << "  </PropertyGroup>" << endl;
 
   writeItemDefinitionGroup(file,true);
@@ -591,7 +591,7 @@ void ProjectFile::writeItemDefinitionGroup(wofstream &file,const bool debug)
 
   name=getTargetName(debug);
 
-  file << "  <ItemDefinitionGroup Condition=\"'$(Configuration)|$(Platform)'=='" << (debug ? "Debug" : "Release") << "|" << _wizard->platform() << "'\">" << endl;
+  file << "  <ItemDefinitionGroup Condition=\"'$(Configuration)|$(Platform)'=='" << (debug ? "Debug" : "Release") << "|" << _wizard->platformName() << "'\">" << endl;
   file << "    <ClCompile>" << endl;
   file << "      <RuntimeLibrary>MultiThreaded" << (debug ? "Debug" : "") << (_wizard->solutionType() == SolutionType::STATIC_MT ? "" : "DLL") << "</RuntimeLibrary>" << endl;
   file << "      <StringPooling>true</StringPooling>" << endl;
@@ -634,7 +634,7 @@ void ProjectFile::writeItemDefinitionGroup(wofstream &file,const bool debug)
   {
     file << "    <Lib>" << endl;
     file << "      <AdditionalLibraryDirectories>" << _wizard->libDirectory() << ";%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>" << endl;
-    file << "      <AdditionalDependencies>/MACHINE:" << (_wizard->build64bit() ? "AMD64" : "X86");
+    file << "      <AdditionalDependencies>/MACHINE:" << (_wizard->machineName());
     writeAdditionalDependencies(file,L";");
     file << ";%(AdditionalDependencies)</AdditionalDependencies>" << endl;
     file << "      <SuppressStartupBanner>true</SuppressStartupBanner>" << endl;
@@ -644,11 +644,11 @@ void ProjectFile::writeItemDefinitionGroup(wofstream &file,const bool debug)
   {
     file << "    <Link>" << endl;
     file << "      <AdditionalLibraryDirectories>" << _wizard->libDirectory() << ";%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>" << endl;
-    file << "      <AdditionalDependencies>/MACHINE:" << (_wizard->build64bit() ? "AMD64" : "X86");
+    file << "      <AdditionalDependencies>/MACHINE:" << _wizard->machineName();
     writeAdditionalDependencies(file,L";");
     file << ";%(AdditionalDependencies)</AdditionalDependencies>" << endl;
     file << "      <SuppressStartupBanner>true</SuppressStartupBanner>" << endl;
-    file << "      <TargetMachine>Machine" << (_wizard->build64bit() ? "X64" : "X86") << "</TargetMachine>" << endl;
+    file << "      <TargetMachine>Machine" << _wizard->machineName() << "</TargetMachine>" << endl;
     file << "      <GenerateDebugInformation>" << (debug ? "true" : "false") << "</GenerateDebugInformation>" << endl;
     file << "      <ProgramDatabaseFile>" << _wizard->binDirectory() << (_project->isExe() ? _name : name) << ".pdb</ProgramDatabaseFile>" << endl;
     file << "      <ImportLibrary>" << _wizard->libDirectory() << name << ".lib</ImportLibrary>" << endl;
@@ -697,7 +697,7 @@ void ProjectFile::writeFiles(wofstream &file,const vector<wstring> &collection)
       if (!_project->useNasm())
       {
         file << "    <CustomBuild Include=\"" << *f << "\">" << endl;
-        file << "      <Command>ml" << (_wizard->build64bit() ? "64" : "") << " /nologo /c /Cx " << (_wizard->build64bit() ? "" : "/safeseh /coff") << " /Fo\"$(IntDir)%(Filename).obj\" \"%(FullPath)\"</Command>" << endl;
+        file << "      <Command>ml" << (_wizard->platform() == Platform::X64 ? "64" : "") << " /nologo /c /Cx " << (_wizard->platform() == Platform::X64 ? "" : "/safeseh /coff") << " /Fo\"$(IntDir)%(Filename).obj\" \"%(FullPath)\"</Command>" << endl;
         file << "      <Outputs>$(IntDir)%(Filename).obj;%(Outputs)</Outputs>" << endl;
         file << "    </CustomBuild>" << endl;
       }
@@ -705,7 +705,7 @@ void ProjectFile::writeFiles(wofstream &file,const vector<wstring> &collection)
       {
         folder=(*f).substr(0,(*f).find_last_of(L"\\") + 1);
         file << "    <CustomBuild Include=\"" << *f << "\">" << endl;
-        file << "      <Command>..\\build\\nasm -fwin" << (_wizard->build64bit() ? "64" : "32") << " -DWIN" << (_wizard->build64bit() ? "64 -D__x86_64__" : "32") << " -I" << folder << " -o \"$(IntDir)%(Filename).obj\" \"%(FullPath)\"</Command>" << endl;
+        file << "      <Command>..\\build\\nasm -fwin" << (_wizard->platform() == Platform::X64 ? "64" : "32") << " -DWIN" << (_wizard->platform() == Platform::X64 ? "64 -D__x86_64__" : "32") << " -I" << folder << " -o \"$(IntDir)%(Filename).obj\" \"%(FullPath)\"</Command>" << endl;
         file << "      <Outputs>$(IntDir)%(Filename).obj;%(Outputs)</Outputs>" << endl;
         file << "    </CustomBuild>" << endl;
       }

@@ -22,7 +22,7 @@
 
 CommandLineInfo::CommandLineInfo(const ConfigureWizard &wizard)
 {
-  _build64bit=wizard.build64bit();
+  _platform=wizard.platform();
   _excludeDeprecated=wizard.excludeDeprecated();
   _includeIncompatibleLicense=wizard.includeIncompatibleLicense();
   _includeOptional=wizard.includeOptional();
@@ -45,11 +45,6 @@ CommandLineInfo::CommandLineInfo(const CommandLineInfo& obj)
 CommandLineInfo& CommandLineInfo::operator=(const CommandLineInfo& obj)
 {
   return *this;
-}
-
-bool CommandLineInfo::build64bit() const
-{
-  return(_build64bit);
 }
 
 bool CommandLineInfo::excludeDeprecated() const
@@ -75,6 +70,11 @@ bool CommandLineInfo::installedSupport() const
 bool CommandLineInfo::noWizard() const
 {
   return(_noWizard);
+}
+
+Platform CommandLineInfo::platform() const
+{
+  return(_platform);
 }
 
 QuantumDepth CommandLineInfo::quantumDepth() const
@@ -149,10 +149,10 @@ void CommandLineInfo::ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast
     _quantumDepth=QuantumDepth::Q32;
   else if (_wcsicmp(pszParam, L"Q64") == 0)
     _quantumDepth=QuantumDepth::Q64;
-  else if ((_wcsicmp(pszParam, L"x86") == 0) || (_wcsicmp(pszParam, L"Win32") == 0))
-    _build64bit=false;
+  else if (_wcsicmp(pszParam, L"x86") == 0)
+    _platform=Platform::X86;
   else if (_wcsicmp(pszParam, L"x64") == 0)
-    _build64bit=true;
+    _platform=Platform::X64;
   else if (_wcsicmp(pszParam, L"VS2015") == 0)
     _visualStudioVersion=VisualStudioVersion::VS2015;
   else if (_wcsicmp(pszParam, L"VS2017") == 0)

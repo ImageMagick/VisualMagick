@@ -32,9 +32,6 @@ public:
 
   ~TargetPage();
 
-  bool build64bit() const;
-  void build64bit(bool value);
-
   bool excludeDeprecated() const;
   void excludeDeprecated(bool value);
 
@@ -46,6 +43,9 @@ public:
 
   bool installedSupport() const;
   void installedSupport(bool value);
+
+  Platform platform() const;
+  void platform(Platform value);
 
   QuantumDepth quantumDepth() const;
   void quantumDepth(QuantumDepth value);
@@ -84,7 +84,7 @@ private:
 
   void setVisualStudioVersion();
 
-  BOOL                _build64bit;
+  Platform            _platform;
   BOOL                _excludeDeprecated;
   BOOL                _includeIncompatibleLicense;
   BOOL                _includeOptional;
