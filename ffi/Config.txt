@@ -6,6 +6,7 @@
 [DIRECTORIES]
 ..\..\ffi\include
 ..\..\ffi\src
+..\..\ffi\src\aarch64
 ..\..\ffi\src\x86
 
 [DEFINES]
@@ -17,9 +18,13 @@ ffi64.c
 java_raw_api.c
 
 [EXCLUDES_X64]
-ffi.c
 win32.asm
+winarm64.asm
 
 [EXCLUDES_X86]
-ffiw64.c
+win64.asm
+winarm64.asm
+
+[EXCLUDES_ARM64]
+win32.asm
 win64.asm
