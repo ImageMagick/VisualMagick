@@ -47,8 +47,8 @@ public:
   bool installedSupport() const;
   void installedSupport(bool value);
 
-  int quantumDepth() const;
-  void quantumDepth(int value);
+  QuantumDepth quantumDepth() const;
+  void quantumDepth(QuantumDepth value);
 
   SolutionType solutionType() const;
   void solutionType(SolutionType value);
@@ -89,7 +89,7 @@ private:
   BOOL         _includeIncompatibleLicense;
   BOOL         _includeOptional;
   BOOL         _installedSupport;
-  int          _quantumDepth;
+  QuantumDepth _quantumDepth;
   SolutionType _solutionType;
   BOOL         _useHDRI;
   BOOL         _useOpenCL;

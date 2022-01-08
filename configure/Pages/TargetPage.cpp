@@ -30,7 +30,7 @@ TargetPage::TargetPage() : CPropertyPage(IDD_TARGET_PAGE)
   _excludeDeprecated=TRUE;
   _includeIncompatibleLicense=FALSE;
   _installedSupport=FALSE;
-  _quantumDepth=Q16;
+  _quantumDepth=QuantumDepth::Q16;
   _solutionType=SolutionType::DYNAMIC_MT;
   _useHDRI=PathFileExists(L"..\\MagickCore") ? TRUE : FALSE;
   _useOpenCL=TRUE;
@@ -92,12 +92,12 @@ void TargetPage::build64bit(bool value)
   _build64bit=value;
 }
 
-int TargetPage::quantumDepth() const
+QuantumDepth TargetPage::quantumDepth() const
 {
   return(_quantumDepth);
 }
 
-void TargetPage::quantumDepth(int value)
+void TargetPage::quantumDepth(QuantumDepth value)
 {
   _quantumDepth=value;
 }
@@ -167,7 +167,7 @@ void TargetPage::DoDataExchange(CDataExchange* pDX)
   CPropertyPage::DoDataExchange(pDX);
 
   DDX_Check(pDX,IDC_BUILD_64_BIT,_build64bit);
-  DDX_CBIndex(pDX,IDC_QUANTUM_DEPTH,_quantumDepth);
+  DDX_CBIndex(pDX,IDC_QUANTUM_DEPTH,(int&) _quantumDepth);
   DDX_Radio(pDX,IDC_PROJECT_DYNAMIC_MT,(int&) _solutionType);
   DDX_Check(pDX,IDC_HDRI,_useHDRI);
   DDX_Check(pDX,IDC_OPEN_CL,_useOpenCL);

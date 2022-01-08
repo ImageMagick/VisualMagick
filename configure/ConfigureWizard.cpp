@@ -99,7 +99,7 @@ wstring ConfigureWizard::platformName() const
   return(_targetPage.build64bit() ? L"x64" : L"x86");
 }
 
-int ConfigureWizard::quantumDepth() const
+QuantumDepth ConfigureWizard::quantumDepth() const
 {
   return(_targetPage.quantumDepth());
 }

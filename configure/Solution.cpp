@@ -208,13 +208,13 @@ void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
     config << "  A value of 8 uses half the memory than 16 and typically runs 30% faster," << endl;
     config << "  but provides 256 times less color resolution than a value of 16." << endl;
     config << "*/" << endl;
-    if (wizard.quantumDepth() == Q8)
+    if (wizard.quantumDepth() == QuantumDepth::Q8)
       config << "#define MAGICKCORE_QUANTUM_DEPTH 8" << endl;
-    else if (wizard.quantumDepth() == Q16)
+    else if (wizard.quantumDepth() == QuantumDepth::Q16)
       config << "#define MAGICKCORE_QUANTUM_DEPTH 16" << endl;
-    else if (wizard.quantumDepth() == Q32)
+    else if (wizard.quantumDepth() == QuantumDepth::Q32)
       config << "#define MAGICKCORE_QUANTUM_DEPTH 32" << endl;
-    else if (wizard.quantumDepth() == Q64)
+    else if (wizard.quantumDepth() == QuantumDepth::Q64)
       config << "#define MAGICKCORE_QUANTUM_DEPTH 64" << endl;
     config << endl;
 
@@ -447,7 +447,7 @@ void Solution::writeVersion(const ConfigureWizard &wizard,const VersionInfo &ver
     line=replace(line,L"@PACKAGE_NAME@",L"ImageMagick");
     line=replace(line,L"@PACKAGE_VERSION_ADDENDUM@",versionInfo.libAddendum());
     line=replace(line,L"@PACKAGE_RELEASE_DATE@",versionInfo.releaseDate());
-    line=replace(line,L"@QUANTUM_DEPTH@",to_wstring(wizard.quantumDepth()));
+    line=replace(line,L"@QUANTUM_DEPTH@",to_wstring((int) wizard.quantumDepth()));
     line=replace(line,L"@RELEASE_DATE@",versionInfo.releaseDate());
     line=replace(line,L"@TARGET_OS@",L"Windows");
     start=line.find(L"@");

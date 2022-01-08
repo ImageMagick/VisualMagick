@@ -44,7 +44,7 @@ public:
 
   bool noWizard() const;
 
-  int quantumDepth() const;
+  QuantumDepth quantumDepth() const;
 
   SolutionType solutionType() const;
 
@@ -67,7 +67,7 @@ private:
   bool         _includeOptional;
   bool         _installedSupport;
   bool         _noWizard;
-  int          _quantumDepth;
+  QuantumDepth _quantumDepth;
   SolutionType _solutionType;
   bool         _useHDRI;
   bool         _useOpenCL;

@@ -61,7 +61,7 @@ public:
 
   wstring platformName() const;
 
-  int quantumDepth() const;
+  QuantumDepth quantumDepth() const;
 
   wstring solutionName() const;
 

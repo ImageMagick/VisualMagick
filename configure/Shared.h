@@ -34,7 +34,7 @@ enum {VS2015, VS2017, VS2019, VS2022};
 #define VSEARLIEST VS2015
 #define VSLATEST VS2022
 
-enum {Q8, Q16, Q32, Q64};
+enum class QuantumDepth {Q8, Q16, Q32, Q64};
 
 static const wstring validSrcFilesArr[] = {L".c", L".cpp", L".cc"};
 const vector<wstring> validSrcFiles(validSrcFilesArr, std::end(validSrcFilesArr));

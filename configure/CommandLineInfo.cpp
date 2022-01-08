@@ -77,7 +77,7 @@ bool CommandLineInfo::noWizard() const
   return(_noWizard);
 }
 
-int CommandLineInfo::quantumDepth() const
+QuantumDepth CommandLineInfo::quantumDepth() const
 {
   return(_quantumDepth);
 }
@@ -142,13 +142,13 @@ void CommandLineInfo::ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast
   else if (_wcsicmp(pszParam, L"openCL") == 0)
     _useOpenCL=true;
   else if (_wcsicmp(pszParam, L"Q8") == 0)
-    _quantumDepth=Q8;
+    _quantumDepth=QuantumDepth::Q8;
   else if (_wcsicmp(pszParam, L"Q16") == 0)
-    _quantumDepth=Q16;
+    _quantumDepth=QuantumDepth::Q16;
   else if (_wcsicmp(pszParam, L"Q32") == 0)
-    _quantumDepth=Q32;
+    _quantumDepth=QuantumDepth::Q32;
   else if (_wcsicmp(pszParam, L"Q64") == 0)
-    _quantumDepth=Q64;
+    _quantumDepth=QuantumDepth::Q64;
   else if ((_wcsicmp(pszParam, L"x86") == 0) || (_wcsicmp(pszParam, L"Win32") == 0))
     _build64bit=false;
   else if (_wcsicmp(pszParam, L"x64") == 0)
