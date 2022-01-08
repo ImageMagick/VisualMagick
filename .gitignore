@@ -1,5 +1,6 @@
 */*.vcxproj
 
+/configure/x64
 /configure/Debug
 /configure/Release
 /configure/configure.aps
