@@ -27,16 +27,16 @@
 
 enum class SolutionType {DYNAMIC_MT, STATIC_MTD, STATIC_MT};
 
+enum class QuantumDepth {Q8, Q16, Q32, Q64};
+
+enum class Platform {X86, X64};
+
 enum class ProjectType {UNDEFINEDTYPE, APPTYPE, COMTYPE, DLLTYPE, DLLMODULETYPE, EXETYPE, EXEMODULETYPE, STATICTYPE};
 
 enum class VisualStudioVersion {VS2015, VS2017, VS2019, VS2022};
 
-enum class Platform {X86, X64};
-
 #define VSEARLIEST VisualStudioVersion::VS2015
 #define VSLATEST VisualStudioVersion::VS2022
-
-enum class QuantumDepth {Q8, Q16, Q32, Q64};
 
 static const wstring validSrcFilesArr[] = {L".c", L".cpp", L".cc"};
 const vector<wstring> validSrcFiles(validSrcFilesArr, std::end(validSrcFilesArr));
