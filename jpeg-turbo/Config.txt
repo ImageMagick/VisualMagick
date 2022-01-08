@@ -5,13 +5,11 @@
 
 [NASM]
 
-[DEFINES]
-WITH_SIMD
-
 [DIRECTORIES]
 ..\..\jpeg-turbo
 ..\..\jpeg-turbo\simd\i386
 ..\..\jpeg-turbo\simd\x86_64
+..\..\jpeg-turbo\simd\aarch64
 
 [EXCLUDES]
 cdjpeg.c
@@ -26,7 +24,6 @@ jdcol565.c
 jdmrgext.c
 jdmrg565.c
 jpegtran.c
-jsimd_none.c
 jstdhuff.c
 rd*
 tj*
@@ -51,10 +48,16 @@ jdmrgext-sse2.asm
 jdmrgext-mmx.asm
 
 [EXCLUDES_X86]
+jsimd_none.c
 ..\..\jpeg-turbo\simd\x86_64
 
 [EXCLUDES_X64]
+jsimd_none.c
 ..\..\jpeg-turbo\simd\i386
+
+[EXCLUDES_ARM64]
+..\..\jpeg-turbo\simd\i386
+..\..\jpeg-turbo\simd\x86_64
 
 [CONFIG_DEFINE]
 /*
