@@ -421,12 +421,12 @@ void ProjectFile::loadSource(const wstring &directory)
   FindClose(fileHandle);
 }
 
-wstring ProjectFile::nasmOptions()
+wstring ProjectFile::nasmOptions(const wstring &folder)
 {
   switch (_wizard->platform())
   {
-    case Platform::X86: return(L"..\\build\\nasm -fwin32 -DWIN32 -o \"$(IntDir)%(Filename).obj\" \"%(FullPath)\"");
-    case Platform::X64: return(L"..\\build\\nasm -fwin64 -DWIN64 -D__x86_64__ -o \"$(IntDir)%(Filename).obj\" \"%(FullPath)\"");
+    case Platform::X86: return(L"..\\build\\nasm -fwin32 -DWIN32 -I" + folder + L" - o \"$(IntDir)%(Filename).obj\" \"%(FullPath)\"");
+    case Platform::X64: return(L"..\\build\\nasm -fwin64 -DWIN64 -D__x86_64__ -I" + folder + L" -o \"$(IntDir)%(Filename).obj\" \"%(FullPath)\"");
     case Platform::ARM64: return(L"");
     default: throw;
   }
@@ -727,7 +727,7 @@ void ProjectFile::writeFiles(wofstream &file,const vector<wstring> &collection)
       {
         folder=(*f).substr(0,(*f).find_last_of(L"\\") + 1);
         file << "    <CustomBuild Include=\"" << *f << "\">" << endl;
-        file << "      <Command>" << nasmOptions() << "</Command>" << endl;
+        file << "      <Command>" << nasmOptions(folder) << "</Command>" << endl;
         file << "      <Outputs>$(IntDir)%(Filename).obj;%(Outputs)</Outputs>" << endl;
         file << "    </CustomBuild>" << endl;
       }

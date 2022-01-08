@@ -85,7 +85,7 @@ private:
 
   void loadSource(const wstring &directory);
 
-  wstring nasmOptions();
+  wstring nasmOptions(const wstring &folder);
 
   void merge(vector<wstring> &input, vector<wstring> &output);
 
