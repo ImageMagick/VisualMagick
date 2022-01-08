@@ -54,26 +54,26 @@ public:
 
   bool useOpenMP() const;
 
-  int visualStudioVersion() const;
+  VisualStudioVersion visualStudioVersion() const;
 
   bool zeroConfigurationSupport() const;
 
   virtual void ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast);
 
 private:
-  bool         _build64bit;
-  bool         _excludeDeprecated;
-  bool         _includeIncompatibleLicense;
-  bool         _includeOptional;
-  bool         _installedSupport;
-  bool         _noWizard;
-  QuantumDepth _quantumDepth;
-  SolutionType _solutionType;
-  bool         _useHDRI;
-  bool         _useOpenCL;
-  bool         _useOpenMP;
-  int          _visualStudioVersion;
-  bool         _zeroConfigurationSupport;
+  bool                _build64bit;
+  bool                _excludeDeprecated;
+  bool                _includeIncompatibleLicense;
+  bool                _includeOptional;
+  bool                _installedSupport;
+  bool                _noWizard;
+  QuantumDepth        _quantumDepth;
+  SolutionType        _solutionType;
+  bool                _useHDRI;
+  bool                _useOpenCL;
+  bool                _useOpenMP;
+  VisualStudioVersion _visualStudioVersion;
+  bool                _zeroConfigurationSupport;
 };
 
 #endif // __CommandLineInfo__

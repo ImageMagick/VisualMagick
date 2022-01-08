@@ -141,7 +141,7 @@ bool ConfigureWizard::useOpenMP() const
   return(_targetPage.useOpenMP());
 }
 
-int ConfigureWizard::visualStudioVersion() const
+VisualStudioVersion ConfigureWizard::visualStudioVersion() const
 {
   return(_targetPage.visualStudioVersion());
 }
@@ -150,10 +150,10 @@ wstring ConfigureWizard::visualStudioVersionName() const
 {
   switch(_targetPage.visualStudioVersion())
   {
-    case VS2015: return(L"VS2015");
-    case VS2017: return(L"VS2017");
-    case VS2019: return(L"VS2019");
-    case VS2022: return(L"VS2022");
+    case VisualStudioVersion::VS2015: return(L"VS2015");
+    case VisualStudioVersion::VS2017: return(L"VS2017");
+    case VisualStudioVersion::VS2019: return(L"VS2019");
+    case VisualStudioVersion::VS2022: return(L"VS2022");
     default: return(L"VS");
   }
 }

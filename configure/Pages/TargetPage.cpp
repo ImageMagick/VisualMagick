@@ -142,12 +142,12 @@ void TargetPage::useOpenMP(bool value)
   _useOpenMP=value;
 }
 
-int TargetPage::visualStudioVersion() const
+VisualStudioVersion TargetPage::visualStudioVersion() const
 {
   return(_visualStudioVersion);
 }
 
-void TargetPage::visualStudioVersion(int value)
+void TargetPage::visualStudioVersion(VisualStudioVersion value)
 {
   _visualStudioVersion=value;
 }
@@ -172,7 +172,7 @@ void TargetPage::DoDataExchange(CDataExchange* pDX)
   DDX_Check(pDX,IDC_HDRI,_useHDRI);
   DDX_Check(pDX,IDC_OPEN_CL,_useOpenCL);
   DDX_Check(pDX,IDC_OPEN_MP,_useOpenMP);
-  DDX_CBIndex(pDX,IDC_VISUALSTUDIO,_visualStudioVersion);
+  DDX_CBIndex(pDX,IDC_VISUALSTUDIO,(int&) _visualStudioVersion);
   DDX_Check(pDX,IDC_INCLUDE_INCOMPATIBLE,_includeIncompatibleLicense);
   DDX_Check(pDX,IDC_INCLUDE_OPTIONAL,_includeOptional);
   DDX_Check(pDX,IDC_EXCLUDE_DEPRECATED,_excludeDeprecated);
@@ -231,13 +231,13 @@ bool TargetPage::hasVisualStudioFolder(const wchar_t *name)
 void TargetPage::setVisualStudioVersion()
 {
   if (hasVisualStudioFolder(L"2022"))
-    _visualStudioVersion=VS2022;
+    _visualStudioVersion=VisualStudioVersion::VS2022;
   else if (hasVisualStudioFolder(L"2019"))
-    _visualStudioVersion=VS2019;
+    _visualStudioVersion=VisualStudioVersion::VS2019;
   else if (hasVisualStudioFolder(L"2017"))
-    _visualStudioVersion=VS2017;
+    _visualStudioVersion=VisualStudioVersion::VS2017;
   else if (!getEnvironmentVariable(L"VS140COMNTOOLS").empty())
-    _visualStudioVersion=VS2015;
+    _visualStudioVersion=VisualStudioVersion::VS2015;
   else
     _visualStudioVersion=VSLATEST;
 }

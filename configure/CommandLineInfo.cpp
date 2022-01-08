@@ -102,7 +102,7 @@ bool CommandLineInfo::useOpenMP() const
   return(_useOpenMP);
 }
 
-int CommandLineInfo::visualStudioVersion() const
+VisualStudioVersion CommandLineInfo::visualStudioVersion() const
 {
   return(_visualStudioVersion);
 }
@@ -154,13 +154,13 @@ void CommandLineInfo::ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast
   else if (_wcsicmp(pszParam, L"x64") == 0)
     _build64bit=true;
   else if (_wcsicmp(pszParam, L"VS2015") == 0)
-    _visualStudioVersion=VS2015;
+    _visualStudioVersion=VisualStudioVersion::VS2015;
   else if (_wcsicmp(pszParam, L"VS2017") == 0)
-    _visualStudioVersion=VS2017;
+    _visualStudioVersion=VisualStudioVersion::VS2017;
   else if (_wcsicmp(pszParam, L"VS2019") == 0)
-    _visualStudioVersion=VS2019;
+    _visualStudioVersion=VisualStudioVersion::VS2019;
   else if (_wcsicmp(pszParam, L"VS2022") == 0)
-    _visualStudioVersion=VS2022;
+    _visualStudioVersion=VisualStudioVersion::VS2022;
   else if (_wcsicmp(pszParam, L"zeroConfigurationSupport") == 0)
     _zeroConfigurationSupport=true;
 }

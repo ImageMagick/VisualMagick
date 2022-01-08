@@ -43,7 +43,7 @@ public:
 
   vector<wstring> &aliases();
 
-  bool isSupported(const int visualStudioVersion) const;
+  bool isSupported(const VisualStudioVersion visualStudioVersion) const;
 
   void loadConfig();
 
@@ -117,7 +117,7 @@ private:
   wstring                _reference;
   vector<wstring>        _resourceFiles;
   vector<wstring>        _srcFiles;
-  int                    _minimumVisualStudioVersion;
+  VisualStudioVersion    _minimumVisualStudioVersion;
   const ConfigureWizard *_wizard;
 };
 

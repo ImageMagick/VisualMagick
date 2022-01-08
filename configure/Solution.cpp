@@ -484,13 +484,13 @@ void Solution::checkKeyword(const wstring keyword)
 void Solution::write(const ConfigureWizard &wizard,wofstream &file)
 {
   file << "Microsoft Visual Studio Solution File, Format Version 12.00" << endl;
-  if (wizard.visualStudioVersion() == VS2015)
+  if (wizard.visualStudioVersion() == VisualStudioVersion::VS2015)
     file << "# Visual Studio 2015" << endl;
-  else if (wizard.visualStudioVersion() == VS2017)
+  else if (wizard.visualStudioVersion() == VisualStudioVersion::VS2017)
     file << "# Visual Studio 2017" << endl;
-  else if (wizard.visualStudioVersion() == VS2019)
+  else if (wizard.visualStudioVersion() == VisualStudioVersion::VS2019)
     file << "# Visual Studio 2019" << endl;
-  else if (wizard.visualStudioVersion() == VS2022)
+  else if (wizard.visualStudioVersion() == VisualStudioVersion::VS2022)
     file << "# Visual Studio 2022" << endl;
 
   foreach (Project*,p,_projects)

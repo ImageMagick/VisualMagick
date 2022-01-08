@@ -19,7 +19,6 @@
 */
 #include "stdafx.h"
 #include "Project.h"
-#include "Shared.h"
 
 wstring Project::configDefine() const
 {
@@ -113,7 +112,7 @@ bool Project::isModule() const
   return((_type == DLLMODULETYPE) || (_type == EXEMODULETYPE));
 }
 
-bool Project::isSupported(const int visualStudioVersion) const
+bool Project::isSupported(const VisualStudioVersion visualStudioVersion) const
 {
   return(visualStudioVersion >= _minimumVisualStudioVersion);
 }
@@ -168,7 +167,7 @@ int Project::warningLevel() const
   return(_warningLevel);
 }
 
-void Project::checkFiles(const int visualStudioVersion)
+void Project::checkFiles(const VisualStudioVersion visualStudioVersion)
 {
    std::vector<ProjectFile*>
      newFiles(_files.size());

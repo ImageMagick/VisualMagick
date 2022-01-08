@@ -75,7 +75,7 @@ public:
 
   bool useOpenMP() const;
 
-  int visualStudioVersion() const;
+  VisualStudioVersion visualStudioVersion() const;
 
   wstring visualStudioVersionName() const;
 

@@ -62,8 +62,8 @@ public:
   bool useOpenMP() const;
   void useOpenMP(bool value);
 
-  int visualStudioVersion() const;
-  void visualStudioVersion(int value);
+  VisualStudioVersion visualStudioVersion() const;
+  void visualStudioVersion(VisualStudioVersion value);
 
   bool zeroConfigurationSupport() const;
   void zeroConfigurationSupport(bool value);
@@ -84,18 +84,18 @@ private:
 
   void setVisualStudioVersion();
 
-  BOOL         _build64bit;
-  BOOL         _excludeDeprecated;
-  BOOL         _includeIncompatibleLicense;
-  BOOL         _includeOptional;
-  BOOL         _installedSupport;
-  QuantumDepth _quantumDepth;
-  SolutionType _solutionType;
-  BOOL         _useHDRI;
-  BOOL         _useOpenCL;
-  BOOL         _useOpenMP;
-  int          _visualStudioVersion;
-  BOOL         _zeroConfigurationSupport;
+  BOOL                _build64bit;
+  BOOL                _excludeDeprecated;
+  BOOL                _includeIncompatibleLicense;
+  BOOL                _includeOptional;
+  BOOL                _installedSupport;
+  QuantumDepth        _quantumDepth;
+  SolutionType        _solutionType;
+  BOOL                _useHDRI;
+  BOOL                _useOpenCL;
+  BOOL                _useOpenMP;
+  VisualStudioVersion _visualStudioVersion;
+  BOOL                _zeroConfigurationSupport;
 };
 
 #endif // __TargetPage__

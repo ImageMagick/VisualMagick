@@ -143,7 +143,7 @@ void ProjectFile::loadAliases()
   aliases.close();
 }
 
-bool ProjectFile::isSupported(const int visualStudioVersion) const
+bool ProjectFile::isSupported(const VisualStudioVersion visualStudioVersion) const
 {
   return(visualStudioVersion >= _minimumVisualStudioVersion);
 }
@@ -536,13 +536,13 @@ void ProjectFile::write(wofstream &file,const vector<Project*> &allProjects)
     file << "    <ConfigurationType>DynamicLibrary</ConfigurationType>" << endl;
   else if (_project->isExe())
     file << "    <ConfigurationType>Application</ConfigurationType>" << endl;
-  if (_wizard->visualStudioVersion() == VS2015)
+  if (_wizard->visualStudioVersion() == VisualStudioVersion::VS2015)
     file << "    <PlatformToolset>v140_xp</PlatformToolset>" << endl;
-  else if (_wizard->visualStudioVersion() == VS2017)
+  else if (_wizard->visualStudioVersion() == VisualStudioVersion::VS2017)
     file << "    <PlatformToolset>v141</PlatformToolset>" << endl;
-  else if (_wizard->visualStudioVersion() == VS2019)
+  else if (_wizard->visualStudioVersion() == VisualStudioVersion::VS2019)
     file << "    <PlatformToolset>v142</PlatformToolset>" << endl;
-  else if (_wizard->visualStudioVersion() == VS2022)
+  else if (_wizard->visualStudioVersion() == VisualStudioVersion::VS2022)
     file << "    <PlatformToolset>v143</PlatformToolset>" << endl;
   file << "    <UseOfMfc>false</UseOfMfc>" << endl;
   if (_project->useUnicode())
@@ -567,7 +567,7 @@ void ProjectFile::write(wofstream &file,const vector<Project*> &allProjects)
   }
   file << "    <IntDir Condition=\"'$(Configuration)|$(Platform)'=='Debug|" << _wizard->platform() << "'\">" << getIntermediateDirectoryName(true) << "</IntDir>" << endl;
   file << "    <IntDir Condition=\"'$(Configuration)|$(Platform)'=='Release|" << _wizard->platform() << "'\">" << getIntermediateDirectoryName(false) << "</IntDir>" << endl;
-  if (_wizard->visualStudioVersion() >= VS2019)
+  if (_wizard->visualStudioVersion() >= VisualStudioVersion::VS2019)
     file << "    <UseDebugLibraries Condition=\"'$(Configuration)|$(Platform)'=='Debug|" << _wizard->platform() << "'\">true</UseDebugLibraries>" << endl;
   file << "  </PropertyGroup>" << endl;
 
@@ -618,9 +618,9 @@ void ProjectFile::writeItemDefinitionGroup(wofstream &file,const bool debug)
   writePreprocessorDefinitions(file,debug);
   file << ";%(PreprocessorDefinitions)</PreprocessorDefinitions>" << endl;
   file << "      <MultiProcessorCompilation>true</MultiProcessorCompilation>" << endl;
-  if (_wizard->visualStudioVersion() >= VS2015)
+  if (_wizard->visualStudioVersion() >= VisualStudioVersion::VS2015)
     file << "      <AdditionalOptions>/source-charset:utf-8 %(AdditionalOptions)</AdditionalOptions>" << endl;
-  if (_wizard->visualStudioVersion() >= VS2017) {
+  if (_wizard->visualStudioVersion() >= VisualStudioVersion::VS2017) {
     file << "      <LanguageStandard>stdcpp17</LanguageStandard>" << endl;
     file << "      <LanguageStandard_C>stdc17</LanguageStandard_C>" << endl;
   }

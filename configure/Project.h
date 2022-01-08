@@ -22,6 +22,7 @@
 
 #include "ConfigureWizard.h"
 #include "ProjectFile.h"
+#include "Shared.h"
 
 class Project
 {
@@ -63,7 +64,7 @@ public:
 
   bool isModule() const;
 
-  bool isSupported(const int visualStudioVersion) const;
+  bool isSupported(const VisualStudioVersion visualStudioVersion) const;
 
   vector<wstring> &libraries();
 
@@ -85,7 +86,7 @@ public:
 
   int warningLevel() const;
 
-  void checkFiles(const int visualStudioVersion);
+  void checkFiles(const VisualStudioVersion visualStudioVersion);
 
   static Project* create(wstring name);
 
@@ -133,7 +134,7 @@ private:
   int                  _type;
   bool                 _useNasm;
   bool                 _useUnicode;
-  int                  _minimumVisualStudioVersion;
+  VisualStudioVersion  _minimumVisualStudioVersion;
   wstring              _version;
   int                  _warningLevel;
 };

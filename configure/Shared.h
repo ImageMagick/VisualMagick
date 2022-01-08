@@ -29,10 +29,10 @@ enum class SolutionType {DYNAMIC_MT, STATIC_MTD, STATIC_MT};
 
 enum {UNDEFINEDTYPE, APPTYPE, COMTYPE, DLLTYPE, DLLMODULETYPE, EXETYPE, EXEMODULETYPE, STATICTYPE};
 
-enum {VS2015, VS2017, VS2019, VS2022};
+enum class VisualStudioVersion {VS2015, VS2017, VS2019, VS2022};
 
-#define VSEARLIEST VS2015
-#define VSLATEST VS2022
+#define VSEARLIEST VisualStudioVersion::VS2015
+#define VSLATEST VisualStudioVersion::VS2022
 
 enum class QuantumDepth {Q8, Q16, Q32, Q64};
 
@@ -134,16 +134,16 @@ static inline wstring replace(const wstring &str, const wstring &from, const wst
   return(result);
 }
 
-static inline int parseVisualStudioVersion(const wstring &version)
+static inline VisualStudioVersion parseVisualStudioVersion(const wstring &version)
 {
   if (version == L"2015")
-    return(VS2015);
+    return(VisualStudioVersion::VS2015);
   else if (version == L"2017")
-    return(VS2017);
+    return(VisualStudioVersion::VS2017);
   else if (version == L"2019")
-    return(VS2019);
+    return(VisualStudioVersion::VS2019);
   else if (version == L"2022")
-    return(VS2022);
+    return(VisualStudioVersion::VS2022);
 
   return(VSEARLIEST);
 }
