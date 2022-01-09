@@ -297,8 +297,8 @@ wstring ProjectFile::asmOptions()
 {
   switch (_wizard->platform())
   {
-    case Platform::X86: return(L"ml /nologo /c /Cx /Fo\"$(IntDir)%(Filename).obj\" \"%(FullPath)\"");
-    case Platform::X64: return(L"ml64 /nologo /c /Cx /safeseh /coff /Fo\"$(IntDir)%(Filename).obj\" \"%(FullPath)\"");
+    case Platform::X86: return(L"ml /nologo /c /Cx /safeseh /coff /Fo\"$(IntDir)%(Filename).obj\" \"%(FullPath)\"");
+    case Platform::X64: return(L"ml64 /nologo /c /Cx /Fo\"$(IntDir)%(Filename).obj\" \"%(FullPath)\"");
     case Platform::ARM64: return(L"armasm64 \"%(FullPath)\" -o \"$(IntDir)%(Filename).obj\"");
     default: throw;
   }
