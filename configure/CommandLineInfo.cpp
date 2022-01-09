@@ -119,7 +119,7 @@ void CommandLineInfo::ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast
 
   if (_wcsicmp(pszParam, L"arm64") == 0)
     _platform=Platform::ARM64;
-  if (_wcsicmp(pszParam, L"dmt") == 0)
+  else if (_wcsicmp(pszParam, L"dmt") == 0)
     _solutionType=SolutionType::DYNAMIC_MT;
   else if (_wcsicmp(pszParam, L"deprecated") == 0)
     _excludeDeprecated=FALSE;
