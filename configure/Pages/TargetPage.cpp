@@ -26,7 +26,13 @@ TargetPage::TargetPage() : CPropertyPage(IDD_TARGET_PAGE)
 {
   setVisualStudioVersion();
 
+#if _M_IX86
+  _platform=Platform::X86;
+#elif _M_ARM64
+  _platform=Platform::ARM64;
+#else
   _platform=Platform::X64;
+#endif
   _excludeDeprecated=TRUE;
   _includeIncompatibleLicense=FALSE;
   _installedSupport=FALSE;
