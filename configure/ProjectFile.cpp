@@ -425,7 +425,7 @@ wstring ProjectFile::nasmOptions(const wstring &folder)
 {
   switch (_wizard->platform())
   {
-    case Platform::X86: return(L"..\\build\\nasm -fwin32 -DWIN32 -I" + folder + L" - o \"$(IntDir)%(Filename).obj\" \"%(FullPath)\"");
+    case Platform::X86: return(L"..\\build\\nasm -fwin32 -DWIN32 -I" + folder + L" -o \"$(IntDir)%(Filename).obj\" \"%(FullPath)\"");
     case Platform::X64: return(L"..\\build\\nasm -fwin64 -DWIN64 -D__x86_64__ -I" + folder + L" -o \"$(IntDir)%(Filename).obj\" \"%(FullPath)\"");
     case Platform::ARM64: return(L"");
     default: throw;
