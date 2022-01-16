@@ -2,6 +2,8 @@
 
 [DISABLED_ARM64]
 
+[OPTIONAL]
+
 [LICENSE]
 ..\..\flif\LICENSE_Apache2
 
