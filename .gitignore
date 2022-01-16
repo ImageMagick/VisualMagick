@@ -3,7 +3,6 @@
 /configure/x64
 /configure/Debug
 /configure/Release
-/configure/configure.aps
 /configure/configure.ilk
 /configure/configure.pdb
 
@@ -23,6 +22,7 @@ bin
 
 NOTICE.txt
 
+*.aps
 *.db
 *.ipch
 *.opendb
