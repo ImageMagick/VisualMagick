@@ -46,7 +46,6 @@
   #include "tasks-install-devel.isx"
   #include "tasks-install-perlmagick.isx"
 #endif
-#include "tasks-install-com.isx"
 
 
 ; Windows registry settings
@@ -64,7 +63,6 @@
   #include "files-perlmagick.isx"
   #include "files-development.isx"
 #endif
-#include "files-com.isx"
 
 [Icons]
 #include "icons-associate.isx"
@@ -75,14 +73,12 @@
 #ifdef MagickDynamicPackage
   #include "run-ppm.isx"
 #endif
-#include "run-register-com.isx"
 
 [UninstallRun]
 #include "uninstallrun-pathtool.isx"
 #ifdef MagickDynamicPackage
   #include "uninstallrun-ppm.isx"
 #endif
-#include "uninstallrun-unregister-com.isx"
 
 [Code]
 function ModPathDir(): TArrayOfString;
