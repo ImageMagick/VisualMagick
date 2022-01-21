@@ -527,7 +527,7 @@ void ProjectFile::writePreprocessorDefinitions(wofstream &file,const bool debug)
   if (_project->isExe() && _wizard->solutionType() != SolutionType::STATIC_MT)
     file << ";_AFXDLL";
   if (_wizard->includeIncompatibleLicense())
-    file << ";_AFXDLL,_MAGICK_INCOMPATIBLE_LICENSES_";
+    file << ";_MAGICK_INCOMPATIBLE_LICENSES_";
 }
 
 void ProjectFile::write(wofstream &file,const vector<Project*> &allProjects)
