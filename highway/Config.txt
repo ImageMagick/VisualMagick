@@ -10,6 +10,7 @@
 ..\..\highway
 
 [EXCLUDES]
+nanobenchmark.cc
 *_test.cc
 
 [VISUAL_STUDIO]
