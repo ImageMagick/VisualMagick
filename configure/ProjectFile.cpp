@@ -632,7 +632,7 @@ void ProjectFile::writeItemDefinitionGroup(wofstream &file,const bool debug)
   file << "      <ProgramDatabaseFileName>" << _wizard->binDirectory() << (_project->isExe() ? _name : name) << ".pdb</ProgramDatabaseFileName>" << endl;
   file << "      <BasicRuntimeChecks>" << (debug ? "EnableFastChecks" : "Default") <<"</BasicRuntimeChecks>" << endl;
   file << "      <OmitFramePointers>" << (debug ? "false" : "true") <<"</OmitFramePointers>" << endl;
-  file << "      <Optimization>" << (debug ? "Disabled" : "Full") <<"</Optimization>" << endl;
+  file << "      <Optimization>" << (debug ? "Disabled" : "MaxSpeed") <<"</Optimization>" << endl;
   file << "      <AdditionalIncludeDirectories>";
   writeAdditionalIncludeDirectories(file,L";");
   file << ";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>" << endl;
