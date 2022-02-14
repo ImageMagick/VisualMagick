@@ -113,6 +113,11 @@ bool Project::isModule() const
   return((_type == ProjectType::DLLMODULETYPE) || (_type == ProjectType::EXEMODULETYPE));
 }
 
+bool Project::isOptimizationDisable() const
+{
+  return(_disableOptimization);
+}
+
 bool Project::isSupported(const VisualStudioVersion visualStudioVersion) const
 {
   return(visualStudioVersion >= _minimumVisualStudioVersion);
@@ -285,6 +290,7 @@ Project::Project(wstring name)
 
   _hasIncompatibleLicense=false;
   _disabledARM64=false;
+  _disableOptimization=false;
   _isOptional=false;
   _type=ProjectType::UNDEFINEDTYPE;
   _useNasm=false;
@@ -350,6 +356,8 @@ void Project::loadConfig(wifstream &config)
       addLines(config,_directories);
     else if (line == L"[DISABLED_ARM64]")
       _disabledARM64=true;
+    else if (line == L"[DISABLE_OPTIMIZATION]")
+      _disableOptimization=true;
     else if (line == L"[DLL]")
       _type=ProjectType::DLLTYPE;
     else if (line == L"[DLLMODULE]")

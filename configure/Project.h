@@ -62,6 +62,8 @@ public:
 
   bool isModule() const;
 
+  bool isOptimizationDisable() const;
+
   bool isSupported(const VisualStudioVersion visualStudioVersion) const;
 
   vector<wstring> &libraries();
@@ -115,6 +117,7 @@ private:
   vector<wstring>      _dependencies;
   vector<wstring>      _directories;
   bool                 _disabledARM64;
+  bool                 _disableOptimization;
   vector<wstring>      _excludes;
   vector<wstring>      _excludesX86;
   vector<wstring>      _excludesX64;

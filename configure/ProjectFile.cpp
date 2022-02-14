@@ -630,9 +630,9 @@ void ProjectFile::writeItemDefinitionGroup(wofstream &file,const bool debug)
   file << "      <OpenMPSupport>" << (_wizard->useOpenMP() ? "true" : "false") << "</OpenMPSupport>" << endl;
   file << "      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>" << endl;
   file << "      <ProgramDatabaseFileName>" << _wizard->binDirectory() << (_project->isExe() ? _name : name) << ".pdb</ProgramDatabaseFileName>" << endl;
-  file << "      <BasicRuntimeChecks>" << (debug ? "EnableFastChecks" : "Default") <<"</BasicRuntimeChecks>" << endl;
-  file << "      <OmitFramePointers>" << (debug ? "false" : "true") <<"</OmitFramePointers>" << endl;
-  file << "      <Optimization>" << (debug ? "Disabled" : "MaxSpeed") <<"</Optimization>" << endl;
+  file << "      <BasicRuntimeChecks>" << (debug ? "EnableFastChecks" : "Default") << "</BasicRuntimeChecks>" << endl;
+  file << "      <OmitFramePointers>" << (debug ? "false" : "true") << "</OmitFramePointers>" << endl;
+  file << "      <Optimization>" << (debug || _project->isOptimizationDisable() ? "Disabled" : "MaxSpeed") << "</Optimization>" << endl;
   file << "      <AdditionalIncludeDirectories>";
   writeAdditionalIncludeDirectories(file,L";");
   file << ";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>" << endl;
