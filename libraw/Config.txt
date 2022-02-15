@@ -5,6 +5,8 @@
 
 [DEFINES_DLL]
 LIBRAW_BUILDLIB
+USE_ZLIB
+USE_JPEG
 
 [DEFINES_LIB]
 LIBRAW_NODLL
@@ -23,10 +25,16 @@ LIBRAW_NODLL
 ..\..\libraw\src\write
 
 [INCLUDES]
+..\..\jpeg-turbo
 ..\..\libraw
+..\..\zlib
 
 [EXCLUDES]
 *_ph.cpp
+
+[DEPENDENCIES]
+jpeg-turbo
+zlib
 
 [CONFIG_DEFINE]
 /*
