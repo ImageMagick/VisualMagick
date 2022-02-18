@@ -10,9 +10,6 @@
 
 /utilities/ImageMagick.version.h
 
-ImageMagickObject/dlldata.c
-ImageMagickObject/vc*
-
 .vs
 .vscode
 bin
