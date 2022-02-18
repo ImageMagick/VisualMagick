@@ -50,8 +50,6 @@ public:
 
   bool isConsole() const;
 
-  bool isCom() const;
-
   bool isDll() const;
 
   bool isExe() const;

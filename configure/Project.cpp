@@ -83,14 +83,9 @@ bool Project::isConsole() const
   return(_type != ProjectType::APPTYPE);
 }
 
-bool Project::isCom() const
-{
-  return(_type == ProjectType::COMTYPE);
-}
-
 bool Project::isDll() const
 {
-  return((_type == ProjectType::DLLTYPE) || (_type == ProjectType::DLLMODULETYPE) || (_type == ProjectType::COMTYPE));
+  return((_type == ProjectType::DLLTYPE) || (_type == ProjectType::DLLMODULETYPE));
 }
 
 bool Project::isExe() const
@@ -230,12 +225,6 @@ bool Project::loadFiles(const ConfigureWizard &wizard)
 
   switch(_type)
   {
-    case ProjectType::COMTYPE:
-    {
-      projectFile=new ProjectFile(&wizard,this,L"COM",_name);
-      _files.push_back(projectFile);
-      break;
-    }
     case ProjectType::DLLMODULETYPE:
     {
       loadModules(wizard);
@@ -340,8 +329,6 @@ void Project::loadConfig(wifstream &config)
     line=readLine(config);
     if (line == L"[APP]")
       _type=ProjectType::APPTYPE;
-    else if (line == L"[COM]")
-      _type=ProjectType::COMTYPE;
     else if (line == L"[CONFIG_DEFINE]")
       addLines(config,_configDefine);
     else if (line == L"[DEFINES_DLL]")

@@ -218,9 +218,6 @@ void ProjectFile::write(const vector<Project*> &allprojects)
 
 bool ProjectFile::isLib() const
 {
-  if (_project->isCom())
-    return(false);
-
   return(_project->isLib() || (_wizard->solutionType() != SolutionType::DYNAMIC_MT && _project->isDll()));
 }
 
@@ -344,9 +341,6 @@ wstring ProjectFile::getTargetName(const bool debug)
 {
   wstring
     targetName;
-
-  if (_project->isCom())
-    return _name;
 
   targetName=_prefix+L"_";
   if (_prefix.compare(L"FILTER") != 0)
@@ -508,7 +502,7 @@ void ProjectFile::writePreprocessorDefinitions(wofstream &file,const bool debug)
   {
     file << ";" << *def;
   }
-  if (isLib() || (_wizard->solutionType() != SolutionType::DYNAMIC_MT && (_project->isExe() || _project->isCom())))
+  if (isLib() || (_wizard->solutionType() != SolutionType::DYNAMIC_MT && (_project->isExe())))
   {
     foreach (wstring,def,_definesLib)
     {
