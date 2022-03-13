@@ -28,6 +28,8 @@ public:
 
   wstring fullVersion() const;
 
+  wstring gitVersion() const;
+
   wstring interfaceVersion() const;
 
   wstring libAddendum() const;
@@ -52,8 +54,13 @@ public:
 
 private:
 
+  wstring executeCommand(const wchar_t *command);
+
   void loadValue(const wstring line, const wstring keyword, wstring *value);
 
+  void setGitVersion();
+
+  wstring _gitVersion;
   wstring _major;
   wstring _minor;
   wstring _micro;

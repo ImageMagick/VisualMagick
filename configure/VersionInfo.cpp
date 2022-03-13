@@ -25,9 +25,47 @@ VersionInfo::VersionInfo()
 {
 }
 
+wstring VersionInfo::executeCommand(const wchar_t* command)
+{
+  FILE
+    *pipe;
+
+  wstring
+    result;
+
+  pipe=_wpopen(command, L"rt");
+  if (pipe == (FILE *) NULL)
+    return(L"");
+  try
+  {
+    char
+      buffer[50];
+
+    size_t
+      length;
+
+    while ((length=fread(buffer,sizeof(*buffer),sizeof(buffer),pipe)) != 0)
+      result+=wstring(buffer,buffer+length);
+  }
+  catch(...)
+  {
+    _pclose(pipe);
+    return(L"");
+  }
+  if (_pclose(pipe) != 0)
+    return(L"");
+  result=replace(result,L"\n",L"");
+  return(result);
+}
+
+wstring VersionInfo::gitVersion() const
+{
+  return(_gitVersion);
+}
+
 wstring VersionInfo::fullVersion() const
 {
-  return _major+L"."+_minor+L"."+_micro+L"."+_patchlevel;
+  return(_major+L"."+_minor+L"."+_micro+L"."+_patchlevel);
 }
 
 wstring VersionInfo::interfaceVersion() const
@@ -58,7 +96,7 @@ bool VersionInfo::load()
   wstring
     line;
 
-  version.open("..\\..\\ImageMagick\\m4\\version.m4");
+  version.open(L"..\\..\\ImageMagick\\m4\\version.m4");
   if (!version)
     return(false);
 
@@ -79,9 +117,11 @@ bool VersionInfo::load()
 
   version.close();
 
+  setGitVersion();
+
   return(_major != L"" && _minor != L"" && _micro != L"" && _patchlevel != L"" && _libraryCurrent != L"" &&
          _libraryRevision != L"" && _libraryAge != L"" && _libVersion != L"" && _ppLibraryCurrent != L"" &&
-         _ppLibraryRevision != L"" && _ppLibraryAge != L"");
+         _ppLibraryRevision != L"" && _ppLibraryAge != L"" && _gitVersion != L"");
 }
 
 void VersionInfo::loadValue(const wstring line,const wstring keyword,wstring *value)
@@ -130,6 +170,30 @@ wstring VersionInfo::releaseDate() const
   (void) wcsftime(buffer,11,L"%Y-%m-%d",&tm);
 
   return(wstring(buffer));
+}
+
+void VersionInfo::setGitVersion()
+{
+  struct _stat64
+    attributes;
+
+  _gitVersion=executeCommand(L"cd ..\\..\\ImageMagick && git rev-parse --short HEAD");
+  if (_gitVersion != L"")
+    _gitVersion+=executeCommand(L"cd ..\\..\\ImageMagick && git log -1 --format=:%cd --date=format:%Y%m%d");
+  if (_gitVersion == L"" && _wstati64(L"..\\..\\ImageMagick\\ChangeLog.md",&attributes) == 0)
+  {
+    char
+      buffer[9];
+
+    struct tm
+      tm;
+
+    if (localtime_s(&tm,&attributes.st_mtime) == 0)
+    {
+      strftime(buffer,sizeof(buffer),"%Y%m%d",&tm);
+      _gitVersion=std::wstring(buffer,buffer+sizeof(buffer));
+    }
+  }
 }
 
 wstring VersionInfo::version() const
