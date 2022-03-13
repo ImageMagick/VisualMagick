@@ -58,6 +58,24 @@ wstring VersionInfo::executeCommand(const wchar_t* command)
   return(result);
 }
 
+wstring VersionInfo::getFileModificationDate(const wchar_t *fileName,const wchar_t *format)
+{
+  wchar_t
+    buffer[20];
+
+  struct tm
+    tm;
+
+  struct _stat64
+    attributes;
+
+  if (_wstati64(fileName,&attributes) != 0)
+    return(L"");
+  (void) localtime_s(&tm,&attributes.st_mtime);
+  (void) wcsftime(buffer,20,format,&tm);
+  return(wstring(buffer));
+}
+
 wstring VersionInfo::gitRevision() const
 {
   return(_gitRevision);
@@ -118,10 +136,11 @@ bool VersionInfo::load()
   version.close();
 
   setGitRevision();
+  setReleaseDate();
 
   return(_major != L"" && _minor != L"" && _micro != L"" && _patchlevel != L"" && _libraryCurrent != L"" &&
          _libraryRevision != L"" && _libraryAge != L"" && _libVersion != L"" && _ppLibraryCurrent != L"" &&
-         _ppLibraryRevision != L"" && _ppLibraryAge != L"" && _gitRevision != L"");
+         _ppLibraryRevision != L"" && _ppLibraryAge != L"" && _gitRevision != L"" && _releaseDate != L"");
 }
 
 void VersionInfo::loadValue(const wstring line,const wstring keyword,wstring *value)
@@ -156,52 +175,31 @@ wstring VersionInfo::ppInterfaceVersion() const
 
 wstring VersionInfo::releaseDate() const
 {
-  wchar_t
-    buffer[11];
-
-  struct tm
-    tm;
-
-  time_t
-    t;
-
-  time(&t);
-  (void) localtime_s(&tm,&t);
-  (void) wcsftime(buffer,11,L"%Y-%m-%d",&tm);
-
-  return(wstring(buffer));
+  return(_releaseDate);
 }
 
 void VersionInfo::setGitRevision()
 {
-  struct _stat64
-    attributes;
-
   _gitRevision=executeCommand(L"cd ..\\..\\ImageMagick && git rev-parse --short HEAD");
   if (_gitRevision != L"")
     _gitRevision+=executeCommand(L"cd ..\\..\\ImageMagick && git log -1 --format=:%cd --date=format:%Y%m%d");
-  if (_gitRevision == L"" && _wstati64(L"..\\..\\ImageMagick\\ChangeLog.md",&attributes) == 0)
-  {
-    char
-      buffer[9];
+  if (_gitRevision == L"")
+    _gitRevision=getFileModificationDate(L"..\\..\\ImageMagick\\ChangeLog.md",L"%Y%m%d");
+}
 
-    struct tm
-      tm;
-
-    if (localtime_s(&tm,&attributes.st_mtime) == 0)
-    {
-      strftime(buffer,sizeof(buffer),"%Y%m%d",&tm);
-      _gitRevision=std::wstring(buffer,buffer+sizeof(buffer));
-    }
-  }
+void VersionInfo::setReleaseDate()
+{
+  _releaseDate=executeCommand(L"cd ..\\..\\ImageMagick && git log -1 --format=%cd --date=format:%Y-%m-%d");
+  if (_gitRevision == L"")
+    _gitRevision=getFileModificationDate(L"..\\..\\ImageMagick\\ChangeLog.md",L"%Y-%m-%d");
 }
 
 wstring VersionInfo::version() const
 {
-  return _major+L"."+_minor+L"."+_micro;
+  return(_major+L"."+_minor+L"."+_micro);
 }
 
 wstring VersionInfo::versionNumber() const
 {
-  return _major+L","+_minor+L","+_micro+L","+_patchlevel;
+  return(_major+L","+_minor+L","+_micro+L","+_patchlevel);
 }

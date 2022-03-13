@@ -56,9 +56,13 @@ private:
 
   wstring executeCommand(const wchar_t *command);
 
-  void loadValue(const wstring line, const wstring keyword, wstring *value);
+  wstring getFileModificationDate(const wchar_t *fileName,const wchar_t *format);
+
+  void loadValue(const wstring line,const wstring keyword,wstring *value);
 
   void setGitRevision();
+
+  void setReleaseDate();
 
   wstring _gitRevision;
   wstring _major;
@@ -72,6 +76,7 @@ private:
   wstring _ppLibraryCurrent;
   wstring _ppLibraryRevision;
   wstring _ppLibraryAge;
+  wstring _releaseDate;
 };
 
 #endif // __VersionInfo__
