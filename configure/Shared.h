@@ -111,14 +111,14 @@ static inline wstring readLicense(const wstring &fileName)
   if (!file)
     return L"UNABLE TO OPEN LICENSE FILE: " + fileName;
 
-  content=trim(wstring((istreambuf_iterator<wchar_t>(file)), istreambuf_iterator<wchar_t>()));
+  content=trim(wstring((istreambuf_iterator<wchar_t>(file)),istreambuf_iterator<wchar_t>()));
 
   file.close();
 
   return (content);
 }
 
-static inline wstring replace(const wstring &str, const wstring &from, const wstring &to)
+static inline wstring replace(const wstring &str,const wstring &from,const wstring &to)
 {
   size_t
     index;
