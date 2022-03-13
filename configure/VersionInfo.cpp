@@ -58,9 +58,9 @@ wstring VersionInfo::executeCommand(const wchar_t* command)
   return(result);
 }
 
-wstring VersionInfo::gitVersion() const
+wstring VersionInfo::gitRevision() const
 {
-  return(_gitVersion);
+  return(_gitRevision);
 }
 
 wstring VersionInfo::fullVersion() const
@@ -117,11 +117,11 @@ bool VersionInfo::load()
 
   version.close();
 
-  setGitVersion();
+  setGitRevision();
 
   return(_major != L"" && _minor != L"" && _micro != L"" && _patchlevel != L"" && _libraryCurrent != L"" &&
          _libraryRevision != L"" && _libraryAge != L"" && _libVersion != L"" && _ppLibraryCurrent != L"" &&
-         _ppLibraryRevision != L"" && _ppLibraryAge != L"" && _gitVersion != L"");
+         _ppLibraryRevision != L"" && _ppLibraryAge != L"" && _gitRevision != L"");
 }
 
 void VersionInfo::loadValue(const wstring line,const wstring keyword,wstring *value)
@@ -172,15 +172,15 @@ wstring VersionInfo::releaseDate() const
   return(wstring(buffer));
 }
 
-void VersionInfo::setGitVersion()
+void VersionInfo::setGitRevision()
 {
   struct _stat64
     attributes;
 
-  _gitVersion=executeCommand(L"cd ..\\..\\ImageMagick && git rev-parse --short HEAD");
-  if (_gitVersion != L"")
-    _gitVersion+=executeCommand(L"cd ..\\..\\ImageMagick && git log -1 --format=:%cd --date=format:%Y%m%d");
-  if (_gitVersion == L"" && _wstati64(L"..\\..\\ImageMagick\\ChangeLog.md",&attributes) == 0)
+  _gitRevision=executeCommand(L"cd ..\\..\\ImageMagick && git rev-parse --short HEAD");
+  if (_gitRevision != L"")
+    _gitRevision+=executeCommand(L"cd ..\\..\\ImageMagick && git log -1 --format=:%cd --date=format:%Y%m%d");
+  if (_gitRevision == L"" && _wstati64(L"..\\..\\ImageMagick\\ChangeLog.md",&attributes) == 0)
   {
     char
       buffer[9];
@@ -191,7 +191,7 @@ void VersionInfo::setGitVersion()
     if (localtime_s(&tm,&attributes.st_mtime) == 0)
     {
       strftime(buffer,sizeof(buffer),"%Y%m%d",&tm);
-      _gitVersion=std::wstring(buffer,buffer+sizeof(buffer));
+      _gitRevision=std::wstring(buffer,buffer+sizeof(buffer));
     }
   }
 }

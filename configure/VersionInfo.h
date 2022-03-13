@@ -28,7 +28,7 @@ public:
 
   wstring fullVersion() const;
 
-  wstring gitVersion() const;
+  wstring gitRevision() const;
 
   wstring interfaceVersion() const;
 
@@ -58,9 +58,9 @@ private:
 
   void loadValue(const wstring line, const wstring keyword, wstring *value);
 
-  void setGitVersion();
+  void setGitRevision();
 
-  wstring _gitVersion;
+  wstring _gitRevision;
   wstring _major;
   wstring _minor;
   wstring _micro;

@@ -429,7 +429,7 @@ void Solution::writeVersion(const ConfigureWizard &wizard,const VersionInfo &ver
     line=replace(line,L"@CXX@",wizard.visualStudioVersionName());
     line=replace(line,L"@DOCUMENTATION_PATH@",L"unavailable");
     line=replace(line,L"@LIB_VERSION@",versionInfo.version());
-    line=replace(line,L"@MAGICK_GIT_REVISION@",versionInfo.gitVersion());
+    line=replace(line,L"@MAGICK_GIT_REVISION@",versionInfo.gitRevision());
     line=replace(line,L"@MAGICK_LIB_VERSION_NUMBER@",versionInfo.libVersionNumber());
     line=replace(line,L"@MAGICK_LIB_VERSION_TEXT@",versionInfo.version());
     line=replace(line,L"@MAGICK_LIBRARY_CURRENT@",versionInfo.interfaceVersion());
