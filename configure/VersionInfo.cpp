@@ -190,7 +190,7 @@ void VersionInfo::setGitRevision()
 void VersionInfo::setReleaseDate()
 {
   _releaseDate=executeCommand(L"cd ..\\..\\ImageMagick && git log -1 --format=%cd --date=format:%Y-%m-%d");
-  if (_gitRevision == L"")
+  if (_releaseDate == L"")
     _gitRevision=getFileModificationDate(L"..\\..\\ImageMagick\\ChangeLog.md",L"%Y-%m-%d");
 }
 
