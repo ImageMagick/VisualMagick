@@ -120,14 +120,14 @@ bool VersionInfo::load()
 
   while (getline(version,line))
   {
-    loadValue(line,L"_major_version",&_major);
-    loadValue(line,L"_minor_version",&_minor);
-    loadValue(line,L"_micro_version",&_micro);
-    loadValue(line,L"_patchlevel_version",&_patchlevel);
     loadValue(line,L"_library_current",&_libraryCurrent);
     loadValue(line,L"_library_revision",&_libraryRevision);
     loadValue(line,L"_library_age",&_libraryAge);
     loadValue(line,L"_lib_version",&_libVersion);
+    loadValue(line,L"_major_version",&_major);
+    loadValue(line,L"_minor_version",&_minor);
+    loadValue(line,L"_micro_version",&_micro);
+    loadValue(line,L"_patchlevel_version",&_patchlevel);
     loadValue(line,L"pp_library_current",&_ppLibraryCurrent);
     loadValue(line,L"pp_library_revision",&_ppLibraryRevision);
     loadValue(line,L"pp_library_age",&_ppLibraryAge);

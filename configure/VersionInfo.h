@@ -65,14 +65,14 @@ private:
   void setReleaseDate();
 
   wstring _gitRevision;
-  wstring _major;
-  wstring _minor;
-  wstring _micro;
-  wstring _patchlevel;
   wstring _libraryCurrent;
   wstring _libraryRevision;
   wstring _libraryAge;
   wstring _libVersion;
+  wstring _major;
+  wstring _minor;
+  wstring _micro;
+  wstring _patchlevel;
   wstring _ppLibraryCurrent;
   wstring _ppLibraryRevision;
   wstring _ppLibraryAge;
