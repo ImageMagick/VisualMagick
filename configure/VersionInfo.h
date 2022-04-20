@@ -65,6 +65,7 @@ private:
   void setReleaseDate();
 
   wstring _gitRevision;
+  wstring _isBeta;
   wstring _libraryCurrent;
   wstring _libraryRevision;
   wstring _libraryAge;

@@ -93,7 +93,10 @@ wstring VersionInfo::interfaceVersion() const
 
 wstring VersionInfo::libAddendum() const
 {
-  return(L"-"+_patchlevel);
+  if (_isBeta == L"y")
+    return(L"-"+_patchlevel+L" beta");
+  else
+    return(L"-"+_patchlevel);
 }
 
 wstring VersionInfo::libVersion() const
@@ -120,6 +123,7 @@ bool VersionInfo::load()
 
   while (getline(version,line))
   {
+    loadValue(line,L"_is_beta",&_isBeta);
     loadValue(line,L"_library_current",&_libraryCurrent);
     loadValue(line,L"_library_revision",&_libraryRevision);
     loadValue(line,L"_library_age",&_libraryAge);
