@@ -9,6 +9,7 @@ _MAGICKLIB_
 [INCLUDES]
 ..\..\ImageMagick
 ..\..\bzlib
+..\..\fftw\api
 ..\..\freetype\include
 ..\..\glib
 ..\..\glib\glib
@@ -27,6 +28,7 @@ widget.c
 [DEPENDENCIES]
 bzlib
 freetype
+fftw
 lcms
 libxml
 lqr
