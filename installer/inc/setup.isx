@@ -28,6 +28,7 @@ ArchitecturesInstallIn64BitMode=arm64
   #else
     #define public MagickArchitecture "x86"
     #define public MagickArchitectureDescription "(32-bit)"
+  #endif
 #endif
 
 #ifdef MagickHDRI
