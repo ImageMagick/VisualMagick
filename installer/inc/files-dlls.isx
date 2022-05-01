@@ -21,7 +21,11 @@
 #ifdef Magick64BitArchitecture
   #define  public MagickArchitecture "x64"
 #else
-  #define  public MagickArchitecture "x86"
+  #ifdef MagickArm64Architecture
+    #define  public MagickArchitecture "arm64"
+  #else
+    #define  public MagickArchitecture "x86"
+  #endif
 #endif
 
 ;

@@ -44,6 +44,8 @@
 #ifdef MagickDynamicPackage
   #include "tasks-legacy.isx"
   #include "tasks-install-devel.isx"
+#endif
+#ifdef MagickPerlMagick
   #include "tasks-install-perlmagick.isx"
 #endif
 
@@ -59,8 +61,10 @@
 #include "files-documentation.isx"
 #include "files-licenses.isx"
 #include "files-dlls.isx"
-#ifdef MagickDynamicPackage
+#ifdef MagickPerlMagick
   #include "files-perlmagick.isx"
+#endif
+#ifdef MagickDynamicPackage
   #include "files-development.isx"
 #endif
 
@@ -69,14 +73,13 @@
 
 [Run]
 #include "run-pathtool.isx"
-
-#ifdef MagickDynamicPackage
+#ifdef MagickPerlMagick
   #include "run-ppm.isx"
 #endif
 
 [UninstallRun]
 #include "uninstallrun-pathtool.isx"
-#ifdef MagickDynamicPackage
+#ifdef MagickPerlMagick
   #include "uninstallrun-ppm.isx"
 #endif
 

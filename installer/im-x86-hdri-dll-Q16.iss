@@ -19,6 +19,7 @@
 ; #define DEBUG 1
 
 #define  public MagickDynamicPackage 1
+#define  public MagickPerlMagick 1
 #define  public MagickHDRI 1
 #define  public QuantumDepth "16"
 #include "inc\body.isx"
