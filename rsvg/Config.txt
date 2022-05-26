@@ -1,18 +1,18 @@
 [DLL]
 
 [LICENSE]
-..\..\librsvg\COPYING
+..\..\rsvg\librsvg\COPYING
 
 [DEFINES]
 GDK_PIXBUF_ENABLE_BACKEND
 RSVG_COMPILATION
 
 [DIRECTORIES]
-..\..\librsvg
-..\..\librsvg\gdk-pixbuf
-..\..\librsvg\gdk-pixbuf\gdk-pixbuf
-..\..\librsvg\gdk-pixbuf\gdk-pixbuf\pixops
-..\..\librsvg\gdk-pixbuf-loader
+..\..\rsvg\gdk-pixbuf
+..\..\rsvg\gdk-pixbuf\gdk-pixbuf
+..\..\rsvg\gdk-pixbuf\gdk-pixbuf\pixops
+..\..\rsvg\librsvg
+..\..\rsvg\librsvg\gdk-pixbuf-loader
 
 [INCLUDES]
 ..\..\cairo\src
@@ -23,10 +23,10 @@ RSVG_COMPILATION
 ..\..\harfbuzz\src
 ..\..\jp2\src\libjasper\include
 ..\..\jpeg-turbo
-..\..\libxml\include
 ..\..\pango
 ..\..\png
 ..\..\tiff\libtiff
+..\..\xml\include
 
 [EXCLUDES]
 fallback-c89.c
@@ -55,10 +55,10 @@ croco
 glib
 jp2
 jpeg-turbo
-libxml
 pango
 png
 tiff
+xml
 
 [CONFIG_DEFINE]
 /*

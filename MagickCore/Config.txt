@@ -13,11 +13,11 @@ _MAGICKLIB_
 ..\..\freetype\include
 ..\..\glib
 ..\..\glib\glib
-..\..\libxml\include
 ..\..\lcms\include
 ..\..\lqr
 ..\..\lqr\lqr
 ..\..\raqm\src
+..\..\xml\include
 ..\..\zlib
 
 [EXCLUDES]
@@ -30,9 +30,9 @@ bzlib
 freetype
 fftw
 lcms
-libxml
 lqr
 raqm
+xml
 zlib
 
 [WARNING_LEVEL]

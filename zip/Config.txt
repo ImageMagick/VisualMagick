@@ -1,14 +1,14 @@
 [DLL]
 
 [LICENSE]
-..\..\libzip\LICENSE
+..\..\zip\LICENSE
 
 [DIRECTORIES]
-..\..\libzip\lib
+..\..\zip\lib
 
 [INCLUDES]
 ..\..\bzlib
-..\..\liblzma\src\liblzma\api
+..\..\lzma\src\liblzma\api
 ..\..\zlib
 
 [EXCLUDES]
@@ -25,7 +25,7 @@ zip_mkstempm.c
 
 [DEPENDENCIES]
 bzlib
-liblzma
+lzma
 zlib
 
 [CONFIG_DEFINE]

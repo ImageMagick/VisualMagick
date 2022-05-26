@@ -1,7 +1,7 @@
 [DLL]
 
 [LICENSE]
-..\..\libraw\COPYRIGHT
+..\..\raw\COPYRIGHT
 
 [DEFINES_DLL]
 LIBRAW_BUILDLIB
@@ -12,21 +12,21 @@ USE_JPEG
 LIBRAW_NODLL
 
 [DIRECTORIES]
-..\..\libraw\internal
-..\..\libraw\src
-..\..\libraw\src\decoders
-..\..\libraw\src\demosaic
-..\..\libraw\src\integration
-..\..\libraw\src\metadata
-..\..\libraw\src\postprocessing
-..\..\libraw\src\preprocessing
-..\..\libraw\src\tables
-..\..\libraw\src\utils
-..\..\libraw\src\write
+..\..\raw\internal
+..\..\raw\src
+..\..\raw\src\decoders
+..\..\raw\src\demosaic
+..\..\raw\src\integration
+..\..\raw\src\metadata
+..\..\raw\src\postprocessing
+..\..\raw\src\preprocessing
+..\..\raw\src\tables
+..\..\raw\src\utils
+..\..\raw\src\write
 
 [INCLUDES]
 ..\..\jpeg-turbo
-..\..\libraw
+..\..\raw
 ..\..\zlib
 
 [EXCLUDES]

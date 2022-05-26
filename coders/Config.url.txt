@@ -1,5 +1,5 @@
 [INCLUDES]
-..\..\libxml\include
+..\..\xml\include
 
 [DEPENDENCIES]
-libxml
+xml

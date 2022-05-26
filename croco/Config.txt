@@ -9,4 +9,4 @@
 [INCLUDES]
 ..\..\glib
 ..\..\glib\glib
-..\..\libxml\include
+..\..\xml\include

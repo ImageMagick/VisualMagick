@@ -1,7 +1,7 @@
 [DLL]
 
 [LICENSE]
-..\..\liblzma\COPYING.LGPLv2.1
+..\..\lzma\COPYING.LGPLv2.1
 
 [DEFINES]
 HAVE_CONFIG_H
@@ -10,16 +10,16 @@ HAVE_CONFIG_H
 DLL_EXPORT
 
 [DIRECTORIES]
-..\..\liblzma\src\common
-..\..\liblzma\src\liblzma\api
-..\..\liblzma\src\liblzma\check
-..\..\liblzma\src\liblzma\common
-..\..\liblzma\src\liblzma\delta
-..\..\liblzma\src\liblzma\lz
-..\..\liblzma\src\liblzma\lzma
-..\..\liblzma\src\liblzma\rangecoder
-..\..\liblzma\src\liblzma\simple
-..\..\liblzma\windows
+..\..\lzma\src\common
+..\..\lzma\src\liblzma\api
+..\..\lzma\src\liblzma\check
+..\..\lzma\src\liblzma\common
+..\..\lzma\src\liblzma\delta
+..\..\lzma\src\liblzma\lz
+..\..\lzma\src\liblzma\lzma
+..\..\lzma\src\liblzma\rangecoder
+..\..\lzma\src\liblzma\simple
+..\..\lzma\windows
 
 [EXCLUDES]
 crc32_small.c

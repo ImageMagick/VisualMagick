@@ -1,7 +1,7 @@
 [STATIC]
 
 [LICENSE]
-..\..\libde265\COPYING
+..\..\de265\COPYING
 
 [DEFINES]
 HAVE_STDINT_H
@@ -10,11 +10,11 @@ HAVE_STDINT_H
 LIBDE265_STATIC_BUILD
 
 [DIRECTORIES]
-..\..\libde265\extra
-..\..\libde265\libde265
-..\..\libde265\libde265\encoder
-..\..\libde265\libde265\encoder\algo
+..\..\de265\extra
+..\..\de265\libde265
+..\..\de265\libde265\encoder
+..\..\de265\libde265\encoder\algo
 
 [INCLUDES]
-..\..\libde265
-..\..\libde265\libde265
+..\..\de265
+..\..\de265\libde265

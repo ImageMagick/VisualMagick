@@ -1,15 +1,15 @@
 [DLL]
 
 [LICENSE]
-..\..\libxml\COPYING
+..\..\xml\COPYING
 
 [DEFINES_LIB]
 LIBXML_STATIC
 
 [DIRECTORIES]
-..\..\libxml
-..\..\libxml\include
-..\..\libxml\include\libxml
+..\..\xml
+..\..\xml\include
+..\..\xml\include\libxml
 
 [INCLUDES]
 ..\..\zlib

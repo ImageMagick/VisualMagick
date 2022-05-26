@@ -1,7 +1,7 @@
 [DLL]
 
 [LICENSE]
-..\..\libheif\COPYING
+..\..\heif\COPYING
 
 [DEFINES]
 HAVE_AOM_DECODER
@@ -16,12 +16,12 @@ LIBHEIF_STATIC_BUILD
 LIBHEIF_EXPORTS
 
 [DIRECTORIES]
-..\..\libheif\libheif
+..\..\heif\libheif
 
 [INCLUDES]
 ..\..\aom
-..\..\libde265
-..\..\libheif
+..\..\de265
+..\..\heif
 
 [EXCLUDES]
 box_fuzzer.cc
@@ -33,7 +33,7 @@ heif_encoder_x265.cc
 
 [DEPENDENCIES]
 aom
-libde265
+de265
 
 [CONFIG_DEFINE]
 /*

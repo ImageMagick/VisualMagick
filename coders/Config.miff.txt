@@ -1,6 +1,6 @@
 [INCLUDES]
 ..\..\bzlib
-..\..\liblzma\src\liblzma\api
+..\..\lzma\src\liblzma\api
 ..\..\zlib
 
 [DEFINES_LIB]
@@ -8,5 +8,5 @@ LZMA_API_STATIC
 
 [DEPENDENCIES]
 bzlib
-liblzma
+lzma
 zlib

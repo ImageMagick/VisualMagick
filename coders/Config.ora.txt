@@ -1,5 +1,5 @@
 [INCLUDES]
-..\..\libzip\lib
+..\..\zip\lib
 
 [DEPENDENCIES]
-libzip
+zip
