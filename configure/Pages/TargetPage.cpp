@@ -60,7 +60,7 @@ void TargetPage::excludeDeprecated(bool value)
 
 bool TargetPage::includeIncompatibleLicense() const
 {
-  return(_includeIncompatibleLicense == 1);
+  return(_includeIncompatibleLicense == TRUE);
 }
 
 void TargetPage::includeIncompatibleLicense(bool value)
@@ -70,7 +70,7 @@ void TargetPage::includeIncompatibleLicense(bool value)
 
 bool TargetPage::includeOptional() const
 {
-  return(_includeOptional == 1);
+  return(_includeOptional == TRUE);
 }
 
 void TargetPage::includeOptional(bool value)
@@ -80,7 +80,7 @@ void TargetPage::includeOptional(bool value)
 
 bool TargetPage::installedSupport() const
 {
-	return(_installedSupport == 1);
+	return(_installedSupport == TRUE);
 }
 
 void TargetPage::installedSupport(bool value)
@@ -120,7 +120,7 @@ void TargetPage::solutionType(SolutionType value)
 
 bool TargetPage::useHDRI() const
 {
-  return(_useHDRI == 1);
+  return(_useHDRI == TRUE);
 }
 
 void TargetPage::useHDRI(bool value)
@@ -130,7 +130,7 @@ void TargetPage::useHDRI(bool value)
 
 bool TargetPage::useOpenCL() const
 {
-  return(_useOpenCL == 1);
+  return(_useOpenCL == TRUE);
 }
 
 void TargetPage::useOpenCL(bool value)
@@ -140,7 +140,7 @@ void TargetPage::useOpenCL(bool value)
 
 bool TargetPage::useOpenMP() const
 {
-  return(_useOpenMP == 1);
+  return(_useOpenMP == TRUE);
 }
 
 void TargetPage::useOpenMP(bool value)
@@ -160,7 +160,7 @@ void TargetPage::visualStudioVersion(VisualStudioVersion value)
 
 bool TargetPage::zeroConfigurationSupport() const
 {
-  return(_zeroConfigurationSupport != 0);
+  return(_zeroConfigurationSupport != FALSE);
 }
 
 void TargetPage::zeroConfigurationSupport(bool value)
