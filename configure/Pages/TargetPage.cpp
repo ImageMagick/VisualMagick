@@ -50,7 +50,7 @@ TargetPage::~TargetPage()
 
 bool TargetPage::excludeDeprecated() const
 {
-  return(_excludeDeprecated == 1);
+  return(_excludeDeprecated == TRUE);
 }
 
 void TargetPage::excludeDeprecated(bool value)
