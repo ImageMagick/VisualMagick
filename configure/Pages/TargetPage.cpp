@@ -80,12 +80,12 @@ void TargetPage::includeOptional(bool value)
 
 bool TargetPage::installedSupport() const
 {
-	return(_installedSupport == TRUE);
+  return(_installedSupport == TRUE);
 }
 
 void TargetPage::installedSupport(bool value)
 {
-	_installedSupport = value;
+  _installedSupport=value;
 }
 
 Platform TargetPage::platform() const
