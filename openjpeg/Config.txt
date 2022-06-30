@@ -6,6 +6,9 @@
 [DEFINES]
 DLL_EXPORT
 
+[DEFINES_LIB]
+OPJ_STATIC
+
 [DIRECTORIES]
 ..\..\openjpeg\src\lib\openjp2
 
