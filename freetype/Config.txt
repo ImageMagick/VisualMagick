@@ -2,11 +2,12 @@
 
 [LICENSE]
 ..\..\freetype\docs\FTL.TXT
+..\..\zlib
 
 [DEFINES]
 FT2_BUILD_LIBRARY
 FT_CONFIG_OPTION_ERROR_STRINGS
-Z_PREFIX
+FT_CONFIG_OPTION_SYSTEM_ZLIB
 
 [DEFINES_DLL]
 DLL_EXPORT
@@ -72,6 +73,9 @@ type1.c
 type1cid.c
 type42.c
 zutil.c
+
+[DEPENDENCIES]
+zlib
 
 [CONFIG_DEFINE]
 /*
