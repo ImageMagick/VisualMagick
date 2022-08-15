@@ -40,6 +40,8 @@ lcms
 [VISUAL_STUDIO]
 2017
 
+[DISABLE_OPTIMIZATION]
+
 [CONFIG_DEFINE]
 /*
   Define to use the jpeg-xl library
