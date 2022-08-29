@@ -4,6 +4,7 @@
 ..\..\jpeg-xl\LICENSE
 
 [DIRECTORIES]
+..\..\jpeg-xl\lib\include\jxl
 ..\..\jpeg-xl\lib\jxl
 ..\..\jpeg-xl\lib\jxl\base
 ..\..\jpeg-xl\lib\jxl\butteraugli
@@ -11,6 +12,7 @@
 ..\..\jpeg-xl\lib\jxl\modular
 ..\..\jpeg-xl\lib\jxl\modular\encoding
 ..\..\jpeg-xl\lib\jxl\modular\transform
+..\..\jpeg-xl\lib\jxl\render_pipeline
 ..\..\jpeg-xl\lib\threads
 
 [DEFINES_LIB]
