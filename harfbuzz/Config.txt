@@ -21,7 +21,10 @@ dump-indic-data.cc
 dump-khmer-data.cc
 dump-myanmar-data.cc
 dump-use-data.cc
+failing-alloc.c
 harfbuzz.cc
+harfbuzz-subset.cc
+hb-subset*
 main.cc
 test.cc
 test-*
