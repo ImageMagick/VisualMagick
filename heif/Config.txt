@@ -18,6 +18,7 @@ LIBHEIF_EXPORTS
 
 [DIRECTORIES]
 ..\..\heif\libheif
+..\..\heif\libheif\plugins
 
 [INCLUDES]
 ..\..\aom
@@ -30,6 +31,7 @@ encoder_fuzzer.cc
 file_fuzzer.cc
 heif_decoder_dav1d.cc
 heif_encoder_rav1e.cc
+heif_encoder_svt.cc
 heif_encoder_x265.cc
 
 [DEPENDENCIES]
