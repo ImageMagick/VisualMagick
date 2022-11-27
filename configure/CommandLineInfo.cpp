@@ -155,8 +155,6 @@ void CommandLineInfo::ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast
     _platform=Platform::X86;
   else if (_wcsicmp(pszParam, L"x64") == 0)
     _platform=Platform::X64;
-  else if (_wcsicmp(pszParam, L"VS2015") == 0)
-    _visualStudioVersion=VisualStudioVersion::VS2015;
   else if (_wcsicmp(pszParam, L"VS2017") == 0)
     _visualStudioVersion=VisualStudioVersion::VS2017;
   else if (_wcsicmp(pszParam, L"VS2019") == 0)

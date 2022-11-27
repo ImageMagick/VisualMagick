@@ -16,6 +16,3 @@ HWY_STATIC_DEFINE
 [EXCLUDES]
 nanobenchmark.cc
 *_test.cc
-
-[VISUAL_STUDIO]
-2017

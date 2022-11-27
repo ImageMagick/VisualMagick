@@ -168,7 +168,6 @@ wstring ConfigureWizard::visualStudioVersionName() const
 {
   switch(_targetPage.visualStudioVersion())
   {
-    case VisualStudioVersion::VS2015: return(L"VS2015");
     case VisualStudioVersion::VS2017: return(L"VS2017");
     case VisualStudioVersion::VS2019: return(L"VS2019");
     case VisualStudioVersion::VS2022: return(L"VS2022");

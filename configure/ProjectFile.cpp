@@ -552,9 +552,7 @@ void ProjectFile::write(wofstream &file,const vector<Project*> &allProjects)
     file << "    <ConfigurationType>DynamicLibrary</ConfigurationType>" << endl;
   else if (_project->isExe())
     file << "    <ConfigurationType>Application</ConfigurationType>" << endl;
-  if (_wizard->visualStudioVersion() == VisualStudioVersion::VS2015)
-    file << "    <PlatformToolset>v140_xp</PlatformToolset>" << endl;
-  else if (_wizard->visualStudioVersion() == VisualStudioVersion::VS2017)
+  if (_wizard->visualStudioVersion() == VisualStudioVersion::VS2017)
     file << "    <PlatformToolset>v141</PlatformToolset>" << endl;
   else if (_wizard->visualStudioVersion() == VisualStudioVersion::VS2019)
     file << "    <PlatformToolset>v142</PlatformToolset>" << endl;
@@ -634,12 +632,8 @@ void ProjectFile::writeItemDefinitionGroup(wofstream &file,const bool debug)
   writePreprocessorDefinitions(file,debug);
   file << ";%(PreprocessorDefinitions)</PreprocessorDefinitions>" << endl;
   file << "      <MultiProcessorCompilation>true</MultiProcessorCompilation>" << endl;
-  if (_wizard->visualStudioVersion() >= VisualStudioVersion::VS2015)
-    file << "      <AdditionalOptions>/source-charset:utf-8 %(AdditionalOptions)</AdditionalOptions>" << endl;
-  if (_wizard->visualStudioVersion() >= VisualStudioVersion::VS2017) {
-    file << "      <LanguageStandard>stdcpp17</LanguageStandard>" << endl;
-    file << "      <LanguageStandard_C>stdc17</LanguageStandard_C>" << endl;
-  }
+  file << "      <LanguageStandard>stdcpp17</LanguageStandard>" << endl;
+  file << "      <LanguageStandard_C>stdc17</LanguageStandard_C>" << endl;
   file << "    </ClCompile>" << endl;
   file << "    <ResourceCompile>" << endl;
   file << "      <PreprocessorDefinitions>" << (debug ? "_DEBUG" : "NDEBUG") <<";%(PreprocessorDefinitions)</PreprocessorDefinitions>" << endl;

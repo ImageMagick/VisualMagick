@@ -242,8 +242,6 @@ void TargetPage::setVisualStudioVersion()
     _visualStudioVersion=VisualStudioVersion::VS2019;
   else if (hasVisualStudioFolder(L"2017"))
     _visualStudioVersion=VisualStudioVersion::VS2017;
-  else if (!getEnvironmentVariable(L"VS140COMNTOOLS").empty())
-    _visualStudioVersion=VisualStudioVersion::VS2015;
   else
     _visualStudioVersion=VSLATEST;
 }

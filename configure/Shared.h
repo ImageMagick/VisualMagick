@@ -33,9 +33,9 @@ enum class Platform {X86, X64, ARM64};
 
 enum class ProjectType {UNDEFINEDTYPE, APPTYPE, DLLTYPE, DLLMODULETYPE, EXETYPE, EXEMODULETYPE, STATICTYPE};
 
-enum class VisualStudioVersion {VS2015, VS2017, VS2019, VS2022};
+enum class VisualStudioVersion {VS2017, VS2019, VS2022};
 
-#define VSEARLIEST VisualStudioVersion::VS2015
+#define VSEARLIEST VisualStudioVersion::VS2017
 #define VSLATEST VisualStudioVersion::VS2022
 
 static const wstring validSrcFilesArr[] = {L".c", L".cpp", L".cc"};
@@ -138,9 +138,7 @@ static inline wstring replace(const wstring &str,const wstring &from,const wstri
 
 static inline VisualStudioVersion parseVisualStudioVersion(const wstring &version)
 {
-  if (version == L"2015")
-    return(VisualStudioVersion::VS2015);
-  else if (version == L"2017")
+  if (version == L"2017")
     return(VisualStudioVersion::VS2017);
   else if (version == L"2019")
     return(VisualStudioVersion::VS2019);

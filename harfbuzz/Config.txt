@@ -32,6 +32,3 @@ test-*
 [DEPENDENCIES]
 freetype
 glib
-
-[VISUAL_STUDIO]
-2017
