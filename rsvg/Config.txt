@@ -21,7 +21,7 @@ RSVG_COMPILATION
 ..\..\glib\glib
 ..\..\glib\gmodule
 ..\..\harfbuzz\src
-..\..\jp2\src\libjasper\include
+..\..\jasper\src\libjasper\include
 ..\..\jpeg-turbo
 ..\..\pango
 ..\..\png
@@ -53,7 +53,7 @@ timescale.c
 cairo
 croco
 glib
-jp2
+jasper
 jpeg-turbo
 pango
 png

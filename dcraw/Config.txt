@@ -7,9 +7,9 @@ NO_LCMS
 ..\..\dcraw
 
 [INCLUDES]
-..\..\jp2\src\libjasper\include
+..\..\jasper\src\libjasper\include
 ..\..\jpeg-turbo
 
 [DEPENDENCIES]
-jp2
+jasper
 jpeg-turbo
