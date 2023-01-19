@@ -18,9 +18,7 @@ _WEBPLIB_
 ..\..\webp\src\mux
 ..\..\webp\src\utils
 ..\..\webp\src\webp
-
-[EXCLUDES]
-libwebpmux.rc
+..\..\webp\sharpyuv
 
 [CONFIG_DEFINE]
 /*
