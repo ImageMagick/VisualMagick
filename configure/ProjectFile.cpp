@@ -631,6 +631,7 @@ void ProjectFile::writeItemDefinitionGroup(wofstream &file,const bool debug)
   file << "      <PreprocessorDefinitions>";
   writePreprocessorDefinitions(file,debug);
   file << ";%(PreprocessorDefinitions)</PreprocessorDefinitions>" << endl;
+  file << "      <AdditionalOptions>/source-charset:utf-8 %(AdditionalOptions)</AdditionalOptions>" << endl;
   file << "      <MultiProcessorCompilation>true</MultiProcessorCompilation>" << endl;
   file << "      <LanguageStandard>stdcpp17</LanguageStandard>" << endl;
   file << "      <LanguageStandard_C>stdc17</LanguageStandard_C>" << endl;
