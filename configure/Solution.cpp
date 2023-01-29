@@ -200,7 +200,7 @@ void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
     if (wizard.installedSupport())
       config << "#define MAGICKCORE_INSTALLED_SUPPORT" << endl;
     else
-      config << "//#define MAGICKCORE_INSTALLED_SUPPORT" << endl;
+      config << "#undef MAGICKCORE_INSTALLED_SUPPORT" << endl;
     config << endl;
 
     config << "/*" << endl;
@@ -242,7 +242,7 @@ void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
     if (wizard.excludeDeprecated())
       config << "#define MAGICKCORE_EXCLUDE_DEPRECATED" << endl;
     else
-      config << "//#define MAGICKCORE_EXCLUDE_DEPRECATED" << endl;
+      config << "#undef MAGICKCORE_EXCLUDE_DEPRECATED" << endl;
     config << endl;
 
     config << "/*" << endl;
@@ -251,7 +251,7 @@ void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
     if (wizard.zeroConfigurationSupport())
       config << "#define MAGICKCORE_ZERO_CONFIGURATION_SUPPORT" << endl;
     else
-      config << "//#define MAGICKCORE_ZERO_CONFIGURATION_SUPPORT" << endl;
+      config << "#undef MAGICKCORE_ZERO_CONFIGURATION_SUPPORT" << endl;
 
     foreach (Project*,p,_projects)
     {
