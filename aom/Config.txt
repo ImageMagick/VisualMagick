@@ -6,6 +6,7 @@
 [DIRECTORIES]
 ..\..\aom\aom\src
 ..\..\aom\aom_dsp
+..\..\aom\aom_dsp\flow_estimation
 ..\..\aom\aom_mem
 ..\..\aom\aom_scale
 ..\..\aom\aom_util
