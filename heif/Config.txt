@@ -33,6 +33,7 @@ heif_decoder_dav1d.cc
 heif_encoder_rav1e.cc
 heif_encoder_svt.cc
 heif_encoder_x265.cc
+plugins_*
 
 [DEPENDENCIES]
 aom
