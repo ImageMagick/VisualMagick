@@ -15,6 +15,7 @@
 cdjpeg.c
 cjpeg.c
 djpeg.c
+example.c
 jccolext.c
 jcstest.c
 jdatadst-tj.c
@@ -23,12 +24,15 @@ jdcolext.c
 jdcol565.c
 jdmrgext.c
 jdmrg565.c
+jdtrans.c
 jpegtran.c
 jstdhuff.c
 rd*
 tj*
+strtest.c
 turbojpeg.c
 turbojpeg-jni.c
+turbojpeg-mp.c
 wrbmp.c
 wrgif.c
 wrjpgcom.c
