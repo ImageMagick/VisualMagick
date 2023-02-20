@@ -6,6 +6,7 @@
 [DEFINES]
 __CONSOLE__
 _LCMSLIB_
+CMS_NO_REGISTER_KEYWORD
 
 [DIRECTORIES]
 ..\..\lcms\include
