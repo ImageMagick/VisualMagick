@@ -3,6 +3,9 @@
 [LICENSE]
 ..\..\xml\COPYING
 
+[DEFINES]
+IN_LIBXML
+
 [DEFINES_LIB]
 LIBXML_STATIC
 
@@ -20,28 +23,11 @@ ws2_32.lib
 [EXCLUDES]
 nanoftp.c
 nanohttp.c
+rngparser.c
 runsuite.c
 runtest.c
 runxmlconf.c
-testAutomata.c
-testC14N.c
-testHTML.c
-testModule.c
-testReader.c
-testRegexp.c
-testRelax.c
-testSAX.c
-testSchemas.c
-testThreads.c
-testThreadsWin32.c
-testURI.c
-testXPath.c
-testapi.c
-testchar.c
-testdict.c
-testdso.c
-testlimits.c
-testrecurse.c
+test*
 trio.c
 trionan.c
 triostr.c
