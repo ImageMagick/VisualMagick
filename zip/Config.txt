@@ -3,6 +3,9 @@
 [LICENSE]
 ..\..\zip\LICENSE
 
+[DEFINES_LIB]
+ZIP_STATIC
+
 [DIRECTORIES]
 ..\..\zip\lib
 
