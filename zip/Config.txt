@@ -15,6 +15,7 @@ ZIP_STATIC
 ..\..\zlib
 
 [EXCLUDES]
+zip_algorithm_zstd.c
 zip_crypto_commoncrypto.c
 zip_crypto_gnutls.c
 zip_crypto_mbedtls.c
