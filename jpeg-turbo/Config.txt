@@ -24,7 +24,6 @@ jdcolext.c
 jdcol565.c
 jdmrgext.c
 jdmrg565.c
-jdtrans.c
 jpegtran.c
 jstdhuff.c
 rd*
