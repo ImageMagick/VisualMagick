@@ -34,16 +34,16 @@ ConfigureApp::ConfigureApp()
 {
 }
 
-BOOL ConfigureApp::InitInstance()
+BOOL ConfigureApp::Init()
 {
+  ConfigureWizard
+    wizard;
+  
   INT_PTR
     response;
 
   Solution
     solution;
-
-  ConfigureWizard
-    wizard;
 
   WaitDialog
     waitDialog;
@@ -65,4 +65,27 @@ BOOL ConfigureApp::InitInstance()
 
   solution.write(wizard,waitDialog);
   return(TRUE);
+}
+
+
+BOOL ConfigureApp::InitInstance()
+{
+  if (AttachConsole(ATTACH_PARENT_PROCESS))
+    {
+      try
+      {
+        return Init();
+      }
+      catch (exception ex)
+      {
+        FILE
+          *fpstderr=stderr;
+
+        freopen_s(&fpstderr, "CONOUT$", "w", stderr);
+        cerr << ex.what() << endl;
+        return(FALSE);
+      }
+    }
+  else
+    return Init();
 }

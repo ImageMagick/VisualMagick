@@ -114,7 +114,7 @@ static inline wstring readLicense(const wstring &fileName)
 
   file.open(fileName);
   if (!file)
-    throwException(L"UNABLE TO OPEN LICENSE FILE: " + fileName);
+    throwException(L"Unable to open license file: " + fileName);
 
   content=trim(wstring((istreambuf_iterator<wchar_t>(file)),istreambuf_iterator<wchar_t>()));
 

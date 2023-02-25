@@ -33,6 +33,10 @@ public:
   virtual BOOL InitInstance();
 
   DECLARE_MESSAGE_MAP()
+
+private:
+
+  BOOL Init();
 };
 
 #endif // __ConfigureApp__
