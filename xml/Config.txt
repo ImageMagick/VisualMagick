@@ -1,7 +1,7 @@
 [DLL]
 
 [LICENSE]
-..\..\xml\COPYING
+..\..\xml\Copyright
 
 [DEFINES]
 IN_LIBXML
