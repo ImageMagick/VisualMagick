@@ -477,9 +477,9 @@ void Solution::checkKeyword(const wstring keyword)
   };
 
   if (contains(skipableKeywords,keyword))
-   return;
+    return;
 
-  throw exception();
+  throwException(L"Invalid keyword: " + keyword);
 }
 
 void Solution::write(const ConfigureWizard &wizard,wofstream &file)
