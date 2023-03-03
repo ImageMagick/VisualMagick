@@ -24,6 +24,7 @@ FLIF_BUILD_DLL
 [EXCLUDES]
 flif.cpp
 flif-interface.cpp
+flif-pixbuf-loader.c
 image.cpp
 image-metadata.cpp
 image-pam.cpp
