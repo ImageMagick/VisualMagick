@@ -22,25 +22,26 @@
 #define IDC_VISUALSTUDIO                1008
 #define IDC_OPEN_MP                     1009
 #define IDC_OPEN_CL                     1010
-#define IDC_INCLUDE_OPTIONAL            1011
-#define IDC_INCLUDE_INCOMPATIBLE        1012
-#define IDC_EXCLUDE_DEPRECATED          1013
-#define IDC_INSTALLED_SUPPORT           1014
-#define IDC_ZERO_CONFIGURATION_SUPPORT  1015
-#define IDC_INTERMEDIATE_DEBUG          1016
-#define IDC_INTERMEDIATE_DEBUG_BROWSE   1017
-#define IDC_INTERMEDIATE_RELEASE        1018
-#define IDC_INTERMEDIATE_RELEASE_BROWSE 1019
-#define IDC_BIN_DIR                     1020
-#define IDC_BIN_DIR_BROWSE              1021
-#define IDC_FUZZ_BIN_DIR                1022
-#define IDC_FUZZ_BIN_DIR_BROWSE         1023
-#define IDC_LIB_DIR                     1024
-#define IDC_LIB_DIR_BROWSE              1025
-#define IDC_FINISHED_TEXT               1026
-#define IDD_WAITDIALOG                  1027
-#define IDC_MSGCTRL                     1028
-#define IDC_PROGRESSCTRL                1029
+#define IDC_ENABLE_DPC                  1011
+#define IDC_INCLUDE_OPTIONAL            1012
+#define IDC_INCLUDE_INCOMPATIBLE        1013
+#define IDC_EXCLUDE_DEPRECATED          1014
+#define IDC_INSTALLED_SUPPORT           1015
+#define IDC_ZERO_CONFIGURATION_SUPPORT  1016
+#define IDC_INTERMEDIATE_DEBUG          1017
+#define IDC_INTERMEDIATE_DEBUG_BROWSE   1018
+#define IDC_INTERMEDIATE_RELEASE        1019
+#define IDC_INTERMEDIATE_RELEASE_BROWSE 1020
+#define IDC_BIN_DIR                     1021
+#define IDC_BIN_DIR_BROWSE              1022
+#define IDC_FUZZ_BIN_DIR                1023
+#define IDC_FUZZ_BIN_DIR_BROWSE         1024
+#define IDC_LIB_DIR                     1025
+#define IDC_LIB_DIR_BROWSE              1026
+#define IDC_FINISHED_TEXT               1027
+#define IDD_WAITDIALOG                  1028
+#define IDC_MSGCTRL                     1029
+#define IDC_PROGRESSCTRL                1030
 
 // Next default values for new objects
 // 

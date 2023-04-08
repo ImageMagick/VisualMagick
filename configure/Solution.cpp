@@ -237,6 +237,15 @@ void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
     config << endl;
 
     config << "/*" << endl;
+    config << "  Define to enable Distributed Pixel Cache" << endl;
+    config << "*/" << endl;
+    if (wizard.enableDpc())
+      config << "#define MAGICKCORE_DPC_SUPPORT" << endl;
+    else
+      config << "#undef MAGICKCORE_DPC_SUPPORT" << endl;
+    config << endl;
+
+    config << "/*" << endl;
     config << "  Exclude deprecated methods in MagickCore API" << endl;
     config << "*/" << endl;
     if (wizard.excludeDeprecated())

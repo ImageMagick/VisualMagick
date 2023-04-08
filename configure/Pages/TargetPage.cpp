@@ -33,6 +33,7 @@ TargetPage::TargetPage() : CPropertyPage(IDD_TARGET_PAGE)
 #else
   _platform=Platform::X64;
 #endif
+  _enableDpc=TRUE;
   _excludeDeprecated=TRUE;
   _includeIncompatibleLicense=FALSE;
   _installedSupport=FALSE;
@@ -46,6 +47,16 @@ TargetPage::TargetPage() : CPropertyPage(IDD_TARGET_PAGE)
 
 TargetPage::~TargetPage()
 {
+}
+
+bool TargetPage::enableDpc() const
+{
+  return(_enableDpc == TRUE);
+}
+
+void TargetPage::enableDpc(bool value)
+{
+  _enableDpc=value;
 }
 
 bool TargetPage::excludeDeprecated() const
@@ -177,8 +188,9 @@ void TargetPage::DoDataExchange(CDataExchange* pDX)
   DDX_CBIndex(pDX,IDC_VISUALSTUDIO,(int&) _visualStudioVersion);
   DDX_Radio(pDX,IDC_PROJECT_DYNAMIC_MT,(int&) _solutionType);
   DDX_Check(pDX,IDC_HDRI,_useHDRI);
-  DDX_Check(pDX,IDC_OPEN_CL,_useOpenCL);
   DDX_Check(pDX,IDC_OPEN_MP,_useOpenMP);
+  DDX_Check(pDX,IDC_OPEN_CL,_useOpenCL);
+  DDX_Check(pDX,IDC_ENABLE_DPC,_enableDpc);
   DDX_Check(pDX,IDC_INCLUDE_INCOMPATIBLE,_includeIncompatibleLicense);
   DDX_Check(pDX,IDC_INCLUDE_OPTIONAL,_includeOptional);
   DDX_Check(pDX,IDC_EXCLUDE_DEPRECATED,_excludeDeprecated);

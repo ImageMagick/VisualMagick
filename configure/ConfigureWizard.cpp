@@ -44,6 +44,11 @@ wstring ConfigureWizard::binDirectory() const
   return(_systemPage.binDirectory());
 }
 
+bool ConfigureWizard::enableDpc() const
+{
+  return(_targetPage.enableDpc());
+}
+
 bool ConfigureWizard::excludeDeprecated() const
 {
   return(_targetPage.excludeDeprecated());
@@ -183,6 +188,7 @@ bool ConfigureWizard::zeroConfigurationSupport() const
 void ConfigureWizard::parseCommandLineInfo(const CommandLineInfo &info)
 {
   _targetPage.platform(info.platform());
+  _targetPage.enableDpc(info.enableDpc());
   _targetPage.excludeDeprecated(info.excludeDeprecated());
   _targetPage.includeIncompatibleLicense(info.includeIncompatibleLicense());
   _targetPage.includeOptional(info.includeOptional());

@@ -39,6 +39,8 @@ public:
 
   wstring binDirectory() const;
 
+  bool enableDpc() const;
+
   bool excludeDeprecated() const;
 
   wstring fuzzBinDirectory() const;

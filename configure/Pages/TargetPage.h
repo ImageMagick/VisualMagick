@@ -32,6 +32,9 @@ public:
 
   ~TargetPage();
 
+  bool enableDpc() const;
+  void enableDpc(bool value);
+
   bool excludeDeprecated() const;
   void excludeDeprecated(bool value);
 
@@ -85,6 +88,7 @@ private:
   void setVisualStudioVersion();
 
   Platform            _platform;
+  BOOL                _enableDpc;
   BOOL                _excludeDeprecated;
   BOOL                _includeIncompatibleLicense;
   BOOL                _includeOptional;

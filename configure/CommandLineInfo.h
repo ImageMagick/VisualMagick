@@ -32,6 +32,8 @@ public:
 
   CommandLineInfo& operator =(const CommandLineInfo& obj);
 
+  bool enableDpc() const;
+
   bool excludeDeprecated() const;
 
   bool includeIncompatibleLicense() const;
@@ -62,6 +64,7 @@ public:
 
 private:
   Platform            _platform;
+  bool                _enableDpc;
   bool                _excludeDeprecated;
   bool                _includeIncompatibleLicense;
   bool                _includeOptional;

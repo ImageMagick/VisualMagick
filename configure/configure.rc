@@ -118,26 +118,28 @@ BEGIN
     COMBOBOX        IDC_VISUALSTUDIO,260,130,47,40,CBS_DROPDOWNLIST | WS_VSCROLL |
                     WS_TABSTOP
     CONTROL         "Enable HDRI",IDC_HDRI,"Button",BS_AUTOCHECKBOX |
-                    WS_TABSTOP,15,100,66,10
+                    WS_TABSTOP,15,100,70,10
     CONTROL         "Enable OpenMP",IDC_OPEN_MP,"Button",
-                    BS_AUTOCHECKBOX | WS_TABSTOP,15,115,66,10
+                    BS_AUTOCHECKBOX | WS_TABSTOP,15,115,70,10
     CONTROL         "Enable OpenCL",IDC_OPEN_CL,"Button",BS_AUTOCHECKBOX |
-                    WS_TABSTOP,15,130,66,10
+                    WS_TABSTOP,15,130,70,10
+    CONTROL         "Enable Distributed Pixel Cache",IDC_ENABLE_DPC,"Button",BS_AUTOCHECKBOX |
+                    WS_TABSTOP,15,145,110,10
     CONTROL         "Use zero configuration",
                     IDC_ZERO_CONFIGURATION_SUPPORT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    15,145,90,10
+                    15,160,90,10
     CONTROL         "Include all demo, test, appl, and contrib directories",
                     IDC_INCLUDE_OPTIONAL,"Button",BS_AUTOCHECKBOX |
-                    WS_TABSTOP,15,160,170,10
+                    WS_TABSTOP,15,175,170,10
     CONTROL         "Build projects that are not compatible with the Apache 2.0 license",
                     IDC_INCLUDE_INCOMPATIBLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    15,175,220,10
+                    15,190,220,10
     CONTROL         "Exclude deprecated methods",
                     IDC_EXCLUDE_DEPRECATED,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    15,190,105,10
+                    15,205,105,10
     CONTROL         "Use registry settings or hard-coded paths to locate installed components",
                     IDC_INSTALLED_SUPPORT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
-                    15,205,240,10
+                    15,220,240,10
 END
 
 IDD_SYSTEM_PAGE DIALOG  0, 0, 318, 233
