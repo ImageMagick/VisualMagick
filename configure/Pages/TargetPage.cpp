@@ -35,7 +35,6 @@ TargetPage::TargetPage() : CPropertyPage(IDD_TARGET_PAGE)
 #endif
   _enableDpc=TRUE;
   _excludeDeprecated=TRUE;
-  _includeIncompatibleLicense=FALSE;
   _installedSupport=FALSE;
   _quantumDepth=QuantumDepth::Q16;
   _solutionType=SolutionType::DYNAMIC_MT;
@@ -43,6 +42,13 @@ TargetPage::TargetPage() : CPropertyPage(IDD_TARGET_PAGE)
   _useOpenCL=TRUE;
   _useOpenMP=TRUE;
   _zeroConfigurationSupport=FALSE;
+#ifdef DEBUG
+  _includeOptional=TRUE;
+  _includeIncompatibleLicense=TRUE;
+#else
+  _includeOptional=FALSE;
+  _includeIncompatibleLicense=FALSE;
+#endif
 }
 
 TargetPage::~TargetPage()
