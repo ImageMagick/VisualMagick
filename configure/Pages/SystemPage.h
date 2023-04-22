@@ -34,10 +34,6 @@ public:
 
   wstring fuzzBinDirectory() const;
 
-  wstring intermediateDirectoryDebug() const;
-
-  wstring intermediateDirectoryRelease() const;
-
   wstring libDirectory() const;
 
   virtual BOOL OnSetActive();
@@ -51,10 +47,6 @@ protected:
   afx_msg void OnFuzzBinDirBrowse();
 
   virtual BOOL OnInitDialog();
-
-  afx_msg void OnIntermediateDirectoryDebugBrowse();
-
-  afx_msg void OnIntermediateDirectoryReleaseBrowse();
 
   afx_msg void OnLibDirBrowse();
 
@@ -70,8 +62,6 @@ private:
 
   CStringW _binDirectory;
   CStringW _fuzzBinDirectory;
-  CStringW _intermediateDirectoryDebug;
-  CStringW _intermediateDirectoryRelease;
   CStringW _libDirectory;
 };
 

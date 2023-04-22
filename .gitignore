@@ -13,9 +13,9 @@
 .vs
 .vscode
 bin
-/Debug
+Debug
+Release
 /lib
-/Release
 
 NOTICE.txt
 

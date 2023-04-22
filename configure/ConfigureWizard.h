@@ -51,10 +51,6 @@ public:
 
   bool installedSupport() const;
 
-  wstring intermediateDirectoryDebug() const;
-
-  wstring intermediateDirectoryRelease() const;
-
   wstring libDirectory() const;
 
   wstring machineName() const;

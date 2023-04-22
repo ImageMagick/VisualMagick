@@ -147,28 +147,18 @@ STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "System Setup"
 FONT 8, "MS Sans Serif"
 BEGIN
-    GROUPBOX        "Intermediate files directory setup:",IDC_STATIC,7,7,304,
-                    97
-    LTEXT           "Please specify the location in your file system were you would like to place intermediate files that are generated during the build process. This include such things as object code, etc.",
-                    IDC_STATIC,14,19,290,19
-    LTEXT           "Intermediate files Release directory:",IDC_STATIC,14,47, 147,9
-    EDITTEXT        IDC_INTERMEDIATE_RELEASE,13,58,259,12,ES_AUTOHSCROLL
-    PUSHBUTTON      "Browse",IDC_INTERMEDIATE_RELEASE_BROWSE,275,58,30,13
-    LTEXT           "Intermediate files Debug directory:",IDC_STATIC,13,74, 147,9
-    EDITTEXT        IDC_INTERMEDIATE_DEBUG,13,85,259,12,ES_AUTOHSCROLL
-    PUSHBUTTON      "Browse",IDC_INTERMEDIATE_DEBUG_BROWSE,275,85,30,13
-    GROUPBOX        "Output files directory setup:",IDC_STATIC,7,113,304,117
+    GROUPBOX        "Output files directory setup:",IDC_STATIC,7,7,304,117
     LTEXT           "Please specify were the executables, libraries, and DLL's should be placed:",
-                    IDC_STATIC,13,127,291,11
-    LTEXT           "Exe and DLL directory:",IDC_STATIC,13,144,147,9
-    EDITTEXT        IDC_BIN_DIR,13,155,259,12,ES_AUTOHSCROLL
-    PUSHBUTTON      "Browse",IDC_BIN_DIR_BROWSE,275,155,30,13
-    LTEXT           "Fuzz exe directory:",IDC_STATIC,13,171,147,9
-    EDITTEXT        IDC_FUZZ_BIN_DIR,13,183,259,12,ES_AUTOHSCROLL
-    PUSHBUTTON      "Browse",IDC_FUZZ_BIN_DIR_BROWSE,275,183,30,13
-    LTEXT           "Library directory:",IDC_STATIC,13,199,147,9
-    EDITTEXT        IDC_LIB_DIR,13,211,259,12,ES_AUTOHSCROLL
-    PUSHBUTTON      "Browse",IDC_LIB_DIR_BROWSE,275,211,30,13
+                    IDC_STATIC,13,21,291,11
+    LTEXT           "Exe and DLL directory:",IDC_STATIC,13,38,147,9
+    EDITTEXT        IDC_BIN_DIR,13,49,259,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_BIN_DIR_BROWSE,275,48,30,13
+    LTEXT           "Fuzz exe directory:",IDC_STATIC,13,65,147,9
+    EDITTEXT        IDC_FUZZ_BIN_DIR,13,77,259,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_FUZZ_BIN_DIR_BROWSE,275,76,30,13
+    LTEXT           "Library directory:",IDC_STATIC,13,93,147,9
+    EDITTEXT        IDC_LIB_DIR,13,105,259,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_LIB_DIR_BROWSE,275,104,30,13
 END
 
 IDD_FINISHED_PAGE DIALOG  0, 0, 318, 233

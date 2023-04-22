@@ -331,9 +331,9 @@ wstring ProjectFile::getIntermediateDirectoryName(const bool debug)
   wstring
     directoryName;
 
-  directoryName = (debug ? _wizard->intermediateDirectoryDebug() : _wizard->intermediateDirectoryRelease());
-  directoryName += _wizard->solutionName() + L"-" + _wizard->platformName();
-  directoryName += L"\\" + _prefix + L"_" + _name + L"\\";
+  directoryName = (debug ? L"Debug\\" : L"Release\\");
+  directoryName += _wizard->solutionName() + L"-" + _wizard->platformName() + L"\\";
+  directoryName += _prefix + L"_" + _name + L"\\";
   return(directoryName);
 }
 

@@ -74,16 +74,6 @@ bool ConfigureWizard::installedSupport() const
 	return(_targetPage.installedSupport());
 }
 
-wstring ConfigureWizard::intermediateDirectoryDebug() const
-{
-  return(_systemPage.intermediateDirectoryDebug());
-}
-
-wstring ConfigureWizard::intermediateDirectoryRelease() const
-{
-  return(_systemPage.intermediateDirectoryRelease());
-}
-
 wstring ConfigureWizard::libDirectory() const
 {
   return(_systemPage.libDirectory());
