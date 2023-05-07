@@ -2,7 +2,6 @@
 
 [LICENSE]
 ..\..\freetype\docs\FTL.TXT
-..\..\zlib
 
 [DEFINES]
 FT2_BUILD_LIBRARY
