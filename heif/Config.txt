@@ -18,6 +18,7 @@ LIBHEIF_EXPORTS
 
 [DIRECTORIES]
 ..\..\heif\libheif
+..\..\heif\libheif\color-conversion
 ..\..\heif\libheif\plugins
 
 [INCLUDES]
@@ -26,13 +27,10 @@ LIBHEIF_EXPORTS
 ..\..\heif
 
 [EXCLUDES]
-box_fuzzer.cc
-encoder_fuzzer.cc
-file_fuzzer.cc
-heif_decoder_dav1d.cc
-heif_encoder_rav1e.cc
-heif_encoder_svt.cc
-heif_encoder_x265.cc
+decoder_dav1d.cc
+encoder_rav1e.cc
+encoder_svt.cc
+encoder_x265.cc
 plugins_*
 
 [DEPENDENCIES]
