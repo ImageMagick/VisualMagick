@@ -24,6 +24,7 @@
 #include <functional>
 #include <cctype>
 #include <locale>
+#include <filesystem>
 
 enum class SolutionType {DYNAMIC_MT, STATIC_MTD, STATIC_MT};
 
@@ -85,8 +86,8 @@ static inline wstring trim(const wstring &s)
     result;
 
   result=s;
-  result.erase(result.begin(), find_if(result.begin(), result.end(), not1(ptr_fun<int, int>(isspace))));
-  result.erase(find_if(result.rbegin(), result.rend(), not1(ptr_fun<int, int>(isspace))).base(), result.end());
+  result.erase(result.begin(), find_if(result.begin(), result.end(), [](int c) {return !std::isspace(c);}));
+  result.erase(find_if(result.rbegin(), result.rend(), [](int c) {return !std::isspace(c);}).base(), result.end());
   return(result);
 }
 
@@ -120,7 +121,7 @@ static inline wstring readLicense(const wstring &fileName)
 
   file.close();
 
-  return (content);
+  return(content);
 }
 
 static inline wstring replace(const wstring &str,const wstring &from,const wstring &to)

@@ -66,11 +66,11 @@ public:
 
   vector<wstring> &libraries();
 
-  wstring license() const;
-
   wstring moduleDefinitionFile() const;
 
   wstring name() const;
+
+  wstring notice() const;
 
   vector<wstring> &references();
 
@@ -106,7 +106,9 @@ private:
 
   void loadModules(const ConfigureWizard &wizard);
 
-  void loadVersion();
+  vector<wstring> readLicenseFilenames(const wstring &line);
+
+  void setNoticeAndVersion();
 
   wstring              _configDefine;
   vector<wstring>      _defines;
@@ -125,17 +127,18 @@ private:
   vector<wstring>      _includes;
   bool                 _isOptional;
   vector<wstring>      _libraries;
-  wstring              _license;
+  vector<wstring>      _licenseFileNames;
   wstring              _moduleDefinitionFile;
   wstring              _modulePrefix;
   wstring              _name;
+  wstring              _notice;
   vector<wstring>      _references;
   bool                 _treatWarningAsError;
   ProjectType          _type;
   bool                 _useNasm;
   bool                 _useUnicode;
   VisualStudioVersion  _minimumVisualStudioVersion;
-  wstring              _version;
+  vector<wstring>      _versions;
   int                  _warningLevel;
 };
 

@@ -1,7 +1,7 @@
 [DLL]
 
 [LICENSE]
-..\..\exr\LICENSE
+..\..\exr\openexr\LICENSE.md;..\..\exr\imath\LICENSE.md
 
 [DEFINES]
 HALF_EXPORTS

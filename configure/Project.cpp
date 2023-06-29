@@ -123,11 +123,6 @@ vector<wstring> &Project::libraries()
   return(_libraries);
 }
 
-wstring Project::license() const
-{
-  return(_license);
-}
-
 wstring Project::moduleDefinitionFile() const
 {
   return(_moduleDefinitionFile);
@@ -136,6 +131,11 @@ wstring Project::moduleDefinitionFile() const
 wstring Project::name() const
 {
   return(_name);
+}
+
+wstring Project::notice() const
+{
+  return(_notice);
 }
 
 vector<wstring> &Project::references()
@@ -160,7 +160,7 @@ bool Project::useUnicode() const
 
 wstring Project::version() const
 {
-  return _version;
+  return _versions[0];
 }
 
 int Project::warningLevel() const
@@ -207,7 +207,7 @@ Project* Project::create(wstring name)
 
   Project* project = new Project(name);
   project->loadConfig(config);
-  project->loadVersion();
+  project->setNoticeAndVersion();
 
   config.close();
   return(project);
@@ -388,7 +388,7 @@ void Project::loadConfig(wifstream &config)
     else if (line == L"[TREAT_WARNING_AS_ERROR]")
       _treatWarningAsError=true;
     else if (line == L"[LICENSE]")
-      _license=readLicense(readLine(config));
+      _licenseFileNames=readLicenseFilenames(readLine(config));
   }
 }
 
@@ -443,31 +443,76 @@ void Project::loadModules(const ConfigureWizard &wizard)
   }
 }
 
-void Project::loadVersion()
+vector<wstring> Project::readLicenseFilenames(const wstring &line)
 {
-  wifstream
-    version;
-
   wstring
-    line;
+    fileName;
 
-  version.open(L"..\\..\\" + _name + L"\\ImageMagick\\ImageMagick.version.h");
-  if (!version)
-    {
-      _version=L"unknown";
-      return;
-    }
+  vector<wstring>
+    fileNames;
 
-  while (!version.eof())
+  wstringstream
+    wss(line);
+
+  while(getline(wss, fileName, L';'))
   {
-    line=readLine(version);
-    if (!startsWith(line,L"DELEGATE_VERSION_NUM"))
-      continue;
+    filesystem::path
+      file(fileName);
 
-    _version=line.substr(line.find_last_of(L" "));
-    _version=replace(_version,L",",L".");
-    _version=trim(_version);
+    if (!filesystem::exists(file))
+      throwException(L"Unable to open license file: " + fileName);
+
+    fileNames.push_back(fileName);
   }
 
-  version.close();
+  return (fileNames);
+}
+
+void Project::setNoticeAndVersion()
+{
+  _notice=L"";
+  foreach(wstring,licenseFileName,_licenseFileNames)
+  {
+    filesystem::path
+      folder,
+      versionFile;
+
+    wifstream
+      version;
+
+    wstring
+      versionFileName;
+
+    folder=filesystem::path(*licenseFileName).parent_path();
+    versionFileName=folder.wstring()+L"\\ImageMagick\\ImageMagick.version.h";
+    versionFile=filesystem::path(versionFileName).wstring();
+    if (!filesystem::exists(versionFile))
+      {
+        folder=folder.parent_path();
+        versionFileName=folder.wstring()+L"\\ImageMagick\\ImageMagick.version.h";
+        versionFile=filesystem::path(versionFileName).wstring();
+        if (!filesystem::exists(versionFile))
+          throwException(L"Unable to find version file for: "+_name);
+      }
+
+    version.open(versionFileName);
+    while (!version.eof())
+    {
+      wstring
+        line;
+
+      line=readLine(version);
+      if (!startsWith(line,L"DELEGATE_VERSION_NUM"))
+        continue;
+
+      line=line.substr(line.find_last_of(L" "));
+      line=replace(line,L",",L".");
+      _versions.push_back(line);
+      break;
+    }
+    version.close();
+
+    _notice+=L"[ "+folder.stem().wstring()+_versions.back()+L" ] copyright:\r\n";
+    _notice+=readLicense(*licenseFileName)+L"\r\n";
+  }
 }

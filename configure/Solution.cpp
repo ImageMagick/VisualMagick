@@ -338,12 +338,11 @@ void Solution::writeNotice(const ConfigureWizard &wizard,const VersionInfo &vers
 
   foreach (Project*,p,_projects)
   {
-    if (((*p)->license() == L"") || ((*p)->shouldSkip(wizard)))
+    if (((*p)->notice() == L"") || (*p)->shouldSkip(wizard))
       continue;
 
-    notice << "[ " << (*p)->name() << " " << (*p)->version() << " ] copyright:" << endl << endl;
-    notice << (*p)->license() << endl;
-    notice << endl << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << endl << endl;
+    notice << (*p)->notice();
+    notice << "* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *" << endl << endl;
   }
 
   notice.close();
