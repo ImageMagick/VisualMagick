@@ -137,37 +137,51 @@ typedef long ssize_t;
 #endif
 #define __func__  __FUNCTION__
 
+#if defined(_WIN64)
 #define MAGICKCORE_SIZEOF_VOID_P 8
+#else
+#define MAGICKCORE_SIZEOF_VOID_P 4
+#endif
 
+#define MAGICKCORE_HAVE_ACOSH 1
+#define MAGICKCORE_HAVE_ASINH 1
+#define MAGICKCORE_HAVE_ATANH 1
+#define MAGICKCORE_HAVE_ATEXIT 1
+#define MAGICKCORE_HAVE_ATOLL 1
+#define MAGICKCORE_HAVE_DECL_VSNPRINTF 1
+#define MAGICKCORE_HAVE_ERF 1
+#define MAGICKCORE_HAVE_GETTIMEOFDAY 1
+#define MAGICKCORE_HAVE_INTTYPES_H 1
+#define MAGICKCORE_HAVE_J0 1
+#define MAGICKCORE_HAVE_J1 1
+#define MAGICKCORE_HAVE_LOCALE_H 1
+#define MAGICKCORE_HAVE_LOCALE_T 1
+#define MAGICKCORE_HAVE_PCLOSE 1
+#define MAGICKCORE_HAVE_POPEN 1
+#define MAGICKCORE_HAVE_POW 1
+#define MAGICKCORE_HAVE_PROCESS_H 1
+#define MAGICKCORE_HAVE_RAISE 1
+#define MAGICKCORE_HAVE_SQRT 1
+#define MAGICKCORE_HAVE_STDINT_H 1
+#define MAGICKCORE_HAVE_STDIO_H 1
+#define MAGICKCORE_HAVE_STRING_H 1
+#define MAGICKCORE_HAVE_STRTOD 1
 #define MAGICKCORE_HAVE_STRTOD_L 1
+#define MAGICKCORE_HAVE_TELLDIR 1
+#define MAGICKCORE_HAVE_UINTPTR_T 1
+#define MAGICKCORE_HAVE_VFPRINTF 1
 #define MAGICKCORE_HAVE_VFPRINTF_L 1
 #define MAGICKCORE_HAVE_VSNPRINTF 1
 #define MAGICKCORE_HAVE_VSNPRINTF_L 1
-#define MAGICKCORE_HAVE__ALIGNED_MALLOC 1
-#define MAGICKCORE_HAVE_VSNPRINTF 1
-#define MAGICKCORE_HAVE_GETTIMEOFDAY
-#define MAGICKCORE_HAVE_SETVBUF 1
-#define MAGICKCORE_HAVE_TEMPNAM 1
-#define MAGICKCORE_HAVE_RAISE 1
-#define MAGICKCORE_HAVE_PROCESS_H 1
-#define MAGICKCORE_HAVE_SPAWNVP 1
-#define MAGICKCORE_HAVE_UTIME 1
-#define MAGICKCORE_STDC_HEADERS 1
-#define MAGICKCORE_HAVE_LOCALE_H 1
-#define MAGICKCORE_HAVE_LOCALE_T 1
-#define MAGICKCORE_HAVE_STRING_H 1
-#define MAGICKCORE_HAVE_J0 1
-#define MAGICKCORE_HAVE_J1 1
+#define MAGICKCORE_HAVE__ALIGNED_MALLOC */
+#define MAGICKCORE_HAVE__EXIT 1
 #define MAGICKCORE_SETJMP_IS_THREAD_SAFE 1
+#define MAGICKCORE_STDC_HEADERS 1
 
 /*
   Disable specific warnings.
 */
 #ifdef _MSC_VER
-#if _MSC_VER < 1910
-#pragma warning(disable: 4054) /* 'conversion' : from function pointer 'type1' to data pointer 'type2' */
-#pragma warning(disable: 4055) /* 'conversion' : from data pointer 'type1' to function pointer 'type2' */
-#endif
 #if _MSC_VER < 1920
 #pragma warning(disable: 4101) /* 'identifier' : unreferenced local variable */
 #pragma warning(disable: 4130) /* 'operator' : logical operation on address of string constant */
