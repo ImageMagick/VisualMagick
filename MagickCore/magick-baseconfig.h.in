@@ -137,9 +137,16 @@ typedef long ssize_t;
 #endif
 #define __func__  __FUNCTION__
 
+#define MAGICKCORE_SIZEOF_DOUBLE 8
+#define MAGICKCORE_SIZEOF_DOUBLE_T 8
+#define MAGICKCORE_SIZEOF_FLOAT 4
+#define MAGICKCORE_SIZEOF_FLOAT_T 8
+
 #if defined(_WIN64)
+#define MAGICKCORE_SIZEOF_SSIZE_T 8
 #define MAGICKCORE_SIZEOF_VOID_P 8
 #else
+#define MAGICKCORE_SIZEOF_SSIZE_T 4
 #define MAGICKCORE_SIZEOF_VOID_P 4
 #endif
 
