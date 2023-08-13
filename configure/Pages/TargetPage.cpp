@@ -37,6 +37,7 @@ TargetPage::TargetPage() : CPropertyPage(IDD_TARGET_PAGE)
   _excludeDeprecated=TRUE;
   _installedSupport=FALSE;
   _quantumDepth=QuantumDepth::Q16;
+  _policyConfig=PolicyConfig::OPEN;
   _solutionType=SolutionType::DYNAMIC_MT;
   _useHDRI=PathFileExists(L"..\\MagickCore") ? TRUE : FALSE;
   _useOpenCL=TRUE;
@@ -113,6 +114,16 @@ Platform TargetPage::platform() const
 void TargetPage::platform(Platform value)
 {
   _platform=value;
+}
+
+PolicyConfig TargetPage::policyConfig() const
+{
+  return(_policyConfig);
+}
+
+void TargetPage::policyConfig(PolicyConfig value)
+{
+  _policyConfig=value;
 }
 
 QuantumDepth TargetPage::quantumDepth() const
@@ -192,6 +203,7 @@ void TargetPage::DoDataExchange(CDataExchange* pDX)
   DDX_CBIndex(pDX,IDC_QUANTUM_DEPTH,(int&) _quantumDepth);
   DDX_CBIndex(pDX,IDC_PLATFORM,(int&) _platform);
   DDX_CBIndex(pDX,IDC_VISUALSTUDIO,(int&) _visualStudioVersion);
+  DDX_CBIndex(pDX,IDC_POLICYCONFIG,(int&) _policyConfig);
   DDX_Radio(pDX,IDC_PROJECT_DYNAMIC_MT,(int&) _solutionType);
   DDX_Check(pDX,IDC_HDRI,_useHDRI);
   DDX_Check(pDX,IDC_OPEN_MP,_useOpenMP);

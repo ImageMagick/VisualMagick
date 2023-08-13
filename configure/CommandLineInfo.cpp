@@ -29,6 +29,7 @@ CommandLineInfo::CommandLineInfo(const ConfigureWizard &wizard)
   _includeOptional=wizard.includeOptional();
   _installedSupport=wizard.installedSupport();
   _noWizard=false;
+  _policyConfig=wizard.policyConfig();
   _quantumDepth=wizard.quantumDepth();
   _solutionType=wizard.solutionType();
   _useHDRI=wizard.useHDRI();
@@ -81,6 +82,11 @@ bool CommandLineInfo::noWizard() const
 Platform CommandLineInfo::platform() const
 {
   return(_platform);
+}
+
+PolicyConfig CommandLineInfo::policyConfig() const
+{
+  return(_policyConfig);
 }
 
 QuantumDepth CommandLineInfo::quantumDepth() const
@@ -149,8 +155,12 @@ void CommandLineInfo::ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast
     _useOpenMP=false;
   else if (_wcsicmp(pszParam, L"noWizard") == 0)
     _noWizard=true;
+  else if (_wcsicmp(pszParam, L"LimitedPolicy") == 0)
+    _policyConfig=PolicyConfig::LIMITED;
   else if (_wcsicmp(pszParam, L"openCL") == 0)
     _useOpenCL=true;
+  else if (_wcsicmp(pszParam, L"OpenPolicy") == 0)
+    _policyConfig=PolicyConfig::OPEN;
   else if (_wcsicmp(pszParam, L"Q8") == 0)
     _quantumDepth=QuantumDepth::Q8;
   else if (_wcsicmp(pszParam, L"Q16") == 0)
@@ -159,6 +169,8 @@ void CommandLineInfo::ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast
     _quantumDepth=QuantumDepth::Q32;
   else if (_wcsicmp(pszParam, L"Q64") == 0)
     _quantumDepth=QuantumDepth::Q64;
+  else if (_wcsicmp(pszParam, L"SecurePolicy") == 0)
+    _policyConfig=PolicyConfig::SECURE;
   else if (_wcsicmp(pszParam, L"x86") == 0)
     _platform=Platform::X86;
   else if (_wcsicmp(pszParam, L"x64") == 0)
@@ -169,6 +181,8 @@ void CommandLineInfo::ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast
     _visualStudioVersion=VisualStudioVersion::VS2019;
   else if (_wcsicmp(pszParam, L"VS2022") == 0)
     _visualStudioVersion=VisualStudioVersion::VS2022;
+  else if (_wcsicmp(pszParam, L"WebSafePolicy") == 0)
+    _policyConfig=PolicyConfig::WEBSAFE;
   else if (_wcsicmp(pszParam, L"zeroConfigurationSupport") == 0)
     _zeroConfigurationSupport=true;
 }

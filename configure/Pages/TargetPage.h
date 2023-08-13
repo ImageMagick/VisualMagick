@@ -50,6 +50,9 @@ public:
   Platform platform() const;
   void platform(Platform value);
 
+  PolicyConfig policyConfig() const;
+  void policyConfig(PolicyConfig value);
+
   QuantumDepth quantumDepth() const;
   void quantumDepth(QuantumDepth value);
 
@@ -93,6 +96,7 @@ private:
   BOOL                _includeIncompatibleLicense;
   BOOL                _includeOptional;
   BOOL                _installedSupport;
+  PolicyConfig        _policyConfig;
   QuantumDepth        _quantumDepth;
   SolutionType        _solutionType;
   BOOL                _useHDRI;

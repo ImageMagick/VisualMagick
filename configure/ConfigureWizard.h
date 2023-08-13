@@ -61,6 +61,8 @@ public:
 
   wstring platformAlias() const;
 
+  PolicyConfig policyConfig() const;
+
   QuantumDepth quantumDepth() const;
 
   wstring solutionName() const;

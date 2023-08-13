@@ -36,6 +36,8 @@ enum class ProjectType {UNDEFINEDTYPE, APPTYPE, DLLTYPE, DLLMODULETYPE, EXETYPE,
 
 enum class VisualStudioVersion {VS2017, VS2019, VS2022};
 
+enum class PolicyConfig {LIMITED, OPEN, SECURE, WEBSAFE};
+
 #define VSEARLIEST VisualStudioVersion::VS2017
 #define VSLATEST VisualStudioVersion::VS2022
 

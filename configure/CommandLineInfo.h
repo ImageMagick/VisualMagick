@@ -46,6 +46,8 @@ public:
 
   Platform platform() const;
 
+  PolicyConfig policyConfig() const;
+
   QuantumDepth quantumDepth() const;
 
   SolutionType solutionType() const;
@@ -70,6 +72,7 @@ private:
   bool                _includeOptional;
   bool                _installedSupport;
   bool                _noWizard;
+  PolicyConfig        _policyConfig;
   QuantumDepth        _quantumDepth;
   SolutionType        _solutionType;
   bool                _useHDRI;

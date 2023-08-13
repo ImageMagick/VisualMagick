@@ -50,6 +50,8 @@ private:
 
   void writeNotice(const ConfigureWizard &wizard,const VersionInfo &versionInfo);
 
+  void writePolicyConfig(const ConfigureWizard &wizard);
+
   void writeThresholdMap(const ConfigureWizard &wizard);
 
   void writeVersion(const ConfigureWizard &wizard,const VersionInfo &versionInfo);

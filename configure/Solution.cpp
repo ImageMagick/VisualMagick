@@ -128,6 +128,9 @@ void Solution::write(const ConfigureWizard &wizard,WaitDialog &waitDialog)
   waitDialog.nextStep(L"Writing Makefile.PL");
   writeMakeFile(wizard);
 
+  waitDialog.nextStep(L"Writing policy config");
+  writePolicyConfig(wizard);
+
   if (!versionInfo.load())
     return;
 
@@ -348,6 +351,40 @@ void Solution::writeNotice(const ConfigureWizard &wizard,const VersionInfo &vers
   notice.close();
 }
 
+void Solution::writePolicyConfig(const ConfigureWizard &wizard)
+{
+  wchar_t
+    buffer[512];
+
+  wifstream
+    infile;
+
+  wofstream
+    outfile;
+
+  switch(wizard.policyConfig())
+  {
+  case PolicyConfig::LIMITED:
+    infile=wifstream(L"..\\..\\ImageMagick\\config\\limited-policy.xml");
+    break;
+  case PolicyConfig::OPEN:
+    infile=wifstream(L"..\\..\\ImageMagick\\config\\open-policy.xml");
+    break;
+  case PolicyConfig::SECURE:
+    infile=wifstream(L"..\\..\\ImageMagick\\config\\secure-policy.xml");
+    break;
+  case PolicyConfig::WEBSAFE:
+    infile=wifstream(L"..\\..\\ImageMagick\\config\\websafe-policy.xml");
+    break;
+  }
+  outfile=wofstream(L"..\\bin\\policy.xml");
+  while (infile.read(buffer, 512))
+    outfile.write(buffer, infile.gcount());
+  outfile.write(buffer, infile.gcount());
+  infile.close();
+  outfile.close();
+}
+
 void Solution::writeThresholdMap(const ConfigureWizard &wizard)
 {
   wifstream
@@ -480,8 +517,8 @@ void Solution::checkKeyword(const wstring keyword)
     L"CODER_PATH",L"CONFIGURE_ARGS",L"CONFIGURE_PATH",L"CXXFLAGS",L"DEFS",L"DISTCHECK_CONFIG_FLAGS",
     L"EXEC_PREFIX_DIR",L"EXECUTABLE_PATH",L"FILTER_PATH",L"host",L"INCLUDE_PATH",L"LIBRARY_PATH",
     L"MAGICK_CFLAGS",L"MAGICK_CPPFLAGS",L"MAGICK_DELEGATES",L"MAGICK_FEATURES",L"MAGICK_LDFLAGS",
-    L"MAGICK_LIBS",L"MAGICK_PCFLAGS",L"MAGICK_TARGET_VENDOR",L"PREFIX_DIR",L"SHARE_PATH",
-    L"SHAREARCH_PATH"
+    L"MAGICK_LIBS",L"MAGICK_PCFLAGS",L"MAGICK_SECURITY_POLICY",L"MAGICK_TARGET_VENDOR",L"PREFIX_DIR",
+    L"SHARE_PATH",L"SHAREARCH_PATH"
   };
 
   if (contains(skipableKeywords,keyword))

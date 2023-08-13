@@ -117,6 +117,11 @@ wstring ConfigureWizard::platformAlias() const
   }
 }
 
+PolicyConfig ConfigureWizard::policyConfig() const
+{
+  return(_targetPage.policyConfig());
+}
+
 QuantumDepth ConfigureWizard::quantumDepth() const
 {
   return(_targetPage.quantumDepth());
@@ -183,6 +188,7 @@ void ConfigureWizard::parseCommandLineInfo(const CommandLineInfo &info)
   _targetPage.includeIncompatibleLicense(info.includeIncompatibleLicense());
   _targetPage.includeOptional(info.includeOptional());
   _targetPage.installedSupport(info.installedSupport());
+  _targetPage.policyConfig(info.policyConfig());
   _targetPage.quantumDepth(info.quantumDepth());
   _targetPage.solutionType(info.solutionType());
   _targetPage.useHDRI(info.useHDRI());
