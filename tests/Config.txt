@@ -3,7 +3,7 @@
 [OPTIONAL]
 
 [DIRECTORIES]
-..\..\ImageMagick\Magick++\tests
+ImageMagick\Magick++\tests
 
 [INCLUDES]
 ..\..\ImageMagick

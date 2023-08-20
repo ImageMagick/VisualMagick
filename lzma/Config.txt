@@ -10,16 +10,16 @@ HAVE_CONFIG_H
 DLL_EXPORT
 
 [DIRECTORIES]
-..\..\lzma\src\common
-..\..\lzma\src\liblzma\api
-..\..\lzma\src\liblzma\check
-..\..\lzma\src\liblzma\common
-..\..\lzma\src\liblzma\delta
-..\..\lzma\src\liblzma\lz
-..\..\lzma\src\liblzma\lzma
-..\..\lzma\src\liblzma\rangecoder
-..\..\lzma\src\liblzma\simple
-..\..\lzma\windows
+lzma\src\common
+lzma\src\liblzma\api
+lzma\src\liblzma\check
+lzma\src\liblzma\common
+lzma\src\liblzma\delta
+lzma\src\liblzma\lz
+lzma\src\liblzma\lzma
+lzma\src\liblzma\rangecoder
+lzma\src\liblzma\simple
+lzma\windows
 
 [EXCLUDES]
 crc32_small.c

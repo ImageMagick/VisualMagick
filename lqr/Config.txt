@@ -7,8 +7,8 @@ COPYING.LESSER
 LQR_EXPORTS
 
 [DIRECTORIES]
-..\..\lqr
-..\..\lqr\lqr
+lqr
+lqr\lqr
 
 [INCLUDES]
 ..\..\glib

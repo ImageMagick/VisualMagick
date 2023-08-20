@@ -8,8 +8,8 @@ __CONSOLE__
 _LCMSLIB_
 
 [DIRECTORIES]
-..\..\lcms\include
-..\..\lcms\src
+lcms\include
+lcms\src
 
 [CONFIG_DEFINE]
 /*

@@ -8,11 +8,11 @@ GDK_PIXBUF_ENABLE_BACKEND
 RSVG_COMPILATION
 
 [DIRECTORIES]
-..\..\rsvg\gdk-pixbuf
-..\..\rsvg\gdk-pixbuf\gdk-pixbuf
-..\..\rsvg\gdk-pixbuf\gdk-pixbuf\pixops
-..\..\rsvg\librsvg
-..\..\rsvg\librsvg\gdk-pixbuf-loader
+rsvg\gdk-pixbuf
+rsvg\gdk-pixbuf\gdk-pixbuf
+rsvg\gdk-pixbuf\gdk-pixbuf\pixops
+rsvg\librsvg
+rsvg\librsvg\gdk-pixbuf-loader
 
 [INCLUDES]
 ..\..\cairo\src

@@ -13,8 +13,8 @@ PANGO_ENABLE_ENGINE
 HAVE_CAIRO_WIN32
 
 [DIRECTORIES]
-..\..\pango
-..\..\pango\pango
+pango
+pango\pango
 
 [INCLUDES]
 ..\..\cairo\src

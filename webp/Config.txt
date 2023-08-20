@@ -10,15 +10,15 @@ _WEBPLIB_
 ..\..\webp
 
 [DIRECTORIES]
-..\..\webp\src
-..\..\webp\src\dec
-..\..\webp\src\demux
-..\..\webp\src\dsp
-..\..\webp\src\enc
-..\..\webp\src\mux
-..\..\webp\src\utils
-..\..\webp\src\webp
-..\..\webp\sharpyuv
+webp\src
+webp\src\dec
+webp\src\demux
+webp\src\dsp
+webp\src\enc
+webp\src\mux
+webp\src\utils
+webp\src\webp
+webp\sharpyuv
 
 [CONFIG_DEFINE]
 /*

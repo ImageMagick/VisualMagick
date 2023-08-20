@@ -406,7 +406,13 @@ void Project::loadModules(const ConfigureWizard &wizard)
 
   foreach (wstring,dir,_directories)
   {
-    fileHandle=FindFirstFile((*dir + L"\\*.*").c_str(),&data);
+    const wstring
+      fileDir(L"..\\..\\" + *dir);
+
+    if (!directoryExists(fileDir))
+      throwException(L"Invalid folder specified: " + fileDir);
+
+    fileHandle=FindFirstFile((fileDir + L"\\*.*").c_str(),&data);
     do
     {
       if (fileHandle == INVALID_HANDLE_VALUE)
@@ -492,7 +498,7 @@ void Project::setNoticeAndVersion()
         versionFileName=folder.wstring()+L"\\ImageMagick\\ImageMagick.version.h";
         versionFile=filesystem::path(versionFileName).wstring();
         if (!filesystem::exists(versionFile))
-          throwException(L"Unable to find version file for: "+_name);
+          throwException(L"Unable to find version file for: " + _name);
       }
 
     version.open(versionFileName);

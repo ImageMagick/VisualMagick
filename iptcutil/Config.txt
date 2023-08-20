@@ -3,4 +3,4 @@
 [OPTIONAL]
 
 [DIRECTORIES]
-..\..\contrib\utilities
+contrib\utilities

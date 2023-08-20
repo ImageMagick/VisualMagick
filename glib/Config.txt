@@ -22,18 +22,18 @@ SUPPORT_UCP
 SUPPORT_UTF8
 
 [DIRECTORIES]
-..\..\glib
-..\..\glib\gio
-..\..\glib\gio\gvdb
-..\..\glib\gio\win32
-..\..\glib\glib
-..\..\glib\glib\dirent
-..\..\glib\glib\gnulib
-..\..\glib\glib\gobject
-..\..\glib\glib\libcharset
-..\..\glib\glib\pcre
-..\..\glib\gmodule
-..\..\glib\gobject
+glib
+glib\gio
+glib\gio\gvdb
+glib\gio\win32
+glib\glib
+glib\glib\dirent
+glib\glib\gnulib
+glib\glib\gobject
+glib\glib\libcharset
+glib\glib\pcre
+glib\gmodule
+glib\gobject
 
 [INCLUDES]
 ..\..\ffi\include

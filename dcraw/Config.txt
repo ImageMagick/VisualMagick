@@ -4,7 +4,7 @@
 NO_LCMS
 
 [DIRECTORIES]
-..\..\dcraw
+dcraw
 
 [INCLUDES]
 ..\..\jasper\src\libjasper\include

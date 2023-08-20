@@ -7,7 +7,7 @@ LICENSE
 ZIP_STATIC
 
 [DIRECTORIES]
-..\..\zip\lib
+zip\lib
 
 [INCLUDES]
 ..\..\bzlib

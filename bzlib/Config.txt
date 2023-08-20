@@ -8,7 +8,7 @@ _WIN32
 BZ_EXPORT
 
 [DIRECTORIES]
-..\..\bzlib
+bzlib
 
 [EXCLUDES]
 dlltest.c

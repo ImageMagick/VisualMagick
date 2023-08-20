@@ -4,20 +4,20 @@
 LICENSE
 
 [DIRECTORIES]
-..\..\aom\aom\src
-..\..\aom\aom_dsp
-..\..\aom\aom_dsp\flow_estimation
-..\..\aom\aom_mem
-..\..\aom\aom_scale
-..\..\aom\aom_util
-..\..\aom\aom_scale\generic
-..\..\aom\common
-..\..\aom\av1
-..\..\aom\av1\common
-..\..\aom\av1\decoder
-..\..\aom\av1\encoder
-..\..\aom\third_party\fastfeat
-..\..\aom\third_party\vector
+aom\aom\src
+aom\aom_dsp
+aom\aom_dsp\flow_estimation
+aom\aom_mem
+aom\aom_scale
+aom\aom_util
+aom\aom_scale\generic
+aom\common
+aom\av1
+aom\av1\common
+aom\av1\decoder
+aom\av1\encoder
+aom\third_party\fastfeat
+aom\third_party\vector
 
 [INCLUDES]
 ..\..\aom

@@ -9,17 +9,17 @@ COPYING
 COMPILING_FFTW
 
 [DIRECTORIES]
-..\..\fftw\api
-..\..\fftw\dft
-..\..\fftw\dft\scalar
-..\..\fftw\dft\scalar\codelets
-..\..\fftw\kernel
-..\..\fftw\rdft
-..\..\fftw\rdft\scalar
-..\..\fftw\rdft\scalar\r2cb
-..\..\fftw\rdft\scalar\r2cf
-..\..\fftw\rdft\scalar\r2r
-..\..\fftw\reodft
+fftw\api
+fftw\dft
+fftw\dft\scalar
+fftw\dft\scalar\codelets
+fftw\kernel
+fftw\rdft
+fftw\rdft\scalar
+fftw\rdft\scalar\r2cb
+fftw\rdft\scalar\r2cf
+fftw\rdft\scalar\r2r
+fftw\reodft
 
 [INCLUDES]
 ..\..\fftw

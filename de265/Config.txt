@@ -10,10 +10,10 @@ HAVE_STDINT_H
 LIBDE265_STATIC_BUILD
 
 [DIRECTORIES]
-..\..\de265\extra
-..\..\de265\libde265
-..\..\de265\libde265\encoder
-..\..\de265\libde265\encoder\algo
+de265\extra
+de265\libde265
+de265\libde265\encoder
+de265\libde265\encoder\algo
 
 [INCLUDES]
 ..\..\de265

@@ -14,12 +14,12 @@ HAS_ENCODER
 FLIF_BUILD_DLL
 
 [DIRECTORIES]
-..\..\flif\extern
-..\..\flif\src
-..\..\flif\src\image
-..\..\flif\src\library
-..\..\flif\src\maniac
-..\..\flif\src\transform
+flif\extern
+flif\src
+flif\src\image
+flif\src\library
+flif\src\maniac
+flif\src\transform
 
 [EXCLUDES]
 flif.cpp

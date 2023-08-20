@@ -82,6 +82,16 @@ static inline bool contains(const vector<wstring> &container, const wstring s)
   return(false);
 }
 
+static bool directoryExists(const std::wstring& folderPath)
+{
+  DWORD
+    folderAttr = GetFileAttributesW(folderPath.c_str());
+
+  if (folderAttr == INVALID_FILE_ATTRIBUTES)
+    return false;
+  return (folderAttr & FILE_ATTRIBUTE_DIRECTORY);
+}
+
 static inline wstring trim(const wstring &s)
 {
   wstring

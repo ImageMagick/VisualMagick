@@ -9,7 +9,7 @@ COPYING
 _JBIGLIB_
 
 [DIRECTORIES]
-..\..\jbig\libjbig
+jbig\libjbig
 
 [EXCLUDES]
 tstcodec.c

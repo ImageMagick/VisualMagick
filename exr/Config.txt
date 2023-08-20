@@ -16,13 +16,13 @@ OPENEXR_EXPORTS
 OPENEXRCORE_EXPORTS
 
 [DIRECTORIES]
-..\..\exr\imath
-..\..\exr\imath\src\Imath
-..\..\exr\openexr
-..\..\exr\openexr\src\lib\Iex
-..\..\exr\openexr\src\lib\IlmThread
-..\..\exr\openexr\src\lib\OpenEXR
-..\..\exr\openexr\src\lib\OpenEXRCore
+exr\imath
+exr\imath\src\Imath
+exr\openexr
+exr\openexr\src\lib\Iex
+exr\openexr\src\lib\IlmThread
+exr\openexr\src\lib\OpenEXR
+exr\openexr\src\lib\OpenEXRCore
 
 [INCLUDES]
 ..\..\zlib

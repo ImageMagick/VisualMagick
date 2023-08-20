@@ -1,7 +1,7 @@
 [DLLMODULE]
 
 [DIRECTORIES]
-..\..\ImageMagick\filters
+ImageMagick\filters
 
 [INCLUDES]
 ..\..\ImageMagick

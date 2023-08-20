@@ -12,17 +12,17 @@ USE_JPEG
 LIBRAW_NODLL
 
 [DIRECTORIES]
-..\..\raw\internal
-..\..\raw\src
-..\..\raw\src\decoders
-..\..\raw\src\demosaic
-..\..\raw\src\integration
-..\..\raw\src\metadata
-..\..\raw\src\postprocessing
-..\..\raw\src\preprocessing
-..\..\raw\src\tables
-..\..\raw\src\utils
-..\..\raw\src\write
+raw\internal
+raw\src
+raw\src\decoders
+raw\src\demosaic
+raw\src\integration
+raw\src\metadata
+raw\src\postprocessing
+raw\src\preprocessing
+raw\src\tables
+raw\src\utils
+raw\src\write
 
 [INCLUDES]
 ..\..\jpeg-turbo

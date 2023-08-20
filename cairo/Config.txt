@@ -8,8 +8,8 @@ CAIRO_FEATURES_H
 CAIRO_BUILD
 
 [DIRECTORIES]
-..\..\cairo\src
-..\..\cairo\src\win32
+cairo\src
+cairo\src\win32
 
 [INCLUDES]
 ..\..\freetype\include

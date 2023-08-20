@@ -14,7 +14,7 @@ PNG_NO_MODULEDEF
 PNG_BUILD_DLL
 
 [DIRECTORIES]
-..\..\png
+png
 
 [INCLUDES]
 ..\..\zlib

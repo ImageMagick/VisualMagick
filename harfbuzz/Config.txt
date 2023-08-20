@@ -9,7 +9,7 @@ HAVE_FREETYPE
 HARFBUZZ_COMPILATION
 
 [DIRECTORIES]
-..\..\harfbuzz\src
+harfbuzz\src
 
 [INCLUDES]
 ..\..\freetype\include

@@ -10,9 +10,9 @@ IN_LIBXML
 LIBXML_STATIC
 
 [DIRECTORIES]
-..\..\xml
-..\..\xml\include
-..\..\xml\include\libxml
+xml
+xml\include
+xml\include\libxml
 
 [INCLUDES]
 ..\..\zlib

@@ -4,7 +4,7 @@
 COPYING
 
 [DIRECTORIES]
-..\..\croco\src
+croco\src
 
 [INCLUDES]
 ..\..\glib

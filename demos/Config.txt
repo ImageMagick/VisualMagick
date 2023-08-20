@@ -3,11 +3,11 @@
 [OPTIONAL]
 
 [DIRECTORIES]
-..\..\Magick++\demo
+ImageMagick\Magick++\demo
 
 [INCLUDES]
-..\..
-..\..\Magick++\lib
+..\..\ImageMagick
+..\..\ImageMagick\Magick++\lib
 
 [MODULE_PREFIX]
 DEMO

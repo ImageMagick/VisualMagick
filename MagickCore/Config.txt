@@ -4,7 +4,7 @@
 _MAGICKLIB_
 
 [DIRECTORIES]
-..\..\ImageMagick\MagickCore
+ImageMagick\MagickCore
 
 [INCLUDES]
 ..\..\ImageMagick

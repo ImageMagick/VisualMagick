@@ -10,7 +10,7 @@ DLL_EXPORT
 OPJ_STATIC
 
 [DIRECTORIES]
-..\..\openjpeg\src\lib\openjp2
+openjpeg\src\lib\openjp2
 
 [EXCLUDES]
 bench_dwt.c

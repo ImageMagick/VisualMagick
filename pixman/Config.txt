@@ -7,7 +7,7 @@ COPYING
 PACKAGE
 
 [DIRECTORIES]
-..\..\pixman\pixman
+pixman\pixman
 
 [EXCLUDES]
 pixman-arm-detect-win32.asm

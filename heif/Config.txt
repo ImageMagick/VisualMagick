@@ -17,9 +17,9 @@ LIBHEIF_STATIC_BUILD
 LIBHEIF_EXPORTS
 
 [DIRECTORIES]
-..\..\heif\libheif
-..\..\heif\libheif\color-conversion
-..\..\heif\libheif\plugins
+heif\libheif
+heif\libheif\color-conversion
+heif\libheif\plugins
 
 [INCLUDES]
 ..\..\aom

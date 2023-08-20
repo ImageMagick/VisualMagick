@@ -317,7 +317,7 @@ wstring ProjectFile::getFilter(const wstring &fileName,vector<wstring> &filters)
   while (folder.find_first_of(L"\\") != -1)
   {
     folder=folder.substr(0, folder.find_last_of(L"\\"));
-    if (!contains(filters, folder))
+    if (!contains(filters,folder))
       filters.push_back(folder);
   }
 
@@ -365,9 +365,9 @@ void ProjectFile::loadSource()
   foreach (wstring,dir,_project->directories())
   {
     if ((_project->isModule()) && (_project->isExe() || (_project->isDll() && _wizard->solutionType() == SolutionType::DYNAMIC_MT)))
-      loadModule(*dir);
+      loadModule(L"..\\..\\" + *dir);
     else
-      loadSource(*dir);
+      loadSource(L"..\\..\\" + *dir);
   }
 
   resourceFile=L"..\\..\\" + _project->name() + L"\\ImageMagick\\ImageMagick.rc";
@@ -430,7 +430,7 @@ void ProjectFile::merge(vector<wstring> &input, vector<wstring> &output)
 {
   foreach (wstring,value,input)
   {
-    if (std::find(output.begin(),output.end(), *value) == output.end())
+    if (!contains(output,*value))
       output.push_back(*value);
   }
 }
@@ -474,10 +474,13 @@ void ProjectFile::writeAdditionalIncludeDirectories(wofstream &file,const wstrin
     bool
       skip;
 
+    wstring
+      dir(L"..\\..\\" + *projectDir);
+
     skip=false;
     foreach (wstring,includeDir,_includes)
     {
-      if ((*projectDir).find(*includeDir) == 0)
+      if (dir.find(*includeDir) == 0)
       {
         skip=true;
         break;
@@ -485,7 +488,7 @@ void ProjectFile::writeAdditionalIncludeDirectories(wofstream &file,const wstrin
     }
 
     if (!skip)
-      file << separator << *projectDir;
+      file << separator << dir;
   }
   foreach (wstring,includeDir,_includes)
   {

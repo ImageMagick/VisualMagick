@@ -7,8 +7,8 @@ LICENSE.md
 _TIFFLIB_
 
 [DIRECTORIES]
-..\..\tiff\libtiff
-..\..\tiff\port
+tiff\libtiff
+tiff\port
 
 [INCLUDES]
 ..\..\jbig\libjbig

@@ -1,8 +1,8 @@
 [DLL]
 
 [DIRECTORIES]
-..\..\ImageMagick\Magick++\lib
-..\..\ImageMagick\Magick++\lib\Magick++
+ImageMagick\Magick++\lib
+ImageMagick\Magick++\lib\Magick++
 
 [INCLUDES]
 ..\..\ImageMagick

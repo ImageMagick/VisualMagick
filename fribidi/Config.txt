@@ -21,4 +21,4 @@ HAVE_STRING_H
 HAVE_WCHAR_H
 
 [DIRECTORIES]
-..\..\fribidi\lib
+fribidi\lib

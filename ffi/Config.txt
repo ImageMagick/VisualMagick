@@ -4,10 +4,10 @@
 LICENSE
 
 [DIRECTORIES]
-..\..\ffi\include
-..\..\ffi\src
-..\..\ffi\src\aarch64
-..\..\ffi\src\x86
+ffi\include
+ffi\src
+ffi\src\aarch64
+ffi\src\x86
 
 [DEFINES]
 FFI_BUILDING

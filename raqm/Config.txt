@@ -7,7 +7,7 @@ COPYING
 FRIBIDI_LIB_STATIC
 
 [DIRECTORIES]
-..\..\raqm\src
+raqm\src
 
 [INCLUDES]
 ..\..\freetype\include

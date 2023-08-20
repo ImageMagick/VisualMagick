@@ -4,8 +4,8 @@
 LICENSE
 
 [DIRECTORIES]
-..\..\highway\hwy
-..\..\highway\hwy\ops
+highway\hwy
+highway\hwy\ops
 
 [DEFINES]
 HWY_STATIC_DEFINE

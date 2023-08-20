@@ -7,7 +7,7 @@ LICENSE
 ZLIB_DLL
 
 [DIRECTORIES]
-..\..\zlib
+zlib
 
 [EXCLUDES]
 maketree.c
