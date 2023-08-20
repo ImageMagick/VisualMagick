@@ -1,7 +1,7 @@
 [STATIC]
 
 [LICENSE]
-ffi\LICENSE
+LICENSE
 
 [DIRECTORIES]
 ..\..\ffi\include

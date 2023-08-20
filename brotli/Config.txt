@@ -1,7 +1,7 @@
 [STATIC]
 
 [LICENSE]
-brotli\LICENSE
+LICENSE
 
 [DIRECTORIES]
 ..\..\brotli\c\common

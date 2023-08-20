@@ -1,7 +1,7 @@
 [DLL]
 
 [LICENSE]
-rsvg\librsvg\COPYING
+librsvg\COPYING
 
 [DEFINES]
 GDK_PIXBUF_ENABLE_BACKEND

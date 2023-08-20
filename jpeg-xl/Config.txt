@@ -1,7 +1,7 @@
 [DLL]
 
 [LICENSE]
-jpeg-xl\LICENSE
+LICENSE
 
 [DIRECTORIES]
 ..\..\jpeg-xl\lib\include\jxl

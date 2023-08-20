@@ -1,7 +1,7 @@
 [DLL]
 
 [LICENSE]
-harfbuzz\COPYING
+COPYING
 
 [DEFINES]
 HAVE_GLIB

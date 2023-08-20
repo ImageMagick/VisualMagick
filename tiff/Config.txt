@@ -1,7 +1,7 @@
 [DLL]
 
 [LICENSE]
-tiff\LICENSE.md
+LICENSE.md
 
 [DEFINES]
 _TIFFLIB_
