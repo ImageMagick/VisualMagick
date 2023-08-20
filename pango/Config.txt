@@ -1,7 +1,7 @@
 [DLL]
 
 [LICENSE]
-..\..\pango\COPYING
+pango\COPYING
 
 [DEFINES_LIB]
 FRIBIDI_LIB_STATIC

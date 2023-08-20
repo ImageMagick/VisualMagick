@@ -1,7 +1,7 @@
 [DLL]
 
 [LICENSE]
-..\..\bzlib\LICENSE
+bzlib\LICENSE
 
 [DEFINES]
 _WIN32

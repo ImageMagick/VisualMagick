@@ -1,7 +1,7 @@
 [DLL]
 
 [LICENSE]
-..\..\webp\COPYING
+webp\COPYING
 
 [DEFINES]
 _WEBPLIB_

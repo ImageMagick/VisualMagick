@@ -1,7 +1,7 @@
 [STATIC]
 
 [LICENSE]
-..\..\aom\LICENSE
+aom\LICENSE
 
 [DIRECTORIES]
 ..\..\aom\aom\src

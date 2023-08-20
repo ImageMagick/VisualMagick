@@ -454,12 +454,12 @@ vector<wstring> Project::readLicenseFilenames(const wstring &line)
   while(getline(wss, fileName, L';'))
   {
     filesystem::path
-      file(fileName);
+      file(L"..\\..\\" + fileName);
 
     if (!filesystem::exists(file))
       throwException(L"Unable to open license file: " + fileName);
 
-    fileNames.push_back(fileName);
+    fileNames.push_back(L"..\\..\\" + fileName);
   }
 
   return (fileNames);

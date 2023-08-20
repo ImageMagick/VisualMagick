@@ -1,7 +1,7 @@
 [DLL]
 
 [LICENSE]
-..\..\jpeg-turbo\LICENSE.md
+jpeg-turbo\LICENSE.md
 
 [NASM]
 

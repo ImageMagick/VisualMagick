@@ -1,7 +1,7 @@
 [DLL]
 
 [LICENSE]
-..\..\openjpeg\LICENSE
+openjpeg\LICENSE
 
 [DEFINES]
 DLL_EXPORT

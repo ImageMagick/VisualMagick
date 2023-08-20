@@ -1,7 +1,7 @@
 [DLL]
 
 [LICENSE]
-..\..\freetype\docs\FTL.TXT
+freetype\docs\FTL.TXT
 
 [DEFINES]
 FT2_BUILD_LIBRARY

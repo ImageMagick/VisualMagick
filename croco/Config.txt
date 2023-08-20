@@ -1,7 +1,7 @@
 [STATIC]
 
 [LICENSE]
-..\..\croco\COPYING
+croco\COPYING
 
 [DIRECTORIES]
 ..\..\croco\src

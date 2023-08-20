@@ -1,7 +1,7 @@
 [DLL]
 
 [LICENSE]
-..\..\png\LICENSE
+png\LICENSE
 
 [DEFINES]
 _PNGLIB_

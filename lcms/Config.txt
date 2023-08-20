@@ -1,7 +1,7 @@
 [DLL]
 
 [LICENSE]
-..\..\lcms\COPYING
+lcms\COPYING
 
 [DEFINES]
 __CONSOLE__
