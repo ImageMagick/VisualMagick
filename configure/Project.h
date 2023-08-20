@@ -128,6 +128,7 @@ private:
   bool                 _isOptional;
   vector<wstring>      _libraries;
   vector<wstring>      _licenseFileNames;
+  VisualStudioVersion  _minimumVisualStudioVersion;
   wstring              _moduleDefinitionFile;
   wstring              _modulePrefix;
   wstring              _name;
@@ -137,7 +138,6 @@ private:
   ProjectType          _type;
   bool                 _useNasm;
   bool                 _useUnicode;
-  VisualStudioVersion  _minimumVisualStudioVersion;
   vector<wstring>      _versions;
   int                  _warningLevel;
 };
