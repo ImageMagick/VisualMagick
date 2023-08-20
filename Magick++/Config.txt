@@ -13,7 +13,4 @@
 MagickCore
 MagickWand
 
-[WARNING_LEVEL]
-4
-
-[TREAT_WARNING_AS_ERROR]
+[MAGICK_PROJECT]

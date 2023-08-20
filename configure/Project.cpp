@@ -145,7 +145,7 @@ vector<wstring> &Project::references()
 
 bool Project::treatWarningAsError() const
 {
-  return(_treatWarningAsError);
+  return(_magickProject);
 }
 
 bool Project::useNasm() const
@@ -165,7 +165,7 @@ wstring Project::version() const
 
 int Project::warningLevel() const
 {
-  return(_warningLevel);
+  return(_magickProject ? 4 : 0);
 }
 
 void Project::checkFiles(const VisualStudioVersion visualStudioVersion)
@@ -277,16 +277,15 @@ Project::Project(wstring name)
 {
   _name=name;
 
-  _hasIncompatibleLicense=false;
   _disabledARM64=false;
   _disableOptimization=false;
+  _hasIncompatibleLicense=false;
   _isOptional=false;
+  _minimumVisualStudioVersion=VSEARLIEST;
   _type=ProjectType::UNDEFINEDTYPE;
   _useNasm=false;
   _useUnicode=false;
-  _treatWarningAsError=false;
-  _warningLevel=0;
-  _minimumVisualStudioVersion=VSEARLIEST;
+  _magickProject=false;
 }
 
 void Project::addLines(wifstream &config,wstring &value)
@@ -383,10 +382,8 @@ void Project::loadConfig(wifstream &config)
       _useUnicode=true;
     else if (line == L"[VISUAL_STUDIO]")
       _minimumVisualStudioVersion=parseVisualStudioVersion(readLine(config));
-    else if (line == L"[WARNING_LEVEL]")
-      _warningLevel=stoi(readLine(config));
-    else if (line == L"[TREAT_WARNING_AS_ERROR]")
-      _treatWarningAsError=true;
+    else if (line == L"[MAGICK_PROJECT]")
+      _magickProject=true;
     else if (line == L"[LICENSE]")
       _licenseFileNames=readLicenseFilenames(readLine(config));
   }

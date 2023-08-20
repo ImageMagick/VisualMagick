@@ -128,18 +128,17 @@ private:
   bool                 _isOptional;
   vector<wstring>      _libraries;
   vector<wstring>      _licenseFileNames;
+  bool                 _magickProject;
   VisualStudioVersion  _minimumVisualStudioVersion;
   wstring              _moduleDefinitionFile;
   wstring              _modulePrefix;
   wstring              _name;
   wstring              _notice;
   vector<wstring>      _references;
-  bool                 _treatWarningAsError;
   ProjectType          _type;
   bool                 _useNasm;
   bool                 _useUnicode;
   vector<wstring>      _versions;
-  int                  _warningLevel;
 };
 
 #endif // __Project__
