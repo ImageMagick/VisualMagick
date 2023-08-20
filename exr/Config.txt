@@ -25,7 +25,7 @@ exr\openexr\src\lib\OpenEXR
 exr\openexr\src\lib\OpenEXRCore
 
 [INCLUDES]
-..\..\zlib
+zlib
 
 [EXCLUDES]
 b44ExpLogTable.cpp

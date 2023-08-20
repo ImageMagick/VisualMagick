@@ -10,9 +10,9 @@ ZIP_STATIC
 zip\lib
 
 [INCLUDES]
-..\..\bzlib
-..\..\lzma\src\liblzma\api
-..\..\zlib
+bzlib
+lzma\src\liblzma\api
+zlib
 
 [EXCLUDES]
 zip_algorithm_zstd.c

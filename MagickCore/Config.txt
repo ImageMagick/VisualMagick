@@ -7,18 +7,18 @@ _MAGICKLIB_
 ImageMagick\MagickCore
 
 [INCLUDES]
-..\..\ImageMagick
-..\..\bzlib
-..\..\fftw\api
-..\..\freetype\include
-..\..\glib
-..\..\glib\glib
-..\..\lcms\include
-..\..\lqr
-..\..\lqr\lqr
-..\..\raqm\src
-..\..\xml\include
-..\..\zlib
+ImageMagick
+bzlib
+fftw\api
+freetype\include
+glib
+glib\glib
+lcms\include
+lqr
+lqr\lqr
+raqm\src
+xml\include
+zlib
 
 [EXCLUDES]
 mac.c

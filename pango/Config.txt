@@ -17,12 +17,12 @@ pango
 pango\pango
 
 [INCLUDES]
-..\..\cairo\src
-..\..\fribidi\lib
-..\..\glib
-..\..\glib\glib
-..\..\glib\gmodule
-..\..\harfbuzz\src
+cairo\src
+fribidi\lib
+glib
+glib\glib
+glib\gmodule
+harfbuzz\src
 
 [EXCLUDES]
 emoji_presentation_scanner.c

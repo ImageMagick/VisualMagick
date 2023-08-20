@@ -15,18 +15,18 @@ rsvg\librsvg
 rsvg\librsvg\gdk-pixbuf-loader
 
 [INCLUDES]
-..\..\cairo\src
-..\..\croco\src
-..\..\glib
-..\..\glib\glib
-..\..\glib\gmodule
-..\..\harfbuzz\src
-..\..\jasper\src\libjasper\include
-..\..\jpeg-turbo
-..\..\pango
-..\..\png
-..\..\tiff\libtiff
-..\..\xml\include
+cairo\src
+croco\src
+glib
+glib\glib
+glib\gmodule
+harfbuzz\src
+jasper\src\libjasper\include
+jpeg-turbo
+pango
+png
+tiff\libtiff
+xml\include
 
 [EXCLUDES]
 fallback-c89.c

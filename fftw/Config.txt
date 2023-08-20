@@ -22,7 +22,7 @@ fftw\rdft\scalar\r2r
 fftw\reodft
 
 [INCLUDES]
-..\..\fftw
+fftw
 
 [CONFIG_DEFINE]
 /*

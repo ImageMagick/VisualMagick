@@ -1,5 +1,5 @@
 [INCLUDES]
-..\..\webp\src
+webp\src
 
 [DEPENDENCIES]
 webp

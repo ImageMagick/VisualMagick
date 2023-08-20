@@ -9,4 +9,4 @@ brotli\c\dec
 brotli\c\enc
 
 [INCLUDES]
-..\..\brotli\c\include
+brotli\c\include

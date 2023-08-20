@@ -7,7 +7,7 @@ COPYING
 _WEBPLIB_
 
 [INCLUDES]
-..\..\webp
+webp
 
 [DIRECTORIES]
 webp\src

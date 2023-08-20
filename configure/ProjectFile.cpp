@@ -474,13 +474,10 @@ void ProjectFile::writeAdditionalIncludeDirectories(wofstream &file,const wstrin
     bool
       skip;
 
-    wstring
-      dir(L"..\\..\\" + *projectDir);
-
     skip=false;
     foreach (wstring,includeDir,_includes)
     {
-      if (dir.find(*includeDir) == 0)
+      if ((*projectDir).find(*includeDir) == 0)
       {
         skip=true;
         break;
@@ -488,11 +485,11 @@ void ProjectFile::writeAdditionalIncludeDirectories(wofstream &file,const wstrin
     }
 
     if (!skip)
-      file << separator << dir;
+      file << separator << L"..\\..\\" <<  *projectDir;
   }
   foreach (wstring,includeDir,_includes)
   {
-    file << separator << *includeDir;
+    file << separator << L"..\\..\\" << *includeDir;
   }
   if (_wizard->useOpenCL())
     file << separator << L"..\\..\\VisualMagick\\OpenCL";

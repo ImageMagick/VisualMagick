@@ -22,9 +22,9 @@ heif\libheif\color-conversion
 heif\libheif\plugins
 
 [INCLUDES]
-..\..\aom
-..\..\de265
-..\..\heif
+aom
+de265
+heif
 
 [EXCLUDES]
 decoder_dav1d.cc

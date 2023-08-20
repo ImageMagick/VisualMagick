@@ -4,7 +4,7 @@
 ImageMagick\coders
 
 [INCLUDES]
-..\..\ImageMagick
+ImageMagick
 
 [EXCLUDES]
 x.c

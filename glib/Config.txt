@@ -36,8 +36,8 @@ glib\gmodule
 glib\gobject
 
 [INCLUDES]
-..\..\ffi\include
-..\..\zlib
+ffi\include
+zlib
 
 [EXCLUDES]
 gactiongroupexporter.c

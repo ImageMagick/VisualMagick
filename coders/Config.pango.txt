@@ -1,9 +1,9 @@
 [INCLUDES]
-..\..\cairo\src
-..\..\glib
-..\..\glib\glib
-..\..\harfbuzz\src
-..\..\pango
+cairo\src
+glib
+glib\glib
+harfbuzz\src
+pango
 
 [DEPENDENCIES]
 cairo

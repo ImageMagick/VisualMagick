@@ -15,7 +15,7 @@ xml\include
 xml\include\libxml
 
 [INCLUDES]
-..\..\zlib
+zlib
 
 [LIBRARIES]
 ws2_32.lib

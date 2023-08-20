@@ -6,8 +6,8 @@
 contrib\win32\MFC\NtMagick
 
 [INCLUDES]
-..\..\ImageMagick
-..\..\ImageMagick\Magick++\lib
+ImageMagick
+ImageMagick\Magick++\lib
 
 [UNICODE]
 

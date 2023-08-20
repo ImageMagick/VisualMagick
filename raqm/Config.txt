@@ -10,9 +10,9 @@ FRIBIDI_LIB_STATIC
 raqm\src
 
 [INCLUDES]
-..\..\freetype\include
-..\..\fribidi\lib
-..\..\harfbuzz\src
+freetype\include
+fribidi\lib
+harfbuzz\src
 
 [DEPENDENCIES]
 fribidi

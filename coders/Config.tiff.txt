@@ -1,5 +1,5 @@
 [INCLUDES]
-..\..\tiff\libtiff
+tiff\libtiff
 
 [DEPENDENCIES]
 tiff

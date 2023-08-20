@@ -1,6 +1,6 @@
 [INCLUDES]
-..\..\exr\openexr
-..\..\exr\openexr\src\lib\OpenEXR
+exr\openexr
+exr\openexr\src\lib\OpenEXR
 
 [DEFINES_DLL]
 OPENEXR_DLL

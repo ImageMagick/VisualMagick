@@ -1,5 +1,5 @@
 [INCLUDES]
-..\..\raw\libraw
+raw\libraw
 
 [DEFINES_LIB]
 LIBRAW_NODLL

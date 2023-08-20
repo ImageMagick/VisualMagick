@@ -9,8 +9,8 @@ BUILD_MAIN
 ImageMagick\Magick++\fuzz
 
 [INCLUDES]
-..\..\ImageMagick
-..\..\ImageMagick\Magick++\lib
+ImageMagick
+ImageMagick\Magick++\lib
 
 [EXCLUDES]
 encoder_list.cc

@@ -24,11 +24,11 @@ JXL_INTERNAL_LIBRARY_BUILD
 JXL_THREADS_INTERNAL_LIBRARY_BUILD
 
 [INCLUDES]
-..\..\jpeg-xl
-..\..\jpeg-xl\lib\include
-..\..\highway
-..\..\brotli\c\include
-..\..\lcms\include
+jpeg-xl
+jpeg-xl\lib\include
+highway
+brotli\c\include
+lcms\include
 
 [EXCLUDES]
 *_gbench.cc

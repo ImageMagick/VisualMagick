@@ -5,9 +5,9 @@ ImageMagick\Magick++\lib
 ImageMagick\Magick++\lib\Magick++
 
 [INCLUDES]
-..\..\ImageMagick
-..\..\ImageMagick\MagickCore
-..\..\ImageMagick\Magick++\lib
+ImageMagick
+ImageMagick\MagickCore
+ImageMagick\Magick++\lib
 
 [DEPENDENCIES]
 MagickCore

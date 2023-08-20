@@ -1,5 +1,5 @@
 [INCLUDES]
-..\..\xml\include
+xml\include
 
 [DEPENDENCIES]
 xml

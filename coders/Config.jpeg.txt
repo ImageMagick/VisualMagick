@@ -1,5 +1,5 @@
 [INCLUDES]
-..\..\jpeg-turbo
+jpeg-turbo
 
 [DEPENDENCIES]
 jpeg-turbo

@@ -11,8 +11,8 @@ lqr
 lqr\lqr
 
 [INCLUDES]
-..\..\glib
-..\..\glib\glib
+glib
+glib\glib
 
 [DEPENDENCIES]
 glib

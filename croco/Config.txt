@@ -7,6 +7,6 @@ COPYING
 croco\src
 
 [INCLUDES]
-..\..\glib
-..\..\glib\glib
-..\..\xml\include
+glib
+glib\glib
+xml\include

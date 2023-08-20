@@ -4,7 +4,7 @@
 ImageMagick\utilities
 
 [INCLUDES]
-..\..\ImageMagick
+ImageMagick
 
 [MODULE_PREFIX]
 UTIL

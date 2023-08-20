@@ -12,9 +12,9 @@ HARFBUZZ_COMPILATION
 harfbuzz\src
 
 [INCLUDES]
-..\..\freetype\include
-..\..\glib
-..\..\glib\glib
+freetype\include
+glib
+glib\glib
 
 [EXCLUDES]
 dump-indic-data.cc

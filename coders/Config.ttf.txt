@@ -1,5 +1,5 @@
 [INCLUDES]
-..\..\freetype\include
+freetype\include
 
 [DEPENDENCIES]
 freetype

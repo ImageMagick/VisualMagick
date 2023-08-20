@@ -1,5 +1,5 @@
 [INCLUDES]
-..\..\zlib
+zlib
 
 [DEPENDENCIES]
 zlib

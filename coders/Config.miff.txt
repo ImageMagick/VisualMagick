@@ -1,7 +1,7 @@
 [INCLUDES]
-..\..\bzlib
-..\..\lzma\src\liblzma\api
-..\..\zlib
+bzlib
+lzma\src\liblzma\api
+zlib
 
 [DEFINES_LIB]
 LZMA_API_STATIC

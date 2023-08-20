@@ -25,9 +25,9 @@ raw\src\utils
 raw\src\write
 
 [INCLUDES]
-..\..\jpeg-turbo
-..\..\raw
-..\..\zlib
+jpeg-turbo
+raw
+zlib
 
 [EXCLUDES]
 *_ph.cpp

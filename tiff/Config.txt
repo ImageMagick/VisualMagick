@@ -11,10 +11,10 @@ tiff\libtiff
 tiff\port
 
 [INCLUDES]
-..\..\jbig\libjbig
-..\..\jpeg-turbo
-..\..\webp\src
-..\..\zlib
+jbig\libjbig
+jpeg-turbo
+webp\src
+zlib
 
 [MODULE_DEFINITION_FILE]
 ..\..\tiff\libtiff\libtiff.def

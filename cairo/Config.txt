@@ -12,11 +12,11 @@ cairo\src
 cairo\src\win32
 
 [INCLUDES]
-..\..\freetype\include
-..\..\glib
-..\..\pixman\pixman
-..\..\png
-..\..\zlib
+freetype\include
+glib
+pixman\pixman
+png
+zlib
 
 [EXCLUDES]
 check-link.c

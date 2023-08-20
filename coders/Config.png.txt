@@ -1,6 +1,6 @@
 [INCLUDES]
-..\..\png
-..\..\zlib
+png
+zlib
 
 [DEPENDENCIES]
 png

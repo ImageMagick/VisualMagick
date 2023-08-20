@@ -16,5 +16,5 @@ de265\libde265\encoder
 de265\libde265\encoder\algo
 
 [INCLUDES]
-..\..\de265
-..\..\de265\libde265
+de265
+de265\libde265

@@ -6,8 +6,8 @@
 ImageMagick\Magick++\demo
 
 [INCLUDES]
-..\..\ImageMagick
-..\..\ImageMagick\Magick++\lib
+ImageMagick
+ImageMagick\Magick++\lib
 
 [MODULE_PREFIX]
 DEMO

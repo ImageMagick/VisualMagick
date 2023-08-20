@@ -34,7 +34,7 @@ image-rggb.cpp
 viewflif.c
 
 [INCLUDES]
-..\..\zlib
+zlib
 
 [DEPENDENCIES]
 zlib

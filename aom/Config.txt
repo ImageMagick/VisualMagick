@@ -20,7 +20,7 @@ aom\third_party\fastfeat
 aom\third_party\vector
 
 [INCLUDES]
-..\..\aom
+aom
 
 [EXCLUDES]
 args.c
