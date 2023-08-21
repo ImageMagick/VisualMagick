@@ -542,7 +542,7 @@ void Solution::write(const ConfigureWizard &wizard,wofstream &file)
     foreach (ProjectFile*,pf,(*p)->files())
     {
       file << "Project(\"{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}\") = \"" << (*pf)->name() << "\", ";
-      file << "\".\\" << (*p)->name() << "\\" << (*pf)->fileName() << "\", \"{" << (*pf)->guid() << "}\"" << endl;
+      file << "\"VisualStudioProjects\\" << (*pf)->name() << "\\" << (*pf)->fileName() << "\", \"{" << (*pf)->guid() << "}\"" << endl;
       file << "EndProject" << endl;
     }
   }

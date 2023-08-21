@@ -24,6 +24,11 @@
 #include <algorithm>
 #include <map>
 
+
+static const wstring
+  relativePathForConfigure(L"..\\..\\"),
+  relativePathForProject(L"..\\..\\..\\");
+
 ProjectFile::ProjectFile(const ConfigureWizard *wizard,Project *project,
   const wstring &prefix,const wstring &name)
   : _wizard(wizard),
@@ -197,7 +202,12 @@ void ProjectFile::write(const vector<Project*> &allprojects)
   wofstream
     file;
 
-  file.open(L"..\\" + _project->name() + L"\\" + _fileName);
+  wstring
+    projectDir(L"..\\VisualStudioProjects\\" + name());
+
+  CreateDirectoryW(projectDir.c_str(), NULL);
+
+  file.open(projectDir + L"\\" + _fileName);
   if (!file)
     return;
 
@@ -207,7 +217,7 @@ void ProjectFile::write(const vector<Project*> &allprojects)
 
   file.close();
 
-  file.open(L"..\\" + _project->name() + L"\\" + _fileName + L".filters");
+  file.open(projectDir + L"\\" + _fileName + L".filters");
   if (!file)
     return;
 
@@ -242,13 +252,13 @@ void ProjectFile::addFile(const wstring &directory, const wstring &name)
   {
     src_file=directory + L"\\" + name + *ext;
 
-    if (PathFileExists(src_file.c_str()))
+    if (PathFileExists((relativePathForConfigure + src_file).c_str()))
     {
-      _srcFiles.push_back(src_file);
+      _srcFiles.push_back(relativePathForProject + src_file);
 
       header_file=directory + L"\\" + name + L".h";
-      if (PathFileExists(header_file.c_str()))
-        _includeFiles.push_back(header_file);
+      if (PathFileExists((relativePathForConfigure + header_file).c_str()))
+        _includeFiles.push_back(relativePathForProject + header_file);
 
       break;
     }
@@ -261,13 +271,13 @@ void ProjectFile::addFile(const wstring &directory, const wstring &name)
   {
     src_file=directory + L"\\main" + *ext;
 
-    if (PathFileExists(src_file.c_str()))
+    if (PathFileExists((relativePathForConfigure + src_file).c_str()))
     {
-      _srcFiles.push_back(src_file);
+      _srcFiles.push_back(relativePathForProject + src_file);
 
       header_file=directory + L"\\" + name + L".h";
-      if (PathFileExists(header_file.c_str()))
-        _includeFiles.push_back(header_file);
+      if (PathFileExists((relativePathForConfigure + header_file).c_str()))
+        _includeFiles.push_back(relativePathForProject + header_file);
 
       break;
     }
@@ -365,17 +375,17 @@ void ProjectFile::loadSource()
   foreach (wstring,dir,_project->directories())
   {
     if ((_project->isModule()) && (_project->isExe() || (_project->isDll() && _wizard->solutionType() == SolutionType::DYNAMIC_MT)))
-      loadModule(L"..\\..\\" + *dir);
+      loadModule(*dir);
     else
-      loadSource(L"..\\..\\" + *dir);
+      loadSource(*dir);
   }
 
-  resourceFile=L"..\\..\\" + _project->name() + L"\\ImageMagick\\ImageMagick.rc";
+  resourceFile=relativePathForProject + _project->name() + L"\\ImageMagick\\ImageMagick.rc";
   if (PathFileExists(resourceFile.c_str()))
     _resourceFiles.push_back(resourceFile);
 
   /* This resource file is used by the ImageMagick projects */
-  resourceFile=L"..\\" + _project->name() + L"\\ImageMagick.rc";
+  resourceFile=relativePathForProject + _project->name() + L"\\ImageMagick.rc";
   if (PathFileExists(resourceFile.c_str()))
     _resourceFiles.push_back(resourceFile);
 }
@@ -391,7 +401,7 @@ void ProjectFile::loadSource(const wstring &directory)
   if (contains(_project->platformExcludes(_wizard->platform()),directory))
     return;
 
-  fileHandle=FindFirstFile((directory + L"\\*.*").c_str(),&data);
+  fileHandle=FindFirstFile((relativePathForConfigure + directory + L"\\*.*").c_str(),&data);
   do
   {
     if (fileHandle == INVALID_HANDLE_VALUE)
@@ -404,11 +414,11 @@ void ProjectFile::loadSource(const wstring &directory)
       continue;
 
     if (isSrcFile(data.cFileName))
-      _srcFiles.push_back(directory + L"\\" + data.cFileName);
+      _srcFiles.push_back(relativePathForProject + directory + L"\\" + data.cFileName);
     else if (endsWith(data.cFileName,L".h"))
-      _includeFiles.push_back(directory + L"\\" + data.cFileName);
+      _includeFiles.push_back(relativePathForProject + directory + L"\\" + data.cFileName);
     else if (endsWith(data.cFileName,L".rc"))
-      _resourceFiles.push_back(directory + L"\\" + data.cFileName);
+      _resourceFiles.push_back(relativePathForProject + directory + L"\\" + data.cFileName);
 
   } while (FindNextFile(fileHandle,&data));
 
@@ -485,14 +495,14 @@ void ProjectFile::writeAdditionalIncludeDirectories(wofstream &file,const wstrin
     }
 
     if (!skip)
-      file << separator << L"..\\..\\" <<  *projectDir;
+      file << separator << relativePathForProject <<  *projectDir;
   }
   foreach (wstring,includeDir,_includes)
   {
-    file << separator << L"..\\..\\" << *includeDir;
+    file << separator << relativePathForProject << *includeDir;
   }
   if (_wizard->useOpenCL())
-    file << separator << L"..\\..\\VisualMagick\\OpenCL";
+    file << separator << relativePathForProject << L"VisualMagick\\OpenCL";
 }
 
 void ProjectFile::writePreprocessorDefinitions(wofstream &file,const bool debug)
@@ -671,7 +681,7 @@ void ProjectFile::writeItemDefinitionGroup(wofstream &file,const bool debug)
         file << "    <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>" << endl;
       file << "      <SubSystem>Windows</SubSystem>" << endl;
       if ((_project->isDll()) && (!_project->moduleDefinitionFile().empty()))
-        file << "      <ModuleDefinitionFile>" << _project->moduleDefinitionFile() << "</ModuleDefinitionFile>" << endl;
+        file << "      <ModuleDefinitionFile>" << relativePathForProject <<  _project->moduleDefinitionFile() << "</ModuleDefinitionFile>" << endl;
     }
     else
       file << "      <SubSystem>Console</SubSystem>" << endl;
@@ -691,7 +701,7 @@ void ProjectFile::writeFiles(wofstream &file,const vector<wstring> &collection)
   wstring
     fileName,
     folder,
-    objFile;
+    name;
 
   if (collection.size() == 0)
     return;
@@ -732,13 +742,14 @@ void ProjectFile::writeFiles(wofstream &file,const vector<wstring> &collection)
         count=++fileCount[fileName];
 
       file << "    <ClCompile Include=\"" << *f << "\">" << endl;
-      if (contains(_cppFiles,(*f)))
+      name=replace(*f,L"..\\",L"");
+      if (contains(_cppFiles,name))
         file << "      <CompileAs>CompileAsCpp</CompileAs>" << endl;
       else if (count > 1)
       {
-        objFile=(*f).substr(0,(*f).find_last_of(L"."));
-        objFile=objFile.substr(objFile.find_last_of(L"\\") + 1);
-        file << "      <ObjectFileName>$(IntDir)" << objFile << "_" << count << ".obj</ObjectFileName>" << endl;
+        name=(*f).substr(0,(*f).find_last_of(L"."));
+        name=name.substr(name.find_last_of(L"\\") + 1);
+        file << "      <ObjectFileName>$(IntDir)" << name << "_" << count << ".obj</ObjectFileName>" << endl;
       }
       file << "      <MultiProcessorCompilation>true</MultiProcessorCompilation>" << endl;
       file << "    </ClCompile>" << endl;
@@ -760,15 +771,21 @@ void ProjectFile::writeFilter(wofstream &file)
   file << "  <ItemGroup>" << endl;
   foreach_const (wstring,f,_srcFiles)
   {
+    wstring
+      tagName(L"ClCompile");
+
+    if (endsWith((*f),L".asm"))
+      tagName=L"CustomBuild";
+
     filter=getFilter(*f,filters);
     if (filter != L"")
     {
-      file << "    <ClCompile Include=\"" << *f << "\">" << endl;
+      file << "    <" << tagName << L" Include=\"" << *f << "\">" << endl;
       file << "      <Filter>" << filter << "</Filter>" << endl;
-      file << "    </ClCompile>" << endl;
+      file << "    </" << tagName << L">" << endl;
     }
     else
-      file << "    <ClCompile Include=\"" << *f << "\" />" << endl;
+      file << "    <" << tagName << L" Include=\"" << *f << "\" />" << endl;
   }
   file << "  </ItemGroup>" << endl;
   file << "  <ItemGroup>" << endl;
@@ -828,7 +845,7 @@ void ProjectFile::writeProjectReferences(wofstream &file,const vector<Project*> 
         if (projectFileName != L"" && (*deppf)->_name != projectFileName)
           continue;
 
-        file << "    <ProjectReference Include=\"..\\" << (*deppf)-> _project->name() << "\\" << (*deppf)->_fileName << "\">" << endl;
+        file << "    <ProjectReference Include=\"..\\" << (*deppf)->name() << "\\" << (*deppf)->_fileName << "\">" << endl;
         file << "      <Project>{" << (*deppf)->guid() << "}</Project>" << endl;
         file << "      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>" << endl;
         file << "    </ProjectReference>" << endl;

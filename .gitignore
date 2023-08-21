@@ -1,5 +1,3 @@
-*/*.vcxproj
-
 /configure/x64
 /configure/Debug
 /configure/Release
@@ -7,6 +5,8 @@
 /configure/configure.pdb
 
 /installer/inc/version.isx
+
+/VisualStudioProjects/*
 
 /utilities/ImageMagick.version.h
 
@@ -28,4 +28,3 @@ NOTICE.txt
 *.suo
 *.user
 *.exe
-*.filters
