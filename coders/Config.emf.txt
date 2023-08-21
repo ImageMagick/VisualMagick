@@ -1,2 +1,2 @@
 [CPP]
-..\..\ImageMagick\coders\emf.c
+ImageMagick\coders\emf.c

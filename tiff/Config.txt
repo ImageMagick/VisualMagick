@@ -17,7 +17,7 @@ webp\src
 zlib
 
 [MODULE_DEFINITION_FILE]
-..\..\tiff\libtiff\libtiff.def
+tiff\libtiff\libtiff.def
 
 [EXCLUDES]
 mkg3states.c
