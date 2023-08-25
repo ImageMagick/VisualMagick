@@ -196,7 +196,8 @@ typedef long ssize_t;
 #pragma warning(disable: 4204) /* nonstandard extension used: non-constant aggregate initializer */
 #pragma warning(disable: 4459) /* 'identifier' : declaration of 'foo' hides global declaration */
 #endif
-#pragma warning(disable: 6993) /* Code analysis ignores OpenMP constructs; analyzing single-threaded code */
+#pragma warning(disable: 4611) /* interaction between '_setjmp' and C++ object destruction is non-portable */
+#pragma warning(disable: 6993) /* code analysis ignores OpenMP constructs; analyzing single-threaded code */
 #endif
 
 #endif

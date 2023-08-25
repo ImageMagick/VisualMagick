@@ -28,6 +28,8 @@ class Project
 {
 public:
 
+  wstring compileAs(VisualStudioVersion visualStudioVersion) const;
+
   wstring configDefine() const;
 
   vector<wstring> &defines();
