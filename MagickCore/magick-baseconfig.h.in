@@ -99,13 +99,6 @@ $$CONFIG$$
 */
 #define MAGICKCORE_PACKAGE_NAME  "ImageMagick"
 
-/*
-  Required or InitializeCriticalSectionandSpinCount is undefined.
-*/
-#if !defined(_WIN32_WINNT)
-#  define _WIN32_WINNT  0x0502
-#endif
-
 #define _magickcore_inline __inline
 #define _magickcore_restrict __restrict
 
