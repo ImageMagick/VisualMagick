@@ -26,17 +26,17 @@
 #include <locale>
 #include <filesystem>
 
-enum class SolutionType {DYNAMIC_MT, STATIC_MTD, STATIC_MT};
-
-enum class QuantumDepth {Q8, Q16, Q32, Q64};
-
 enum class Platform {X86, X64, ARM64};
+
+enum class PolicyConfig {LIMITED, OPEN, SECURE, WEBSAFE};
 
 enum class ProjectType {UNDEFINEDTYPE, APPTYPE, DLLTYPE, DLLMODULETYPE, EXETYPE, EXEMODULETYPE, STATICTYPE};
 
-enum class VisualStudioVersion {VS2017, VS2019, VS2022};
+enum class QuantumDepth {Q8, Q16, Q32, Q64};
 
-enum class PolicyConfig {LIMITED, OPEN, SECURE, WEBSAFE};
+enum class SolutionType {DYNAMIC_MT, STATIC_MTD, STATIC_MT};
+
+enum class VisualStudioVersion {VS2017, VS2019, VS2022};
 
 #define VSEARLIEST VisualStudioVersion::VS2017
 #define VSLATEST VisualStudioVersion::VS2022
