@@ -110,7 +110,6 @@ private:
   vector<wstring>        _aliases;
   wstring                _fileName;
   wstring                _guid;
-  vector<wstring>        _cppFiles;
   vector<wstring>        _dependencies;
   vector<wstring>        _includeFiles;
   vector<wstring>        _includes;

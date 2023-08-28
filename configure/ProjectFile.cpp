@@ -178,8 +178,6 @@ void ProjectFile::loadConfig()
       addLines(config,_dependencies);
     else if (line == L"[INCLUDES]")
       addLines(config,_includes);
-    else if (line == L"[CPP]")
-      addLines(config,_cppFiles);
     else if (line == L"[VISUAL_STUDIO]")
       _minimumVisualStudioVersion=parseVisualStudioVersion(readLine(config));
     else if (line == L"[DEFINES_LIB]")
@@ -193,7 +191,6 @@ void ProjectFile::merge(ProjectFile *projectFile)
 {
   merge(projectFile->_dependencies,_dependencies);
   merge(projectFile->_includes,_includes);
-  merge(projectFile->_cppFiles,_cppFiles);
   merge(projectFile->_definesLib,_definesLib);
 }
 
@@ -743,9 +740,7 @@ void ProjectFile::writeFiles(wofstream &file,const vector<wstring> &collection)
 
       file << "    <ClCompile Include=\"" << *f << "\">" << endl;
       name=replace(*f,L"..\\",L"");
-      if (contains(_cppFiles,name))
-        file << "      <CompileAs>CompileAsCpp</CompileAs>" << endl;
-      else if (count > 1)
+      if (count > 1)
       {
         name=(*f).substr(0,(*f).find_last_of(L"."));
         name=name.substr(name.find_last_of(L"\\") + 1);
