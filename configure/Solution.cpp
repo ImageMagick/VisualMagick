@@ -162,6 +162,16 @@ wstring Solution::getFolder()
   return(folder);
 }
 
+bool Solution::isImageMagick7(const ConfigureWizard &wizard)
+{
+  foreach (Project*,p,_projects)
+  {
+    if ((*p)->name().compare(L"MagickCore") == 0)
+      return(true);
+  }
+    return(false);
+}
+
 void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
 {
   wstring
@@ -220,6 +230,18 @@ void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
     else if (wizard.quantumDepth() == QuantumDepth::Q64)
       config << "#define MAGICKCORE_QUANTUM_DEPTH 64" << endl;
     config << endl;
+
+    if (isImageMagick7(wizard))
+      {
+        config << "/*" << endl;
+        config << "  Defines the number of bits available for channel masks" << endl;
+        config << "*/" << endl;
+        if (wizard.visualStudioVersion() >= VisualStudioVersion::VS2022)
+          config << "#define MAGICKCORE_CHANNEL_MASK_DEPTH 64" << endl;
+        else
+          config << "#define MAGICKCORE_CHANNEL_MASK_DEPTH 32" << endl;
+        config << endl;
+      }
 
     config << "/*" << endl;
     config << "  Define to enable high dynamic range imagery (HDRI)" << endl;

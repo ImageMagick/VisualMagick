@@ -44,6 +44,8 @@ private:
 
   wstring getFolder();
 
+  bool isImageMagick7(const ConfigureWizard &wizard);
+
   void writeMagickBaseConfig(const ConfigureWizard &wizard);
 
   void writeMakeFile(const ConfigureWizard &wizard);

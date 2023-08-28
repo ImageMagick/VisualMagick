@@ -103,6 +103,15 @@ $$CONFIG$$
 #define _magickcore_restrict __restrict
 
 /*
+  The 64-bit channel mask requires a C++ compiler
+*/
+#if MAGICKCORE_CHANNEL_MASK_DEPTH == 64
+#  if !defined(__cplusplus) && !defined(c_plusplus)
+#    error ImageMagick was build with a 64 channel bit mask and that requires a C++ compiler
+#  endif
+#endif
+
+/*
   Visual C++ does not define double_t, float_t, or ssize_t by default.
 */
 #if !defined(double_t)
@@ -181,7 +190,6 @@ typedef long ssize_t;
 /*
   Disable specific warnings.
 */
-#ifdef _MSC_VER
 #if _MSC_VER < 1920
 #pragma warning(disable: 4101) /* 'identifier' : unreferenced local variable */
 #pragma warning(disable: 4130) /* 'operator' : logical operation on address of string constant */
@@ -191,6 +199,5 @@ typedef long ssize_t;
 #endif
 #pragma warning(disable: 4611) /* interaction between '_setjmp' and C++ object destruction is non-portable */
 #pragma warning(disable: 6993) /* code analysis ignores OpenMP constructs; analyzing single-threaded code */
-#endif
 
 #endif
