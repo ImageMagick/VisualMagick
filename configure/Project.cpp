@@ -20,9 +20,9 @@
 #include "stdafx.h"
 #include "Project.h"
 
-wstring Project::compileAs(VisualStudioVersion visualStudioVersion) const
+Compiler Project::compiler(VisualStudioVersion visualStudioVersion) const
 {
-  return(_magickProject && visualStudioVersion >= VisualStudioVersion::VS2022 ? L"CompileAsCpp" : L"Default");
+  return(_magickProject && visualStudioVersion >= VisualStudioVersion::VS2022 ? Compiler::CPP : Compiler::Default);
 }
 
 wstring Project::configDefine() const

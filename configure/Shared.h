@@ -26,6 +26,8 @@
 #include <locale>
 #include <filesystem>
 
+enum class Compiler {Default, CPP};
+
 enum class Platform {X86, X64, ARM64};
 
 enum class PolicyConfig {LIMITED, OPEN, SECURE, WEBSAFE};
