@@ -108,19 +108,20 @@ private:
   void writeProjectReferences(wofstream &file,const vector<Project*> &allProjects);
 
   vector<wstring>        _aliases;
+  vector<wstring>        _cppFiles;
+  vector<wstring>        _dependencies;
   wstring                _fileName;
   wstring                _guid;
-  vector<wstring>        _dependencies;
   vector<wstring>        _includeFiles;
   vector<wstring>        _includes;
   vector<wstring>        _definesLib;
+  VisualStudioVersion    _minimumVisualStudioVersion;
   wstring                _name;
   wstring                _prefix;
   Project               *_project;
   wstring                _reference;
   vector<wstring>        _resourceFiles;
   vector<wstring>        _srcFiles;
-  VisualStudioVersion    _minimumVisualStudioVersion;
   const ConfigureWizard *_wizard;
 };
 
