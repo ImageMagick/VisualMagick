@@ -399,6 +399,8 @@ void Solution::writePolicyConfig(const ConfigureWizard &wizard)
     infile=wifstream(L"..\\..\\ImageMagick\\config\\websafe-policy.xml");
     break;
   }
+  if (!infile)
+    throwException(L"Unable to open policy file");
   outfile=wofstream(L"..\\bin\\policy.xml");
   while (infile.read(buffer, 512))
     outfile.write(buffer, infile.gcount());
