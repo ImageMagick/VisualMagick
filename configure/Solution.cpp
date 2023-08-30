@@ -387,16 +387,16 @@ void Solution::writePolicyConfig(const ConfigureWizard &wizard)
   switch(wizard.policyConfig())
   {
   case PolicyConfig::LIMITED:
-    infile=wifstream(L"..\\..\\ImageMagick\\config\\limited-policy.xml");
+    infile=wifstream(L"..\\..\\ImageMagick\\config\\policy-limited.xml");
     break;
   case PolicyConfig::OPEN:
-    infile=wifstream(L"..\\..\\ImageMagick\\config\\open-policy.xml");
+    infile=wifstream(L"..\\..\\ImageMagick\\config\\policy-open.xml");
     break;
   case PolicyConfig::SECURE:
-    infile=wifstream(L"..\\..\\ImageMagick\\config\\secure-policy.xml");
+    infile=wifstream(L"..\\..\\ImageMagick\\config\\policy-secure.xml");
     break;
   case PolicyConfig::WEBSAFE:
-    infile=wifstream(L"..\\..\\ImageMagick\\config\\websafe-policy.xml");
+    infile=wifstream(L"..\\..\\ImageMagick\\config\\policy-websafe.xml");
     break;
   }
   if (!infile)
