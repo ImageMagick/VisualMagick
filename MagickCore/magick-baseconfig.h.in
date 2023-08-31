@@ -145,10 +145,8 @@ typedef long ssize_t;
 #define MAGICKCORE_SIZEOF_FLOAT_T 4
 
 #if defined(_WIN64)
-#define MAGICKCORE_SIZEOF_SSIZE_T 8
 #define MAGICKCORE_SIZEOF_VOID_P 8
 #else
-#define MAGICKCORE_SIZEOF_SSIZE_T 4
 #define MAGICKCORE_SIZEOF_VOID_P 4
 #endif
 
