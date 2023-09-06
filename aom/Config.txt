@@ -39,6 +39,7 @@ ivfenc.c
 md5_utils.c
 obudec.c
 rawenc.c
+saliency_map.c
 tools_common.c
 tune_vmaf.c
 tune_butteraugli.c
