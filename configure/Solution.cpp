@@ -234,7 +234,7 @@ void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
     if (isImageMagick7(wizard))
       {
         config << "/*" << endl;
-        config << "  Defines the number of bits available for channel masks" << endl;
+        config << "  Channel mask depth" << endl;
         config << "*/" << endl;
         if ((wizard.visualStudioVersion() >= VisualStudioVersion::VS2022) && (wizard.platform() != Platform::X86))
           config << "#define MAGICKCORE_CHANNEL_MASK_DEPTH 64" << endl;
