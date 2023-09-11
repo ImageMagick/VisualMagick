@@ -44,6 +44,14 @@ wstring ConfigureWizard::binDirectory() const
   return(_systemPage.binDirectory());
 }
 
+wstring ConfigureWizard::channelMaskDepth() const
+{
+  if ((visualStudioVersion() >= VisualStudioVersion::VS2022) && (platform() != Platform::X86))
+    return(L"64");
+  else
+    return(L"32");
+}
+
 bool ConfigureWizard::enableDpc() const
 {
   return(_targetPage.enableDpc());

@@ -236,10 +236,7 @@ void Solution::writeMagickBaseConfig(const ConfigureWizard &wizard)
         config << "/*" << endl;
         config << "  Channel mask depth" << endl;
         config << "*/" << endl;
-        if ((wizard.visualStudioVersion() >= VisualStudioVersion::VS2022) && (wizard.platform() != Platform::X86))
-          config << "#define MAGICKCORE_CHANNEL_MASK_DEPTH 64" << endl;
-        else
-          config << "#define MAGICKCORE_CHANNEL_MASK_DEPTH 32" << endl;
+        config << "#define MAGICKCORE_CHANNEL_MASK_DEPTH " << wizard.channelMaskDepth() << endl;
         config << endl;
       }
 
@@ -495,6 +492,7 @@ void Solution::writeVersion(const ConfigureWizard &wizard,const VersionInfo &ver
   while (getline(inputStream,line))
   {
     line=replace(line,L"@CC@",wizard.visualStudioVersionName());
+    line=replace(line,L"@CHANNEL_MASK_DEPTH@",wizard.channelMaskDepth());
     line=replace(line,L"@CXX@",wizard.visualStudioVersionName());
     line=replace(line,L"@DOCUMENTATION_PATH@",L"unavailable");
     line=replace(line,L"@LIB_VERSION@",versionInfo.version());

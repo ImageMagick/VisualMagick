@@ -39,6 +39,8 @@ public:
 
   wstring binDirectory() const;
 
+  wstring channelMaskDepth() const;
+
   bool enableDpc() const;
 
   bool excludeDeprecated() const;
