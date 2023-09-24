@@ -1,0 +1,12 @@
+[STATIC]
+
+[LICENSE]
+COPYING
+
+[DIRECTORIES]
+deflate\lib
+deflate\lib\arm
+deflate\lib\x86
+
+[INCLUDES]
+deflate\lib

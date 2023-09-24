@@ -25,14 +25,14 @@ exr\openexr\src\lib\OpenEXR
 exr\openexr\src\lib\OpenEXRCore
 
 [INCLUDES]
-zlib
+deflate
 
 [EXCLUDES]
 b44ExpLogTable.cpp
 toFloat.cpp
 
 [DEPENDENCIES]
-zlib
+deflate
 
 [CONFIG_DEFINE]
 /*
