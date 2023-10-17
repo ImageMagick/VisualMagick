@@ -28,7 +28,13 @@ heif
 
 [EXCLUDES]
 decoder_dav1d.cc
+decoder_ffmpeg.cc
+decoder_jpeg.cc
+decoder_openjpeg.cc
 encoder_rav1e.cc
+encoder_jpeg.cc
+encoder_openjpeg.cc
+encoder_kvazaar.cc
 encoder_svt.cc
 encoder_x265.cc
 plugins_*
