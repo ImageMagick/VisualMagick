@@ -5,11 +5,13 @@ LICENSE.md
 
 [NASM]
 
+[INCLUDES_NASM]
+jpeg-turbo\simd\nasm
+
 [DIRECTORIES]
 jpeg-turbo
 jpeg-turbo\simd\i386
 jpeg-turbo\simd\x86_64
-jpeg-turbo\simd\aarch64
 
 [EXCLUDES]
 cdjpeg.c
