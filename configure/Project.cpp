@@ -70,6 +70,11 @@ vector<wstring> &Project::includes()
   return(_includes);
 }
 
+vector<wstring> &Project::includesNasm()
+{
+  return(_includesNasm);
+}
+
 vector<wstring> &Project::platformExcludes(Platform platform)
 {
   switch (platform)
@@ -367,6 +372,8 @@ void Project::loadConfig(wifstream &config)
       addLines(config,_excludesARM64);
     else if (line == L"[INCLUDES]")
       addLines(config,_includes);
+    else if (line == L"[INCLUDES_NASM]")
+      addLines(config,_includesNasm);
     else if (line == L"[INCOMPATIBLE_LICENSE]")
       _hasIncompatibleLicense=true;
     else if (line == L"[STATIC]")

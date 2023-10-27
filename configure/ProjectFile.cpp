@@ -427,13 +427,24 @@ void ProjectFile::loadSource(const wstring &directory)
 
 wstring ProjectFile::nasmOptions(const wstring &folder)
 {
-  switch (_wizard->platform())
-  {
-    case Platform::X86: return(L"..\\build\\nasm -fwin32 -DWIN32 -I" + folder + L" -o \"$(IntDir)%(Filename).obj\" \"%(FullPath)\"");
-    case Platform::X64: return(L"..\\build\\nasm -fwin64 -DWIN64 -D__x86_64__ -I" + folder + L" -o \"$(IntDir)%(Filename).obj\" \"%(FullPath)\"");
-    case Platform::ARM64: return(L"");
-    default: throw;
-  }
+  wstring
+    result=L"";
+
+  if (_wizard->platform() == Platform::ARM64)
+    return(result);
+
+  result += L"..\\build\\nasm -i\"" + folder +L"\"";
+
+  if (_wizard->platform() == Platform::X86)
+    result += L" -fwin32 -DWIN32";
+  else
+    result += L" -fwin64 -DWIN64 -D__x86_64__";
+
+  foreach_const(wstring,include,_project->includesNasm())
+    result += L" -i\"" + relativePathForProject + *include + L"\"";
+
+  result += L" -o \"$(IntDir)%(Filename).obj\" \"%(FullPath)\"";
+  return(result);
 }
 
 void ProjectFile::merge(vector<wstring> &input, vector<wstring> &output)
@@ -725,7 +736,7 @@ void ProjectFile::writeFiles(wofstream &file,const vector<wstring> &collection)
       }
       else
       {
-        folder=(*f).substr(0,(*f).find_last_of(L"\\") + 1);
+        folder=(*f).substr(0,(*f).find_last_of(L"\\"));
         file << "    <CustomBuild Include=\"" << *f << "\">" << endl;
         file << "      <Command>" << nasmOptions(folder) << "</Command>" << endl;
         file << "      <Outputs>$(IntDir)%(Filename).obj;%(Outputs)</Outputs>" << endl;

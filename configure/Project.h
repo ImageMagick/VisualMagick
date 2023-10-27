@@ -48,6 +48,8 @@ public:
 
   vector<wstring> &includes();
 
+  vector<wstring> &includesNasm();
+
   vector<wstring> &platformExcludes(Platform platform);
 
   bool isConsole() const;
@@ -127,6 +129,7 @@ private:
   vector<ProjectFile*> _files;
   bool                 _hasIncompatibleLicense;
   vector<wstring>      _includes;
+  vector<wstring>      _includesNasm;
   bool                 _isOptional;
   vector<wstring>      _libraries;
   vector<wstring>      _licenseFileNames;
