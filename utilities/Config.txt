@@ -1,5 +1,8 @@
 [EXEMODULE]
 
+[ICON]
+ImageMagick\images\ImageMagick.ico
+
 [DIRECTORIES]
 ImageMagick\utilities
 

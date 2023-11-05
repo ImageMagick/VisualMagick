@@ -52,6 +52,8 @@ public:
 
   vector<wstring> &platformExcludes(Platform platform);
 
+  wstring icon() const;
+
   bool isConsole() const;
 
   bool isDll() const;
@@ -128,6 +130,7 @@ private:
   vector<wstring>      _excludesARM64;
   vector<ProjectFile*> _files;
   bool                 _hasIncompatibleLicense;
+  wstring              _icon;
   vector<wstring>      _includes;
   vector<wstring>      _includesNasm;
   bool                 _isOptional;

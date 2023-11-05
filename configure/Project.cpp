@@ -86,6 +86,11 @@ vector<wstring> &Project::platformExcludes(Platform platform)
   }
 }
 
+wstring Project::icon() const
+{
+  return _icon;
+}
+
 bool Project::isConsole() const
 {
   if (!isExe())
@@ -370,6 +375,8 @@ void Project::loadConfig(wifstream &config)
       addLines(config,_excludesX64);
     else if (line == L"[EXCLUDES_ARM64]")
       addLines(config,_excludesARM64);
+    else if (line == L"[ICON]")
+      _icon=readLine(config);
     else if (line == L"[INCLUDES]")
       addLines(config,_includes);
     else if (line == L"[INCLUDES_NASM]")
