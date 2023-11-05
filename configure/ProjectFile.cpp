@@ -480,71 +480,6 @@ wstring ProjectFile::createGuid()
   return result;
 }
 
-void ProjectFile::writeAdditionalDependencies(wofstream &file,const wstring &separator)
-{
-  foreach (wstring,lib,_project->libraries())
-  {
-    file << separator << *lib;
-  }
-}
-
-void ProjectFile::writeAdditionalIncludeDirectories(wofstream &file,const wstring &separator)
-{
-  foreach (wstring,projectDir,_project->directories())
-  {
-    bool
-      skip;
-
-    skip=false;
-    foreach (wstring,includeDir,_includes)
-    {
-      if ((*projectDir).find(*includeDir) == 0)
-      {
-        skip=true;
-        break;
-      }
-    }
-
-    if (!skip)
-      file << separator << relativePathForProject <<  *projectDir;
-  }
-  foreach (wstring,includeDir,_includes)
-  {
-    file << separator << relativePathForProject << *includeDir;
-  }
-  if (_wizard->useOpenCL())
-    file << separator << relativePathForProject << L"VisualMagick\\OpenCL";
-}
-
-void ProjectFile::writePreprocessorDefinitions(wofstream &file,const bool debug)
-{
-  file << (debug ? "_DEBUG" : "NDEBUG") << ";_WINDOWS;WIN32;_VISUALC_;NeedFunctionPrototypes";
-  foreach (wstring,def,_project->defines())
-  {
-    file << ";" << *def;
-  }
-  if (isLib() || (_wizard->solutionType() != SolutionType::DYNAMIC_MT && (_project->isExe())))
-  {
-    foreach (wstring,def,_definesLib)
-    {
-      file << ";" << *def;
-    }
-    file << ";_LIB";
-  }
-  else if (_project->isDll())
-  {
-    foreach (wstring,def,_project->definesDll())
-    {
-      file << ";" << *def;
-    }
-    file << ";_DLL;_MAGICKMOD_";
-  }
-  if (_project->isExe() && _wizard->solutionType() != SolutionType::STATIC_MT)
-    file << ";_AFXDLL";
-  if (_wizard->includeIncompatibleLicense())
-    file << ";_MAGICK_INCOMPATIBLE_LICENSES_";
-}
-
 void ProjectFile::write(wofstream &file,const vector<Project*> &allProjects)
 {
   file << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << endl;
@@ -619,87 +554,40 @@ void ProjectFile::write(wofstream &file,const vector<Project*> &allProjects)
   file << "</Project>" << endl;
 }
 
-void ProjectFile::writeItemDefinitionGroup(wofstream &file,const bool debug)
+void ProjectFile::writeAdditionalDependencies(wofstream &file,const wstring &separator)
 {
-  wstring
-    name;
-
-  name=getTargetName(debug);
-
-  file << "  <ItemDefinitionGroup Condition=\"'$(Configuration)|$(Platform)'=='" << (debug ? "Debug" : "Release") << "|" << _wizard->platformName() << "'\">" << endl;
-  file << "    <ClCompile>" << endl;
-  file << "      <RuntimeLibrary>MultiThreaded" << (debug ? "Debug" : "") << (_wizard->solutionType() == SolutionType::STATIC_MT ? "" : "DLL") << "</RuntimeLibrary>" << endl;
-  file << "      <StringPooling>true</StringPooling>" << endl;
-  file << "      <FunctionLevelLinking>true</FunctionLevelLinking>" << endl;
-  if (_project->warningLevel() == 0)
-    file << "      <WarningLevel>TurnOffAllWarnings</WarningLevel>" << endl;
-  else
-    file << "      <WarningLevel>Level" << _project->warningLevel() << "</WarningLevel>" << endl;
-  if (_project->treatWarningAsError())
-    file << "      <TreatWarningAsError>true</TreatWarningAsError>" << endl;
-  file << "      <SuppressStartupBanner>true</SuppressStartupBanner>" << endl;
-  if (_project->compiler(_wizard->visualStudioVersion()) == Compiler::CPP)
-    file << "      <CompileAs>CompileAsCpp</CompileAs>" << endl;
-  file << "      <InlineFunctionExpansion>" << (debug ? "Disabled" : "AnySuitable") << "</InlineFunctionExpansion>" << endl;
-  file << "      <OpenMPSupport>" << (_wizard->useOpenMP() ? "true" : "false") << "</OpenMPSupport>" << endl;
-  file << "      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>" << endl;
-  file << "      <ProgramDatabaseFileName>" << _wizard->binDirectory() << (_project->isExe() ? _name : name) << ".pdb</ProgramDatabaseFileName>" << endl;
-  file << "      <BasicRuntimeChecks>" << (debug ? "EnableFastChecks" : "Default") << "</BasicRuntimeChecks>" << endl;
-  file << "      <OmitFramePointers>" << (debug ? "false" : "true") << "</OmitFramePointers>" << endl;
-  file << "      <Optimization>" << (debug || _project->isOptimizationDisable() ? "Disabled" : "MaxSpeed") << "</Optimization>" << endl;
-  file << "      <AdditionalIncludeDirectories>";
-  writeAdditionalIncludeDirectories(file,L";");
-  file << ";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>" << endl;
-  file << "      <PreprocessorDefinitions>";
-  writePreprocessorDefinitions(file,debug);
-  file << ";%(PreprocessorDefinitions)</PreprocessorDefinitions>" << endl;
-  file << "      <AdditionalOptions>/source-charset:utf-8 %(AdditionalOptions)</AdditionalOptions>" << endl;
-  file << "      <MultiProcessorCompilation>true</MultiProcessorCompilation>" << endl;
-  file << "      <LanguageStandard>stdcpp17</LanguageStandard>" << endl;
-  file << "      <LanguageStandard_C>stdc17</LanguageStandard_C>" << endl;
-  file << "    </ClCompile>" << endl;
-  file << "    <ResourceCompile>" << endl;
-  file << "      <PreprocessorDefinitions>" << (debug ? "_DEBUG" : "NDEBUG") <<";%(PreprocessorDefinitions)</PreprocessorDefinitions>" << endl;
-  file << "      <Culture>0x0409</Culture>" << endl;
-  file << "    </ResourceCompile>" << endl;
-
-  if (isLib())
+  foreach (wstring,lib,_project->libraries())
   {
-    file << "    <Lib>" << endl;
-    file << "      <AdditionalLibraryDirectories>" << _wizard->libDirectory() << ";%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>" << endl;
-    file << "      <AdditionalDependencies>/MACHINE:" << (_wizard->machineName());
-    writeAdditionalDependencies(file,L";");
-    file << ";%(AdditionalDependencies)</AdditionalDependencies>" << endl;
-    file << "      <SuppressStartupBanner>true</SuppressStartupBanner>" << endl;
-    file << "    </Lib>" << endl;
+    file << separator << *lib;
   }
-  else
+}
+
+void ProjectFile::writeAdditionalIncludeDirectories(wofstream &file,const wstring &separator)
+{
+  foreach (wstring,projectDir,_project->directories())
   {
-    file << "    <Link>" << endl;
-    file << "      <AdditionalLibraryDirectories>" << _wizard->libDirectory() << ";%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>" << endl;
-    file << "      <AdditionalDependencies>/MACHINE:" << _wizard->machineName();
-    writeAdditionalDependencies(file,L";");
-    file << ";%(AdditionalDependencies)</AdditionalDependencies>" << endl;
-    file << "      <SuppressStartupBanner>true</SuppressStartupBanner>" << endl;
-    file << "      <TargetMachine>Machine" << _wizard->machineName() << "</TargetMachine>" << endl;
-    file << "      <GenerateDebugInformation>" << (debug ? "true" : "false") << "</GenerateDebugInformation>" << endl;
-    file << "      <ProgramDatabaseFile>" << _wizard->binDirectory() << (_project->isExe() ? _name : name) << ".pdb</ProgramDatabaseFile>" << endl;
-    file << "      <ImportLibrary>" << _wizard->libDirectory() << name << ".lib</ImportLibrary>" << endl;
-    if (!_project->isConsole())
+    bool
+      skip;
+
+    skip=false;
+    foreach (wstring,includeDir,_includes)
     {
-      if (_project->isDll())
-        file << "      <LinkDLL>true</LinkDLL>" << endl;
-      else if (_project->useUnicode())
-        file << "    <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>" << endl;
-      file << "      <SubSystem>Windows</SubSystem>" << endl;
-      if ((_project->isDll()) && (!_project->moduleDefinitionFile().empty()))
-        file << "      <ModuleDefinitionFile>" << relativePathForProject <<  _project->moduleDefinitionFile() << "</ModuleDefinitionFile>" << endl;
+      if ((*projectDir).find(*includeDir) == 0)
+      {
+        skip=true;
+        break;
+      }
     }
-    else
-      file << "      <SubSystem>Console</SubSystem>" << endl;
-    file << "    </Link>" << endl;
+
+    if (!skip)
+      file << separator << relativePathForProject <<  *projectDir;
   }
-  file << "  </ItemDefinitionGroup>" << endl;
+  foreach (wstring,includeDir,_includes)
+  {
+    file << separator << relativePathForProject << *includeDir;
+  }
+  if (_wizard->useOpenCL())
+    file << separator << relativePathForProject << L"VisualMagick\\OpenCL";
 }
 
 void ProjectFile::writeFiles(wofstream &file,const vector<wstring> &collection)
@@ -823,6 +711,118 @@ void ProjectFile::writeFilter(wofstream &file)
   }
   file << "  </ItemGroup>" << endl;
   file << "</Project>" << endl;
+}
+
+void ProjectFile::writeItemDefinitionGroup(wofstream &file,const bool debug)
+{
+  wstring
+    name;
+
+  name=getTargetName(debug);
+
+  file << "  <ItemDefinitionGroup Condition=\"'$(Configuration)|$(Platform)'=='" << (debug ? "Debug" : "Release") << "|" << _wizard->platformName() << "'\">" << endl;
+  file << "    <ClCompile>" << endl;
+  file << "      <RuntimeLibrary>MultiThreaded" << (debug ? "Debug" : "") << (_wizard->solutionType() == SolutionType::STATIC_MT ? "" : "DLL") << "</RuntimeLibrary>" << endl;
+  file << "      <StringPooling>true</StringPooling>" << endl;
+  file << "      <FunctionLevelLinking>true</FunctionLevelLinking>" << endl;
+  if (_project->warningLevel() == 0)
+    file << "      <WarningLevel>TurnOffAllWarnings</WarningLevel>" << endl;
+  else
+    file << "      <WarningLevel>Level" << _project->warningLevel() << "</WarningLevel>" << endl;
+  if (_project->treatWarningAsError())
+    file << "      <TreatWarningAsError>true</TreatWarningAsError>" << endl;
+  file << "      <SuppressStartupBanner>true</SuppressStartupBanner>" << endl;
+  if (_project->compiler(_wizard->visualStudioVersion()) == Compiler::CPP)
+    file << "      <CompileAs>CompileAsCpp</CompileAs>" << endl;
+  file << "      <InlineFunctionExpansion>" << (debug ? "Disabled" : "AnySuitable") << "</InlineFunctionExpansion>" << endl;
+  file << "      <OpenMPSupport>" << (_wizard->useOpenMP() ? "true" : "false") << "</OpenMPSupport>" << endl;
+  file << "      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>" << endl;
+  file << "      <ProgramDatabaseFileName>" << _wizard->binDirectory() << (_project->isExe() ? _name : name) << ".pdb</ProgramDatabaseFileName>" << endl;
+  file << "      <BasicRuntimeChecks>" << (debug ? "EnableFastChecks" : "Default") << "</BasicRuntimeChecks>" << endl;
+  file << "      <OmitFramePointers>" << (debug ? "false" : "true") << "</OmitFramePointers>" << endl;
+  file << "      <Optimization>" << (debug || _project->isOptimizationDisable() ? "Disabled" : "MaxSpeed") << "</Optimization>" << endl;
+  file << "      <AdditionalIncludeDirectories>";
+  writeAdditionalIncludeDirectories(file,L";");
+  file << ";%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>" << endl;
+  file << "      <PreprocessorDefinitions>";
+  writePreprocessorDefinitions(file,debug);
+  file << ";%(PreprocessorDefinitions)</PreprocessorDefinitions>" << endl;
+  file << "      <AdditionalOptions>/source-charset:utf-8 %(AdditionalOptions)</AdditionalOptions>" << endl;
+  file << "      <MultiProcessorCompilation>true</MultiProcessorCompilation>" << endl;
+  file << "      <LanguageStandard>stdcpp17</LanguageStandard>" << endl;
+  file << "      <LanguageStandard_C>stdc17</LanguageStandard_C>" << endl;
+  file << "    </ClCompile>" << endl;
+  file << "    <ResourceCompile>" << endl;
+  file << "      <PreprocessorDefinitions>" << (debug ? "_DEBUG" : "NDEBUG") <<";%(PreprocessorDefinitions)</PreprocessorDefinitions>" << endl;
+  file << "      <Culture>0x0409</Culture>" << endl;
+  file << "    </ResourceCompile>" << endl;
+
+  if (isLib())
+  {
+    file << "    <Lib>" << endl;
+    file << "      <AdditionalLibraryDirectories>" << _wizard->libDirectory() << ";%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>" << endl;
+    file << "      <AdditionalDependencies>/MACHINE:" << (_wizard->machineName());
+    writeAdditionalDependencies(file,L";");
+    file << ";%(AdditionalDependencies)</AdditionalDependencies>" << endl;
+    file << "      <SuppressStartupBanner>true</SuppressStartupBanner>" << endl;
+    file << "    </Lib>" << endl;
+  }
+  else
+  {
+    file << "    <Link>" << endl;
+    file << "      <AdditionalLibraryDirectories>" << _wizard->libDirectory() << ";%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>" << endl;
+    file << "      <AdditionalDependencies>/MACHINE:" << _wizard->machineName();
+    writeAdditionalDependencies(file,L";");
+    file << ";%(AdditionalDependencies)</AdditionalDependencies>" << endl;
+    file << "      <SuppressStartupBanner>true</SuppressStartupBanner>" << endl;
+    file << "      <TargetMachine>Machine" << _wizard->machineName() << "</TargetMachine>" << endl;
+    file << "      <GenerateDebugInformation>" << (debug ? "true" : "false") << "</GenerateDebugInformation>" << endl;
+    file << "      <ProgramDatabaseFile>" << _wizard->binDirectory() << (_project->isExe() ? _name : name) << ".pdb</ProgramDatabaseFile>" << endl;
+    file << "      <ImportLibrary>" << _wizard->libDirectory() << name << ".lib</ImportLibrary>" << endl;
+    if (!_project->isConsole())
+    {
+      if (_project->isDll())
+        file << "      <LinkDLL>true</LinkDLL>" << endl;
+      else if (_project->useUnicode())
+        file << "    <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>" << endl;
+      file << "      <SubSystem>Windows</SubSystem>" << endl;
+      if ((_project->isDll()) && (!_project->moduleDefinitionFile().empty()))
+        file << "      <ModuleDefinitionFile>" << relativePathForProject <<  _project->moduleDefinitionFile() << "</ModuleDefinitionFile>" << endl;
+    }
+    else
+      file << "      <SubSystem>Console</SubSystem>" << endl;
+    file << "    </Link>" << endl;
+  }
+  file << "  </ItemDefinitionGroup>" << endl;
+}
+
+void ProjectFile::writePreprocessorDefinitions(wofstream &file,const bool debug)
+{
+  file << (debug ? "_DEBUG" : "NDEBUG") << ";_WINDOWS;WIN32;_VISUALC_;NeedFunctionPrototypes";
+  foreach (wstring,def,_project->defines())
+  {
+    file << ";" << *def;
+  }
+  if (isLib() || (_wizard->solutionType() != SolutionType::DYNAMIC_MT && (_project->isExe())))
+  {
+    foreach (wstring,def,_definesLib)
+    {
+      file << ";" << *def;
+    }
+    file << ";_LIB";
+  }
+  else if (_project->isDll())
+  {
+    foreach (wstring,def,_project->definesDll())
+    {
+      file << ";" << *def;
+    }
+    file << ";_DLL;_MAGICKMOD_";
+  }
+  if (_project->isExe() && _wizard->solutionType() != SolutionType::STATIC_MT)
+    file << ";_AFXDLL";
+  if (_wizard->includeIncompatibleLicense())
+    file << ";_MAGICK_INCOMPATIBLE_LICENSES_";
 }
 
 void ProjectFile::writeProjectReferences(wofstream &file,const vector<Project*> &allProjects)

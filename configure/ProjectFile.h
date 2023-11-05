@@ -91,19 +91,19 @@ private:
 
   void setFileName();
 
-  void writeAdditionalDependencies(wofstream &file,const wstring &separator);
-
-  void writeAdditionalIncludeDirectories(wofstream &file,const wstring &separator);
-
-  void writePreprocessorDefinitions(wofstream &file,const bool debug);
-
   void write(wofstream &file,const vector<Project*> &allProjects);
-
-  void writeItemDefinitionGroup(wofstream &file,const bool debug);
 
   void writeFiles(wofstream &file,const vector<wstring> &collection);
 
   void writeFilter(wofstream &file);
+
+  void writeAdditionalDependencies(wofstream &file,const wstring &separator);
+
+  void writeAdditionalIncludeDirectories(wofstream &file,const wstring &separator);
+
+  void writeItemDefinitionGroup(wofstream &file,const bool debug);
+
+  void writePreprocessorDefinitions(wofstream &file,const bool debug);
 
   void writeProjectReferences(wofstream &file,const vector<Project*> &allProjects);
 
