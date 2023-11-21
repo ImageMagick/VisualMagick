@@ -39,7 +39,6 @@
 [Tasks]
 #include "tasks-desktopicon.isx"
 #include "tasks-update-path.isx"
-#include "tasks-install-ffmpeg.isx"
 #include "tasks-extensions.isx"
 #ifdef MagickDynamicPackage
   #include "tasks-legacy.isx"
