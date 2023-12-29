@@ -6,7 +6,7 @@
 BUILD_MAIN
 
 [DIRECTORIES]
-ImageMagick\Magick++\fuzz
+ImageMagick\oss-fuzz
 
 [INCLUDES]
 ImageMagick
