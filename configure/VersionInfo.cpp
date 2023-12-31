@@ -94,7 +94,7 @@ wstring VersionInfo::interfaceVersion() const
 wstring VersionInfo::libAddendum() const
 {
   if (_isBeta == L"y")
-    return(L"-"+_patchlevel+L" (Beta) ");
+    return(L"-"+_patchlevel+L" (Beta)");
   else
     return(L"-"+_patchlevel);
 }
