@@ -16,4 +16,4 @@
 ;  Copyright (C) 2003 - 2008 GraphicsMagick Group
 #endif
 
-Name: install_PerlMagick; Description: "Install PerlMagick for Strawberry Perl v5.20"; Flags: unchecked
+Name: install_PerlMagick; Description: "Install PerlMagick for Strawberry Perl"; Flags: unchecked
