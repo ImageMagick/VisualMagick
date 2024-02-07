@@ -221,6 +221,9 @@
         <message name="IncludeElementNestedTooDeeply">
           include element nested too deeply
         </message>
+        <message name="PolicyValidationException">
+          security policy failed to validate
+        </message>
       </error>
       <warning>
         <message name="UnableToOpenConfigureFile">
@@ -1051,6 +1054,9 @@
           <message name="PixelCacheAllocationFailed">
             pixel cache allocation failed
           </message>
+          <message name="TimeLimitExceeded">
+            time limit exceeded
+          </message>
           <message name="TooManyExceptions">
             too many exceptions
           </message>
@@ -1080,9 +1086,6 @@
           </message>
         </error>
         <fatalerror>
-          <message name="TimeLimitExceeded">
-            time limit exceeded
-          </message>
           <message name="UnableToAllocateDashPattern">
             unable to allocate dash pattern
           </message>
