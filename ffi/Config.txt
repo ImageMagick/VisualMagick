@@ -10,7 +10,7 @@ ffi\src\aarch64
 ffi\src\x86
 
 [DEFINES]
-FFI_BUILDING
+FFI_STATIC_BUILD
 
 [EXCLUDES]
 dlmalloc.c
