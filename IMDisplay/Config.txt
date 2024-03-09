@@ -1,5 +1,7 @@
 [APP]
 
+[OPTIONAL]
+
 [DIRECTORIES]
 win2k\IMDisplay
 
