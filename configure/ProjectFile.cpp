@@ -37,7 +37,9 @@ ProjectFile::ProjectFile(const ConfigureWizard *wizard,Project *project,
     _name(name)
 {
   initialize(project);
-  loadAliases();
+
+  if (!wizard->excludeAliases())
+    loadAliases();
 }
 
 ProjectFile::ProjectFile(const ConfigureWizard *wizard,Project *project,

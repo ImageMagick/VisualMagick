@@ -35,6 +35,9 @@ public:
   bool enableDpc() const;
   void enableDpc(bool value);
 
+  bool excludeAliases() const;
+  void excludeAliases(bool value);
+
   bool excludeDeprecated() const;
   void excludeDeprecated(bool value);
 
@@ -92,6 +95,7 @@ private:
 
   Platform            _platform;
   BOOL                _enableDpc;
+  BOOL                _excludeAliases;
   BOOL                _excludeDeprecated;
   BOOL                _includeIncompatibleLicense;
   BOOL                _includeOptional;

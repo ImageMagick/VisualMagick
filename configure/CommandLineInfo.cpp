@@ -24,6 +24,7 @@ CommandLineInfo::CommandLineInfo(const ConfigureWizard &wizard)
 {
   _platform=wizard.platform();
   _enableDpc=wizard.enableDpc();
+  _excludeAliases=wizard.excludeAliases();
   _excludeDeprecated=wizard.excludeDeprecated();
   _includeIncompatibleLicense=wizard.includeIncompatibleLicense();
   _includeOptional=wizard.includeOptional();
@@ -52,6 +53,11 @@ CommandLineInfo& CommandLineInfo::operator=(const CommandLineInfo& obj)
 bool CommandLineInfo::enableDpc() const
 {
   return(_enableDpc);
+}
+
+bool CommandLineInfo::excludeAliases() const
+{
+  return(_excludeAliases);
 }
 
 bool CommandLineInfo::excludeDeprecated() const
@@ -147,6 +153,8 @@ void CommandLineInfo::ParseParam(const wchar_t* pszParam, BOOL bFlag, BOOL bLast
     _includeOptional=true;
   else if (_wcsicmp(pszParam, L"installedSupport") == 0)
     _installedSupport=true;
+  else if (_wcsicmp(pszParam, L"noAliases") == 0)
+    _excludeAliases=true;
   else if (_wcsicmp(pszParam, L"noDpc") == 0)
     _enableDpc=false;
   else if (_wcsicmp(pszParam, L"noHdri") == 0)

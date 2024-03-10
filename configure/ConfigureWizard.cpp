@@ -57,6 +57,11 @@ bool ConfigureWizard::enableDpc() const
   return(_targetPage.enableDpc());
 }
 
+bool ConfigureWizard::excludeAliases() const
+{
+  return(_targetPage.excludeAliases());
+}
+
 bool ConfigureWizard::excludeDeprecated() const
 {
   return(_targetPage.excludeDeprecated());
@@ -192,6 +197,7 @@ void ConfigureWizard::parseCommandLineInfo(const CommandLineInfo &info)
 {
   _targetPage.platform(info.platform());
   _targetPage.enableDpc(info.enableDpc());
+  _targetPage.excludeAliases(info.excludeAliases());
   _targetPage.excludeDeprecated(info.excludeDeprecated());
   _targetPage.includeIncompatibleLicense(info.includeIncompatibleLicense());
   _targetPage.includeOptional(info.includeOptional());

@@ -34,22 +34,23 @@ TargetPage::TargetPage() : CPropertyPage(IDD_TARGET_PAGE)
   _platform=Platform::X64;
 #endif
   _enableDpc=TRUE;
+  _excludeAliases=FALSE;
   _excludeDeprecated=TRUE;
+#ifdef DEBUG
+  _includeIncompatibleLicense=TRUE;
+  _includeOptional=TRUE;
+#else
+  _includeIncompatibleLicense=FALSE;
+  _includeOptional=FALSE;
+#endif
   _installedSupport=FALSE;
-  _quantumDepth=QuantumDepth::Q16;
   _policyConfig=PolicyConfig::OPEN;
+  _quantumDepth=QuantumDepth::Q16;
   _solutionType=SolutionType::DYNAMIC_MT;
   _useHDRI=PathFileExists(L"..\\MagickCore") ? TRUE : FALSE;
   _useOpenCL=TRUE;
   _useOpenMP=TRUE;
   _zeroConfigurationSupport=FALSE;
-#ifdef DEBUG
-  _includeOptional=TRUE;
-  _includeIncompatibleLicense=TRUE;
-#else
-  _includeOptional=FALSE;
-  _includeIncompatibleLicense=FALSE;
-#endif
 }
 
 TargetPage::~TargetPage()
@@ -64,6 +65,16 @@ bool TargetPage::enableDpc() const
 void TargetPage::enableDpc(bool value)
 {
   _enableDpc=value;
+}
+
+bool TargetPage::excludeAliases() const
+{
+  return(_excludeAliases == TRUE);
+}
+
+void TargetPage::excludeAliases(bool value)
+{
+  _excludeAliases=value;
 }
 
 bool TargetPage::excludeDeprecated() const

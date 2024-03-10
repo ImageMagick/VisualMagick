@@ -43,6 +43,8 @@ public:
 
   bool enableDpc() const;
 
+  bool excludeAliases() const;
+
   bool excludeDeprecated() const;
 
   wstring fuzzBinDirectory() const;
